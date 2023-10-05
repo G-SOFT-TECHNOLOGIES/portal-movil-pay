@@ -1,0 +1,84 @@
+<div class="flex justify-center px-8 py-4">
+    <div>
+        <p-button (click)="showDialog()" icon="pi pi-external-link" styleClass="p-button-danger bg-red-700"
+            label="Aceptar terminos y condiciones"></p-button>
+        <p-dialog header="TERMINOS Y CONDICIONES" [modal]="true" [draggable]="false" [(visible)]="visible" [style]="{ width: '50vw', height: '50hw' }"
+            [maximizable]="true" position="top">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                id est laborum.
+            </p>
+
+            <p>
+                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
+                rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                explicabo. Nemo enim
+                ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+                eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
+                amet, consectetur,
+                adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
+                quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
+                laboriosam, nisi ut aliquid ex ea
+                commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
+                molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+            </p>
+
+            <p>
+                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
+                provident, similique sunt in culpa qui
+                officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
+                expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
+                minus id quod maxime
+                placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem
+                quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae
+                sint et molestiae non
+                recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores
+                alias consequatur aut perferendis doloribus asperiores repellat.
+            </p>
+            <div class="">
+
+            </div>
+            <ng-template pTemplate="footer">
+                <!-- <div class="flex flex-row-reverse">
+                    <div class="border-l-4 border-yellow-400 bg-yellow-50 p-4">
+                        <div class="flex ">
+                            <div class="flex-shrink-0 items-end">
+                                <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor"
+                                    aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3 text-start">
+                                <h3 class="text-base text-yellow-700">
+                                    Normas para realizar el Pago
+                                </h3>
+                                <ul role="list" class="text-base text-yellow-600 list-disc space-y-1 pl-5">
+                                    <li>Antes de procesar el pago debe verificar que el <strong>monto</strong> sea mayor o igual al monto a pagar por el producto.</li>
+                                    <li>No se procesará el pago si el monto es menor al monto a pagar.</li>
+                                    <li>Deberá contactar al área de Antención al Cliente en caso de que haya cancelado un monto menor al costo del producto.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class=" flex justify-center gap-y-4">
+
+                    <form [formGroup]="formGroup" class="inline-flex gap-x-4 my-4">
+                        <span id="aceptar" class="font-mono font-semibold">Aceptar y continuar</span>
+                        <mat-slide-toggle formControlName="checked" color="warn"
+                            (change)="changeOption($event.checked)"></mat-slide-toggle>
+                    </form>
+                </div>
+            </ng-template>
+
+        </p-dialog>
+    </div>
+
+</div>

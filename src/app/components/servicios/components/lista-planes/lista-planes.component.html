@@ -1,0 +1,39 @@
+<div class="mt-10 px-8 ">
+    <!-- <div class="flex justify-between  py-4 m-4">
+        <a mat-icon-button color="warn" matTooltip="Volver" (click)="atras()">
+            <mat-icon>arrow_back</mat-icon>
+        </a>
+        <span class="text-xl font-bold m-2 uppercase"> </span>
+        <div class="card flex items-end">
+            <button *ngIf="shopping$  |async as shopping;else CERO " (click)="showDialog()"
+                class="p-2 rounded-full bg-red-600 text-white mx-5  hover:bg-red-500 focus:outline-none focus:bg-red-500"
+                matBadge="{{shopping}}">
+                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                    </path>
+                </svg>
+            </button>
+            <ng-template #CERO>
+              
+            </ng-template>
+
+            <p-dialog header="Resumen del Plan" [(visible)]="visible" position="top" [breakpoints]="{ '960px': '75vw' }"
+                [style]="{ width: '30vw' }" [draggable]="true" [resizable]="true">
+                <app-dialogo-resumen-cuenta></app-dialogo-resumen-cuenta>
+            </p-dialog>
+        </div>
+    </div> -->
+
+    <!-- <app-detalles-plan *ngIf="!verOpciones" (response)="verOpciones = $event"></app-detalles-plan> -->
+    <!-- <app-finalizar *ngIf="verOpciones"> </app-finalizar> -->
+
+    <!-- <div class="card px-8 py-8">
+        <p-toast></p-toast>
+        <p-steps [model]="items" [readonly]="true">
+        </p-steps>
+    </div> -->
+    <router-outlet></router-outlet>
+
+</div>

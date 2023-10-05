@@ -1,0 +1,93 @@
+<div class="relative" *ngIf="plan">
+  <div
+    class="sticky top-0 z-10 border-y border-b-gray-200 border-t-gray-100 bg-gray-200  rounded-lg shadow px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900">
+    <h3>Plan seleccionado</h3>
+  </div>
+  <div class="my-4 grid grid-cols-1 gap-y-6 gap-x-4">
+
+    <label class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none"
+      *ngIf="plan |async as plan">
+      <span class="flex flex-1">
+        <span class="flex flex-col">
+          <span class=" text-sm font-medium text-gray-900">{{plan[0].name}}</span>
+          <span class="mt-1 flex items-center text-sm text-gray-500">{{plan[0].description}}</span>
+        </span>
+      </span>
+      <span class="flex ">
+        <span class="flex flex-col">
+          <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+              clip-rule="evenodd" />
+          </svg>
+          <span class=" text-sm font-medium text-gray-900">$ {{plan[0].cost}}
+          </span>
+        </span>
+      </span>
+    </label>
+  </div>
+  <div class="space-y-4 divide-y-2">
+
+  </div>
+  <div
+    class="sticky top-0 z-10 border-y border-b-gray-200 border-t-gray-100 bg-gray-100 rounded-lg shadow px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900">
+    <h3>Paquetes</h3>
+  </div>
+  <div class="space-y-4 divide-y-2" *ngIf="paquetes | async as paquetes">
+    <label class="relative  bg-zing-50 px-6 py-2  focus:outline-none sm:flex sm:justify-between"
+      *ngFor="let paquete of paquetes">
+      <input type="radio" name="server-size" value="Hobby" class="sr-only" aria-labelledby="server-size-0-label"
+        aria-describedby="server-size-0-description-0 server-size-0-description-1">
+      <span class="flex items-center">
+        <span class="flex flex-col text-sm">
+          <span id="server-size-0-label" class="font-medium text-gray-900">{{paquete.name}}</span>
+          <span id="server-size-0-description-0" class="text-gray-500">
+            <span class="hidden sm:mx-1 sm:inline" aria-hidden="true">&middot;</span>
+            <span class=" sm:inline">{{paquete.detail}}</span>
+          </span>
+        </span>
+      </span>
+      <span id="server-size-0-description-1"
+        class="mt-2 flex items-center gap-x-2 text-sm sm:ml-4 sm:mt-0  sm:text-right">
+        <span class="font-medium text-gray-900">${{paquete.price}}</span>
+        <span class="ml-2 text-gray-500 sm:ml-0">/mes</span>
+        <p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text"
+          (onClick)="delPaquete(paquete)"></p-button>
+      </span>
+    </label>
+
+  </div>
+  <div
+    class="sticky top-0 z-10 border-y border-b-gray-200 border-t-gray-200 bg-gray-100 rounded-lg shadow px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900">
+    <h3>Equipos</h3>
+  </div>
+  <div class="space-y-4 divide-y-2" *ngIf="equipos |async as equipos">
+    <label class="relative  bg-zing-50 px-6 py-2  focus:outline-none sm:flex sm:justify-between"
+      *ngFor="let equipo  of equipos">
+      <input type="radio" name="server-size" value="Hobby" class="sr-only" aria-labelledby="server-size-0-label"
+        aria-describedby="server-size-0-description-0 server-size-0-description-1">
+      <span class="flex items-center">
+        <span class="flex flex-col text-sm">
+          <span id="server-size-0-label" class="font-medium text-gray-900">{{equipo.name}}</span>
+        </span>
+      </span>
+      <span class="flex items-center">
+        <span class="flex flex-col text-sm">
+          <span id="server-size-0-label" class="font-medium text-gray-900">#{{equipo.count}}</span>
+
+        </span>
+      </span>
+      <span id="server-size-0-description-1"
+        class="mt-2 flex items-center gap-x-2 text-sm sm:ml-4 sm:mt-0  sm:text-right">
+        <span class="font-medium text-gray-900">${{equipo.cost}}</span>
+        <span class="ml-2 text-gray-500 sm:ml-0">/mes</span>
+        <p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text"
+          (onClick)="delEquipo(equipo)"></p-button>
+      </span>
+    </label>
+  </div>
+  <div class="my-4">
+    <button type="submit" (click)="verResumen()"
+      class="w-full rounded-md border ont-mono font-semibold border-transparent text-lg bg-red-700 px-4 py-2 text-white shadow-sm hover:bg-red-800 ">Verificar</button>
+  </div>
+</div>

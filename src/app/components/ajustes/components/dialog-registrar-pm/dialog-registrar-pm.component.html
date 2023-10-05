@@ -1,0 +1,49 @@
+<h1 mat-dialog-title class="bg-red-700"><span class="text-slate-50 text-xl font-medium">Agregar pago móvil</span><a
+  mat-dialog-close class="absolute top-1 right-0 p-2.5 text-sm font-medium  text-white rounded-r-lg cursor-pointer ">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+    stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+  </svg>
+  <span class="sr-only">Close</span>
+</a></h1>
+<div mat-dialog-content>
+  <div class="pt-8">
+    <form class="grid grid-cols-1 gap-4" [formGroup]="myForm">
+      <div >
+        <label>Nombre</label>
+        <div>
+          <mat-form-field class="w-full">
+            <input type="text" matInput formControlName="name">
+            <mat-icon matPrefix>person</mat-icon>
+  
+            <mat-error  class="text-xs" *ngIf="myForm.hasError('required')">
+              El campo Nombre es  <strong>Obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div >
+        <label>Teléfono</label>
+        <div>
+          <mat-form-field class="w-full">
+            <input type="tel" matInput formControlName="phone" #phone maxlength="11" minlength="11" pattern="[0-9]*">
+            <mat-icon matPrefix> smartphone</mat-icon>
+            <mat-error *ngIf="myForm.controls['phone'].hasError('pattern')"  class="text-xs ">
+              Solo caracateres númericos
+            </mat-error>
+            <mat-error class="text-xs" *ngIf="myForm.controls['phone'].hasError('required')">
+              El campo Teléfono es  <strong>Obligatorio</strong>
+            </mat-error>
+            <mat-hint align="end" class="text-xs">{{phone.value.length}} /
+              11</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      
+    </form>
+  </div>
+
+</div>
+<div mat-dialog-actions>    
+  <button mat-raised-button [disabled]="myForm.invalid" class="block w-full mt-5" color="warn" (click)="onSubmit()">Agregar</button>
+</div>

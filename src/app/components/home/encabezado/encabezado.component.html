@@ -1,0 +1,42 @@
+
+
+<div class="mt-6 mb-6 mx-4">
+  <div>
+    <nav class=" sm:flex" aria-label="Breadcrumb">
+      <ol role="list" class="flex items-center space-x-4">
+        <li>
+          <div class="flex">
+            <a  [routerLink]="'/home'" routerLinkActive="router-link-active"  class="inline-flex text-sm font-medium text-red-600 hover:text-red-500">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+              {{titulo.directorio  | titlecase}}
+            </a>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg class="h-5 w-5 flex-shrink-0 text-red-600 hover:text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+            </svg>
+            <a  [routerLink]="'/home/'+titulo.nombre" routerLinkActive="router-link-active" class="ml-4 text-sm font-medium text-red-600 hover:text-red-500">{{titulo.nombre | titlecase }}</a>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg class="h-5 w-5 flex-shrink-0 text-red-600 hover:text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+            </svg>
+            <a [routerLink]="'/home/'+titulo.nombre+'/'+titulo.extension" routerLinkActive="router-link-active" aria-current="page" class="ml-4 text-sm font-medium text-red-600 hover:text-red-500">{{titulo.extension | titlecase   }}</a>
+          </div>
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <div class="mt-5 md:flex md:items-center md:justify-between">
+    <div class="min-w-0 flex-1">
+      <h1 class="text-2xl font-bold leading-7 text-red-600 hover:text-red-500">{{titulo.extension | removeUnderscore  | titlecase}}</h1>
+    </div>    
+  </div>
+  <hr />
+</div>
+
+

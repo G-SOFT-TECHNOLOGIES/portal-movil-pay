@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Recuperar Contraseña</h1>
+<div mat-dialog-content>
+  <div class="grid grid-cols-1 p-4">
+    <form class="" (submit)="onSubmit()" [formGroup]="myForm">
+      <!-- <mat-form-field style="width: 100%;">
+        <input matInput placeholder="xxxxxxxx" formControlName="cedula">
+        <mat-select style="width: 50px;margin-left: 25px;" matPrefix formControlName="indicador">
+          <mat-option value="V">V</mat-option>
+          <mat-option value="E">E</mat-option>
+          <mat-option value="J">J</mat-option>
+          <mat-option value="P">P</mat-option>
+          <mat-option value="G">G</mat-option>
+        </mat-select>
+        <button mat-icon-button matSuffix [disabled]="myForm.invalid">
+          <mat-icon>send</mat-icon>
+        </button>
+      </mat-form-field> -->
+     
+      <div>
+        <div class="inline-flex w-full inputgroup  mt-2   ">
+          <!-- <p-dropdown formControlName="indicador" [options]="indicador_arr"></p-dropdown> -->
+          <select pInputText formControlName="indicador" style="width: 50px;margin-left: 0px;" matPrefix
+            class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 sm:text-sm sm:leading-6 ring-1 focus:ring-indigo-400">
+            <option value="V">V</option>
+            <option value="E">E</option>
+            <option value="J">J</option>
+            <option value="P">P</option>
+            <option value="G">G</option>
+          </select>
+          <input pInputText id="user" name="user" type="text" required formControlName="cedula"
+            class=" w-full shadow-lg  p-2 flex align-items-center justify-content-center py-1.5 px-2  text-gray-700 focus:line-clamp-none">
+          <button mat-icon-button color="warn" matSuffix [disabled]="myForm.invalid">
+            <mat-icon>send</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+    <p class="mt-2 text-gray-500 md:text-sm font-light">Su nueva contraseña sera enviada a su correo</p>
+  </div>
+
+</div>

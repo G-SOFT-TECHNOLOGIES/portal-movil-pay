@@ -1,0 +1,52 @@
+<h1 mat-dialog-title class="bg-red-500"><span class="text-slate-50 text-xl font-medium">Agregar TRANSFERENCIA</span><a
+        mat-dialog-close
+        class="absolute top-1 right-0 p-2.5 text-sm font-medium  text-white rounded-r-lg cursor-pointer ">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        <span class="sr-only">Close</span>
+    </a></h1>
+<div mat-dialog-content>
+    <div class="pt-8">
+        <form class="grid grid-cols-1 gap-4" [formGroup]="myForm">
+            <div>
+                <label>Nombre</label>
+                <div>
+                    <mat-form-field class="w-full">
+                        <input type="text" matInput formControlName="name">
+                        <mat-icon matPrefix>person</mat-icon>
+                        <mat-error *ngIf="myForm.hasError('required')">
+                            El nombre es <strong>obligatorio</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <label>Número de Cuenta</label>
+                <div>
+                    <mat-form-field class="w-full">
+                        <input type="text" matInput #nro_cuenta formControlName="nro_cuenta" maxlength="20"
+                            minlength="20" pattern="[0-9]*">
+                        <mat-icon matPrefix>tag</mat-icon>
+                    </mat-form-field>
+                    <div class="flex justify-between">
+                        <mat-error *ngIf="myForm.controls['nro_cuenta'].hasError('pattern')" class="text-xs ">
+                            Solo caracteres númericos
+                        </mat-error>
+                        <mat-error *ngIf="myForm.controls['nro_cuenta'].hasError('required')" class="text-xs">
+                            El número de cuenta es <strong>obligatorio</strong>
+                        </mat-error>
+                        <mat-hint align="end" class="text-xs">{{nro_cuenta.value.length}} /
+                            20</mat-hint>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button class="block w-full mt-5" color="warn" [disabled]="myForm.invalid"
+        (click)=" onSubmit()">Registrar
+        Transferencia</button>
+</div>

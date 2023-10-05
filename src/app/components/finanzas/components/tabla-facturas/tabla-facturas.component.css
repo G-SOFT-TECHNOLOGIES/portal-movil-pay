@@ -1,0 +1,23 @@
+th{
+    background-color: #0e0e0e !important;
+    color: whitesmoke !important;
+}
+.example-full-width {
+    width: 100%;
+  }
+  /* Structure */
+.example-container {
+  position: relative;
+}
+
+.example-table-container {
+  position: relative;
+  /* min-height: 200px; */
+  max-height: 600px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+

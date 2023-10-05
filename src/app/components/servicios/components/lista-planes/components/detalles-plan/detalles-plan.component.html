@@ -1,0 +1,69 @@
+<!-- component -->
+
+<div class="md:flex md:items-center" *ngIf="infor != undefined">
+    <div class="flex items-center w-full rounded-2xl h-64 md:w-1/2 lg:h-96 bg-black">
+        <img class=" w-1/2 rounded-md  max-w-lg mx-auto"
+            src="../../../../../../../assets/img/gtv.png" alt="Nike Air">
+    </div>
+    <div class="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
+        <h3 class="text-gray-700 uppercase text-lg">{{infor.name}}</h3>
+
+        <p class=" flex items-end gap-x-1 text-gray-600 mt-3">
+            <span class="text-2xl ">${{infor.cost}}</span>
+            <span class="text-xs ml-1 font-semibold leading-6 ">/ mes</span>
+        </p>
+        <hr class="my-3">
+        <div class="mt-2">
+            <label class="text-gray-700 text-sm" for="count">Descripcion:</label>
+            <div class="flex items-center mt-1">
+                <p>{{infor.description}}</p>
+            </div>
+        </div>
+        <div class="flex items-center mt-6">
+            <button class="inline-flex px-8 py-2 bg-red-600 text-white text-sm font-medium rounded hover:bg-red-500"
+                (click)="comprar()"> <svg class="h-5 w-5 mr-2" fill="none" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                    </path>
+                </svg>Contratar</button>
+            <!-- <button class="rounded-full mx-2 text-gray-600 border  p-2 hover:bg-gray-200 focus:outline-none">
+                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                    </path>
+                </svg>
+            </button> -->
+        </div>
+    </div>
+</div>
+<div class="grid grid-cols-1  my-2" *ngIf="channels_plan_gtv.length > 0">
+    <div class="w-full rounded-lg ">
+        <div class="  px-8 py-4  m-4">
+            <h3 class="text-gray-600 text-center text-2xl font-medium py-4">Canales</h3>
+            <ul class="flex flex-wrap gap-8  ">
+
+                <li class="flex items-center rounded-md w-20 h-20  bg-cover  drop-shadow-xl shadow-lg shadow-gray-500/50  ease-in-out delay-100  hover:-translate-y-1 hover:bg-slate-400 hover:scale-110 duration-300"
+                    [matTooltip]="item.channel.name" *ngFor="let item of channels_plan_gtv">
+                    <ng-container *ngIf="item.channel.file_logo != null else SinImagen">
+                        <img [src]="item.channel.file_logo" [alt]="item.channel.name" class="p-2">
+                    </ng-container>
+                    <ng-template #SinImagen>
+                        <span class="p-4 flex justify-center items-center text-black"
+                            [matTooltip]="item.channel.name"><svg xmlns="http://www.w3.org/2000/svg" width="40"
+                                height="40" fill="currentColor" class="bi bi-camera-video-fill text-gray-800"
+                                viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5z" />
+                            </svg>
+                        </span> </ng-template>
+
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,88 @@
+<div class="mt-10">
+  <div class="flex">
+    <a mat-icon-button color="warn" matTooltip="Volver" [routerLink]="['/home/ajustes']">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+    <span class="text-xl font-bold m-2 uppercase">Editar cuenta</span>
+
+  </div>
+
+  <div class=" lg:py-7 py-5 lg:px-8 animate__animated animate__bounceIn">
+    <form class="mx-auto mt-7 max-w-xl sm:mt-7 p-8 bg-white rounded-lg shadow-lg" [formGroup]="myForm"
+      (submit)="onSubmit()">
+      <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
+      
+        <div>
+          <label class="leading-6 text-sm font-semibold">Nombres</label>
+          <div>
+            <mat-form-field class="example-full-width" style="width: 100%;">
+              <input type="text" matInput placeholder="Nombre Usuario" formControlName="name" readonly>
+              <mat-error *ngIf="myForm.hasError('required')">
+                El Nombre es <strong>Obligatorio</strong>
+              </mat-error>
+              <mat-icon matPrefix>person</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <label class="leading-6 text-sm font-semibold">Apellidos</label>
+          <div>
+            <mat-form-field class="example-full-width" style="width: 100%;">
+              <input type="text" matInput placeholder="Apellido usuario" formControlName="last_name" readonly>
+              <mat-error *ngIf="myForm.hasError('required')">
+                El Apellido es <strong>Obligatorio</strong>
+              </mat-error>
+              <mat-icon matPrefix>person</mat-icon>
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="lg:col-span-2">
+          <label class="leading-6 text-sm font-semibold">Email</label>
+          <div>
+            <mat-form-field class="example-full-width" style="width: 100%;">
+              <input type="email" matInput placeholder="user@gmail.com" formControlName="email">
+              <mat-error *ngIf="myForm.hasError('email') && !myForm.hasError('required')">
+                Por Favor debe rellenar el campo <strong>Email</strong>
+              </mat-error>
+              <mat-error *ngIf="myForm.hasError('required')">
+                El email es <strong>Obligatorio</strong>
+              </mat-error>
+              <mat-icon matPrefix>alternate_email</mat-icon>
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <label class="leading-6 text-sm font-semibold">Telefono</label>
+          <div>
+            <mat-form-field class="example-full-width" style="width: 100%;">
+              <input type="text" matInput placeholder="xxxx-xxx-xxxx" formControlName="phone" maxlength="11">
+              <mat-error *ngIf="myForm.hasError('required')">
+                El Telefono es <strong>Obligatorio</strong>
+              </mat-error>
+              <mat-icon matPrefix>call</mat-icon>
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <label class="leading-6 text-sm font-semibold">Movil</label>
+          <div>
+            <mat-form-field class="example-full-width" style="width: 100%;">
+              <input type="text" matInput placeholder="xxxx-xxx-xxxx" formControlName="mobile" maxlength="11">
+              <mat-error *ngIf="myForm.hasError('required')">
+                El Movil es <strong>Obligatorio</strong>
+              </mat-error>
+              <mat-icon matPrefix>phone_iphone</mat-icon>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="mt-10">
+        <button mat-raised-button color="warn" class="block w-full text-xl py-4 font-medium" type="submit" [disabled]="myForm.invalid">Actualizar</button>
+      </div>
+    </form>
+  </div>
+</div>

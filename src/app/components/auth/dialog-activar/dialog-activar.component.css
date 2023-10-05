@@ -1,0 +1,9 @@
+.mat-form-field-prefix .mat-select {
+    position: absolute;
+    left: 0;
+  }
+  
+  .mat-form-field-prefix .mat-select-trigger {
+    border-right: none;
+    pointer-events: none;
+  }

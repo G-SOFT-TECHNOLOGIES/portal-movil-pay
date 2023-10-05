@@ -1,0 +1,73 @@
+<div class="mt-10">
+    <div class="flex">
+        <a mat-icon-button color="warn" matTooltip="Volver" [routerLink]="['/home/ajustes']">
+            <mat-icon>arrow_back</mat-icon>
+        </a>
+        <span class="text-xl font-bold m-2 uppercase">Actualizar contraseña</span>
+    </div>
+    <div>
+      
+        <div class=" lg:py-7 py-5 lg:px-8 animate__animated animate__bounceIn">
+            <div class="mx-auto mt-7 max-w-xl sm:mt-7 p-8 bg-white rounded-lg shadow-lg">
+                <mat-stepper [linear]="isLinear" #stepper class="example-stepper" color="warn"
+                    [orientation]="(stepperOrientation | async)!">
+                    <mat-step [stepControl]="validar" label="Validar contraseña">
+                        <p class=" text-lg text-gray-500 my-4">*Colocar la contraseña actual</p>
+                        <form class="space-y-6" [formGroup]="validar" (submit)="onSubmit()">
+                            <mat-form-field class="example-full-width w-full">
+                                <mat-label>Introduzca la contraseña</mat-label>
+                                <input  [type]="hide ? 'password' : 'text'" matInput  placeholder="******" formControlName="contraseña"> 
+                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                  </button>       
+                                <mat-error *ngIf="validar.hasError('required')">
+                                  La contraseña es<strong> Obligatoria</strong>
+                                </mat-error>
+                              </mat-form-field>
+                            <mat-form-field class="example-full-width w-full">
+                                <mat-label>Confirmar Contraseña</mat-label>
+                                <input [type]="hide ? 'password' : 'text'" matInput  placeholder="******" formControlName="contraseña2">
+                               
+                                <mat-error *ngIf="validar.hasError('required')">
+                                  La contraseña es<strong> Obligatoria</strong>
+                                </mat-error>
+                              </mat-form-field>
+                          <div>
+                            
+                            <button  mat-raised-button color="warn" type="submit" class="w-full" [disabled]="validar.invalid">Comprobar contraseña </button>
+                          </div>
+                          <div *ngIf="valido" class="flex justify-end">
+                            <button mat-flat-button matStepperNext color="warn">Siguiente</button>
+                        </div>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="nueva" label="Cambiar contraseña">
+                        <form class="space-y-6" [formGroup]="nueva">
+                            <mat-form-field class="example-full-width w-full">
+                                <mat-label>Nueva contraseña</mat-label>
+                                <input  [type]="hide ? 'password' : 'text'" matInput  placeholder="***********" formControlName="contraseña">
+                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                  </button>   
+                                <mat-error *ngIf="nueva.hasError('required')">
+                                  La contraseña <strong>Es Obligatoria</strong>
+                                </mat-error>
+                              </mat-form-field>
+                            <mat-form-field class="example-full-width w-full">
+                                <mat-label>Confirmar Contraseña</mat-label>
+                                <input  [type]="hide ? 'password' : 'text'" matInput  placeholder="***********" formControlName="contraseña2">
+                                <mat-error *ngIf="nueva.hasError('required')">
+                                  La contraseña <strong>Es Obligatoria</strong>
+                                </mat-error>
+
+                              </mat-form-field>
+                          <div>
+                            <button mat-raised-button color="warn" type="submit" class="w-full" [disabled]="nueva.invalid" (click)="updatePassword()">Cambiar contraseña </button>
+                          </div>
+                        </form>
+                    </mat-step>
+                </mat-stepper>
+            </div>
+        </div>
+    </div>
+</div>

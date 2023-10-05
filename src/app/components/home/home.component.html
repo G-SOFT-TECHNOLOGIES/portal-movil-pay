@@ -1,0 +1,45 @@
+<div class=" w-full h-screen">
+    <mat-sidenav-container class="sidenav-container ">
+        <mat-sidenav #drawer class="sidenav" fixedInViewport
+            [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+            [opened]="(isHandset$ | async) === false">
+            <mat-toolbar class="">
+                <div>
+                    <a href="home" class="flex items-center pl-2 mx-5 justify-center pointer" style="cursor: pointer;">
+                        <img src="../../../assets/img/favicon.png" class="mx-2  my-2  mr-4 w-11" alt="G-SOFT Logo" />
+                    </a>
+                </div>
+            </mat-toolbar>
+            <div class="flex felx items-center justify-center shadow-lg  text-green-700 py-3">
+                <div class=" inline-flex items-center gap-x-2">
+                    <mat-icon>attach_money</mat-icon>
+                    <strong class="font-light text-xl">
+                        {{monto$ | async}} </strong>
+                    <span class="text-sm flex items-center">BCV</span>
+                </div>
+            </div>
+            <mat-nav-list>
+                <app-menu></app-menu>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <mat-toolbar class=" flex justify-between shadow-md  ">
+                <button mat-icon-button (click)="drawer.toggle()"><span class="icon-menu text-red-500"></span></button>
+                <span class="font-bold text-gray-600">{{user.name}}, {{user.last_name}} </span>
+
+                <span class="example-spacer"></span>
+                <button mat-icon-button (click)="logout()"><mat-icon class="text-red-500">
+                        logout</mat-icon></button>
+            </mat-toolbar>
+            <div>
+                <ng-container *ngIf="loading |async; else elseTemplate ">
+                    <app-loading></app-loading>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <div class="">
+                        <router-outlet></router-outlet>
+                    </div>
+                </ng-template>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>

@@ -1,0 +1,63 @@
+<div class="mx-auto grid grid-cols-12 gap-4 bg-zinc-50 p-1">
+    <!-- <div class="header lg:col-span-4  col-span-12 rounded-lg  py-4">
+        <app-datos-cuentas></app-datos-cuentas>
+    </div> -->
+    <div class=" header  col-span-12 rounded-lg">
+        <app-informacion-cuenta [contrato]="contract_detail_Tv"></app-informacion-cuenta>
+    </div>
+    <div class="col-span-12 rounded-lg  py-8 sm:col-span-8">
+        <div class="w-full rounded-lg bg-gray-50">
+            <div class=" bg-white px-4 py-4 shadow-md m-2">
+                <div class="flex justify-between px-1 py-4 ">
+                    <div>
+                        <h3 class="font-bold text-2xl font-sans">Paquetes</h3>
+                    </div>
+
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2  lg:divide-x-2 gap-y-4 lg:gap-x-4">
+                    <div class="w-full">
+                        <div class="px-1 py-1 flex justify-between">
+                            <h3 class="font-bold text-xl font-sans">Mis Paquetes</h3>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-center my-4">
+                            <app-lista-paquetes [paquetes]="paquetes"></app-lista-paquetes>
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <div class="px-1 py-1 flex justify-between">
+                            <h3 class="font-bold text-xl font-sans">Paquetes disponibles</h3>
+                            <div class="flex justify-end">
+                                <button mat-raised-button color="primary" class="text-xs lg:text-base" [disabled]="selected.length==0" (click)="Add()">
+                                    <mat-icon>add_shopping_cart</mat-icon> Agregar seleccionados
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-center my-4 ">
+                            <app-add-lista-paquetes [paquetes]="paquetes"
+                                (selected)="selected =$event"></app-add-lista-paquetes>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Sidebar -->
+    </div>
+    <div class="col-span-12 rounded-lg py-8 sm:col-span-4">
+        <div class="w-full rounded-lg bg-gray-50">
+            <div class=" bg-white px-8 py-4 shadow-md m-4">
+                <div class="px-1 py-4">
+                    <h3 class="font-bold text-2xl font-sans">Canales</h3>
+                </div>
+                <div *ngIf="showCanales">
+                    <app-infor-planes-agregados [canales]="canales"></app-infor-planes-agregados>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+</div>

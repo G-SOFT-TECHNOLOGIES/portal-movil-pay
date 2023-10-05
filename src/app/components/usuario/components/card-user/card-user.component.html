@@ -1,0 +1,271 @@
+<!-- <div class=" p-8  xl:p-8  bg-white text-center rounded-3xl  shadow-xl">
+  <div class="top-0 flex justify-between -m-9 my-1 text-red-500">
+    <span
+      class="inline-flex items-center bg-white  gap-x-1 text-sm rounded-full border-2  hover:bg-red-500 hover:text-white  border-red-500 px-4 py-2 font-medium fill-red-500 hover:fill-gray-50">
+      <svg class="h-2 w-2 " viewBox="0 0 6 6" aria-hidden="true">
+        <circle cx="3" cy="3" r="3" />
+      </svg>
+      {{contratos.status_name}}
+    </span>
+
+    <a [routerLink]="[ 'finanzas/', contratos.id]"
+      class="inline-flex items-center gap-x-1.5 rounded-full bg-white px-3 border-2 border-red-500 py-2 text-sm font-semibold text-red-500 shadow-sm hover:bg-red-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-receipt-cutoff inline-flex" viewBox="0 0 16 16">
+        <path
+          d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zM11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+        <path
+          d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z" />
+      </svg>
+      Ver Facturas
+    </a>
+  </div>
+  <div class="space-x-4 grid lg:grid-flow-col mt-8">
+    <div class="flex-1  space-y-2">
+      <div class="flex justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person"
+          viewBox="0 0 16 16">
+          <path
+            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
+        </svg>
+      </div>
+
+
+      <span class="flex justify-center text-center font-light  text-lg">{{contratos.client_type_name}} </span>
+    </div>
+    <div class="flex-1 space-y-2">
+      <div class="flex justify-center items-center space-x-4">
+        <span class="flex justify-end text-center font-medium  mr-4 " matTooltip="Nro. Contrato"> <mat-icon
+            class="">description</mat-icon>
+          {{contratos.id}} </span>
+        <span class="hidden sm:mx-1 sm:inline" aria-hidden="true">••••</span>
+
+        <span class="inline-flex  justify-end font-medium  mr-4" matTooltip="Orden de Instalacion">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+          </svg>
+          {{contratos.installation_order}}
+        </span>
+      </div>
+      <p class="font-medium text-sm text-justify">
+        {{contratos.address_tax}}
+      </p>
+    </div>
+
+  </div>
+  <p-divider></p-divider>
+  <div class="top-0 flex justify-center -m-9 my-1 text-gray-500">
+
+    <div
+      class="inline-flex items-center bg-white  gap-x-1  rounded-full   hover:bg-gray-500 hover:text-white  px-4 py-2 font-medium fill-gray-500 hover:fill-gray-50">
+      <mat-icon>info</mat-icon>
+      <span class="text-base font-medium leading-6 mr-2 ">Ciclo de Facturación</span>
+      <span class="text-lg font-medium ">{{contratos.date_cicle}}</span>
+      <span class="text-xs font-medium ">c/mes</span>
+    </div>
+
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-1  lg:grid-cols-2 gap-y-8  ">
+    <div class="gap-x-8  gap-y-8">
+      <div class=" border-l-4 border-green-400 text-green-400 p-4 ">
+        <span class="flex justify-center text-center mb-2">Saldo a Favor</span>
+        <div class="inline-flex   items-center  ">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-14 h-14">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+          </svg>
+          <span class="text-[25px] font-bold ml-2">$ {{contratos.balance?? 0}}</span>
+          <span class="font-bold uppercase ml-2">usd</span>
+        </div>
+      </div>
+    </div>
+    <div class="gap-x-8">
+      <div class="border-l-4 border-red-400 text-red-400 p-4">
+        <span class="flex justify-center text-center mb-4">Deuda pendiente</span>
+        <div class="inline-flex  items-center  ">
+          <svg width="40" height="40" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
+            <path
+              d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z" />
+            <path
+              d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z" />
+            <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z" />
+          </svg>
+          <span class="text-[25px] font-bold ml-2">$ {{contratos.debt??0}} </span>
+          <span class="font-bold uppercase ml-2">usd</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div> -->
+
+<!-- component -->
+<div class="relative max-w-md mx-auto md:max-w-2xl min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl mt-16">
+  <div class="px-6">
+
+    <div class="flex flex-wrap justify-center">
+      <div class="w-full flex justify-center">
+        <div class="relative">
+          <img src="../../../../../assets/img/g1.png"
+            class="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]" />
+        </div>
+      </div>
+      <div
+        class="right-0 mt-4 rounded-l-full absolute text-center font-medium text-sm border-2 text-white px-3 py-1 bg-black fill-white shadow-md">
+        <a [routerLink]="[ 'finanzas/', contratos.id]" class="inline-flex items-center gap-x-1">
+          Ver Facturas
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-receipt-cutoff inline-flex" viewBox="0 0 16 16">
+            <path
+              d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zM11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+            <path
+              d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z" />
+          </svg>
+        
+        </a>
+      </div>
+      <ng-container *ngIf="contratos.status ==16 ">
+        <div
+          class="left-0 mt-4 rounded-r-full absolute text-center font-medium text-sm text-white px-2 py-1 bg-green-700 fill-white shadow-md">
+          <span class="inline-flex items-center gap-x-2">
+            <svg class="h-2 w-2 " viewBox="0 0 6 6" aria-hidden="true">
+              <circle cx="3" cy="3" r="3" />
+            </svg>
+            {{contratos.status_name}}
+          </span>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="contratos.status ==18 ">
+        <div
+          class="left-0 mt-4 rounded-r-full absolute text-center font-medium text-sm text-white px-2 py-1 bg-red-700 fill-white shadow-md">
+          <span class="inline-flex items-center gap-x-2">
+            <svg class="h-2 w-2 " viewBox="0 0 6 6" aria-hidden="true">
+              <circle cx="3" cy="3" r="3" />
+            </svg>
+            {{contratos.status_name}}
+          </span>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="contratos.status ==19 ">
+        <div
+          class="left-0 mt-4 rounded-r-full absolute text-center font-medium text-sm text-white px-2 py-1 bg-yellow-600 fill-white shadow-md">
+          <span class="inline-flex items-center gap-x-2">
+            <svg class="h-2 w-2 " viewBox="0 0 6 6" aria-hidden="true">
+              <circle cx="3" cy="3" r="3" />
+            </svg>
+            {{contratos.status_name}}
+          </span>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="contratos.status ==20 ">
+        <div
+          class="left-0 mt-4 rounded-r-full absolute text-center font-medium text-sm text-white px-2 py-1 bg-orange-600 fill-white shadow-md">
+          <span class="inline-flex items-center gap-x-2">
+            <svg class="h-2 w-2 " viewBox="0 0 6 6" aria-hidden="true">
+              <circle cx="3" cy="3" r="3" />
+            </svg>
+            {{contratos.status_name}}
+          </span>
+        </div>
+      </ng-container>
+
+      <div class="w-full text-center mt-20 ">
+        <div class="flex justify-center lg:pt-4 pt-8 pb-0 divide-x-4">
+          <div class="p-3 text-center">
+            <span class="text-[25px] font-bold block uppercase tracking-wide text-green-600">$ {{contratos.balance?? 0}}
+              <span class="text-xs font-bold uppercase ml-1">usd</span></span>
+            <span class="text-sm text-slate-400">Saldo a Favor</span>
+          </div>
+          <div class="p-3 text-center">
+            <span class="text-[25px] font-bold block uppercase tracking-wide text-red-600">$ {{contratos.debt??0}}
+              <span class="text-xs font-bold uppercase ml-1">usd</span></span>
+            <span class="text-sm text-slate-400">Deuda pendiente</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="inline-flex items-center my-1 gap-x-1  rounded-full  px-4 ">
+        <mat-icon>info</mat-icon>
+        <span class="text-base font-medium leading-6 mr-2 ">Ciclo de Facturación</span>
+        <span class="text-lg font-medium ">{{contratos.date_cicle}}</span>
+        <span class="text-xs font-medium ">c/mes</span>
+      </div>
+      <div class="w-full  text-center mt-2">
+        <h3 class="text-2xl text-slate-700 font-bold leading-normal mb-1" matTooltip="Nro. Contrato"><mat-icon
+            class="">description</mat-icon>{{contratos.id}}</h3>
+        <div class="text-sm mt-0 text-slate-400 font-bold uppercase" matTooltip="Orden de Instalacion">
+          <span class="inline-flex items-center">
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+            </svg> {{contratos.installation_order}}
+          </span>
+
+        </div>
+      </div>
+      <div class="mt-6 py-6 border-t border-slate-200 text-center">
+        <div class="flex flex-wrap  justify-center">
+          <div class="w-full h-[80px] px-4">
+            <p class="font-light leading-relaxed text-slate-600 "> {{contratos.address_tax}}</p>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <!-- component -->
+  <div>
+    <dl class="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2 p-4" *ngIf="contract">
+      <div *ngIf="contratos.status ==16 && contract.length <= 1   ">
+        <div class=" bg-white px-4 py-5  text-center ">
+          <dt class=" text-sm font-medium text-gray-500 uppercase">Adquiere ya</dt>
+          <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">SERVICIO DE TV </dd>
+          <div class="mt-8 flex justify-center">
+            <div class="w-full inline-flex rounded-md bg-white shadow">
+              <button mat-raised-button color="warn" (click)="IrDetalle(contratos.id)"
+                class="w-full py-2 px-6"><mat-icon class="ml-2">shopping_cart</mat-icon>
+                Contratar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let item of contract">
+        <div class=" bg-white px-4 py-5  text-center">
+          <dt class=" text-sm font-medium text-gray-500">{{item.service_type.description}}</dt>
+          <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{item.plan_type.name}}</dd>
+
+          <ng-container *ngIf="item.service_type.id == 4 else INTERNET">
+            <div class="flex justify-center  divide-x-2">
+              <div class=" px-3 text-center">
+                <span
+                  class="text-sm font-bold block uppercase tracking-wide text-slate-600">{{item.contract_detail_package.length
+                  ?? 0}}
+                  <span class="text-xs font-bold uppercase ml-1">paquetes</span></span>
+              </div>
+              <div class="px-3 text-center">
+                <span
+                  class="text-sm font-bold block uppercase tracking-wide text-slate-600">{{item.contract_detail_product.length
+                  ?? 0}}
+                  <span class="text-xs font-bold uppercase ml-1">TV BOX</span></span>
+              </div>
+            </div>
+            <button mat-raised-button color="warn" (click)="miServicio(contratos.id)" class="flex w-full my-4">
+              Ir a Servicio TV <mat-icon class="mr-2 right-0">tv</mat-icon>
+            </button>
+          </ng-container>
+          <ng-template #INTERNET>
+            <dt class=" text-sm font-medium text-gray-500">{{item.plan_type.profile}}</dt>
+          </ng-template>
+
+        </div>
+
+      </div>
+    </dl>
+  </div>

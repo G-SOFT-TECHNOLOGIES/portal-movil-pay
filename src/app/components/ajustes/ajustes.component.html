@@ -1,0 +1,54 @@
+<div class="mt-10 ">
+  <app-encabezado title="Inicio"></app-encabezado>
+</div>
+<div class=" grid grid-cols-1 lg:grid-cols-3 gap-x-8 mx-auto max-w-5xl px-6 lg:px-8">
+
+  <div class="col-4 gap-x-4 m-4">
+    <div class="flex-1 mx-auto  max-w-lg  gap-8 lg:mx-0 lg:max-w-none" [routerLink]="['editar']">
+      <div
+        class=" flex-1 justify-center py-8 space-y-4 border-b-2 text-gray-500 hover:text-red-700 rounded-md shadow-md bg-white p-4">
+        <div class="flex pointer justify-center" style="cursor: pointer;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-pencil-square"
+            viewBox="0 0 16 16">
+            <path
+              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+            <path fill-rule="evenodd"
+              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+          </svg>
+        </div>
+        <span class="flex justify-center text-center font-extralight text-1xl uppercase">Editar cuenta </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 gap-x-4 m-4">
+    <div class="flex-1   mx-auto  max-w-lg  gap-8 lg:mx-0 lg:max-w-none " [routerLink]="['pagos']" >
+      <div
+        class=" flex-1 justify-center py-8 space-y-4 border-b-2 text-gray-500 hover:text-red-700 rounded-md shadow-md bg-white p-4">
+        <div class="flex pointer justify-center" style="cursor: pointer;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-[45px] h-[45px] inline mb-1">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+          </svg>
+        </div>
+        <span class="flex justify-center text-center font-extralight text-1xl uppercase">Afiliar cuentas </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 gap-x-4 m-4">
+    <div class="flex-1   mx-auto  max-w-lg  gap-8 lg:mx-0 lg:max-w-none " [routerLink]="['actualizar']">
+      <div
+        class=" flex-1 justify-center py-8 space-y-4 border-b-2 text-gray-500 hover:text-red-700 rounded-md shadow-md bg-white p-4">
+        <div class="flex pointer justify-center" style="cursor: pointer;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-[45px] h-[45px] inline  mb-1">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+          </svg>
+        </div>
+          <span class="flex justify-center text-center font-extralight text-1xl uppercase">Actualizar contrasenña
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>

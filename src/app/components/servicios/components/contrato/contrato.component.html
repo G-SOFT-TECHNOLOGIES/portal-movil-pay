@@ -1,0 +1,22 @@
+<ng-container *ngIf="suscrito else Suscribir">
+   <app-subscritos [contrato]="contrato"></app-subscritos>
+</ng-container>
+<ng-template #Suscribir>
+    <div class="bannerFondo bg-black	bg-left-top bg-auto bg-repeat-x">
+    </div>
+    <div class="-mt-64">
+        <div class="w-full text-center">
+            <div class="inset-x-0 top-0  mx-auto drop-shadow-sm">
+                <span class="inline-flex items-center gap-x-2 ">
+                    <img src="../../../../../assets/img/gtv.png" alt="" height="10" width="300" />
+                </span>
+                <!-- <h1 class="font-light text-2xl text-white">
+                    PLANES DE G-TV
+                </h1> -->
+            </div>
+        </div>
+    </div>
+    <div class="mx-auto px-10">
+        <app-nueva-suscripcion></app-nueva-suscripcion>
+    </div>
+</ng-template>

@@ -1,0 +1,88 @@
+<div class="gap-x-8 mx-auto px-6 lg:px-8 bg-white py-2">
+
+    <h1 class="inline-flex text-3xl font-sans text-gray-500 gap-x-8">
+        <svg class="w-[35px] h-[35px] text-gray-800 dark:text-white" aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.6"
+                d="M1 1v14h16M4 10l3-4 4 4 5-5m0 0h-3.207M16 5v3.207" />
+        </svg>
+        Consumo del servicio de Internet
+    </h1>
+    <div class="my-4">
+
+        <mat-tab-group color="warn" (selectedIndexChange)="resetData()">
+            <mat-tab [label]="contrato.client_type_name" *ngFor="let contrato of contratos"
+                (selectFocusedIndex)="getContrato(contrato.id)">
+                <div class="flex justify-end my-8">
+                    <button mat-raised-button color="primary"
+                        (click)="getContrato(contrato.id)"><mat-icon>info</mat-icon>Más información</button>
+                </div>
+
+                <div *ngIf="informacion | async as informacion">
+                    <dl class="mt-4 grid grid-cols-1 gap-5 lg:grid-cols-2 mb-5">
+                        <div class="overflow-hidden rounded-lg bg-zinc-100 px-4 py-5 shadow sm:p-6">
+                            <dt class="truncate text-sm font-medium text-gray-500">{{contrato.id}}</dt>
+                            <dd class="mt-1 text-1xl font-semibold tracking-tight text-gray-500">
+                                {{contrato.client_type_name}}</dd>
+                        </div>
+                        <div class="overflow-hidden rounded-lg bg-zinc-100 px-4 py-5 shadow sm:p-6"
+                            *ngIf="infor_contract[0]?.service_detail.length > 0 else SinEquipo">
+                            <dt class="truncate  font-medium text-gray-500">IP:
+                                {{infor_contract[0]?.service_detail[0]?.ip}}</dt>
+                            <dt class="truncate  font-medium text-gray-500">MAC:
+                                {{infor_contract[0]?.service_detail[0]?.mac}}</dt>
+                            <dt class="truncate  font-medium text-gray-500">Serial:
+                                {{infor_contract[0]?.service_detail[0]?.serial}} </dt>
+                        </div>
+                        <div class="col-span-2 overflow-hidden flex rounded-lg  shadow gap-x-4" >
+
+                            <div class="flex-1   ">
+                                <div class=" flex-1 justify-center py-8 space-y-4 border-b-2 text-gray-500 hover:text-red-600 rounded-md shadow-md bg-white p-4">
+                                     <span class="flex justify-center text-center font-medium text-sm ">Total Subida </span>
+                                    <span class="flex justify-center text-center font-extralight text-2xl"> {{totalSubida}} GB</span>
+                                </div>
+                            </div>
+                            <div class="flex-1 ">
+                                <div class=" flex-1 justify-center py-8 space-y-4 border-b-2 text-gray-500 hover:text-red-600 rounded-md shadow-md bg-white p-4">
+                                     <span class="flex justify-center text-center font-medium text-sm "> Total Bajada  </span>
+                                    <span class="flex justify-center text-center font-extralight text-2xl"> {{totalBajada}} GB </span>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-template #SinEquipo>
+                            <div class="flex justify-center items-centeroverflow-hidden rounded-lg bg-zinc-100 px-4 py-5 shadow sm:p-6">
+                                <div class="flex justify-center items-center">
+                                    <span class="font-medium text-gray-500">NO POSEE EQUIPO</span>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </dl>
+                </div>
+
+                <div class="card flex justify-center gap-x-8">
+                    <mat-form-field class="w-full lg:max-w-sm">
+                        <mat-label>Rango de Fecha de Consumo</mat-label>
+                        <mat-date-range-input [formGroup]="rangeDate" [rangePicker]="campaignOnePicker"
+                            [comparisonStart]="rangeDate.value.start" [comparisonEnd]="rangeDate.value.end">
+                            <input matStartDate placeholder="Desde" formControlName="start">
+                            <input matEndDate placeholder="Hasta" formControlName="end">
+                        </mat-date-range-input>
+                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+                    </mat-form-field>
+                    <!-- <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [showButtonBar]="true"
+                        [readonlyInput]="true"></p-calendar> -->
+                    <p-button icon="pi pi-search"
+                        styleClass="p-button-rounded p-button-danger  p-button-text p-button-raised"
+                        (click)="getContrato(contrato.id)"></p-button>
+
+
+                </div>
+                <p-chart type="line" [data]="data" [options]="options" *ngIf="consumo |async as consumo"></p-chart>
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+</div>

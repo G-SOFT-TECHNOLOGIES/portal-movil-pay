@@ -1,0 +1,146 @@
+<div class="relative">
+
+    <div class="mt-6 mb-6">
+        <h3 class="text-gray-800 text-center font-light ">Monto a Pagar</h3>
+        <div
+            class="inline-flex justify-center gap-y-8 items-center border-2 bg-zinc-100 border-red-300 py-2 w-full rounded-lg  shadow-xl ">
+            <span class=" text-center text-2xl font-mono font-bold">Bs.{{calcular()|number:'1.2-2'}}</span>
+        </div>
+        <!-- <button mat-raised-button color="warn" class="w-full">Bs.{{calcular()|number:'1.2-2'}}</button> -->
+    </div>
+    <div class="sticky top-0 z-10  flex justify-between bg-gray-50">
+        <div *ngIf="registradas.value">
+            <div *ngIf="!listaCuentas else Volver">
+                <button mat-mini-fab color="primary" (click)="listaCuentas = true" matTooltip="Agregar cuentas"><mat-icon>account_balance</mat-icon></button>
+              </div>
+            </div>
+        
+            <div>
+              <ng-template #Volver>
+                <button mat-mini-fab color="primary" (click)="listaCuentas = false"><mat-icon
+                    class="">chevron_leftbriel</mat-icon></button>
+              </ng-template>
+              <mat-checkbox class="ml-3" color="primary" [formControl]="registradas">Cuentas registradas</mat-checkbox>
+            </div>
+
+    </div>
+    <div class="mt-8">
+        <ng-container *ngIf="!listaCuentas"> 
+            <form class="space-y-3" [formGroup]="myForm" (submit)="onSubmit()">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nro de Cuenta</mat-label>
+                    <input matInput formControlName="sender" type="text" maxlength="4" pattern="[0-9]*" />
+                    <mat-icon matPrefix>tag</mat-icon>
+                    <mat-hint>Ultimo 4 digitos de su cuenta</mat-hint>
+                    <mat-error *ngIf="myForm.controls['sender'].hasError('pattern')" class="text-xs ">
+                        Solo caracteres númericos
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Banco Receptor</mat-label>
+                    <mat-select formControlName="bank">
+                        <!-- <mat-option value="4"> BFC </mat-option> -->
+                        <mat-option value="33"> BNC </mat-option>
+                        <!-- <mat-option value="1"> BANESCO </mat-option> -->
+                    </mat-select>
+                    <mat-icon matPrefix>account_balance</mat-icon>
+
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Fecha Del Pago</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="date" />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Referencia</mat-label>
+                    <input matInput formControlName="reference" type="text" maxlength="6" pattern="[0-9]*" />
+                    <mat-hint>Ultimo 6 digitos</mat-hint>
+                    <mat-icon matPrefix>tag</mat-icon>
+                    <mat-error *ngIf="myForm.controls['reference'].hasError('pattern')" class="text-xs ">
+                        Solo caracteres númericos
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Monto Pagado</mat-label>
+                    <input matInput formControlName="amount" type="number" />
+                    <button mat-icon-button matSuffix [attr.aria-label]="'Enviar Pago'" [attr.aria-pressed]="true"
+                        color="warn" [disabled]="myForm.invalid || !botonHabilitado">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                    <mat-icon matPrefix>attach_money</mat-icon>
+
+                </mat-form-field>
+            </form>
+            <ng-container *ngIf="registrar_cuenta && !registradas.value">
+                <div class="my-4 p-2">
+                    <div class="font-medium flex justify-center items-center">
+                        <span>
+                            Afiliar Cuenta
+                        </span>
+                    </div>
+                    <form [formGroup]="registro" class="grid grid-col-1">
+                        <div>
+                            <label>Nombre</label>
+                            <div>
+                                <mat-form-field class="w-full">
+                                    <input type="text" matInput formControlName="name">
+                                    <mat-icon matPrefix>person</mat-icon>
+                                    <mat-error *ngIf="myForm.hasError('required')">
+                                        El nombre es <strong>obligatorio</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Número de Cuenta</label>
+                            <div>
+                                <mat-form-field class="w-full">
+                                    <input type="text" matInput #nro_cuenta formControlName="nro_cuenta" maxlength="20"
+                                        minlength="20" pattern="[0-9]*">
+                                    <mat-icon matPrefix>tag</mat-icon>
+                                    <mat-error *ngIf="registro.controls['nro_cuenta'].hasError('pattern')"
+                                        class="text-xs ">
+                                        Solo caracteres númericos
+                                    </mat-error>
+                                    <mat-error *ngIf="registro.controls['nro_cuenta'].hasError('required')"
+                                        class="text-xs">
+                                        El número de cuenta es <strong>obligatorio</strong>
+                                    </mat-error>
+                                    <mat-hint align="end" class="text-xs">{{nro_cuenta.value.length}} /
+                                        20</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="flex my-2  justify-between gap-4">
+                        <button mat-flat-button class=" w-full" color="warn" [mat-dialog-close]="true">Salir</button>
+                        <button mat-flat-button class=" w-full" color="primary" [disabled]="registro.invalid"
+                            (click)="aggTransferencia()">Registrar</button>
+                    </div>
+                </div>
+            </ng-container>
+
+        </ng-container>
+        <ng-container *ngIf="listaCuentas">
+            <div class="grid grid-cols-1 my-2">
+                <div class="flex drop-shadow-md bg-gray-100 rounded-xl items-center my-2 p-4 gap-x-8"
+                    *ngFor="let item of cuentas" (click)="showAccountBalance(item)">
+                    <div class="flex-shrink-0  items-center ">
+                        <mat-icon>account_balance</mat-icon>
+                    </div>
+                    <div class="flex flex-col flex-wrap font-medium ">
+                        <span class="  "> {{item.method}} </span>
+                        <span class=" ">{{item.name}} </span>
+                        <span class=" ">{{item.phone ?? ''}} </span>
+                        <span class="font-extralight text-clip">{{item.email ?? ''}}</span>
+                    </div>
+                </div>
+            </div>
+
+        </ng-container>
+
+    </div>
+</div>

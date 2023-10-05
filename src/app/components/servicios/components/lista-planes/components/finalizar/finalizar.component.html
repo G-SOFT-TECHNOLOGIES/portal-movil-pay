@@ -1,0 +1,209 @@
+<div class="mt-2">
+  <div class="flex justify-between m-4">
+    <a mat-icon-button color="warn" matTooltip="Ir a Inicio" (click)="atras()">
+        <mat-icon>arrow_back</mat-icon>
+    </a>
+    <span class="text-xl font-bold m-2 uppercase"> </span>
+    <div class="card flex items-end">
+        <button *ngIf="shopping$  |async as shopping;else CERO " (click)="showDialog()"
+            class="p-2 rounded-full bg-red-600 text-white mx-5  hover:bg-red-500 focus:outline-none focus:bg-red-500"
+            matBadge="{{shopping}}">
+            <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                </path>
+            </svg>
+        </button>
+        <ng-template #CERO>
+          
+        </ng-template>
+
+        <p-dialog header="Resumen del Plan" [(visible)]="visible" position="top" [breakpoints]="{ '960px': '75vw' }"
+            [style]="{ width: '30vw' }" [draggable]="true" [resizable]="true">
+            <app-dialogo-resumen-cuenta></app-dialogo-resumen-cuenta>
+        </p-dialog>
+    </div>
+</div>
+</div>
+<div class="flex justify-center px-4 py-4 pb-16">
+  <p-card class="w-full ">
+    <ng-template pTemplate="content">
+      <div class="">
+        <div class="flex gap-x-4 justify-between items-center py-4">
+          <div class="inline-flex mx-4 items-center ">
+            <img src="../../../../../../../assets/img/favicon.png" class="mx-2  my-2  mr-4 w-11" alt="G-SOFT Logo" />
+            <span class="text-3xl font-mono font-bold">
+              G-Soft
+            </span>
+          </div>
+          <div class="flex py-4 flex-row">
+            <div class="flex-1  px-4">
+              <span class="text-3xl font-mono font-bold" *ngIf="id_contrato | async as id_contrato">
+                Contrato: {{id_contrato}}
+              </span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3">
+          <div class="flex-1">
+            <div class="flex items-center justify-center bg-black py-16 mx-8 ">
+              <img src="../../../../../../../assets/img/gtv.png" alt=""
+                class="mr-3  lg:w-[280px]  w-[70px] " />
+
+            </div>
+            <!-- <div class="flex-1 text-center my-4">
+              <p class="mb-2 text-xl font-medium font-sans"></p>
+              <i class="pi pi-tag vertical-align-middle mr-2 text-gray-500"></i>
+              <span class="vertical-align-middle line-height-2 font-medium text-sm text-gray-500">T</span>
+            </div> -->
+
+          </div>
+
+          <div class="col-span-2 " *ngIf="planActivo | async as planActivo">
+            <div class="flex py-4 flex-row" *ngFor="let plan of planActivo">
+              <div class="flex-1 justify-end">
+                <p class="mb-2 text-xl font-medium font-sans">{{plan.name}}</p>
+                <i class="pi pi-tag vertical-align-middle mr-2 text-gray-500"></i>
+                <span class="vertical-align-middle line-height-2 font-medium text-sm text-gray-500">TV</span>
+              </div>
+              <div class="flex-1 ">
+                <span class="font-light lg:text-4xl text-xl text-gray-900">${{plan.cost}}</span>
+                <span class="ml-1 text-gray-500 text-xs">/ mensual</span>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="py-4">
+              <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                  <mat-expansion-panel-header class=" bg-red-700">
+                    <mat-panel-title>
+                      <h3 class=" inline-flex items-center text-gray-50 text-xl font-medium"><svg
+                          xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                          class="bi bi-box-seam mx-2" viewBox="0 0 16 16">
+                          <path
+                            d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
+                        </svg> Agregar Paquetes</h3>
+
+                    </mat-panel-title>
+                    <mat-panel-description>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class="gap-4 my-4 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 ">
+                    <app-planes *ngFor="let item of packages" [paquetes]="item"></app-planes>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+
+            </div>
+            <mat-divider></mat-divider>
+            <div>
+              <div class="py-4">
+                <mat-accordion>
+                  <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header class=" bg-red-700">
+                      <mat-panel-title>
+                        <h3 class=" inline-flex items-center text-gray-50 text-xl font-medium"><mat-icon
+                            class="mx-2">tv</mat-icon> Agregar TV BOX</h3>
+                      </mat-panel-title>
+                      <mat-panel-description>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ul role="list" class=" border-t border-gray-200">
+                      <li class=" grid grid-cols-1 lg:grid-cols-2 py-6" *ngFor="let tv of tvbox">
+                        <div class="flex-shrink-0">
+                          <img
+                            src="https://www.distorbera.com/cdn/shop/products/TV-Box-MXQ-PRO-4K-Distorbera_1500x.jpg?v=1601060944"
+                            alt="Front of men&#039;s Basic Tee in sienna."
+                            class="h-30 w-30 rounded-md object-cover object-center sm:h-48 sm:w-48">
+                        </div>
+
+                        <div class="ml-4 flex flex-1  justify-between sm:ml-6">
+                          <div class="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
+                            <div>
+                              <div class="flex-1">
+                                <p class="mb-2 text-xl font-medium font-sans">{{tv.name}} </p>
+                                <p class="mb-2 text-xl font-medium font-sans">${{tv.cost}} </p>
+                              </div>
+                              <div class="mt-1 flex text-sm">
+                                <!-- <p class="text-gray-500">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore
+                                  fugiat ipsum harum qui mollitia eius, numquam consequuntur aut saepe dolores? Cupiditate
+                                  saepe, quo quos suscipit dolorem quas modi amet odit.</p> -->
+                              </div>
+                              <!-- <p class="flex justify-center mt-1  font-medium text-gray-900">$25.00</p> -->
+                            </div>
+
+                            <div class="mt-4 sm:mt-0 sm:pr-9">
+
+                              <label class="text-gray-700 text-sm" for="count">Cantidad:</label>
+                              <div class="flex justify-center ">
+                                <div class="inline-flex gap-x-2 items-center">
+                                  <button color="primary" mat-mini-fab (click)="resta()" [disabled]="total == 0">
+                                    <mat-icon>remove</mat-icon>
+                                  </button>
+
+                                  <div class="relative mt-2 rounded-md shadow-sm">
+                                    <span
+                                      class="block w-full rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                      aria-describedby="price-currency">{{total}}
+                                    </span>
+                                  </div>
+
+                                  <button color="primary" mat-mini-fab (click)="suma()" [disabled]="total == 3">
+                                    <mat-icon>add</mat-icon>
+                                  </button>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+
+                        </div>
+                      </li>
+                    </ul>
+                  </mat-expansion-panel>
+                </mat-accordion>
+
+              </div>
+
+            </div>
+            <div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="flex gap-x-4 justify-end">
+
+        <p-button label="Siguiente" (onClick)="finalizar()" icon="pi pi-check" iconPos="left"
+          styleClass="p-button-sm p-button-danger"></p-button>
+      </div>
+    </ng-template>
+  </p-card>
+  <div class=" fixed  bottom-0   lg:w-10/12 w-2/3">
+    <p class="relative flex ">
+
+      <mat-toolbar color="primary" class="flex   justify-between text-white px-4 rounded">
+        <div>
+          <span class="font-bold text-3xl ml-8">Total </span>
+        </div>
+        <div *ngIf="acumulado | async as acumulado else Cero">
+          <span class="font-light lg:text-4xl text-xl text-white">${{acumulado | number: '1.2-2' }} / <span class="text-sm">mensual</span>
+          </span>
+
+        </div>
+        <ng-template #Cero>
+          <span class="font-light lg:text-4xl text-xl text-white">${{0 | number: '1.2-2' }}</span>
+
+        </ng-template>
+
+      </mat-toolbar>
+    </p>
+  </div>
+</div>
