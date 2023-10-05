@@ -37,7 +37,6 @@ export class ZelleComponent {
   })
   registradas = new FormControl()
   registrar_cuenta: boolean = false;
-
   listaCuentas: boolean = false
   cuentas: any[] = []
   sinAfiliar: boolean = false
@@ -61,7 +60,9 @@ export class ZelleComponent {
       method: 3,
       date: this.core.formatearFecha(valor.date ?? ''),
     };
-
+    this.registro.patchValue({
+      name: valor.sender
+    })
     this.usuario
       .validarPago(payment)
       .then((result) => {
@@ -98,7 +99,7 @@ export class ZelleComponent {
           .pagarFatura(pago)
           .then((result) => {
             this.snack.openSnack('Pago Registrado con exito', 'success');
-            this.registradas.value ??  this.dialogRef.close(true);
+            this.registradas.value ? this.dialogRef.close(true) : '';
           })
           .catch((err) => {
             this.snack.openSnack(err, 'error')

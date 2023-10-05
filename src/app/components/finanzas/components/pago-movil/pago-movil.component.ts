@@ -1,7 +1,7 @@
 import { Component, inject, Input, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FacturaContratoService } from '../../services/usuario.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'; 
 import { DialogPagarComponent } from '../dialog-pagar/dialog-pagar.component';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { CoreService } from 'src/app/components/service/core.service';
@@ -80,7 +80,9 @@ export class PagoMovilComponent {
       method: 1,
       date: this.core.formatearFecha(valor.date ?? ''),
     };
-
+    this.registro.patchValue({
+      phone: valor.sender
+    })
     this.usuario
       .validarPago(payment)
       .then((result) => {
@@ -112,8 +114,7 @@ export class PagoMovilComponent {
           .pagarFatura(pago)
           .then((result) => {
             this.snack.openSnack('Pago Registrado con exito', 'success');
-            // console.log(this.registradas.value, 'check')
-            this.registradas.value ??  this.dialogRef.close(true);
+            this.registradas.value ? this.dialogRef.close(true) : '';
           })
           .catch((err) => {
             this.snack.openSnack(err, 'error');

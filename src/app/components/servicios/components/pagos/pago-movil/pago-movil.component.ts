@@ -78,7 +78,7 @@ export class PagoMovilComponent {
     this.registro.patchValue({
       phone: valor.sender
     })
-    this.usuario
+    this.usuario 
       .validarPago(payment)
       .then((result) => {
         this.snack.openSnack(result.message, 'success');

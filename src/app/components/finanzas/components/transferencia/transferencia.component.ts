@@ -50,7 +50,7 @@ export class TransferenciaComponent {
   });
   registro = new FormGroup({
     name: new FormControl('', Validators.required),
-    nro_cuenta: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.minLength(20), Validators.pattern('[0-9]*')]),
+    nro_cuenta: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.minLength(4), Validators.pattern('[0-9]*')]),
   })
 
   constructor(private dialogRef: MatDialogRef<DialogPagarComponent>) { }
@@ -73,7 +73,9 @@ export class TransferenciaComponent {
     const valor = this.myForm.value;
     const calculo = this.calcular();
     const resultadoBS = this.convertirBolivares(Number(this.factura.monto))
-
+    this.registro.patchValue({
+      nro_cuenta: valor.sender
+    })
     const payment = {
       bank: valor.bank,
       amount: Number(valor.amount ?? '0'),
@@ -117,7 +119,7 @@ export class TransferenciaComponent {
             }
           ]
         };
-        this.registradas.value ??  this.dialogRef.close(true);
+        this.registradas.value ? this.dialogRef.close(true) : '';
         this.usuario
           .pagarFatura(pago)
           .then((result) => {
@@ -151,7 +153,7 @@ export class TransferenciaComponent {
   showAccountBalance(item: any) {
     this.listaCuentas = false
     this.myForm.patchValue({
-      sender: item.phone.slice(16)
+      sender: item.phone
     })
   }
   aggTransferencia() {

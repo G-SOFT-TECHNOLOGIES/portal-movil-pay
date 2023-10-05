@@ -9,20 +9,15 @@
         <!-- <button mat-raised-button color="warn" class="w-full">Bs.{{calcular()|number:'1.2-2'}}</button> -->
     </div>
     <div class="sticky top-0 z-10  flex justify-between bg-gray-50">
-        <div *ngIf="registradas.value">
-            <div *ngIf="!listaCuentas else Volver">
-                <button mat-mini-fab color="primary" (click)="listaCuentas = true" matTooltip="Agregar cuentas"><mat-icon>account_balance</mat-icon></button>
-              </div>
+        <div>
+            <mat-checkbox class="ml-3" color="primary" [formControl]="registradas"
+                (change)="listaCuentas = registradas.value">Cuentas afiliadas</mat-checkbox>
+        </div>
+        <div *ngIf="cuentas.length == 0" class="flex items-center">
+            <div class="flex items-center">
+                Sin cuentas afiliadas
             </div>
-        
-            <div>
-              <ng-template #Volver>
-                <button mat-mini-fab color="primary" (click)="listaCuentas = false"><mat-icon
-                    class="">chevron_leftbriel</mat-icon></button>
-              </ng-template>
-              <mat-checkbox class="ml-3" color="primary" [formControl]="registradas">Cuentas registradas</mat-checkbox>
-            </div>
-
+        </div>
     </div>
     <div class="mt-8">
         <ng-container *ngIf="!listaCuentas"> 
@@ -98,8 +93,8 @@
                             <label>Número de Cuenta</label>
                             <div>
                                 <mat-form-field class="w-full">
-                                    <input type="text" matInput #nro_cuenta formControlName="nro_cuenta" maxlength="20"
-                                        minlength="20" pattern="[0-9]*">
+                                    <input type="text" matInput #nro_cuenta formControlName="nro_cuenta" maxlength="4"
+                                        minlength="4" pattern="[0-9]*">
                                     <mat-icon matPrefix>tag</mat-icon>
                                     <mat-error *ngIf="registro.controls['nro_cuenta'].hasError('pattern')"
                                         class="text-xs ">
@@ -124,7 +119,7 @@
             </ng-container>
 
         </ng-container>
-        <ng-container *ngIf="listaCuentas">
+        <ng-container *ngIf="listaCuentas && registradas.value">
             <div class="grid grid-cols-1 my-2">
                 <div class="flex drop-shadow-md bg-gray-100 rounded-xl items-center my-2 p-4 gap-x-8"
                     *ngFor="let item of cuentas" (click)="showAccountBalance(item)">

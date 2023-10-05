@@ -104,7 +104,7 @@ export class ZelleComponent {
   showAccountBalance(item: any) {
     this.listaCuentas = false
     this.myForm.patchValue({
-      sender: item.name
+      sender: item.name 
     })
   }
   aggZelle() {

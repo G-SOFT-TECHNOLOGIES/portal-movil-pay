@@ -106,7 +106,7 @@ export class TransferenciaComponent {
           contract: this.factura.contract,
          };
         this.tvservices.setPagoTvBox(pago)
-        // console.log(pago, 'el pago')
+        // console.log(pago, 'el pago') 
         this.registradas.value ? this.dialogRef.close(true) : '';
       
       })
