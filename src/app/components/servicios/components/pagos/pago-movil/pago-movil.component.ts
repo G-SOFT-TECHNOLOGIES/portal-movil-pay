@@ -93,17 +93,10 @@ export class PagoMovilComponent {
           sender: valor.sender,
           date: this.core.formatearFecha(valor.date ?? ''),
           contract: this.factura.contract,
-          // payment_invoices: [
-          //   {
-          //     invoice: this.factura.id,
-          //     amount: resultado < 0 ? this.factura.monto : result.monto,
-          //   },
-          // ],
-
         };
         this.tvservices.setPagoTvBox(pago)
-        // console.log(pago, 'el pago')
-        this.registradas.value ??  this.dialogRef.close(true);
+        this.registradas.value ? this.dialogRef.close(true) : '';
+
       })
       .catch((err) => {
         this.snack.openSnack(err, 'error');

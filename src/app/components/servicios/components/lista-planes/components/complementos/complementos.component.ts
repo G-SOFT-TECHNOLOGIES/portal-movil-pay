@@ -134,7 +134,7 @@ export class ComplementosComponent {
     dialogRef.afterClosed().subscribe(result => {
       this.tvservices.pagoTvBox$.subscribe(data => this.payments = data)
       console.log(this.payments) 
-      if (this.payments !=null) {
+      if (this.payments !=null) { 
         // console.log()
         // console.log(this.payments.amount, monto, this.payments.amount < monto)
         if (this.payments.amount < monto) {

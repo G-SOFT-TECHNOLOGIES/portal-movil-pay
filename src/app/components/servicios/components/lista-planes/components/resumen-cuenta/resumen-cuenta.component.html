@@ -75,7 +75,7 @@
         </span>
         <span class="flex items-center">
           <form [formGroup]="selected" class="text-xs w-[10px]">
-            <p-dropdown formControlName="cant" [options]="count" (onChange)="getCantTvBox()">{{count}}</p-dropdown>
+            <p-dropdown formControlName="cant" [options]="count" (onChange)="getCantTvBox()" [disabled]="payments !=null">{{count}}</p-dropdown>
         </form>
         </span>
         <span id="server-size-0-description-1"

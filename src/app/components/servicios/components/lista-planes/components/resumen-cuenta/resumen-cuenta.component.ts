@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ServicoTvService } from 'src/app/components/servicios/services/servico-tv.service';
 
@@ -9,10 +9,12 @@ import { ServicoTvService } from 'src/app/components/servicios/services/servico-
 })
 export class ResumenCuentaComponent {
   private tvService = inject(ServicoTvService)
+
   paquetes = this.tvService.paquetes$
   plan = this.tvService.plan$
   equipos = this.tvService.equipo$
   @Output() response = new EventEmitter<boolean>()
+  @Input() payments : any
   count = ['1', '2', '3']
   selected = new FormGroup({
     cant: new FormControl<any>('')

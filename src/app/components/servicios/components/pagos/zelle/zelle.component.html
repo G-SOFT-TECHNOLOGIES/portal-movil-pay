@@ -7,28 +7,16 @@
     </div>
     <!-- <button mat-raised-button color="warn" class="w-full">Bs.{{calcular()|number:'1.2-2'}}</button> -->
   </div>
-  <div class="sticky top-0 z-10  flex items-center justify-between bg-gray-50">
-    <div *ngIf="registradas.value">
-      <div *ngIf="!listaCuentas else Volver">
-        <button mat-mini-fab color="primary" (click)="listaCuentas = true" matTooltip="Agregar cuentas"
-          *ngIf="cuentas.length > 0 else SinCuenta"><mat-icon>account_balance</mat-icon></button>
-        <ng-template #SinCuenta>
-          <div class="flex items-center">
-            Sin cuenta afiliada
-          </div>
-        </ng-template>
-
+  <div class="sticky top-0 z-10  flex justify-between bg-gray-50">
+    <div>
+      <mat-checkbox class="ml-3" color="primary" [formControl]="registradas"
+        (change)="listaCuentas = registradas.value">Cuentas afiliadas</mat-checkbox>
+    </div>
+    <div *ngIf="cuentas.length == 0" class="flex items-center">
+      <div class="flex items-center">
+        Sin cuentas afiliadas
       </div>
     </div>
-
-    <div>
-      <ng-template #Volver>
-        <button mat-mini-fab color="primary" (click)="listaCuentas = false"><mat-icon
-            class="">chevron_leftbriel</mat-icon></button>
-      </ng-template>
-      <mat-checkbox class="ml-3" color="primary" [formControl]="registradas">Cuentas registradas</mat-checkbox>
-    </div>
-
   </div>
   <!-- <div class="mt-6">
   <h1 class="text-gray-900 font-semibold ">Monto a Pagar</h1>
@@ -107,8 +95,7 @@
         </div>
       </ng-container>
     </ng-container>
-
-    <ng-container *ngIf="listaCuentas">
+    <ng-container *ngIf="listaCuentas && registradas.value">
       <div class="grid grid-cols-1 my-2">
         <div class="flex drop-shadow-md bg-gray-100 rounded-xl items-center my-2 p-4 gap-x-8"
           *ngFor="let item of cuentas" (click)="showAccountBalance(item)">
