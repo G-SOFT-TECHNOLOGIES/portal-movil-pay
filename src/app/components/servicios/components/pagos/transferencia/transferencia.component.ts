@@ -29,13 +29,13 @@ export class TransferenciaComponent {
   sinAfiliar: boolean = false;
   registrar_cuenta: boolean = false;
   registradas = new FormControl()
-  listaCuentas: boolean = false 
+  listaCuentas: boolean = false
   cuentas: any[] = []
   user = this.core.getUser()
 
   registro = new FormGroup({
     name: new FormControl('', Validators.required),
-    nro_cuenta: new FormControl('', [Validators.required, Validators.maxLength(20), Validators.minLength(20), Validators.pattern('[0-9]*')]),
+    nro_cuenta: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.minLength(4), Validators.pattern('[0-9]*')]),
   })
 
   myForm = new FormGroup({
@@ -82,7 +82,9 @@ export class TransferenciaComponent {
       method: 4,
       date: this.core.formatearFecha(valor.date ?? ''),
     };
-
+    this.registro.patchValue({
+      nro_cuenta: valor.sender
+    })
     this.usuario
       .validarPago(payment)
       .then((result) => {
@@ -98,7 +100,7 @@ export class TransferenciaComponent {
           method: 1,
           reference: valor.reference,
           amount: result.monto,
-          amount_bs:Number(valor.amount),
+          amount_bs: Number(valor.amount),
           sender: valor.sender,
           date: this.core.formatearFecha(valor.date ?? ''),
           contract: this.factura.contract,
@@ -112,7 +114,7 @@ export class TransferenciaComponent {
         };
         this.tvservices.setPagoTvBox(pago)
         // console.log(pago, 'el pago')
-        this.registradas.value ??  this.dialogRef.close(true);
+        this.registradas.value ?? this.dialogRef.close(true);
         // this.usuario
         //   .pagarFatura(pago)
         //   .then((result) => {

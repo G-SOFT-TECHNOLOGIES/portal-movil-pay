@@ -71,7 +71,9 @@ export class ZelleComponent {
       method: 3,
       date: this.core.formatearFecha(valor.date ?? ''),
     };
-
+    this.registro.patchValue({
+      name: valor.sender
+    })
     this.usuario
       .validarPago(payment)
       .then((result) => {
