@@ -7,10 +7,17 @@
     </div>
     <!-- <button mat-raised-button color="warn" class="w-full">Bs.{{calcular()|number:'1.2-2'}}</button> -->
   </div>
-  <div class="sticky top-0 z-10  flex justify-between bg-gray-50">
+  <div class="sticky top-0 z-10  flex items-center justify-between bg-gray-50">
     <div *ngIf="registradas.value">
       <div *ngIf="!listaCuentas else Volver">
-        <button mat-mini-fab color="primary" (click)="listaCuentas = true" matTooltip="Agregar cuentas"><mat-icon>account_balance</mat-icon></button>
+        <button mat-mini-fab color="primary" (click)="listaCuentas = true" matTooltip="Agregar cuentas"
+          *ngIf="cuentas.length > 0 else SinCuenta"><mat-icon>account_balance</mat-icon></button>
+        <ng-template #SinCuenta>
+          <div class="flex items-center">
+            Sin cuenta afiliada
+          </div>
+        </ng-template>
+
       </div>
     </div>
 
@@ -22,7 +29,7 @@
       <mat-checkbox class="ml-3" color="primary" [formControl]="registradas">Cuentas registradas</mat-checkbox>
     </div>
 
-</div>
+  </div>
   <!-- <div class="mt-6">
   <h1 class="text-gray-900 font-semibold ">Monto a Pagar</h1>
   <button mat-raised-button color="warn" class="w-full">${{factura.monto}}</button>
@@ -57,47 +64,48 @@
       </form>
       <ng-container *ngIf="registrar_cuenta  && !registradas.value ">
         <div class="my-4 p-2">
-            <div class="font-medium flex justify-center items-center">
-                <span>
-                    Afiliar Cuenta
-                </span>
-            </div>
-            <form [formGroup]="registro" class="grid grid-col-1">
+          <div class="font-medium flex justify-center items-center">
+            <span>
+              Afiliar Cuenta
+            </span>
+          </div>
+          <form [formGroup]="registro" class="grid grid-col-1">
+            <div>
+              <label>Nombre</label>
               <div>
-                <label>Nombre</label>
-                <div>
-                  <mat-form-field class="w-full">
-                    <input type="text" matInput  formControlName="name">
-                    <mat-icon matPrefix>person</mat-icon>
-                    <mat-error *ngIf="registro.hasError('required')">
-                      Email is <strong>required</strong>
-                    </mat-error>
-                  </mat-form-field>
-                </div>
+                <mat-form-field class="w-full">
+                  <input type="text" matInput formControlName="name">
+                  <mat-icon matPrefix>person</mat-icon>
+                  <mat-error *ngIf="registro.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
               </div>
-              <div>
-                <label>Correo electrónico</label>
-                <div>
-                  <mat-form-field class="w-full">
-                    <input type="email" matInput formControlName="email">
-                    <mat-icon matPrefix>alternate_email</mat-icon>
-                    <mat-error *ngIf="registro.controls['email'].hasError('email') && !registro.controls['email'].hasError('required')">
-                      Por favor colocar un correo valido
-                    </mat-error>
-                    <mat-error *ngIf="registro.controls['email'].hasError('required')">
-                      El correo es <strong>Obligatorio</strong>
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-            </form>
-            <div class="flex my-2  justify-between gap-4">
-                <button mat-flat-button class=" w-full" color="warn" [mat-dialog-close]="true">Salir</button>
-                <button mat-flat-button class=" w-full" color="primary" [disabled]="registro.invalid"
-                    (click)="aggZelle()">Registrar</button>
             </div>
+            <div>
+              <label>Correo electrónico</label>
+              <div>
+                <mat-form-field class="w-full">
+                  <input type="email" matInput formControlName="email">
+                  <mat-icon matPrefix>alternate_email</mat-icon>
+                  <mat-error
+                    *ngIf="registro.controls['email'].hasError('email') && !registro.controls['email'].hasError('required')">
+                    Por favor colocar un correo valido
+                  </mat-error>
+                  <mat-error *ngIf="registro.controls['email'].hasError('required')">
+                    El correo es <strong>Obligatorio</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </form>
+          <div class="flex my-2  justify-between gap-4">
+            <button mat-flat-button class=" w-full" color="warn" [mat-dialog-close]="true">Salir</button>
+            <button mat-flat-button class=" w-full" color="primary" [disabled]="registro.invalid"
+              (click)="aggZelle()">Registrar</button>
+          </div>
         </div>
-    </ng-container>
+      </ng-container>
     </ng-container>
 
     <ng-container *ngIf="listaCuentas">

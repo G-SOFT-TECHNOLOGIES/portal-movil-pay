@@ -75,7 +75,9 @@ export class PagoMovilComponent {
       method: 1,
       date: this.core.formatearFecha(valor.date ?? ''),
     };
-
+    this.registro.patchValue({
+      phone: valor.sender
+    })
     this.usuario
       .validarPago(payment)
       .then((result) => {
