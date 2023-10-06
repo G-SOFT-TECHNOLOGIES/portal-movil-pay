@@ -69,7 +69,7 @@ export class TablaFacturasComponent {
     const resultado = Number(monto) - Number(charged)
     const a = Number(resultado.toFixed(2))
     const dialogRef = this.dialog.open(DialogPagarComponent, {
-      // width: '520px',
+      width: '520px',
       // height: '80%',
       data: {
         monto: a,

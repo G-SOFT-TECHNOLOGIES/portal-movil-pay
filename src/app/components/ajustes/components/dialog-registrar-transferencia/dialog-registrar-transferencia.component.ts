@@ -19,7 +19,7 @@ export class DialogRegistrarTransferenciaComponent {
   user = this.core.getUser()
   myForm = this.form.group({
     name:['',Validators.required],
-    nro_cuenta:['',[Validators.required,Validators.maxLength(20),Validators.minLength(20), Validators.pattern('[0-9]*')]],
+    nro_cuenta:['',[Validators.required,Validators.maxLength(4),Validators.minLength(4), Validators.pattern('[0-9]*')]],
   })
   constructor( 
     public dialogRef: MatDialogRef<DialogRegistrarTransferenciaComponent>,
