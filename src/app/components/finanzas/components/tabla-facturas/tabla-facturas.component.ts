@@ -1,6 +1,6 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Subscription, window } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Invoice, InvoiceParams } from 'src/app/components/finanzas/interfaces/UsuarioInterfaces';
 import { FacturaContratoService } from '../../services/usuario.service';
 import { LoadingService } from 'src/app/components/service/loading.service';
@@ -15,7 +15,6 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./tabla-facturas.component.css']
 })
 export class TablaFacturasComponent {
-
   private facturaServ = inject(FacturaContratoService);
   private loading = inject(LoadingService);
   private dialog = inject(MatDialog);
@@ -41,8 +40,6 @@ export class TablaFacturasComponent {
       this.id = data['id'];
     });
   }
-  @HostListener('window:resize', ['$event'])
-
   ngOnInit(): void {
     console.log("Init",)
     this.getFacturas()
@@ -72,6 +69,8 @@ export class TablaFacturasComponent {
     const resultado = Number(monto) - Number(charged)
     const a = Number(resultado.toFixed(2))
     const dialogRef = this.dialog.open(DialogPagarComponent, {
+      // width: '520px',
+      // height: '80%',
       data: {
         monto: a,
         id,

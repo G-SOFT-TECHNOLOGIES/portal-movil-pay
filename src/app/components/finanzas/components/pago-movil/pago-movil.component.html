@@ -1,8 +1,8 @@
-<div class="relative">
+<div class="">
 
 
   <div class="mt-6 mb-6">
-    <h3 class="text-gray-800 text-center font-light ">Monto a Pagar</h3> 
+    <h3 class="text-gray-800 text-center font-light ">Monto a Pagar</h3>
     <div
       class="inline-flex justify-center gap-y-8 items-center border-2 bg-zinc-100 border-red-300 py-2 w-full rounded-lg  shadow-xl ">
       <span class=" text-center text-2xl font-mono font-bold">Bs.{{calcular()|number:'1.2-2'}}</span>
@@ -17,7 +17,7 @@
     <div *ngIf="cuentas.length == 0" class="flex items-center">
       <div class="flex items-center">
         Sin cuentas afiliadas
-      </div> 
+      </div>
     </div>
   </div>
   <div class=" mt-8">
@@ -27,7 +27,7 @@
       <form class="space-y-3" [formGroup]="myForm" (submit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>Numero Emisor</mat-label>
-          <input matInput formControlName="sender" #sender type="text" maxlength="11"   pattern="[0-9]*" />
+          <input matInput formControlName="sender" #sender type="text" maxlength="11" pattern="[0-9]*" />
           <mat-icon matPrefix>call</mat-icon>
           <mat-error *ngIf="myForm.controls['sender'].hasError('pattern')" class="text-xs ">
             Solo caracateres númericos
@@ -48,8 +48,8 @@
         <mat-form-field appearance="fill">
           <mat-label>Referencia</mat-label>
           <input matInput formControlName="reference" type="text" maxlength="6" pattern="[0-9]*" />
-          <mat-icon  matPrefix>tag</mat-icon>
-          <mat-hint  class="text-xs ">Ultimo 6 digitos</mat-hint>
+          <mat-icon matPrefix>tag</mat-icon>
+          <mat-hint class="text-xs ">Ultimo 6 digitos</mat-hint>
           <mat-error *ngIf="myForm.controls['sender'].hasError('pattern')" class="text-xs ">
             Solo caracateres númericos
           </mat-error>
@@ -114,24 +114,23 @@
       </ng-container>
 
     </ng-container>
-    <ng-container *ngIf="listaCuentas  && registradas.value">
-      <div class="grid grid-cols-1 my-2">
-        <div class="flex drop-shadow-md bg-gray-100 rounded-xl items-center my-2 p-4 gap-x-8"
-          *ngFor="let item of cuentas" (click)="showAccountBalance(item)">
-          <div class="flex-shrink-0  items-center ">
-            <mat-icon>account_balance</mat-icon>
-          </div>
-          <div class="flex flex-col flex-wrap font-medium ">
-            <span class="  "> {{item.method}} </span>
-            <span class=" ">{{item.name}} </span>
-            <span class=" ">{{item.phone ?? ''}} </span>
-            <span class="font-extralight text-clip">{{item.email ?? ''}}</span>
-          </div>
-        </div>
-      </div>
-
-    </ng-container>
-
-
+    
   </div>
 </div>
+<ng-container mat-dialog-actions *ngIf="listaCuentas  && registradas.value">
+  <div class="grid grid-cols-1 my-2">
+    <div class="flex drop-shadow-md bg-gray-100 rounded-xl items-center my-2 p-4 gap-x-8"
+      *ngFor="let item of cuentas" (click)="showAccountBalance(item)">
+      <div class="flex-shrink-0  items-center ">
+        <mat-icon>account_balance</mat-icon>
+      </div>
+      <div class="flex flex-col flex-wrap font-medium ">
+        <span class="  "> {{item.method}} </span>
+        <span class=" ">{{item.name}} </span>
+        <span class=" ">{{item.phone ?? ''}} </span>
+        <span class="font-extralight text-clip">{{item.email ?? ''}}</span>
+      </div>
+    </div>
+  </div>
+
+</ng-container>

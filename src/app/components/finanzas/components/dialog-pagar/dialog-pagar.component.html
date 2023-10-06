@@ -40,14 +40,16 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <ng-container *ngIf="selectedOption == '1'">
-    <app-pago-movil [factura]="data"></app-pago-movil>
-  </ng-container>
-  <ng-container *ngIf="selectedOption == '2'">
-    <app-zelle [factura]="data"></app-zelle>
-  </ng-container>
-  <ng-container *ngIf="selectedOption == '3'">
-    <app-transferencia [factura]="data"></app-transferencia>
-  </ng-container>
-
+  <div class="relative">
+    <ng-container *ngIf="selectedOption == '1'">
+      <app-pago-movil [factura]="data"></app-pago-movil>
+    </ng-container>
+    <ng-container *ngIf="selectedOption == '2'">
+      <app-zelle [factura]="data"></app-zelle>
+    </ng-container>
+    <ng-container *ngIf="selectedOption == '3'">
+      <app-transferencia [factura]="data"></app-transferencia>
+    </ng-container>
+  </div>
+ 
 </div>
