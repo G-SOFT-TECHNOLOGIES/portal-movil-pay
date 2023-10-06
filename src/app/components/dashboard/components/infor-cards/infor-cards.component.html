@@ -1,9 +1,9 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-8 mx-auto max-w-3xl px-6 lg:px-4">
 
-    <div class="col-4 gap-x-4 m-4" routerLink="['home/contratos']">
+    <a class="col-4 gap-x-4 m-4"  [routerLink]="['/home/contratos']">
         <div class="flex-1 mx-auto  max-w-lg  gap-8 lg:mx-0 lg:max-w-none ">
             <div class=" flex-1 justify-center py-8 space-y-4 border-b-2 text-gray-500 hover:text-red-600 rounded-md shadow-md bg-white p-4">
-                <div class="flex pointer justify-center" style="cursor: pointer;">
+                <div class="flex pointer justify-center" style="cursor: pointer;" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                         class="bi bi-cash-coin" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -19,11 +19,11 @@
                 <span class="flex justify-center text-center font-extralight text-3xl">$ {{deuda | number: '1.1-2'}} </span>
             </div>
         </div>
-    </div>
-    <div class="col-4 gap-x-4 m-4" >
+    </a>
+    <a class="col-4 gap-x-4 m-4"  [routerLink]="['/home/contratos']">
         <div class="flex-1   mx-auto  max-w-lg  gap-8 lg:mx-0 lg:max-w-none ">
             <div class=" flex-1 justify-center py-8 space-y-4 border-b-2 text-gray-500 hover:text-red-600 rounded-md shadow-md bg-white p-4">
-                <div class="flex pointer justify-center" style="cursor: pointer;" routerLink="['contratos']">
+                <div class="flex pointer justify-center" style="cursor: pointer;" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="45" height="30" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
                         <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
                         <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
@@ -33,8 +33,8 @@
                 <span class="flex justify-center text-center font-extralight text-3xl">$ {{acumulado | number: '1.1-2'}} </span>
             </div>
         </div>
-    </div>
-    <div class="col-4 gap-x-4 m-4">
+    </a>
+    <a class="col-4 gap-x-4 m-4"  [routerLink]="['/home/tickets']">
         <div class="flex-1   mx-auto  max-w-lg  gap-8 lg:mx-0 lg:max-w-none ">
             <div class=" flex-1 justify-center py-8 space-y-4 border-b-2 text-gray-500 hover:text-red-600 rounded-md shadow-md bg-white p-4">
                 <div class="flex pointer justify-center" style="cursor: pointer;">
@@ -47,5 +47,5 @@
                 <span class="flex justify-center text-center font-extralight text-3xl"> {{tickets.length}} </span>
             </div>
         </div>
-    </div>
+    </a>
 </div>

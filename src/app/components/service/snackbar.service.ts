@@ -12,8 +12,8 @@ export class SnackbarService {
   openSnack(title:string, status:string){
     
     this.snack.open(title,'X',{
-      horizontalPosition:'right' ,
-      verticalPosition:'top' ,
+      horizontalPosition:'center' ,
+      verticalPosition:'bottom' ,
       duration: 10 * 1000,
       panelClass:[`style-${status}`]
     })

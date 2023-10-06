@@ -24,12 +24,11 @@ import { NuevaSuscripcionComponent } from './components/nueva-suscripcion/nueva-
 import { ListaPaquetesComponent } from './components/subscritos/components/lista-paquetes/lista-paquetes.component';
 import { DialogEditPanatallaComponent } from './components/subscritos/components/dialog-edit-panatalla/dialog-edit-panatalla.component';
 import { DialogEditTvboxComponent } from './components/subscritos/components/dialog-edit-tvbox/dialog-edit-tvbox.component';
-import { DialogAddPackageComponent } from './components/subscritos/components/dialog-add-package/dialog-add-package.component';
 import { AddListaPaquetesComponent } from './components/subscritos/components/add-lista-paquetes/add-lista-paquetes.component';
 
 
 @NgModule({
-  declarations: [ServiciosComponent, SubscritosComponent, NuevaSuscripcionComponent, DatosCuentasComponent, InforPlanesAgregadosComponent,  SelectContratosComponent, DialogoPagarComponent, PagoMovilComponent, ZelleComponent, TransferenciaComponent, ContratoComponent, InformacionCuentaComponent, ListaPaquetesComponent, DialogEditPanatallaComponent, DialogEditTvboxComponent, DialogAddPackageComponent, AddListaPaquetesComponent],
+  declarations: [ServiciosComponent, SubscritosComponent, NuevaSuscripcionComponent, DatosCuentasComponent, InforPlanesAgregadosComponent,  SelectContratosComponent, DialogoPagarComponent, PagoMovilComponent, ZelleComponent, TransferenciaComponent, ContratoComponent, InformacionCuentaComponent, ListaPaquetesComponent, DialogEditPanatallaComponent, DialogEditTvboxComponent, AddListaPaquetesComponent],
   imports: [
     CommonModule,
     ServiciosRoutingModule,

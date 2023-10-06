@@ -3,7 +3,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ContractDetailPackage } from 'src/app/components/finanzas/interfaces/UsuarioIDInterface';
 import { ServicoTvService } from 'src/app/components/servicios/services/servico-tv.service';
-import { DialogAddPackageComponent } from '../dialog-add-package/dialog-add-package.component';
 import { LoadingService } from 'src/app/components/service/loading.service';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { DialogoDetallePaqueteComponent } from '../../../lista-planes/components/dialogo-detalle-paquete/dialogo-detalle-paquete.component';

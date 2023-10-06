@@ -4,7 +4,6 @@ import { LoadingService } from 'src/app/components/service/loading.service';
 import { PlanID } from '../../interface/servicestv.interface';
 import { ServicoTvService } from '../../services/servico-tv.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogAddPackageComponent } from './components/dialog-add-package/dialog-add-package.component';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { ConfirmComponent } from 'src/app/components/home/confirm/confirm.component';
