@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { PrimengModule } from '../primeng/primeng.module';
 import { MaterialExampleModule } from 'src/material.module';
 import { FormsModule } from '@angular/forms';
+import { LoginModule } from './login/login.module';
 
 
 
@@ -17,7 +18,11 @@ import { FormsModule } from '@angular/forms';
     AuthRoutingModule,
     ButtonModule,
     PrimengModule,
-    FormsModule
+    FormsModule,
+    PrimengModule,
+    MaterialExampleModule,
+    FormsModule,
+    LoginModule
   ]
 })
 export class AuthModule { }

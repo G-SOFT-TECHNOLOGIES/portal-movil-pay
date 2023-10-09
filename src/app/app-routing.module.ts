@@ -5,12 +5,12 @@ import { IsLoginGuard } from './components/auth/guards/is-login.guard';
 
 const routes: Routes = [{
   path: '',
-  redirectTo: 'auth/login',
+  redirectTo: '',
   pathMatch: 'full'
 },
 {
-  path: 'auth',
-  loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule),
+  path: '',
+  loadChildren: () => import('./components/auth/login/login.module').then(m => m.LoginModule),
   canActivate:[IsLogoutGuard]
 },
 {
@@ -20,7 +20,7 @@ const routes: Routes = [{
 },
 {
   path: '**',
-  redirectTo: 'auth/login',
+  redirectTo: '',
   pathMatch: 'full'
 }];
 

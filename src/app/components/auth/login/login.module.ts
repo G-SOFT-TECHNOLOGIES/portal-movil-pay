@@ -18,8 +18,11 @@ import { DialogActivarComponent } from '../dialog-activar/dialog-activar.compone
     LoginRoutingModule,
     PrimengModule,
     MaterialExampleModule,
-    FormsModule
+    FormsModule,
 
+  ],
+  exports:[
+    LoginComponent
   ]
 })
 export class LoginModule { }
