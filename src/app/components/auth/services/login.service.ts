@@ -50,7 +50,7 @@ export class LoginService {
 
   async logout() {
     sessionStorage.clear()
-    location.href = '/auth/login'
+    location.href = '/'
     this.isLoggedSub.next(false)
   }
 
