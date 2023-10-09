@@ -50,9 +50,14 @@ export class ServicoTvService {
     }
     return []
   }
-  setIdContrato(id: number) {
-    this.id_contrato.next(id)
-    sessionStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
+  setIdContrato(id: number | string) {
+
+    console.log(id, this.id_contrato.value, 'id')
+    if (this.id_contrato.value !== id) {
+      console.log("adentro")
+      this.id_contrato.next(id)
+      sessionStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
+    }
   }
   getIdContract() {
     this.id_contrato$.subscribe(data => {

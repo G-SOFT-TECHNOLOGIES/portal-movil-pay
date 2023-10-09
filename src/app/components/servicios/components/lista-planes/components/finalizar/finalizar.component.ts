@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
@@ -37,6 +37,9 @@ export class FinalizarComponent {
   packages: Packages[] = []
   selectedPaquetes: any[] = [];
   tvbox: any[] = []
+  cant = new FormGroup({
+    countValue: new FormControl(0, [Validators.maxLength(1), Validators.pattern('[0-9*]')])
+  })
   constructor() {
     this.sub = this.rout.params.subscribe((data) => {
       this.id = data['id'];
@@ -63,9 +66,17 @@ export class FinalizarComponent {
     this.getItemsTotalCount()
     this.tvservices.equipo$.subscribe(data => {
       if (data.length > 0) {
-        data.map((count) => this.total = count.count)
+        data.map((count) => {
+          this.total = count.count;
+          this.cant.patchValue({
+            countValue: count.count
+          })
+        })
       } else {
         this.total = this.total
+        this.cant.patchValue({
+          countValue: 0
+        })
       }
     })
     this.getAllPackage()
@@ -81,21 +92,25 @@ export class FinalizarComponent {
   }
   suma() {
     this.total = this.total + 1
-    let equipo = {
-      "count": this.total,
-      "cost": this.tvbox[0].cost,
-      "product": this.tvbox[0].id,
-      "name": this.tvbox[0].name
-    }
-    this.tvservices.setEquipo(equipo)
-    this.tvservices.getEquipo()
-    this.getItemsTotalCount()
-
+    let valor = this.cant.value
+    this.cant.patchValue({
+      countValue: Number(valor.countValue) + 1
+    })
+    return this.enviarDatos()
   }
   resta() {
     this.total = this.total - 1
+    let valor = this.cant.value
+    this.cant.patchValue({
+      countValue: Number(valor.countValue) - 1
+    })
+    return this.enviarDatos()
+
+  }
+  enviarDatos() {
+    let valor = this.cant.value
     let equipo = {
-      "count": this.total,
+      "count": valor.countValue,
       "cost": this.tvbox[0].cost,
       "product": this.tvbox[0].id,
       "name": this.tvbox[0].name
@@ -103,7 +118,6 @@ export class FinalizarComponent {
     this.tvservices.setEquipo(equipo)
     this.tvservices.getEquipo()
     this.getItemsTotalCount()
-
   }
   getAllPackage() {
     this.tvservices.getAllPackages().then((result) => {

@@ -61,7 +61,7 @@
     class="sticky top-0 z-10 border-y border-b-gray-200 border-t-gray-200 bg-gray-100 rounded-lg shadow px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900">
     <h3>Equipos</h3>
   </div>
-  <div class="space-y-4 divide-y-2" *ngIf="equipos |async as equipos">
+  <div class="space-y-4 divide-y-2" *ngIf="equipos |async as equipos ; ">
     <label class="relative  bg-zing-50 px-6 py-2  focus:outline-none sm:flex sm:justify-between"
       *ngFor="let equipo  of equipos">
       <input type="radio" name="server-size" value="Hobby" class="sr-only" aria-labelledby="server-size-0-label"

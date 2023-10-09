@@ -51,7 +51,7 @@
           <div class="flex-1">
             <div class="flex items-center justify-center bg-black py-16 mx-8 ">
               <img src="../../../../../../../assets/img/gtv.png" alt=""
-                class="mr-3  lg:w-[280px]  w-[70px] " />
+                class="mr-3  xl:w-[280px] px-4" />
 
             </div>
             <!-- <div class="flex-1 text-center my-4">
@@ -91,7 +91,7 @@
                     <mat-panel-description>
                     </mat-panel-description>
                   </mat-expansion-panel-header>
-                  <div class="gap-4 my-4 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 ">
+                  <div class="gap-4 my-4 grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 ">
                     <app-planes *ngFor="let item of packages" [paquetes]="item"></app-planes>
                   </div>
                 </mat-expansion-panel>
@@ -144,11 +144,16 @@
                                     <mat-icon>remove</mat-icon>
                                   </button>
 
-                                  <div class="relative mt-2 rounded-md shadow-sm">
-                                    <span
+                                  <div class="relative mt-2 rounded-md shadow-sm flex items-center" [formGroup]="cant">
+                                    <!-- <span
                                       class="block w-full rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                       aria-describedby="price-currency">{{total}}
-                                    </span>
+                                    </span> --> 
+                                    <input pInputText  type="text"  [disabled]="true"
+                                    formControlName="countValue" [maxlength]="1" pattern="[0-9]*"
+                                    class=" block w-full rounded-md text-center"
+                                      
+                                    />
                                   </div>
 
                                   <button color="primary" mat-mini-fab (click)="suma()" [disabled]="total == 3">

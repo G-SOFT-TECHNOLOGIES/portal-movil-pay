@@ -17,10 +17,10 @@
       <mat-checkbox class="flex-1 gap-x-6" color="primary" [checked]="checked"
         (change)="setShopping($event.checked)" [value]="paquetes">
         <div>
-          <h3 class="text-gray-700 uppercase">{{paquetes.name}}</h3>
-          <span class="text-xs"> {{paquetes.detail}}</span>
+          <h3 class="text-gray-700 uppercase truncate">{{paquetes.name}}</h3>
+          <span class="text-xs truncate"> {{paquetes.detail}}</span>
         </div>
-        <span class="text-gray-500 mt-2">${{paquetes.price | number: '1.2-2'}}</span>
+        <span class="text-gray-500 mt-2 truncate">${{paquetes.price | number: '1.2-2'}}</span>
       </mat-checkbox>
     </div>
 
