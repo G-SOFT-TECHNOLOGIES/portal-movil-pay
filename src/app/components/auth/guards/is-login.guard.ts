@@ -14,7 +14,7 @@ export class IsLoginGuard implements CanActivate {
 
   isLoggind(){
     return this.auth.isLoggedSub$.pipe(
-      map((login:boolean)=>login|| this.router.parseUrl('auth/login'))
+      map((login:boolean)=>login|| this.router.parseUrl('/'))
     );
   }
   

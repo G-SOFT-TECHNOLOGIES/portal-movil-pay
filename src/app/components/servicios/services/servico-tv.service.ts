@@ -154,7 +154,7 @@ export class ServicoTvService {
     this.equipo$.subscribe(data => {
       if (data.length > 0) {
         data.map((item) => {
-          this.totalItemsEquipo = item.count
+          this.totalItemsEquipo = Number(item.count)
           this.totalCostEquipo = Number(item.cost * item.count)
           return
         })
