@@ -20,23 +20,31 @@ export class ContratoComponent {
   private rout = inject(ActivatedRoute)
   sub !: Subscription
   id: number = 0
-  contrato! :ContratoID
+  contrato!: ContratoID
   constructor() {
     this.sub = this.rout.params.subscribe((data) => {
       this.id = data['id'];
     });
+
   }
   ngOnInit(): void {
-    this.tvservices.setIdContrato(this.id)
+    console.log(this.id, 'el id')
+   
+
     this.tvservices.getContratoTV(this.id).then((result) => {
-      this.contrato =result
+      this.loader.hideLoading()
       result.contract_detail.map((contract) => {
+        console.log(contract.service_type.id)
         if (contract.service_type.id == 4) {
           this.suscrito = true
         }
+       return this.contrato = result
       })
+      this.tvservices.setIdContrato(this.id)
     }).catch((err) => {
       console.log(err)
+      this.loader.hideLoading()
+
     })
   }
 

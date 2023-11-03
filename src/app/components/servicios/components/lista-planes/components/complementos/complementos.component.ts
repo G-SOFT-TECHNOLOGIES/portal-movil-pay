@@ -96,12 +96,12 @@ export class ComplementosComponent {
       "payment": this.payments
 
     }
-    console.log(body, 'valores del registro')
+    // console.log(body, 'valores del registro')
     setTimeout(() => {
       this.loading = false
       this.tvservices.addServiceTV(body).then((result) => {
         this.loader.hideLoading()
-        console.log(result)
+        // console.log(result)
         this.tvservices.datos_cuentas$.next(result)
         this.snack.openSnack("Procesando la solicitud", "success")
 

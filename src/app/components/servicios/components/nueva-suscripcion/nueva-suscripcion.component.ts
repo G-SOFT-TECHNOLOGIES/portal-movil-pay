@@ -30,9 +30,9 @@ export class NuevaSuscripcionComponent {
     });
   }
   ngOnInit(): void {
-    if (this.tvservices.id_contrato.value != this.id) {
-      this.tvservices.setIdContrato(this.id)
-    }
+    // this.tvservices.setIdContrato(this.id)
+    // if (this.tvservices.id_contrato.value != this.id) {
+    // }
     this.getShopping()
   }
   getShopping() {

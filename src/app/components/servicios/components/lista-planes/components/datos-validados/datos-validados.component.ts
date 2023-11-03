@@ -26,7 +26,7 @@ export class DatosValidadosComponent {
   finalizar() {
     this.router.navigate(['home/contratos', this.id_contrato]);
     this.tvservices.deleteItems()
-    this.tvservices.deleteIdContrato()
+    // this.tvservices.deleteIdContrato()
 
   }
 }

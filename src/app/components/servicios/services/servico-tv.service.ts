@@ -26,7 +26,7 @@ export class ServicoTvService {
   totalItemsEquipo: number = 0
   totalAcumulado = new BehaviorSubject<number>(0)
   totalAcumulado$ = this.totalAcumulado.asObservable()
-  id_contrato = new BehaviorSubject<any>(this.initIdContrato)
+  id_contrato = new BehaviorSubject<number | any>(this.initIdContrato)
   id_contrato$ = this.id_contrato.asObservable()
   itemsCount = new BehaviorSubject<number>(0)
   totalTvBox$ = new BehaviorSubject<number>(this.totalCostEquipo)
@@ -39,7 +39,6 @@ export class ServicoTvService {
     this.pagoTvBox$.next(body)
   }
   setIdServicesTv(id: any) {
-    // console.log(id, 'services')
     this.id_servicestv$.next(id)
   }
   //ID del contrato
@@ -50,14 +49,28 @@ export class ServicoTvService {
     }
     return []
   }
-  setIdContrato(id: number | string) {
+  setIdContrato(id: number | string){
+    let id_cont = id.toString()
+    console.log(id_cont, 'serv')
+    this.id_contrato.next(id_cont.toString())
+    sessionStorage.setItem('paquetes', JSON.stringify(this.id_contrato.value))
+    // if (isNaN(Number(this.id_contrato.value))) {
+    //   this.id_contrato.next(id)
+    //   console.log(this.id_contrato.value, 'el mismo')
+    //   sessionStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
+    //   return
+    // }
+    // console.log(id_cont, 'id_cont')
+    // this.id_contrato.next(id)
+    // console.log(this.id_contrato.value, 'valor')
+    // sessionStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
+    // return this
+    // if (Number(this.id_contrato.value) !== id) {
+    //   console.log(id, "id difer")
 
-    console.log(id, this.id_contrato.value, 'id')
-    if (this.id_contrato.value !== id) {
-      console.log("adentro")
-      this.id_contrato.next(id)
-      sessionStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
-    }
+    // } else {
+
+    // }
   }
   getIdContract() {
     this.id_contrato$.subscribe(data => {
