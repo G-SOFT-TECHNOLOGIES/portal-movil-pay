@@ -29,8 +29,6 @@ export class ContratoComponent {
   }
   ngOnInit(): void {
     console.log(this.id, 'el id')
-   
-
     this.tvservices.getContratoTV(this.id).then((result) => {
       this.loader.hideLoading()
       result.contract_detail.map((contract) => {
