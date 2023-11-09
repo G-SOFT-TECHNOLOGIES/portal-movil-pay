@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { UsuarioService } from '../usuario/services/usuario.service';
 import { LoadingService } from '../service/loading.service';
 import { Contract } from '../usuario/interfaces/contractosInterfaces';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,8 +16,11 @@ export class DashboardComponent {
   private loader = inject(LoadingService)
   contratos$ = this.usuario.contractos$
   contratos = this.contratos$.subscribe(data => data)
+
   ngOnInit(): void {
     this.usuario.getContratos()
     this.loader.hideLoading()
   }
+
+ 
 }

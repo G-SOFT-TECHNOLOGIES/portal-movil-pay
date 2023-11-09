@@ -34,7 +34,7 @@ export class GraficosComponent {
 
     ngOnInit() {
         this.calcularDia0yDia6()
-        this.getContrato(this.contratos[0].id)
+        // this.getContrato(this.contratos[0].id)
         this.loadingChart()
     }
     getContrato(id: number) {

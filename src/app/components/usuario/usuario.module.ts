@@ -7,6 +7,8 @@ import { MaterialExampleModule } from 'src/material.module';
 import { HomeModule } from '../home/home.module';
 import { PrimengModule } from '../primeng/primeng.module';
 import { CardUserComponent } from './components/card-user/card-user.component';
+import { DashboardModule } from '../dashboard/dashboard.module';
+import { PlubicidadComponent } from '../dashboard/components/plubicidad/plubicidad.component';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { CardUserComponent } from './components/card-user/card-user.component';
     UsuarioRoutingModule,
     MaterialExampleModule,
     PrimengModule,
-    HomeModule
+    HomeModule,
+    DashboardModule
   ]
 })
 export class UsuarioModule { }
