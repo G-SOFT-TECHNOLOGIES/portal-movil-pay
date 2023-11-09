@@ -139,7 +139,7 @@
           <dt class=" text-sm font-medium text-gray-500">{{item.service_type.description}}</dt>
           <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{item.plan_type.name}}</dd>
 
-          <ng-container *ngIf="item.service_type.id == 4 else INTERNET">
+          <!-- <ng-container *ngIf="item.service_type.id == 4 else INTERNET">
             <div class="flex justify-center  divide-x-2">
               <div class=" px-3 text-center">
                 <span
@@ -157,7 +157,7 @@
             <button mat-raised-button color="warn" (click)="miServicio(contratos.id)" class="flex w-full m-1">
               Ir a Servicio TV <mat-icon class="mr-2 right-0">tv</mat-icon>
             </button>
-          </ng-container>
+          </ng-container> -->
           <ng-template #INTERNET>
             <dt class=" text-sm font-medium text-gray-500">{{item.plan_type.profile}}</dt>
           </ng-template>
