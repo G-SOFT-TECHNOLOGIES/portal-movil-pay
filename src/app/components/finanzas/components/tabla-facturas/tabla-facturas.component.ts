@@ -81,6 +81,8 @@ export class TablaFacturasComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       this.getFacturas()
+      // if (result) {
+      // }
     })
   }
 

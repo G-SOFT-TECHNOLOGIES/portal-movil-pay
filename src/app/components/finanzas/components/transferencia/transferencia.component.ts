@@ -137,10 +137,18 @@ export class TransferenciaComponent {
       });
   }
 
+  convertidor(){
+    const s = Number(this.factura.monto)
+    const result = s * this.montoDollar$;
+    const r = result.toFixed(2);
+    return Number(r);
+  }
+
   calcular(): number {
     // console.log(this.factura.monto, 'calcular', this.montoDollar$)
-    const f = Number(this.factura.monto);
-    const result = f * this.montoDollar$;
+    const f = Number(this.factura.monto) - this.usuario.saldoFavor;
+    const s = Math.max(f,0)
+    const result = s * this.montoDollar$;
     const r = result.toFixed(2);
     return Number(r);
   }

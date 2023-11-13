@@ -62,13 +62,13 @@ export class ZelleComponent {
     };
     this.registro.patchValue({
       name: valor.sender
-    })
+    })    
     this.usuario
       .validarPago(payment)
       .then((result) => {
         this.botonHabilitado = false
         this.snack.openSnack(result.message, 'success');
-        const numero = Number(this.factura.monto) - Number(result.monto);
+        const numero = Number(this.calcular) - Number(result.monto);
         const resultado = Number(numero.toFixed(2));
         // if (Number(valor.amount) < Number(this.factura.monto)) {
         //   return this.snack.openSnack(
@@ -89,7 +89,7 @@ export class ZelleComponent {
               payment_invoices: [
                 {
                   invoice: this.factura.id,
-                  amount: resultado < 0 ? this.factura.monto : result.monto,
+                  amount: resultado < 0 ? this.calcular : result.monto,
                 },
               ],
             },
@@ -119,6 +119,14 @@ export class ZelleComponent {
       sender: item.name
     })
   }
+
+  get calcular(){
+    const f = Number(this.factura.monto) - this.usuario.saldoFavor
+    const s = Math.max(f,0)
+    return s
+  }
+
+
   aggZelle() {
     const valor = this.registro.value
     const body = {

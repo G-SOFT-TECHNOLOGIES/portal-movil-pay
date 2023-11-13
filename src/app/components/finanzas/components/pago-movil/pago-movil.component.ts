@@ -51,6 +51,8 @@ export class PagoMovilComponent {
   constructor(private dialogRef: MatDialogRef<DialogPagarComponent>) { }
 
   ngOnInit(): void {
+    console.log(this.usuario.saldoFavor);
+    
     this.usuario.montoDollar$.subscribe((data) => {
       this.montoDollar$ = data;
     });
@@ -128,11 +130,20 @@ export class PagoMovilComponent {
   }
 
   calcular(): number {
-    const f = Number(this.factura.monto);
-    const result = f * this.montoDollar$;
+    const f = Number(this.factura.monto) - this.usuario.saldoFavor;
+    const s = Math.max(f,0)
+    const result = s * this.montoDollar$;
     const r = result.toFixed(2);
     return Number(r);
   }
+
+  convertidor(){
+    const s = Number(this.factura.monto)
+    const result = s * this.montoDollar$;
+    const r = result.toFixed(2);
+    return Number(r);
+  }
+
   convertirBolivares(dolar: number): number {
     const resultado = dolar * this.montoDollar$;
     return Number(Number(resultado).toFixed(2));

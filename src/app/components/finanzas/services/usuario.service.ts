@@ -36,6 +36,9 @@ export class FacturaContratoService {
   montoDollar$ = this.montoDollar.asObservable()
 
 
+  saldoFavor:any=0  
+
+
 
   // getFacturas(id:string| number,page=0):Promise<ResultsInvoice>{
   //   let url = `${this.url}/api/gsoft/portal/invoices/?contract=${id}`

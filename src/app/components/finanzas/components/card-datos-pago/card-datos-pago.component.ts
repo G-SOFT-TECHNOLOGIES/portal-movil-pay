@@ -10,10 +10,11 @@ import { ContratoID } from '../../interfaces/UsuarioIDInterface';
   styleUrls: ['./card-datos-pago.component.css']
 })
 export class CardDatosPagoComponent {
-  private usuarioserv = inject(FacturaContratoService); 
+  private usuarioserv = inject(FacturaContratoService);
   private rout = inject(ActivatedRoute)
   sub !: Subscription
   id: number = 0
+  saldoFavor = 0
   contrato = new BehaviorSubject<ContratoID | false>(false)
   constructor() {
     this.sub = this.rout.params.subscribe((data) => {
@@ -22,7 +23,12 @@ export class CardDatosPagoComponent {
   }
   ngOnInit(): void {
     this.usuarioserv.getContrato(this.id)
-    this.usuarioserv.contrato$.subscribe(data => this.contrato.next(data))
+    this.usuarioserv.contrato$.subscribe((data: any) => {
+      this.contrato.next(data)
+      this.usuarioserv.saldoFavor = data.balance ? data.balance : 0
+      this.saldoFavor = data.balance ? data.balance : 0
+    }
+    )
   }
 
 }
