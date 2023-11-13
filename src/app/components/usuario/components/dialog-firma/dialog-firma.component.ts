@@ -18,7 +18,7 @@ export class DialogFirmaComponent {
   private sigPadElement: any;
   private context: any;
   private isDrawing!: boolean;
-
+  isMobile = window.innerWidth < 460;
 
   constructor(
     public dialogRef: MatDialogRef<DialogFirmaComponent>,
