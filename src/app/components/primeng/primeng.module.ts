@@ -85,7 +85,7 @@ import { CardModule } from 'primeng/card';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ChartModule } from 'primeng/chart';
-
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 
 @NgModule({
@@ -174,12 +174,13 @@ import { ChartModule } from 'primeng/chart';
     TreeSelectModule,
     TreeTableModule,
     AnimateModule,
-    CardModule
+    CardModule,
+    KeyFilterModule
   ],
   imports: [
     AvatarModule,
     AvatarGroupModule,
-  
+    KeyFilterModule,
     AccordionModule,
     AutoCompleteModule,
     BadgeModule,

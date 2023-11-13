@@ -1,0 +1,11 @@
+<h1 mat-dialog-title class="bg-gray-900 " style="color:white;">Firma</h1>
+<div mat-dialog-content class="full-screen-dialog" style="height: 100% !important;">
+        <canvas  (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)"
+                (touchstart)="onMouseDown($event)" #signPad width="1400" height="500">
+        </canvas><br>
+<p class="text-xs text-gray-400 text-center">Escribe en el medio de el panel</p> 
+</div>
+<div mat-dialog-actions align="end">
+        <button mat-raised-button (click)="clearSignature()" color="warn" class="mr-4">Limpiar</button>
+        <button mat-raised-button (click)="saveSignature()" color="primary">Guardar</button>
+</div>

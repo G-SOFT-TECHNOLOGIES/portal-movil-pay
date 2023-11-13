@@ -17,11 +17,13 @@ import { FinanzasComponent } from './components/finanzas/finanzas.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { HeadersInterceptor } from './components/helper/headers.interceptor';
 import { TokenInvalidInterceptor } from './components/helper/token-invalid.interceptor';
+import { DialogConfirmComponent } from './components/components/dialog-confirm/dialog-confirm.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DialogConfirmComponent
   ],
   imports: [
     CommonModule,

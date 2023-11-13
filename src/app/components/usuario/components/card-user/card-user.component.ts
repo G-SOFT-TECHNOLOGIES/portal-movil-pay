@@ -7,6 +7,8 @@ import { ServicoTvService } from 'src/app/components/servicios/services/servico-
 import { ContractDetailPackage } from 'src/app/components/finanzas/interfaces/UsuarioIDInterface';
 import { ContractDetail } from 'src/app/components/ajustes/interfaces/TicketInterfaces';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogFirmaComponent } from '../dialog-firma/dialog-firma.component';
 
 @Component({
   selector: 'app-card-user',
@@ -18,9 +20,13 @@ export class CardUserComponent {
   private router = inject(Router)
   private tvservices = inject(ServicoTvService);
   private snack = inject(SnackbarService);
+  private dialog = inject(MatDialog);
+  private usuario = inject(UsuarioService);
   contract: ContractDetail | any
 
   ngOnInit(): void {
+    console.log(this.contratos);
+    
     this.tvservices.getContratoTV(this.contratos.id).then((value) => {
       this.contract = value.contract_detail
     }).catch((error) => {
@@ -50,5 +56,16 @@ export class CardUserComponent {
   } 
   miServicio(contrato: number) {
     this.router.navigate(['home/servicios_tv/contratos', contrato])
+  }
+
+  abrirFirma(){
+    const dialog = this.dialog.open(DialogFirmaComponent,{
+      data:this.contratos.id
+    })
+    dialog.afterClosed().subscribe(d=>{
+      if (d) {
+        this.usuario.getContratos()        
+      }
+    })
   }
 }

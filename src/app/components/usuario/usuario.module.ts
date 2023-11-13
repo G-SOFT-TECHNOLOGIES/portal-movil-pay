@@ -9,10 +9,11 @@ import { PrimengModule } from '../primeng/primeng.module';
 import { CardUserComponent } from './components/card-user/card-user.component';
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { PlubicidadComponent } from '../dashboard/components/plubicidad/plubicidad.component';
+import { DialogFirmaComponent } from './components/dialog-firma/dialog-firma.component';
 
 
 @NgModule({
-  declarations: [UsuarioComponent, CardUserComponent],
+  declarations: [UsuarioComponent, CardUserComponent, DialogFirmaComponent],
   imports: [
     CommonModule,
     UsuarioRoutingModule,

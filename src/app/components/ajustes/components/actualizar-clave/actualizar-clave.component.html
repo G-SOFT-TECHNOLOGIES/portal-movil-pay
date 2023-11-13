@@ -9,14 +9,14 @@
       
         <div class=" lg:py-7 py-5 lg:px-8 animate__animated animate__bounceIn">
             <div class="mx-auto mt-7 max-w-xl sm:mt-7 p-8 bg-white rounded-lg shadow-lg">
-                <mat-stepper [linear]="isLinear" #stepper class="example-stepper" color="warn"
+                <mat-stepper  linear #stepper class="example-stepper" color="warn"
                     [orientation]="(stepperOrientation | async)!">
                     <mat-step [stepControl]="validar" label="Validar contraseña">
                         <p class=" text-lg text-gray-500 my-4">*Colocar la contraseña actual</p>
                         <form class="space-y-6" [formGroup]="validar" (submit)="onSubmit()">
                             <mat-form-field class="example-full-width w-full">
                                 <mat-label>Introduzca la contraseña</mat-label>
-                                <input  [type]="hide ? 'password' : 'text'" matInput  placeholder="******" formControlName="contraseña"> 
+                                <input  [type]="hide ? 'password' : 'text'" matInput  placeholder="******" autocapitalize="off" autocomplete="off" formControlName="contraseña"> 
                                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                   </button>       

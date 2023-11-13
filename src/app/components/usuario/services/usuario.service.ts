@@ -6,6 +6,7 @@ import { LoadingService } from '../../service/loading.service';
 import { SnackbarService } from '../../service/snackbar.service';
 import { Contract, ResultContract } from '../interfaces/contractosInterfaces';
 import { CoreService } from '../../service/core.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,11 @@ export class UsuarioService {
   getContratoId(): Promise<ResultContract> {
     const http = this.http.get<ResultContract>(`${this.url}/api/gsoft/portal/contracts/?client=${this.user.id}`)
     return lastValueFrom(http)
+  }
 
+  patchUsuario(body:any,id:any){
+    const http = this.http.patch(`${this.url}/api/gsoft/portal/contracts/${id}/`,body)
+    return lastValueFrom(http)
   }
 
 }
