@@ -31,13 +31,14 @@ export class GraficosComponent {
     totalSubida: number = 0
     totalBajada: number = 0
     options: any;
+    service_detail: any[] = []
 
     ngOnInit() {
-        this.calcularDia0yDia6()
-        // this.getContrato(this.contratos[0].id)
+        this.calcularPrimeryUltimoDia()
+        this.getContrato(this.contratos[0].id)
         this.loadingChart()
     }
-    getContrato(id: number) {
+    async getContrato(id: number) {
         let body: any = {
             id,
             since: '',
@@ -48,6 +49,16 @@ export class GraficosComponent {
             body.until = new Date(this.rangeDate.value?.end).toLocaleDateString("fr-CA",)
         }
         this.usuarioContratoservices.getContrato(id)
+        this.usuarioContratoservices.contrato$.subscribe(data => {
+            if (data) {
+                this.informacion.next(true)
+                this.infor_contract = data.contract_detail
+                data.contract_detail.map((cd) => {
+                    return this.service_detail = cd.service_detail?.map((sd) => sd)
+                })
+
+            }
+        })
         this.servicesDash.getTrafickContract(body).then((result) => {
             if (result.length > 0) {
                 this.consumo.next(result);
@@ -56,7 +67,6 @@ export class GraficosComponent {
                 this.labels = result.map((label) => label.date)
                 this.totalBajada = this.bajada.reduce((acc, value) => Number(acc) + Number(value)).toFixed(2)
                 this.totalSubida = this.subida.reduce((acc, value) => Number(acc) + Number(value)).toFixed(2)
-                // console.log(this.totalBajada)
                 this.loadingChart()
             } else {
                 this.consumo.next(false);
@@ -66,31 +76,30 @@ export class GraficosComponent {
             this.consumo.next(false)
         })
 
-        this.usuarioContratoservices.contrato$.subscribe(data => {
-            if (data) {
-                this.informacion.next(true)
-                this.infor_contract = data.contract_detail
 
-            }
-        })
     }
 
-    calcularDia0yDia6() {
-        var fechaActual = new Date();
-        var diaActual = fechaActual.getDay(); // 0 para domingo, 1 para lunes, ..., 6 para sábado
+    // calcularDia0yDia6() {
+    //     let fechaActual = new Date();
+    //     let diaActual = fechaActual.getDay(); // 0 para domingo, 1 para lunes, ..., 6 para sábado
+    //     let dia0 = new Date(fechaActual);
+    //     dia0.setDate(fechaActual.getDate() - diaActual);
+    //     let dia6 = new Date(fechaActual);
+    //     let diasHastaSabado = 6 - diaActual;
+    //     dia6.setDate(fechaActual.getDate() + diasHastaSabado);
+    //     this.rangeDate.patchValue({
+    //         start: new Date(dia0),
+    //         end: new Date(dia6),
+    //     })
+    // }
+    calcularPrimeryUltimoDia() {
+        let fechaActual = new Date();
+        let primerDiaDelMes = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), 1);
+        let ultimoDiaDelMes = new Date(fechaActual.getFullYear(), fechaActual.getMonth() + 1, 0);
 
-        // Calcular el "día 0" (domingo)
-        var dia0 = new Date(fechaActual);
-        dia0.setDate(fechaActual.getDate() - diaActual);
-
-        // Calcular el "día 6" (sábado)
-        var dia6 = new Date(fechaActual);
-        var diasHastaSabado = 6 - diaActual;
-        dia6.setDate(fechaActual.getDate() + diasHastaSabado);
         this.rangeDate.patchValue({
-            start: new Date(dia0),
-            end: new Date(dia6),
-
+            start: new Date(primerDiaDelMes),
+            end: new Date(ultimoDiaDelMes),
         })
     }
     calcularFormula(variable: any) {
@@ -110,22 +119,22 @@ export class GraficosComponent {
                     label: 'Subida',
                     data: this.subida,
                     fill: false,
-                    borderColor: documentStyle.getPropertyValue('--blue-500'),
-                    tension: 0.1
+                    borderColor: documentStyle.getPropertyValue('--gray-900'),
+                    backgroundColor: documentStyle.getPropertyValue('--gray-900'),
                 },
                 {
                     label: 'Bajada',
                     data: this.bajada,
                     fill: false,
-                    borderColor: documentStyle.getPropertyValue('--pink-500'),
-                    tension: 0.1
+                    borderColor: documentStyle.getPropertyValue('--red-600'),
+                    backgroundColor: documentStyle.getPropertyValue('--red-600'),
                 }
             ]
         };
 
         this.options = {
             maintainAspectRatio: false,
-            aspectRatio: 0.6,
+            aspectRatio: 0.8,
             plugins: {
                 legend: {
                     labels: {
@@ -134,7 +143,18 @@ export class GraficosComponent {
                 }
             },
             scales: {
-
+                x: {
+                    ticks: {
+                        color: textColorSecondary,
+                        font: {
+                            weight: 500
+                        }
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    }
+                },
                 y: {
                     ticks: {
                         color: textColorSecondary
@@ -143,16 +163,8 @@ export class GraficosComponent {
                         color: surfaceBorder,
                         drawBorder: false
                     }
-                },
-                x: {
-                    ticks: {
-                        color: textColorSecondary
-                    },
-                    grid: {
-                        color: surfaceBorder,
-                        drawBorder: false
-                    }
                 }
+
             },
             responsive: true,
         };
@@ -164,6 +176,8 @@ export class GraficosComponent {
         this.totalBajada = 0
         this.totalSubida = 0
         this.informacion.next(false); this.consumo.next(false)
+        this.service_detail = []
+        this.calcularPrimeryUltimoDia()
     }
 }
 
