@@ -6,7 +6,7 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.6"
                 d="M1 1v14h16M4 10l3-4 4 4 5-5m0 0h-3.207M16 5v3.207" />
         </svg>
-       Consumo de Internet
+        Consumo de Internet
     </h1>
     <div class="my-4">
 
@@ -38,37 +38,15 @@
                         </div>
                         <p-chart type="bar" [data]="data" [options]="options"
                             *ngIf="consumo |async as consumo; else SINCONSUMO"></p-chart>
-                        <ng-template #SINCONSUMO> 
+                        <ng-template #SINCONSUMO>
                             <div class="flex justify-center items-center my-4">
-                                <span class="font-medium text-xl text-gray-500">NO EXISTE CONSUMO EN LA FECHA SELECCIONADA </span>
+                                <span class="font-medium text-xl text-gray-500">NO EXISTE CONSUMO EN LA FECHA
+                                    SELECCIONADA </span>
                             </div>
                         </ng-template>
                     </div>
                     <dl class="mt-4 grid grid-cols-1 gap-5 lg:grid-cols-2 mb-5">
-                        <div class="overflow-hidden flex flex-col items-center rounded-lg bg-zinc-100 px-4 py-5 shadow sm:p-6">
-                            <dt class="truncate text-2xl font-medium text-gray-500">{{contrato.id}}</dt>
-                            <dd class="mt-1 text-lg font-semibold tracking-tight text-red-600">
-                                {{contrato.client_type_name}}</dd>
-                        </div>
-                        <div  class="overflow-hidden flex rounded-lg bg-zinc-100 px-1 py-5 shadow sm:p-6 my-2" *ngIf="service_detail.length >   0 else SinEquipo">
-                            <div *ngFor="let services of service_detail">
-                                <div class=" flex ">
-                                    <div class="flex items-center "><mat-icon class="mr-2 ">router</mat-icon>
-                                    </div>
-                                    <div>
-                                        <dt class="truncate  font-medium text-gray-500">IP:
-                                            {{services.ip}}</dt>
-                                        <dt class="truncate  font-medium text-gray-500">MAC:
-                                            {{services.mac}}</dt>
-                                        <dt class="truncate  font-medium text-gray-500">Serial:
-                                            {{services.serial}} </dt>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-span-2 overflow-hidden flex   gap-x-4"
-                            *ngIf="service_detail.length > 0">
+                        <div class="col-span-2 overflow-hidden flex   gap-x-4" *ngIf="service_detail.length > 0">
 
                             <div class="flex-1   ">
                                 <div
@@ -89,6 +67,31 @@
                                 </div>
                             </div>
                         </div>
+                        <div
+                            class="overflow-hidden flex flex-col items-center rounded-lg bg-zinc-100 px-4  shadow sm:p-6">
+                            <dt class=" text-2xl font-medium text-gray-500">{{contrato.id}}</dt>
+                            <dd class="mt-1 text-lg font-semibold tracking-tight text-red-600">
+                                {{contrato.client_type_name}}</dd>
+                        </div>
+                        <div class="flex rounded-lg bg-zinc-100 px-1 py-5 shadow sm:p-6 my-2"
+                            *ngIf="service_detail.length >   0 else SinEquipo">
+                            <div *ngFor="let services of service_detail">
+                                <div class=" flex ">
+                                    <div class="flex items-center "><mat-icon class="mr-2 ">router</mat-icon>
+                                    </div>
+                                    <div class="text-sm">
+                                        <dt class="  font-medium text-gray-500">IP:
+                                            {{services.ip}}</dt>
+                                        <dt class="  font-medium text-gray-500">MAC:
+                                            {{services.mac}}</dt>
+                                        <dt class="  font-medium text-gray-500">Serial:
+                                            {{services.serial}} </dt>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                         <ng-template #SinEquipo>
                             <div
                                 class="flex justify-center items-centeroverflow-hidden rounded-lg bg-zinc-100 px-4 py-5 shadow sm:p-6">

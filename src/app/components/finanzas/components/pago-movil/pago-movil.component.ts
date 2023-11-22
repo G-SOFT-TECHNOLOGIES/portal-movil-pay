@@ -1,7 +1,7 @@
 import { Component, inject, Input, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FacturaContratoService } from '../../services/usuario.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'; 
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogPagarComponent } from '../dialog-pagar/dialog-pagar.component';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { CoreService } from 'src/app/components/service/core.service';
@@ -47,12 +47,10 @@ export class PagoMovilComponent {
     phone: new FormControl('', [Validators.required, Validators.maxLength(11), Validators.minLength(11), Validators.pattern('[0-9]*')]),
   })
   user = this.core.getUser()
-
+  saldoFavor = this.usuario.saldoFavor
   constructor(private dialogRef: MatDialogRef<DialogPagarComponent>) { }
 
   ngOnInit(): void {
-    console.log(this.usuario.saldoFavor);
-    
     this.usuario.montoDollar$.subscribe((data) => {
       this.montoDollar$ = data;
     });
@@ -131,22 +129,22 @@ export class PagoMovilComponent {
 
   calcular(): number {
     const f = Number(this.factura.monto) - this.usuario.saldoFavor;
-    const s = Math.max(f,0)
+    const s = Math.max(f, 0)
     const result = s * this.montoDollar$;
     const r = result.toFixed(2);
     return Number(r);
   }
 
-  convertidor(){
+  convertidor() {
     const s = Number(this.factura.monto)
     const result = s * this.montoDollar$;
     const r = result.toFixed(2);
     return Number(r);
   }
-
-  convertirBolivares(dolar: number): number {
-    const resultado = dolar * this.montoDollar$;
-    return Number(Number(resultado).toFixed(2));
+ 
+  convertirBolivares(monto: number): number {
+    const resultado = monto * this.montoDollar$;
+    return Number(Number(resultado));
   }
   showAccountBalance(item: any) {
     this.listaCuentas = false

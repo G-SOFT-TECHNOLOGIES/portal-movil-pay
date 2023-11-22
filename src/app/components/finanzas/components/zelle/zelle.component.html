@@ -2,7 +2,7 @@
   <div class="mt-6 mb-6">
 
     <!-- Monto de factura -->
-    <div class="rounded-md bg-blue-50 p-4">
+    <!-- <div class="rounded-md bg-blue-50 p-4">
       <div class="flex">
         <div class="flex-shrink-0">
           <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -16,6 +16,22 @@
           </p>
         </div>
       </div>
+    </div> -->
+    <div class="  bg-zinc-100 rounded-md my-2">
+      <div class="px-8">
+        <div class="flex justify-between  py-2 text-gray-600">
+            <span>Total de la Factura</span>
+            <span class="font-semibold text-gray-700">$ {{this.factura.monto}}</span>
+        </div>
+        <div class="flex justify-between  border-b py-2 text-gray-600">
+            <span>Saldo a Favor</span>
+            <span class="font-semibold text-green-700">$ {{saldoFavor}}</span>
+        </div>
+    </div>
+    <div class="font-semibold text-xl px-8 flex justify-between py-4 text-gray-600  ">
+        <span>Total a pagar</span>
+        <span>$ {{calcular}}</span>
+    </div>
     </div>
 
 

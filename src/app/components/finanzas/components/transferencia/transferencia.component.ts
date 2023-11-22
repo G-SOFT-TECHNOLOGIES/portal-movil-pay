@@ -30,7 +30,7 @@ export class TransferenciaComponent {
   listaCuentas: boolean = false
   cuentas: any[] = []
   user = this.core.getUser()
-
+  saldoFavor = this.usuario.saldoFavor
   myForm = new FormGroup({
     bank: new FormControl('', [
       Validators.required

@@ -41,7 +41,7 @@ export class ZelleComponent {
   cuentas: any[] = []
   sinAfiliar: boolean = false
   user = this.core.getUser()
-
+saldoFavor = this.usuario.saldoFavor
   ngOnInit(): void {
     this.info.getMethod()
     this.info.datosTablas$.subscribe(data => {
