@@ -18,6 +18,7 @@ export class PagoMovilComponent {
     id: 0,
     contract: 0,
   };
+  fechaActual= new Date()
   private info = inject(InfoService);
   private form = inject(FormBuilder);
   private usuario = inject(FacturaContratoService);

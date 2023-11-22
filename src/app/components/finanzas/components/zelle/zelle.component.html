@@ -1,5 +1,5 @@
-<div class="relative">
-  <div class="mt-6 mb-6">
+<div class="relative " >
+  <div class="mt-6 mb-6" (scroll)="viewLinkAccount($event)">
 
     <!-- Monto de factura -->
     <!-- <div class="rounded-md bg-blue-50 p-4">
@@ -35,7 +35,7 @@
     </div>
 
 
-    <h3 class="text-gray-800 text-center font-light ">Monto a Pagar</h3>
+    <!-- <h3 class="text-gray-800 text-center font-light ">Monto a Pagar</h3> -->
     <div
       class="inline-flex justify-center gap-y-8 items-center border-2 bg-zinc-100 border-red-300 py-2 w-full rounded-lg  shadow-xl ">
       <span class=" text-center text-2xl font-mono font-bold">${{calcular}}</span>
@@ -57,9 +57,9 @@
   <h1 class="text-gray-900 font-semibold ">Monto a Pagar</h1>
   <button mat-raised-button color="warn" class="w-full">${{factura.monto}}</button>
 </div> -->
-  <div class="mt-6">
+  <div class="mt-6 ">
     <ng-container *ngIf="!listaCuentas">
-      <form class="space-y-3" [formGroup]="myForm" (submit)="onSubmit()">
+      <form class="space-y-3 " [formGroup]="myForm" (submit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>Titular Cuenta</mat-label>
           <input matInput formControlName="sender" type="text" />
@@ -85,8 +85,8 @@
           <mat-icon matPrefix>attach_money</mat-icon>
         </mat-form-field>
       </form>
-      <ng-container *ngIf="registrar_cuenta && !registradas.value ">
-        <div class="my-4 p-2">
+      <ng-container *ngIf="registrar_cuenta && !registradas.value " class="">
+        <div class="my-4 p-2  ">
           <div class="font-medium flex justify-center items-center">
             <span>
               Afiliar Cuenta

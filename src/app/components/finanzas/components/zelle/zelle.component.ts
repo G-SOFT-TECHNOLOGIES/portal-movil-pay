@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, HostListener, Input, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FacturaContratoService } from '../../services/usuario.service';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -13,6 +13,10 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
   styleUrls: ['./zelle.component.css'],
 })
 export class ZelleComponent {
+  @HostListener("scroll", ['$event'])
+  @HostListener("window:scroll", ['$event'])
+
+
   @Input() factura: { monto: string; id: number; contract: number } = {
     monto: '0',
     id: 0,
@@ -41,7 +45,7 @@ export class ZelleComponent {
   cuentas: any[] = []
   sinAfiliar: boolean = false
   user = this.core.getUser()
-saldoFavor = this.usuario.saldoFavor
+  saldoFavor = this.usuario.saldoFavor
   ngOnInit(): void {
     this.info.getMethod()
     this.info.datosTablas$.subscribe(data => {
@@ -119,14 +123,11 @@ saldoFavor = this.usuario.saldoFavor
       sender: item.name
     })
   }
-
   get calcular(){
     const f = Number(this.factura.monto) - this.usuario.saldoFavor
     const s = Math.max(f,0)
     return s
   }
-
-
   aggZelle() {
     const valor = this.registro.value
     const body = {
@@ -142,5 +143,9 @@ saldoFavor = this.usuario.saldoFavor
       }).catch((err) => {
         console.log(err);
       });
+  }
+  viewLinkAccount(event:any){
+    let scrollOffset = event.srcElement.children[0].scrollTop;
+    console.log("window scroll: ", scrollOffset);
   }
 }

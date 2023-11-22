@@ -1,7 +1,23 @@
-<div class="">
-
-
-  <div class="mt-6 mb-6">
+<div class="relative">
+  <div class="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg  lg:overflow-visible">
+    <div role="alert" class="relative block w-full text-base font-regular px-4 py-2 rounded-lg bg-red-500 text-white">
+      <div class="">
+        <p class="font-bold text-gray-800">
+          Tipo de cambio del día
+          <span class="text-white">
+            {{fechaActual |date:'d/MM/YYYY'}}
+          </span>
+          la tasa  <span class="text-white">
+           Bs {{montoDollar$ |number:'1.2-2'}}
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- <div>
+    <span>Tipo de cambio del día {{fechaActual |date:'d/MM/YYYY'}} a la tasa {{montoDollar$ |number:'1.2-2'}} </span>
+  </div> -->
+  <div class="mt-4 mb-4">
     <!-- Monto de factura -->
     <!-- <div class="rounded-md bg-blue-50 p-4">
       <div class="flex">
@@ -18,18 +34,18 @@
     <div class="  bg-zinc-100 rounded-md my-2">
       <div class="px-8">
         <div class="flex justify-between  py-2 text-gray-600">
-            <span>Total de la Factura</span>
-            <span class="font-semibold text-gray-700">Bs. {{convertidor() |number:'1.2-2'}}</span>
+          <span>Total de la Factura</span>
+          <span class="font-semibold text-gray-700">Bs. {{convertidor() |number:'1.2-2'}}</span>
         </div>
         <div class="flex justify-between  border-b py-2 text-gray-600">
-            <span>Saldo a Favor</span>
-            <span class="font-semibold text-green-700">Bs.  {{convertirBolivares(saldoFavor) |number:'1.2-2'}}</span>
+          <span>Saldo a Favor</span>
+          <span class="font-semibold text-green-700">Bs. {{convertirBolivares(saldoFavor) |number:'1.2-2'}}</span>
         </div>
-    </div>
-    <div class="font-semibold text-xl px-8 flex justify-between py-4 text-gray-600  ">
+      </div>
+      <div class="font-semibold text-xl px-8 flex justify-between py-4 text-gray-600  ">
         <span>Total a pagar</span>
         <span>Bs.{{calcular()|number:'1.2-2'}}</span>
-    </div>
+      </div>
     </div>
 
     <!-- <h3 class="text-gray-800 text-center font-light mt-4 ">Monto a Pagar</h3> -->
@@ -144,13 +160,13 @@
       </ng-container>
 
     </ng-container>
-    
+
   </div>
 </div>
 <ng-container mat-dialog-actions *ngIf="listaCuentas  && registradas.value">
   <div class="grid grid-cols-1 my-2">
-    <div class="flex drop-shadow-md bg-gray-100 rounded-xl items-center my-2 p-4 gap-x-8"
-      *ngFor="let item of cuentas" (click)="showAccountBalance(item)">
+    <div class="flex drop-shadow-md bg-gray-100 rounded-xl items-center my-2 p-4 gap-x-8" *ngFor="let item of cuentas"
+      (click)="showAccountBalance(item)">
       <div class="flex-shrink-0  items-center ">
         <mat-icon>account_balance</mat-icon>
       </div>

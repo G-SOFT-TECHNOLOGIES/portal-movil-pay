@@ -18,6 +18,7 @@ export class TransferenciaComponent {
     id: 0,
     contract: 0,
   };
+  fechaActual= new Date()
   private info = inject(InfoService);
   private usuario = inject(FacturaContratoService);
   private snack = inject(SnackbarService);
