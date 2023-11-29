@@ -25,8 +25,6 @@ export class CardUserComponent {
   contract: ContractDetail | any
 
   ngOnInit(): void {
-    console.log(this.contratos);
-    
     this.tvservices.getContratoTV(this.contratos.id).then((value) => {
       this.contract = value.contract_detail
     }).catch((error) => {
@@ -41,7 +39,6 @@ export class CardUserComponent {
   IrDetalle(contrato: number) {
     let plan = 0
     this.tvservices.id_servicestv$.subscribe(data => plan = data)
-    console.log(contrato, 'cont')
     if (contrato) {
       this.tvservices.setIdContrato(contrato)
     } else {

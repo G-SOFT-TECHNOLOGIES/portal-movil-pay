@@ -68,6 +68,30 @@
           </span>
         </div>
       </ng-container>
+      <!-- Cancelado -->
+      <ng-container *ngIf="contratos.status ==34 ">
+        <div
+          class="left-0 mt-4 rounded-r-full absolute text-center font-medium text-sm text-gray-700 px-2 py-1 bg-gray-100 fill-gray-700 shadow-md">
+          <span class="inline-flex items-center gap-x-2">
+            <svg class="h-2 w-2 " viewBox="0 0 6 6" aria-hidden="true">
+              <circle cx="3" cy="3" r="3" />
+            </svg>
+            {{contratos.status_name}}
+          </span>
+        </div>
+      </ng-container>
+      <!-- Retirado -->
+      <ng-container *ngIf="contratos.status ==35 ">
+        <div
+          class="left-0 mt-4 rounded-r-full absolute text-center font-medium text-sm text-red-700 px-2 py-1 bg-red-100 fill-red-700 shadow-md">
+          <span class="inline-flex items-center gap-x-2">
+            <svg class="h-2 w-2 " viewBox="0 0 6 6" aria-hidden="true">
+              <circle cx="3" cy="3" r="3" />
+            </svg>
+            {{contratos.status_name}}
+          </span>
+        </div>
+      </ng-container>
 
       <div class="w-full text-center mt-20 ">
         <div class="flex justify-center lg:pt-4 pt-8 pb-0 divide-x-4">
