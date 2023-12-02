@@ -13,8 +13,9 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
   styleUrls: ['./pago-movil.component.css'],
 })
 export class PagoMovilComponent {
-  @Input() factura: { monto: string; id: number; contract: number } = {
+  @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
     monto: '0',
+    montoDescuento: '0',
     id: 0,
     contract: 0,
   };
@@ -49,6 +50,7 @@ export class PagoMovilComponent {
   })
   user = this.core.getUser()
   saldoFavor = this.usuario.saldoFavor
+  descuento=0
   constructor(private dialogRef: MatDialogRef<DialogPagarComponent>) { }
 
   ngOnInit(): void {
@@ -56,6 +58,7 @@ export class PagoMovilComponent {
       this.montoDollar$ = data;
     });
     this.info.getMethod()
+    this.descuento=Number(this.factura.monto)-Number(this.factura.montoDescuento)
     this.info.datosTablas$.subscribe(data => {
       this.cuentas = data.filter((pm) => pm.method === "PAGO MOVIL").map(data => data)
     })
@@ -88,7 +91,7 @@ export class PagoMovilComponent {
       .validarPago(payment)
       .then((result) => {
         this.snack.openSnack(result.message, 'success');
-        const numero = Number(this.factura.monto) - Number(result.monto);
+        const numero = Number(this.factura.montoDescuento) - Number(result.monto);
         const resultado = Number(numero.toFixed(2));
         const resultadoBS = this.convertirBolivares(resultado < 0 ? Number(this.factura.monto) : result.monto)
         const pago = {
@@ -105,7 +108,7 @@ export class PagoMovilComponent {
               payment_invoices: [
                 {
                   invoice: this.factura.id,
-                  amount: resultado < 0 ? this.factura.monto : result.monto,
+                  amount: resultado < 0 ? this.factura.montoDescuento : result.monto,
                 },
               ],
             },
@@ -129,7 +132,7 @@ export class PagoMovilComponent {
   }
 
   calcular(): number {
-    const f = Number(this.factura.monto) - this.usuario.saldoFavor;
+    const f = Number(this.factura.montoDescuento) - this.usuario.saldoFavor;
     const s = Math.max(f, 0)
     const result = s * this.montoDollar$;
     const r = result.toFixed(2);

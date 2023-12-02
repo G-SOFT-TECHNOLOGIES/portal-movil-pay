@@ -45,6 +45,18 @@ export class TicketService {
     const obs$ = this.http.post(`${this.url}/api/gsoft/portal/tickets/`, body)
     return lastValueFrom(obs$)
   }
+  createNotification(idTicket:any){
+    const body ={
+      ticket:idTicket,
+      modulo:1
+    }
+    const obs$ = this.http.post(
+      `${this.url}/api/gsoft/portal/notifications/create/`,
+      body
+    );
+    return lastValueFrom(obs$);
+
+  }
 
   getTicketTimeLine(id: number): Promise<TimeLine> {
     const obs$ = this.http.get<TimeLine>(`${this.url}/api/gsoft/portal/tickets/${id}/time_line/`);

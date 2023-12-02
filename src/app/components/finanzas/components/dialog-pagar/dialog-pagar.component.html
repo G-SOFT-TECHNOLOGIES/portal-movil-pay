@@ -39,6 +39,16 @@
         <mat-option value="3">Transferencia</mat-option>
       </mat-select>
     </mat-form-field>
+    <div class="flex items-center justify-between border-t border-gray-200 pt-6" *ngIf="data.montoDescuento==data.monto && selectedOption=='0'">
+      <mat-form-field class="w-full" >
+        <mat-label>Aplicar Cupon </mat-label>
+        <input matInput placeholder="CUPON" [(ngModel)]="cupon" />
+        <button mat-icon-button matSuffix color="primary" matTooltip="Aplicar Cupon" (click)="validateCupon()" >
+            <mat-icon>confirmation_number</mat-icon>
+        </button>
+
+    </mat-form-field>
+    </div>
   </div>
   <div class="relative">
     <ng-container *ngIf="selectedOption == '1'">

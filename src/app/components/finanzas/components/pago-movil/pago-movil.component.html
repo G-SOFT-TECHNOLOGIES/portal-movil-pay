@@ -37,6 +37,10 @@
           <span>Total de la Factura</span>
           <span class="font-semibold text-gray-700">Bs. {{convertidor() |number:'1.2-2'}}</span>
         </div>
+        <div class="flex justify-between  py-2 text-gray-600">
+          <span>Total Descuento</span>
+          <span class="font-semibold text-gray-700">Bs.  {{convertirBolivares(descuento) |number:'1.2-2'}}</span>
+        </div>
         <div class="flex justify-between  border-b py-2 text-gray-600">
           <span>Saldo a Favor</span>
           <span class="font-semibold text-green-700">Bs. {{convertirBolivares(saldoFavor) |number:'1.2-2'}}</span>

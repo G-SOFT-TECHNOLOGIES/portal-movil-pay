@@ -17,8 +17,9 @@ export class ZelleComponent {
   @HostListener("window:scroll", ['$event'])
 
 
-  @Input() factura: { monto: string; id: number; contract: number } = {
+  @Input() factura: { monto: string; id: number; contract: number;montoDescuento: string; } = {
     monto: '0',
+    montoDescuento: '0',
     id: 0,
     contract: 0,
   };
@@ -46,8 +47,11 @@ export class ZelleComponent {
   sinAfiliar: boolean = false
   user = this.core.getUser()
   saldoFavor = this.usuario.saldoFavor
+  descuento=0
+
   ngOnInit(): void {
     this.info.getMethod()
+    this.descuento=Number(this.factura.monto)-Number(this.factura.montoDescuento)
     this.info.datosTablas$.subscribe(data => {
       this.cuentas = data.filter((zelle) => zelle.method === "ZELLE").map(data => data)
     })
@@ -124,7 +128,7 @@ export class ZelleComponent {
     })
   }
   get calcular(){
-    const f = Number(this.factura.monto) - this.usuario.saldoFavor
+    const f = Number(this.factura.montoDescuento) - this.usuario.saldoFavor;
     const s = Math.max(f,0)
     return s
   }

@@ -65,9 +65,11 @@ export class TablaFacturasComponent {
   }
 
 
-  pagar(monto: string, charged: string, id: number, contract: number) {
+  pagar(monto: string, charged: string, id: number, contract: number, montoDescuento:string) {
     const resultado = Number(monto) - Number(charged)
+    const descuento = Number(montoDescuento) - Number(charged)
     const a = Number(resultado.toFixed(2))
+    const d = Number(descuento.toFixed(2))
     const dialogRef = this.dialog.open(DialogPagarComponent, {
       width: '520px',
       // height: '80%',
@@ -75,7 +77,8 @@ export class TablaFacturasComponent {
         monto: a,
         id,
         contract,
-        opcion: ''
+        opcion: '',
+        montoDescuento:d,
       }
     })
 

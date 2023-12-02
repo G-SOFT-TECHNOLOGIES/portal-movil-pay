@@ -92,4 +92,21 @@ export class FacturaContratoService {
   setContratos(contrato: false) {
     this.contrato.next(contrato)
   }
+
+
+  validateCupon(body:any){
+    const obs$ = this.http.post<any>(
+      `${this.url}/api/gsoft/invoices/coupon/validate/`,
+      body,
+    );
+    return lastValueFrom(obs$);
+  }
+
+
+  patchDiscountInvoice(id:number, data:any){
+    const obs$ = this.http.patch(`${this.url}/api/gsoft/portal/invoices/${id}/`, data)
+    return lastValueFrom(obs$)
+  }
+
+
 }
