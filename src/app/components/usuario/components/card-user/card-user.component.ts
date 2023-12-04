@@ -57,7 +57,9 @@ export class CardUserComponent {
 
   abrirFirma(){
     const dialog = this.dialog.open(DialogFirmaComponent,{
-      data:this.contratos.id
+      data:this.contratos.id,
+      width: window.innerWidth > 639 ? '50%' : 'auto',
+      height: window.innerWidth > 639 ? 'auto' : 'auto'
     })
     dialog.afterClosed().subscribe(d=>{
       if (d) {
