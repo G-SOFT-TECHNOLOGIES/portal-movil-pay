@@ -19,7 +19,7 @@ export interface ResultContract {
     finish_installation: any
     status: number
     balance: number
-    debt: any
+    debt: number
     date_cicle: number
     status_name: string
     address: string

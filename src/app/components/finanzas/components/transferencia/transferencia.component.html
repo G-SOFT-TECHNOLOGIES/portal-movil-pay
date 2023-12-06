@@ -75,7 +75,7 @@
                     <mat-label>Nro de Cuenta</mat-label>
                     <input matInput formControlName="sender" type="text" maxlength="4" pattern="[0-9]*" />
                     <mat-icon matPrefix>tag</mat-icon>
-                    <mat-hint>Ultimo 4 digitos de su cuenta</mat-hint>
+                    <mat-hint class="text-xs">Ultimo 4 digitos de su cuenta</mat-hint>
                     <mat-error *ngIf="myForm.controls['sender'].hasError('pattern')" class="text-xs ">
                         Solo caracteres númericos
                     </mat-error>
@@ -153,6 +153,7 @@
                                         class="text-xs">
                                         El número de cuenta es <strong>obligatorio</strong>
                                     </mat-error>
+                                    <mat-hint class="text-xs">Ultimo 4 digitos de su cuenta</mat-hint>
                                     <mat-hint align="end" class="text-xs">{{nro_cuenta.value.length}} /
                                         4</mat-hint>
                                 </mat-form-field>

@@ -36,7 +36,7 @@ export class FacturaContratoService {
   montoDollar$ = this.montoDollar.asObservable()
 
 
-  saldoFavor:any=0  
+  saldoFavor: any = 0
 
 
 
@@ -94,19 +94,20 @@ export class FacturaContratoService {
   }
 
 
-  validateCupon(body:any){
+  validateCupon(body: any) {
     const obs$ = this.http.post<any>(
       `${this.url}/api/gsoft/invoices/coupon/validate/`,
       body,
     );
     return lastValueFrom(obs$);
   }
-
-
-  patchDiscountInvoice(id:number, data:any){
+  patchDiscountInvoice(id: number, data: any) {
     const obs$ = this.http.patch(`${this.url}/api/gsoft/portal/invoices/${id}/`, data)
     return lastValueFrom(obs$)
   }
 
+  calcularBs(montoBs: number | string) {
+    return Number(montoBs) == 0 ? montoBs : Number(montoBs) * this.montoDollar.value
+  }
 
 }

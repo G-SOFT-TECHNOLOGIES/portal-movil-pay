@@ -9,6 +9,7 @@ import { ContractDetail } from 'src/app/components/ajustes/interfaces/TicketInte
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogFirmaComponent } from '../dialog-firma/dialog-firma.component';
+import { FacturaContratoService } from 'src/app/components/finanzas/services/usuario.service';
 
 @Component({
   selector: 'app-card-user',
@@ -22,6 +23,8 @@ export class CardUserComponent {
   private snack = inject(SnackbarService);
   private dialog = inject(MatDialog);
   private usuario = inject(UsuarioService);
+  private fuser = inject(FacturaContratoService)
+
   contract: ContractDetail | any
 
   ngOnInit(): void {
@@ -66,5 +69,9 @@ export class CardUserComponent {
         this.usuario.getContratos()        
       }
     })
+  }
+  
+  calculo(monto: number) {
+    return this.fuser.calcularBs(monto)
   }
 }

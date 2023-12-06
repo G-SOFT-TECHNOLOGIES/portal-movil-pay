@@ -30,5 +30,8 @@ export class CardDatosPagoComponent {
     }
     )
   }
-
+  
+  calculo(monto: number) {
+    return this.usuarioserv.calcularBs(monto)
+  }
 }

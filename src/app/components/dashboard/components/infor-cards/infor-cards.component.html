@@ -9,10 +9,11 @@
 
         </div>
     </div>
-    <a class="col-4 gap-x-4 m-4 cursor-pointer"  [routerLink]="['/home/contratos']" >
+    <a class="col-4 gap-x-4 m-4 cursor-pointer" [routerLink]="['/home/contratos']">
         <div class="flex-1 mx-auto  max-w-lg  gap-8 lg:mx-0 lg:max-w-none ">
-            <div class=" flex-1 justify-center py-8 space-y-4 border-b-2 text-red-600 rounded-md  bg-white p-4 shadow-2xl">
-                <div class="flex pointer justify-center" >
+            <div
+                class=" flex-1 justify-center py-8 space-y-2 border-b-2 text-red-600 rounded-md  bg-white p-4 shadow-2xl">
+                <div class="flex pointer justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                         class="bi bi-cash-coin" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -25,43 +26,55 @@
                     </svg>
                 </div>
                 <span class="flex justify-center text-center font-medium tfont-medium text-sm "> Deuda pendiente </span>
-                <span class="flex justify-center text-center font-extralight text-3xl">$ {{deuda | number: '1.1-2'}} </span>
+                <span class="flex flex-col justify-center text-center font-extralight text-3xl"> {{deuda | currency: 'USD'}}
+                    <span class="flex justify-center text-center font-extralight text-base">{{calculo(deuda) |currency:'Bs '}}
+                    </span>
+                </span>
+               
             </div>
         </div>
     </a>
     <!-- <a class="col-4 gap-x-4 m-4"  [routerLink]="['/home/contratos']"> -->
-        <a class="col-4 gap-x-4 m-4 cursor-pointer"  >
+    <a class="col-4 gap-x-4 m-4 cursor-pointer">
         <div class="flex-1   mx-auto =  gap-8 lg:mx-0 lg:max-w-none ">
-            <div class=" flex-1 justify-center py-8 space-y-4  text-gray-50 rounded-md shadow-2xl shadow-black bg-red-700 ">
-                <div class="flex pointer justify-center" >
+            <div
+                class=" flex-1 justify-center py-8 space-y-4  text-gray-50 rounded-md shadow-2xl shadow-black bg-red-700 ">
+                <div class="flex pointer justify-center">
                     <!-- <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor" class="bi bi-bookmark-star" viewBox="0 0 16 16">
                         <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098z"/>
                         <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
                       </svg> -->
-                      <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor" class="bi bi-bookmark-star-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5M8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098z"/>
-                      </svg>
-                      
-                   
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor"
+                        class="bi bi-bookmark-star-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5M8.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098z" />
+                    </svg>
+
+
                 </div>
                 <span class="flex justify-center text-center font-medium text-sm "> G-Club </span>
-                <span class="flex justify-center text-center font-extralight text-3xl"> {{0 | number: '1.1-2'}} Gigas </span>
+                <span class="flex justify-center text-center font-extralight text-3xl"> {{0 | number: '1.1-2'}} Gigas
+                </span>
             </div>
         </div>
     </a>
-    <a class="col-4 gap-x-4 m-4 cursor-pointer"  [routerLink]="['/home/tickets']">
-        <div class="flex-1   mx-auto  max-w-lg  gap-8 lg:mx-0 lg:max-w-none ">
-            <div class=" flex-1 justify-center py-8 space-y-4 border-b-2 text-red-600 rounded-md shadow-2xl bg-white p-4">
+    <a class="col-4 gap-x-4 m-4 cursor-pointer" [routerLink]="['/home/tickets']">
+        <div class="flex-1   mx-auto  max-w-lg  gap-8 lg:mx-0 lg:max-w-none  ">
+            <div
+                class=" flex-1 justify-center py-8 space-y-4 border-b-2 text-red-600 rounded-md shadow-2xl bg-white p-4 ">
                 <div class="flex pointer justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="30" fill="currentColor" class="bi bi-ticket-perforated" viewBox="0 0 16 16">
-                        <path d="M4 4.85v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Z"/>
-                        <path d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3h-13ZM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1.05a2.5 2.5 0 0 0 0 4.9v1.05a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-1.05a2.5 2.5 0 0 0 0-4.9V4.5Z"/>
-                      </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="30" fill="currentColor"
+                        class="bi bi-ticket-perforated" viewBox="0 0 16 16">
+                        <path
+                            d="M4 4.85v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Z" />
+                        <path
+                            d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3h-13ZM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1.05a2.5 2.5 0 0 0 0 4.9v1.05a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-1.05a2.5 2.5 0 0 0 0-4.9V4.5Z" />
+                    </svg>
                 </div>
                 <span class="flex justify-center text-center font-medium text-sm "> Tickets Abiertos </span>
-                <span class="flex justify-center text-center font-extralight text-3xl"> {{tickets.length}} </span>
+                <span class="flex justify-center text-center font-extralight text-3xl "> {{tickets.length}} </span>
             </div>
         </div>
     </a>
-  
+
 </div>

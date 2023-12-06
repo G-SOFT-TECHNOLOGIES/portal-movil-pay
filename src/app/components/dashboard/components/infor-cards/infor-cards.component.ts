@@ -1,5 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { TicketService } from 'src/app/components/ajustes/services/ticket.service';
+import { FacturaContratoService } from 'src/app/components/finanzas/services/usuario.service';
 import { LoadingService } from 'src/app/components/service/loading.service';
 import { Contract } from 'src/app/components/usuario/interfaces/contractosInterfaces';
 import { UsuarioService } from 'src/app/components/usuario/services/usuario.service';
@@ -10,7 +11,8 @@ import { UsuarioService } from 'src/app/components/usuario/services/usuario.serv
   styleUrls: ['./infor-cards.component.css']
 })
 export class InforCardsComponent {
-  private usuario = inject(UsuarioService)
+  private usuario = inject(FacturaContratoService)
+
   private loader = inject(LoadingService)
   private ticketservices = inject(TicketService)
   @Input() contratos: Contract[] = []
@@ -25,6 +27,8 @@ export class InforCardsComponent {
     this.ticketservices.datosTablasTickets$.subscribe(data => {
       this.tickets = data.filter((status) => status.status == 38).map((ticket) => ticket)
     })
-   
+  }
+  calculo(monto: number) {
+    return this.usuario.calcularBs(monto)
   }
 }

@@ -1,7 +1,7 @@
-<div class="grid justify-center items-center grid-cols-1 sm:grid-cols-2 gap-x-8 grid-col-2 m-auto max-w-5xl px-6 lg:px-8  my-8"
+<div class="grid justify-center grid-cols-1 sm:grid-cols-2 gap-x-8 grid-col-2 m-auto max-w-4xl px-6 lg:px-8  my-8"
     *ngIf="contrato |async as contrato">
     <div class=" gap-x-4 m-4">
-        <div class="flex-1 mx-auto my-auto  max-w-lg  lg:mx-0 lg:max-w-none ">
+        <div class="flex-1 mx-auto my-auto  max-w-lg  lg:mx-0 lg:w-full">
             <div
                 class="flex  py-8 space-y-2 border-b-2 text-gray-500 hover:text-red-600 rounded-md shadow-md bg-white p-4">
                 <div class="inline-flex  items-center justify-end ">
@@ -14,7 +14,7 @@
                 <div class="flex-1 mx-8">
                     <span class="flex font-medium text-2xl">J-500564015 </span>
                     <span class="flex font-medium text-2xl "> {{contrato.bank_associated.bank_name}} </span>
-                    <span class="flex font-extralight text-2xl"><span class="font-semibold"></span>
+                    <span class="flex font-extralight text-xl"><span class="font-semibold"></span>
                         {{contrato.bank_associated.nro_cta}} </span>
                     <span class="flex font-extralight text-2xl">{{contrato.bank_associated.tlf}}</span>
                 </div>
@@ -24,7 +24,8 @@
     </div>
     <div class=" gap-x-4 m-4">
         <div class="flex-1 mx-auto  max-w-lg  lg:mx-0 lg:max-w-none">
-            <div class="flex  py-7 space-y-2 border-b-2 text-green-500 rounded-md shadow-md bg-white  hover:text-gray-600  p-4">
+            <div
+                class="flex  py-7 space-y-2 border-b-2 text-green-500 rounded-md shadow-md bg-white  hover:text-gray-600  p-4">
                 <div class="inline-flex  items-center justify-end ">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="50"
                         height="50">
@@ -36,14 +37,18 @@
                             d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z" />
                     </svg>
                 </div>
-                <div class="flex-1 mx-8">
+                <div class="flex flex-col mx-8">
                     <span class="flex font-medium text-2xl">Saldo a Favor </span>
-                    <span class="flex font-extralight text-xl"> {{saldoFavor | currency}}
-                    </span>
+                    <div class="flex justify-around">
+                        <span class="flex font-extralight text-xl"> {{saldoFavor | currency}}
+                        </span>
+                        <span class="flex font-extralight text-xl">{{calculo(saldoFavor) |currency:'Bs '}}</span>
+                    </div>
                 </div>
 
             </div>
-            <div class="flex  py-7 space-y-2 border-b-2 text-gray-500 rounded-md shadow-md bg-white  hover:text-red-600  p-2 mt-1">
+            <div
+                class="flex  py-7 space-y-2 border-b-2 text-gray-500 rounded-md shadow-md bg-white  hover:text-red-600  p-2 mt-1">
                 <div class="inline-flex  items-center justify-end ">
 
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="50"
