@@ -1,5 +1,13 @@
-<div class="container mx-auto bg-gray-400 h-96 rounded-md flex items-center">
-    <div class="mx-auto flex justify-around items-center">
+<div class="container mx-auto bg-red-700 shadow-2xl h-96 rounded-md flex items-center">
+    <div class="mx-auto flex justify-around items-center ">
+        <div class="w-64 flex flex-col">
+            <h1 class=" text-5xl font-bold mb-4 tracking text-white">
+                Canjea tus puntos
+            </h1>
+            <!-- <p class=" text-4xl font-bold mb-4 tracking text-white"> </p>
+            <p class=" text-3xl font-bold mb-4 tracking text-white"></p> -->
+            <p class="text-3xl font-bold  text-slate-950"> por cupones de descuentos en tus facturas.</p>
+        </div>
         <div class="relative flex bg-white h-36 md:p-2 p-6 rounded-lg border border-gray-200 mb-4 lg:mb-0 shadow-md">
             <div class="flex justify-center items-center  font-mono">
                 <div *ngIf="contrato |async  as contrato">
@@ -8,7 +16,7 @@
                             class="text-sm">Gigas</span> </h1>
                 </div>
 
-                <img src="../../../../../assets/img/moneda_gigas.png" alt="puntos" class="h-24 md:h-20 w-38 ">
+                <img src="../../../../../assets/img/MonedaPortal.png" alt="puntos" class="h-24 md:h-20 w-38 ">
             </div>
             <div class="fixed right-14 xl:top-[10%] p-2 top-20" *ngIf="shopping$  |async as shopping;">
                 <button class="p-2 rounded-full bg-red-600 text-white font-mono font-semibold mx-2 -mb-4"
@@ -25,7 +33,7 @@
             </div>
             <p-dialog header="RESUMEN" [(visible)]="visible" position="bottom" [breakpoints]="{ '960px': '75vw' }"
                 [style]="{ width: '30vw' }" [draggable]="true" [resizable]="true" class="rounded-3xl">
-                <app-dialogo-resumen-cupones></app-dialogo-resumen-cupones>
+                <app-dialogo-resumen-cupones (visible)="visible= $event"></app-dialogo-resumen-cupones>
             </p-dialog>
         </div>
         <img src="https://www.emprenderconactitud.com/img/fidelizamas.png"
@@ -76,7 +84,6 @@
         </div>
     </ng-template>
     <section>
-        <h1 class="text-3xl font-bold text-gray-600 mb-10">Canjea tus puntos por cupones </h1>
         <div class="grid xl:grid-cols-3 gap-4 grid-cols-1" *ngIf="campaing | async as campaing">
             <app-list-campaing *ngFor="let item of campaing" [campaing]="item"></app-list-campaing>
         </div>

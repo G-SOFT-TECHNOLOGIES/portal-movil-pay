@@ -105,7 +105,7 @@ export class UsuarioService {
     this.totalAcumulado.next(0)
   }
   setGenerateCuopon(body:any){
-    const http = this.http.post(`${this.url}/portal/invoices/coupons/adquire/`, body)
+    const http = this.http.post(`${this.url}/api/gsoft/portal/invoices/coupons/adquire/`, body)
     return lastValueFrom(http)
   }
   

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, SimpleChanges, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ContratoID } from 'src/app/components/finanzas/interfaces/UsuarioIDInterface';
@@ -21,11 +21,11 @@ export class CanjearComponent {
   id: number = 0
   checked: boolean = false
   contrato = new BehaviorSubject<Contract | false>(false)
-  campaing = new BehaviorSubject<Campaign[]| false>(false)
+  campaing = new BehaviorSubject<Campaign[] | false>(false)
   page: number = 1
   shopping$ = this.usuario2.itemsCount
+  canjear: boolean = false
   visible: boolean = false;
-
   constructor() {
     this.sub = this.rout.params.subscribe((data) => {
       this.id = data['id'];
