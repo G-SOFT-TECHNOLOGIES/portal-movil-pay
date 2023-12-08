@@ -1,5 +1,6 @@
 <!-- component -->
-<div class="relative mx-auto md:max-w-xl min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl mt-16">
+
+<div class=" mt-[80px] relative mx-auto md:max-w-xl min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl ">
   <div class="px-6">
 
     <div class="flex flex-wrap justify-center">
@@ -92,9 +93,9 @@
         </div>
       </ng-container>
       <div class="flex justify-center mt-28">
-        <button mat-fab color="warn" matTooltip="Canjear">
+        <a [routerLink]="[ 'canjear', contratos.id]"  mat-fab color="warn" matTooltip="Canjear">
           <mat-icon>local_activity</mat-icon>
-        </button>
+        </a>
       </div>
       <div class="w-full text-center ">
         <div class="flex justify-center items-end lg:pt-4 pt-8 pb-0 divide-x-4">

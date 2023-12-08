@@ -88,7 +88,7 @@ export class ServicoTvService {
       return session
     }
     return []
-  }
+  } 
   setPaquetes(e: any) {
     this.paquetes.next([...this.paquetes.value, e])
     sessionStorage.setItem('paquetes', JSON.stringify([...this.paquetes.value]))

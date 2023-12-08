@@ -11,10 +11,12 @@ import { DashboardModule } from '../dashboard/dashboard.module';
 import { PlubicidadComponent } from '../dashboard/components/plubicidad/plubicidad.component';
 import { DialogFirmaComponent } from './components/dialog-firma/dialog-firma.component';
 import { CanjearComponent } from './components/canjear/canjear.component';
+import { ListCampaingComponent } from './components/list-campaing/list-campaing.component';
+import { DialogoResumenCuponesComponent } from './components/dialogo-resumen-cupones/dialogo-resumen-cupones.component';
 
 
 @NgModule({
-  declarations: [UsuarioComponent, CardUserComponent, DialogFirmaComponent, CanjearComponent],
+  declarations: [UsuarioComponent, CardUserComponent, DialogFirmaComponent, CanjearComponent, ListCampaingComponent, DialogoResumenCuponesComponent],
   imports: [
     CommonModule,
     UsuarioRoutingModule,

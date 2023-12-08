@@ -1,0 +1,64 @@
+<div class="relative">
+  <div
+    class="font-mono sticky top-0 z-10 border-y border-b-gray-200 uppercase border-t-gray-100 bg-red-700 rounded-lg shadow px-3 py-1.5 text-sm font-semibold leading-6 text-red-50">
+    <h3>Cupon seleccionado</h3>
+  </div>
+  <div class="space-y-4 divide-y-2" *ngIf="paquetes | async as paquetes">
+    <label class="relative  bg-zing-50 px-6 py-2  focus:outline-none sm:flex sm:justify-between"
+      *ngFor="let paquete of paquetes">
+      <input type="radio" name="server-size" value="Hobby" class="sr-only" aria-labelledby="server-size-0-label"
+        aria-describedby="server-size-0-description-0 server-size-0-description-1">
+      <span class="flex items-center">
+        <span class="flex flex-col text-sm">
+          <span id="server-size-0-label" class="font-medium text-gray-900">{{paquete.name}}</span>
+          <span id="server-size-0-description-0" class="text-gray-500">
+            <span class=" sm:inline">{{paquete.description}}</span>
+          </span>
+        </span>
+      </span>
+      <span id="server-size-0-description-1"
+        class="mt-2 flex items-center gap-x-2 text-sm sm:ml-4 sm:mt-0  sm:text-right">
+        <span class="font-medium text-gray-900">{{paquete.pts}} <span
+            class="ml-2 text-gray-500 sm:ml-0">Gigas</span></span>
+        <span class="ml-2 text-gray-500 sm:ml-0">/ {{paquete.percentage}} %</span>
+        <p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text"
+          (onClick)="delPaquete(paquete)"></p-button>
+      </span>
+    </label>
+
+  </div>
+  <section class=" items-center px-5 py-8 ">
+    <div class="w-full text-red-700 border rounded-lg shadow-xl">
+
+      <div class="flex items-center font-mono justify-between px-6 py-4 mx-auto">
+        <div class="flex">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mr-4 icon icon-tabler icon-tabler-alert-triangle" width="28"
+            height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <circle cx="12" cy="12" r="9"></circle>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            <polyline points="11 12 12 12 12 16 13 16"></polyline>
+          </svg>
+          <p class="text-sm lg:text-2xl font-semibold tracking-wide uppercase">
+            TOTAL</p>
+        </div>
+        <div>
+          <dd class="text-2xl font-mono font-medium " *ngIf="totalAmount | async as acumulado else CERO">
+            {{acumulado }}  <span class="text-xs ">Gigas</span></dd>
+          <ng-template #CERO>
+            <dd class="text-base font-medium text-gray-900">
+              {{0 }} Gigas</dd>
+          </ng-template>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <div class="my-2 flex justify-center">
+    <button  mat-raised-button color="warn" type="submit"  (click)="canjearCupon()"
+    [disabled]="misCupones == 0" 
+    class="w-full inline-flex items-center justify-center rounded-full border font-mono font-semibold border-transparent text-3xl bg-red-700 px-4 py-4 text-white shadow-sm hover:bg-red-600 uppercase">
+    <mat-icon class="mx-2">check_small</mat-icon> Canjear </button>
+  </div>
+</div>

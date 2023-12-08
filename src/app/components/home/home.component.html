@@ -1,6 +1,6 @@
 <div class=" w-full h-screen">
     <mat-sidenav-container class="sidenav-container ">
-        <mat-sidenav #drawer class="sidenav" fixedInViewport
+        <mat-sidenav #drawer class="sidenav fixed" fixedInViewport
             [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
             [opened]="(isHandset$ | async) === false">
             <mat-toolbar class="">
@@ -22,8 +22,8 @@
                 <app-menu></app-menu>
             </mat-nav-list>
         </mat-sidenav>
-        <mat-sidenav-content>
-            <mat-toolbar class=" flex justify-between shadow-md  ">
+        <mat-sidenav-content class="relative">
+            <mat-toolbar class="sticky flex items-end justify-between shadow-md z-10 ">
                 <button mat-icon-button (click)="drawer.toggle()"><span class="icon-menu text-red-500"></span></button>
                 <span class="font-bold text-gray-600">{{user.name}}, {{user.last_name}} </span>
 

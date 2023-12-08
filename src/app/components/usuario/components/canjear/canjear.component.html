@@ -1,1 +1,82 @@
-<p>canjear works!</p>
+<div class="container mx-auto bg-gray-400 h-96 rounded-md flex items-center">
+    <div class="mx-auto ">
+        <div class="relative flex bg-white md:p-2 p-6 rounded-lg border border-gray-200 mb-4 lg:mb-0 shadow-md">
+            <div class="flex justify-center items-center  font-mono">
+                <div *ngIf="contrato |async  as contrato">
+                    <p>Puntos</p>
+                    <h1 class="text-6xl font-bold text-gray-600 font-mono">{{contrato.pts}} <span
+                            class="text-sm">Gigas</span> </h1>
+                </div>
+
+                <img src="../../../../../assets/img/estrella_g.png" alt="puntos" class="h-24 md:h-20 w-38 ">
+            </div>
+            <div class="fixed right-14 xl:top-[10%] p-2 top-20" *ngIf="shopping$  |async as shopping;">
+                <button class="p-2 rounded-full bg-red-600 text-white font-mono font-semibold mx-2 -mb-4" (click)="showDialog()"
+                    matBadge="{{shopping}}">
+                    <svg class="h-10 w-10" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                        </path>
+                    </svg></button>
+                <ng-template #CERO>
+
+                </ng-template>
+            </div>
+            <p-dialog header="RESUMEN" [(visible)]="visible" position="bottom" [breakpoints]="{ '960px': '75vw' }"
+                [style]="{ width: '30vw' }" [draggable]="true" [resizable]="true" class="rounded-3xl">
+                <app-dialogo-resumen-cupones></app-dialogo-resumen-cupones>
+            </p-dialog>
+        </div>
+
+    </div>
+</div>
+<div class="py-16 container mx-auto px-6 md:px-2">
+    <ng-template #SinResultado>
+        <div class="w-1/3">
+            <div class="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
+                <div class="h-48 bg-gray-300"></div>
+                <div class="px-6 py-4">
+                    <div class="h-6 bg-gray-300 mb-2"></div>
+                    <div class="h-4 bg-gray-300 w-2/3"></div>
+                </div>
+                <div class="px-6 pt-4 pb-2">
+                    <div class="h-4 bg-gray-300 w-1/4 mb-2"></div>
+                    <div class="h-4 bg-gray-300 w-1/2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="w-1/3">
+            <div class="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
+                <div class="h-48 bg-gray-300"></div>
+                <div class="px-6 py-4">
+                    <div class="h-6 bg-gray-300 mb-2"></div>
+                    <div class="h-4 bg-gray-300 w-2/3"></div>
+                </div>
+                <div class="px-6 pt-4 pb-2">
+                    <div class="h-4 bg-gray-300 w-1/4 mb-2"></div>
+                    <div class="h-4 bg-gray-300 w-1/2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="w-1/3">
+            <div class="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
+                <div class="h-48 bg-gray-300"></div>
+                <div class="px-6 py-4">
+                    <div class="h-6 bg-gray-300 mb-2"></div>
+                    <div class="h-4 bg-gray-300 w-2/3"></div>
+                </div>
+                <div class="px-6 pt-4 pb-2">
+                    <div class="h-4 bg-gray-300 w-1/4 mb-2"></div>
+                    <div class="h-4 bg-gray-300 w-1/2"></div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <section>
+        <h1 class="text-3xl font-bold text-gray-600 mb-10">Canjea tus puntos por cupones </h1>
+        <div class="grid xl:grid-cols-3 gap-4 grid-cols-1" *ngIf="campaing | async as campaing">
+            <app-list-campaing *ngFor="let item of campaing" [campaing]="item"></app-list-campaing>
+        </div>
+    </section>
+</div>
