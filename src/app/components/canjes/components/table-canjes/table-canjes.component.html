@@ -1,0 +1,39 @@
+<div class="grid grid-cols-1 mx-4 px-4 gap-4 lg:grid-cols-4 my-6">
+    <div *ngFor="let canje of results"
+        [ngClass]="canje.uses>0 ? 'border-red-700   text-red-700':' border-gray-400   text-gray-400'"
+        class="max-w-sm border-collapse border-2 text-center  rounded-lg shadow-md relative transform hover:scale-105 transition duration-500 p-1">
+        <!-- <p class="absolute top-0 left-0 bg-green-700 text-white font-semibold py-1 px-3 rounded-tl-lg rounded-br-lg">{{'Disponible'}}</p> -->
+        <div [ngClass]="canje.uses>0 ? 'border-red-700   text-red-700':' border-gray-700   text-gray-700'"
+            class="max-w-sm border-dashed border-2 text-center py-5 px-10  rounded-lg shadow-md relative ">
+            <!-- <p class="absolute top-0 left-0 bg-green-700 text-white font-semibold py-1 px-3 rounded-tl-lg rounded-br-lg">{{'Disponible'}}</p> -->
+            <h3 class="text-base font-semibold mb-4 mt-4">{{canje.percentage | number:'1.0-0'}}% de Descuento Servicio de {{canje.service_name ? canje.service_name : 'Tu Eleccion'}}
+            </h3>
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <span id="cpnCode"
+                    class="border-dashed border-gray-500  border text-black px-4 py-2 rounded-l font-mono text-2xl">{{canje.code}}</span>
+                <!-- <span id="cpnBtn" class="border border-white bg-white text-purple-600 px-4 py-2 rounded-r cursor-pointer">Copy Code</span> -->
+            </div>
+            <p class="text-sm">{{canje.expires_at | date:'MMM d, y, h:mm a'}}</p>
+
+            <div [ngClass]="canje.uses>0 ? 'border-red-700':' border-gray-700'"
+                class="w-10 h-10 bg-slate-50 rounded-full z-10 absolute top-1/2 transform -translate-y-1/2 left-0 -ml-6 border-r-2 border-dashed">
+            </div>
+            <div [ngClass]="canje.uses>0 ? 'border-red-700':' border-gray-700'"
+                class="w-10 h-10 bg-slate-50 rounded-full z-10 absolute top-1/2 transform -translate-y-1/2 right-0 -mr-6 border-l-2 border-dashed ">
+            </div>
+            <button  class="absolute right-2 bottom-0" (click)="downloadPdf(canje)"> <mat-icon class=" text-gray-700" matTooltip="Descargar Cupon">download</mat-icon> </button>
+
+
+        </div>
+
+    </div>
+
+    </div>
+    <mat-paginator class="mt-4"
+    [pageSizeOptions]="[10]"
+    showFirstLastButtons
+    [length]="count"
+    (page)="onPageChange($event)"
+    aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>

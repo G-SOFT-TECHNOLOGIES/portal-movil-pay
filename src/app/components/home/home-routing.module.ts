@@ -18,6 +18,7 @@ const routes: Routes = [
       { path: 'servicios_tv', loadChildren: () => import('../servicios/servicios.module').then(m => m.ServiciosModule)  },
       { path: 'tickets', loadChildren: () => import('../tickets/tickets.module').then(m => m.TicketsModule)  },
       { path: 'ajustes', loadChildren: () => import('../ajustes/ajustes.module').then(m => m.AjustesModule) },
+      { path: 'canjes', loadChildren: () => import('../canjes/canjes.module').then(m => m.CanjesModule) },
       // { path: 'finanzas', loadChildren: () => import('../finanzas/finanzas.module').then(m => m.FinanzasModule) },
 
   ]
