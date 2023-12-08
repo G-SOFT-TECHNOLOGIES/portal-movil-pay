@@ -1,14 +1,14 @@
 <div class="mt-16">
     <app-encabezado title="Inicio"></app-encabezado>
 </div>
-<div class="grid grid-cols-1 xl:grid-cols-3">
+<div class="grid grid-cols-1 xl:grid-cols-3 animate__animated animate__bounceIn" >
     <div class="col-span-2">
         <ng-container *ngIf="contratos$ | async as contratos; else elseTemplate">
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
                 <div class="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2">
                     <!-- <div class=" p-8  xl:p-8  bg-zinc-100 text-center rounded-3xl  shadow-xl" *ngFor="let item of departmentsAll"> -->
                     <!-- <div class="flex items-center  "> -->
-                    <app-card-user *ngFor="let item of contratos" [contratos]="item"></app-card-user>
+                    <app-card-user class="" *ngFor="let item of contratos" [contratos]="item"></app-card-user>
                 </div>
             </div>
 
