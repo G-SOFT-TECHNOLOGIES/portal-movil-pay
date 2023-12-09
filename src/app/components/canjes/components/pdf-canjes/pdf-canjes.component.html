@@ -21,45 +21,56 @@
                     <div class="flex-auto justify-evenly">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center  my-1">
-                                <span class="mr-3 rounded-full bg-white w-8 h-8">
-                                    <img src="../../../../../assets/img/favicon.png" class="h-8 p-1">
+                                <span class="mr-3 rounded-full bg-white ">
+                                    <img src="../../../../../assets/img/g5.png" class="h-12 p-1">
                                 </span>
-                                <h2 class="font-medium">Telecomunicaciones G-Network</h2>
                             </div>
 
                         </div>
                         <div class=" border-dashed border-b-2 my-5"></div>
-                        <div class="flex items-center">
+                        <div class="flex items-end">
                             <div class="flex flex-col">
                                 <div class="flex-auto text-xs text-gray-400 my-1">
                                     <span class="mr-1 ">Servicio</span>
                                 </div>
-                                <div class="w-full flex-none text-lg text-red-800 font-bold leading-none">{{canje.service_name ? canje.service_name:'TV | INTERNET'}}</div>
+                                <div class="w-full flex-none text-lg text-red-800 font-bold leading-none">
+                                    {{canje.service_name ? canje.service_name:'TV | INTERNET'}}</div>
 
                             </div>
                             <div class="flex flex-col mx-auto">
-                                <img src="../../../../../assets/img/7.png"
-                                    class="w-20 p-1">
+                                <img src="../../../../../assets/img/7.png" class="w-20 p-1">
 
                             </div>
                             <div class="flex flex-col ">
                                 <div class="flex-auto text-xs text-gray-400 my-1">
                                     <span class="mr-1">Descuento</span>
                                 </div>
-                                <div class="w-full flex-none text-lg text-red-800 font-bold leading-none">{{canje.percentage | number:'1.0-0'}}%</div>
+                                <div class="w-full flex-none text-3xl text-red-800 font-bold leading-none">
+                                    {{canje.percentage | number:'1.0-0'}}%</div>
 
                             </div>
                         </div>
-                      
+
                         <div class=" border-dashed border-b-2 my-5 pt-5">
                             <div class="absolute rounded-full w-5 h-5 bg-red-700 -mt-2 -left-2"></div>
                             <div class="absolute rounded-full w-5 h-5 bg-red-700 -mt-2 -right-2"></div>
                         </div>
 
-                        <div class="flex flex-col py-3  justify-center text-sm ">
-                            <h6 class="flex flex-col mx-auto mb-3 text-sm font-bold">{{canje.code}}</h6>
-
+                        <div class="flex flex-col   justify-center text-sm py-3">
+                            <!-- <h6 class="flex flex-col mx-auto mb-3 text-sm font-bold">{{canje.cod e}}</h6> -->
+                            <div class="flex items-center justify-center space-x-2 mb-3 border-dashed border-gray-500  mx-auto">
+                                <span id="cpnCode"
+                                    class=" flex items-start py-auto my-auto text-black px-4 py-2 rounded-l font-mono text-4xl select-none">{{canje.code}}</span>
+                            </div>
+                            <div class="font-semibold flex justify-center text-xs">{{canje.description}}</div>
+                        </div>
+                        <div class=" border-dashed border-b-2 my-5 pt-5">
+                            <div class="absolute rounded-full w-5 h-5 bg-red-700 -mt-2 -left-2"></div>
+                            <div class="absolute rounded-full w-5 h-5 bg-red-700 -mt-2 -right-2"></div>
+                        </div>
+                        <div class="flex justify-stretch mb-4 px-5">
                             <div class="flex flex-col mx-auto text-sm">
+                               
                                 <asw-qr-code #parent [qrData]="qrdata" [width]="option.width" [height]="option.height"
                                     [outerMargin]="option.outerMargin" [type]="option.type" [allowEmptyString]="true"
                                     [logo]="option.logo" [density]="option.density"
@@ -67,18 +78,11 @@
                                     [middleShape]="option.middleShape" [cornerInnerShape]="option.cornerInnerShape"
                                     [cornerOuterShape]="option.cornerOuterShape">
                                 </asw-qr-code>
-                                
+                                <p class="flex flex-col mx-auto text-sm">Vence el {{canje.expires_at | date:'short'}}
+                                </p>
                             </div>
-                            <p class="flex flex-col mx-auto text-sm">Vence el {{canje.expires_at | date:'short'}}</p>
-                        </div>
-                        <div class=" border-dashed border-b-2 my-5 pt-5">
-                            <div class="absolute rounded-full w-5 h-5 bg-red-700 -mt-2 -left-2"></div>
-                            <div class="absolute rounded-full w-5 h-5 bg-red-700 -mt-2 -right-2"></div>
-                        </div>
-                        <div class="flex justify-stretch mb-4 px-5">
-                         
-                                <div class="font-semibold justify-stretch">{{canje.description}}</div>
-                          
+                            <!-- <div class="font-semibold justify-stretch">{{canje.description}}</div> -->
+
                         </div>
 
                     </div>

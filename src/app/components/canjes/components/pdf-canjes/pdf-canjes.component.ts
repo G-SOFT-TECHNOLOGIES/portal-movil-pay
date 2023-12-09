@@ -72,7 +72,7 @@ export class PdfCanjesComponent implements OnInit {
           author: "Cupon de Descuento",
         })
           this.dialogRef.close();
-          pdf.save(`cupon.pdf`);
+          pdf.save(`cupon-${this.canje.code}.pdf`);
           this.loading.hideLoading()
      
       },

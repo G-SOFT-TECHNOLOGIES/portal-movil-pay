@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 mx-4 px-4 gap-4 lg:grid-cols-4 my-6">
+<div class="grid grid-cols-1 mx-4 px-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 my-6">
     <div *ngFor="let canje of results"
         [ngClass]="canje.uses>0 ? 'border-red-700   text-red-700':' border-gray-400   text-gray-400'"
         class="max-w-sm border-collapse border-2 text-center  rounded-lg shadow-md relative transform hover:scale-105 transition duration-500 p-1">
@@ -10,10 +10,10 @@
             </h3>
             <div class="flex items-center justify-center space-x-2 mb-6">
                 <span id="cpnCode"
-                    class="border-dashed border-gray-500  border text-black px-4 py-2 rounded-l font-mono text-2xl">{{canje.code}}</span>
+                    class="border-dashed border-gray-500  border text-black px-4 py-2 rounded-l font-mono text-2xl select-none">{{canje.code}}</span>
                 <!-- <span id="cpnBtn" class="border border-white bg-white text-purple-600 px-4 py-2 rounded-r cursor-pointer">Copy Code</span> -->
             </div>
-            <p class="text-sm">{{canje.expires_at | date:'MMM d, y, h:mm a'}}</p>
+            <p class="text-sm">{{canje.expires_at | date:'d/MM/YYYY, h:mm a'}}</p>
 
             <div [ngClass]="canje.uses>0 ? 'border-red-700':' border-gray-700'"
                 class="w-10 h-10 bg-slate-50 rounded-full z-10 absolute top-1/2 transform -translate-y-1/2 left-0 -ml-6 border-r-2 border-dashed">
