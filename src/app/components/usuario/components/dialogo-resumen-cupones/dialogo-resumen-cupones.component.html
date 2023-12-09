@@ -1,3 +1,4 @@
+
 <div class="relative">
   <div
     class="font-mono sticky top-0 z-10 border-y border-b-gray-200 uppercase border-t-gray-100 bg-red-700 rounded-lg shadow px-3 py-1.5 text-sm font-semibold leading-6 text-red-50">
@@ -55,8 +56,8 @@
       </div>
     </div>
   </section>
-  <div class="my-2 flex justify-center">
-    <button  mat-raised-button color="warn" type="submit"  (click)="canjearCupon()"
+  <div class="my-2 flex justify-center" *ngIf="totalAmount | async as acumulado">
+    <button [disabled]="misCupones < acumulado" mat-raised-button color="warn" type="submit"  (click)="canjearCupon()"
    
     class="w-full inline-flex items-center justify-center rounded-full border font-mono font-semibold border-transparent text-3xl bg-red-700 px-4 py-4 text-white shadow-sm hover:bg-red-600 uppercase">
     <mat-icon class="mx-2">check_small</mat-icon> Canjear </button>

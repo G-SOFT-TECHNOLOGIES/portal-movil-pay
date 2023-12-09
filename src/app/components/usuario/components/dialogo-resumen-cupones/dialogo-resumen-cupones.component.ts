@@ -54,9 +54,7 @@ export class DialogoResumenCuponesComponent {
       this.loader.hideLoading()
       this.visible.emit(false)
       this.usuario2.getContrato(this.id)
-
       this.snack.openSnack("Cupon adquirido correctamente", '')
-
     }).catch((error) => {
       this.loader.hideLoading()
       this.snack.openSnack(error.messagge, '')
