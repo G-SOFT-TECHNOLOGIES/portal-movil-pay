@@ -1,3 +1,4 @@
+<div class=" h-screen" style="overflow-y: none;">
 <div class="container mx-auto bg-red-700 shadow-2xl h-96 rounded-md flex items-center">
     <div class="mx-auto flex  xl:flex-row  flex-col justify-around items-center my-2">
         <div class="w-64 flex flex-col sm:text-center my-2">
@@ -6,15 +7,17 @@
             </p>
             <p class="xl:text-3xl text-base font-bold  text-slate-950"> por cupones de descuentos en tus facturas.</p>
         </div>
-        <div class="relative flex   bg-white xl:h-36 md:p-2 p-6 rounded-lg border border-gray-200 mb-4 lg:mb-0 shadow-md">
+        <div
+            class="relative flex   bg-white xl:h-36 md:p-2 p-6 rounded-lg border border-gray-200 mb-4 lg:mb-0 shadow-md">
             <div class="flex justify-center items-center  font-mono">
                 <div *ngIf="contrato |async  as contrato" class="px-1">
                     <p>Puntos</p>
-                    <h1 class="xl:text-6xl text-3xl  font-bold text-gray-600 font-mono">{{contrato.pts}}<span class="text-sm">
+                    <h1 class="xl:text-6xl text-3xl  font-bold text-gray-600 font-mono">{{contrato.pts}}<span
+                            class="text-sm">
                             Gigas</span> </h1>
                 </div>
 
-                <img src="../../../../../assets/img/MonedaPortal2.png" alt="puntos" class="h-20 md:h-20 w-38 ">
+                <img src="../../../../../assets/img/MonedaPortal3.png" alt="puntos" class="h-20 md:h-20 w-38 ">
             </div>
             <div class="fixed right-14 xl:top-[10%] p-2 top-20" *ngIf="shopping$  |async as shopping;">
                 <button class="p-2 rounded-full bg-red-600 text-white font-mono font-semibold mx-2 -mb-4"
@@ -86,4 +89,5 @@
             <app-list-campaing *ngFor="let item of campaing" [campaing]="item"></app-list-campaing>
         </div>
     </section>
+</div>
 </div>

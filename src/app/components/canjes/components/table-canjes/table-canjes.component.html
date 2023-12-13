@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 mx-4 px-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 my-6">
+<div class="grid grid-cols-1 mx-4 px-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 my-6" style="overflow-y: none">
     <div *ngFor="let canje of results"
         [ngClass]="canje.uses>0 ? 'border-red-700   text-red-700':' border-gray-400   text-gray-400'"
         class="max-w-sm border-collapse border-2 text-center  rounded-lg shadow-md relative transform hover:scale-105 transition duration-500 p-1">

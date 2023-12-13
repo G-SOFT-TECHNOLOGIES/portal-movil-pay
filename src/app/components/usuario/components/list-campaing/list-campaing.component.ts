@@ -21,7 +21,7 @@ export class ListCampaingComponent {
   cant: any = 0
   checked: boolean = false
   selectedPaquetes: any[] = [];
-
+  imgDefault:string= '../../../../../assets/img/promo1.png'
 
 
   ngOnInit() {
