@@ -92,18 +92,23 @@
           </span>
         </div>
       </ng-container>
-      <div class="flex justify-center mt-28">
-        <a [routerLink]="[ 'canjear', contratos.id]"  class="rounded-full p-1 hover:scale-90 bg-slate-100" matTooltip="Canjear">
-          <img src="../../../../../assets/img/MonedaPortal3.png" width="70" alt="">
-        </a>
-      </div>
-      <div class="w-full text-center ">
+      
+      
+      <div class="w-full text-center mt-28 ">
+        <ng-container *ngIf="contratos.client_type == 1 && contratos.status ==16">
+          <!-- <ng-container > -->
+          <div class="flex justify-center " >
+            <a [routerLink]="[ 'canjear', contratos.id]"  class="rounded-full p-1 hover:scale-90 bg-slate-100" matTooltip="Canjear">
+              <img src="../../../../../assets/img/MonedaPortal3.png" width="70" alt="">
+            </a>
+          </div>
+        </ng-container>
         <div class="flex justify-center items-end lg:pt-4 pt-8 pb-0 divide-x-4">
           <div class="p-4 text-center">
             <span class="text-[25px] flex flex-col font-bold justify-center uppercase tracking-wide text-green-600">
               {{contratos.balance?? 0| currency:'USD'}}
-              <span class="text-xs font-bold uppercase ml-1">
-                {{calculo(contratos.balance?? 0) |currency:'Bs'}}</span></span>
+              <span class="text-sm font-bold uppercase ml-1">
+                {{calculo(contratos.balance?? 0) |currency:'Bs '}}</span></span>
             <span class="text-sm text-slate-400">Saldo a Favor</span>
           </div>
           <div class="p-3 text-center">
@@ -111,7 +116,7 @@
               class="text-[25px] flex flex-col font-bold justify-center uppercase tracking-wide text-red-600">{{contratos.debt??0|
               currency}}
               <span class="text-sm font-bold uppercase ml-1">
-                {{calculo(contratos.debt?? 0 ) |currency:'Bs'}}</span></span>
+                {{calculo(contratos.debt?? 0 ) |currency:'Bs '}}</span></span>
             <span class="text-sm text-slate-400">Deuda pendiente</span>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -21,7 +21,7 @@ export class DialogoResumenCuponesComponent {
   @Output() visible = new EventEmitter<boolean>()
   paquetes = this.usuario.campaings$
   totalAmount = this.usuario.totalAcumulado$
-  misCupones: number = this.usuario.mispuntos.value
+  @Input() misCupones:number = 0
   id: number = 0
   sub !: Subscription
 
@@ -54,7 +54,9 @@ export class DialogoResumenCuponesComponent {
       this.loader.hideLoading()
       this.visible.emit(false)
       this.usuario2.getContrato(this.id)
+      this.router.navigate(['home/canjes/'])
       this.snack.openSnack("Cupon adquirido correctamente", '')
+      this.usuario.deleteAllItems()
     }).catch((error) => {
       this.loader.hideLoading()
       this.snack.openSnack(error.messagge, '')

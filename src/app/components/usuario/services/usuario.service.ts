@@ -29,7 +29,6 @@ export class UsuarioService {
   totalAcumulado = new BehaviorSubject<number>(0)
   totalAcumulado$ = this.totalAcumulado.asObservable()
   itemsCount = new BehaviorSubject<number>(0)
-  mispuntos = new BehaviorSubject<number>(0)
   constructor() { }
 
 
@@ -104,6 +103,7 @@ export class UsuarioService {
     this.itemsCount.next(0)
     this.totalAcumulado.next(0)
   }
+
   setGenerateCuopon(body:any){
     const http = this.http.post(`${this.url}/api/gsoft/portal/invoices/coupons/adquire/`, body)
     return lastValueFrom(http)

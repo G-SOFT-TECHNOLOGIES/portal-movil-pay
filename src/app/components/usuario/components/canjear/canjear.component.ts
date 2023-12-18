@@ -6,6 +6,7 @@ import { FacturaContratoService } from 'src/app/components/finanzas/services/usu
 import { Contract, ParamsCampaing } from '../../interfaces/contractosInterfaces';
 import { UsuarioService } from '../../services/usuario.service';
 import { Campaign } from '../../interfaces/cupones.interfaces';
+import { LoadingService } from 'src/app/components/home/services/loading.service';
 
 @Component({
   selector: 'app-canjear',
@@ -16,6 +17,7 @@ export class CanjearComponent {
   private rout = inject(ActivatedRoute)
   private usuario = inject(FacturaContratoService)
   private usuario2 = inject(UsuarioService)
+  private loader = inject(LoadingService)
 
   sub !: Subscription
   id: number = 0
@@ -33,12 +35,12 @@ export class CanjearComponent {
     this.usuario2.deleteAllItems()
   }
   ngOnInit(): void {
+    this.loader.showLoading()
     this.usuario.getContrato(this.id)
     this.usuario.contrato$.subscribe((data: any) => {
+      this.loader.hideLoading()
       this.contrato.next(data)
-      this.usuario2.mispuntos.next(data.pts)
-    }
-    )
+    })
     this.getCampaign()
   }
   getCampaign() {
@@ -50,19 +52,7 @@ export class CanjearComponent {
       this.campaing.next(false)
     })
   }
-
-  checkedCoupon(e: any) {
-    if (e) {
-      console.log(e)
-      return
-    } else {
-      console.log(e)
-      return
-    }
-  }
   showDialog() {
     this.visible = true;
   }
-
-
 }

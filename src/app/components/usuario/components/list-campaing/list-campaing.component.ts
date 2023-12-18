@@ -25,20 +25,22 @@ export class ListCampaingComponent {
 
 
   ngOnInit() {
-    this.selectedPaquetes = sessionStorage.getItem('campaing') as never
+     this.usuario.campaings$.subscribe(data=>{
+      console.log(data)
+      this.selectedPaquetes = data ? data : []
+      })
     this.getShoppingCant()
   }
 
   setShopping(e: any) {
+    console.log(e)
     if (e) {
       this.usuario.setCampaings(this.campaing)
       this.getShoppingCant()
-      console.log(e,  'check ')
       return
     } else {
       this.usuario.deleteCampaings(this.campaing)
       this.getShoppingCant()
-      console.log(e, 'out')
       return
     }
   }

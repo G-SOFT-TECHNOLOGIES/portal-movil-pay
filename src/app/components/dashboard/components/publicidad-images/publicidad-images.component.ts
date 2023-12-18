@@ -13,8 +13,8 @@ export class PublicidadImagesComponent {
   contador = new BehaviorSubject<any>(this.image1)
   count: number = 0
   imagenes = [
-    { img: this.image2 },
     { img: this.image3 },
+    { img: this.image2 },
     { img: this.image1 }
   ]
   intervalo: any;

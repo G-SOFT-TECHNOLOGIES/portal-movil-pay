@@ -23,7 +23,6 @@ export class TableCanjesComponent {
 
   getCanjes(){
     this.canjes.getCanjes(this.setProperty()).then(resp=>{
-      console.log(resp);
       this.count=resp.count
       this.results=resp.results
     })
