@@ -19,6 +19,7 @@ export class DialogRegistrarZelleComponent {
 
   myForm = this.form.group({
     name:['',Validators.required],
+    titular:['',Validators.required],
     email:['',[Validators.required,Validators.email]],
   })
   constructor(
@@ -30,7 +31,8 @@ export class DialogRegistrarZelleComponent {
   onSubmit(){
     const valor = this.myForm.value
     const body = { 
-      "phone": valor.email,
+      "sender": valor.titular,
+      "email": valor.email,
       "name": valor.name,
       "method": 3,
       "client": this.user.id,
@@ -39,8 +41,12 @@ export class DialogRegistrarZelleComponent {
     .then((result) => {
       this.snack.openSnack('Zelle registrado con exito','success')
       this.dialogRef.close(true)
-    }).catch((err) => {
-      console.log(err);
+    }).catch((error) => {
+      if (error== "Bad Request") {
+        this.snack.openSnack("Ya existe un registro con este enviante: "+valor.titular, 'error')
+        return
+      }
+      this.snack.openSnack(error, 'error')
     });
   }
 }

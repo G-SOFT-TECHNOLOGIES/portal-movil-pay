@@ -73,7 +73,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Fecha Del Pago</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="date" />
+          <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date" />
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
@@ -106,6 +106,19 @@
                   <mat-error *ngIf="registro.hasError('required')">
                     Email is <strong>required</strong>
                   </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div>
+              <label>Titular del Zelle</label>
+              <div>
+                <mat-form-field class="w-full">
+                  <input type="text" matInput  formControlName="titular">
+                  <mat-icon matPrefix>person</mat-icon>
+                  <mat-error *ngIf="myForm.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                  <mat-hint class="text-xs">Colocar el mismo nombre que aparece en su cuenta de Zelle </mat-hint>
                 </mat-form-field>
               </div>
             </div>
@@ -143,9 +156,9 @@
             <mat-icon>account_balance</mat-icon>
           </div>
           <div class="flex flex-col flex-wrap font-medium ">
-            <span class="  "> {{item.method}} </span>
+            <span class="  "> {{item.method_name}} </span>
             <span class=" ">{{item.name}} </span>
-            <span class=" ">{{item.phone ?? ''}} </span>
+            <span class=" ">{{item.sender ?? ''}} </span>
             <span class="font-extralight text-clip">{{item.email ?? ''}}</span>
           </div>
         </div>

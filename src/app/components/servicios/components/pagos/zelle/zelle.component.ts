@@ -48,7 +48,7 @@ export class ZelleComponent {
   ngOnInit(): void {
     this.info.getMethod()
     this.info.datosTablas$.subscribe(data => {
-      this.cuentas = data.filter((zelle) => zelle.method === "ZELLE").map(data => data)
+      this.cuentas = data.filter((zelle) => zelle.method === 3).map(data => data)
     })
   }
   onSubmit() {

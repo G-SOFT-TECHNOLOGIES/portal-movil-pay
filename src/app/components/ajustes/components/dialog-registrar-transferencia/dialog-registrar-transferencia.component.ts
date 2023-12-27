@@ -19,7 +19,7 @@ export class DialogRegistrarTransferenciaComponent {
   user = this.core.getUser()
   myForm = this.form.group({
     name:['',Validators.required],
-    nro_cuenta:['',[Validators.required,Validators.maxLength(4),Validators.minLength(4), Validators.pattern('[0-9]*')]],
+    nro_cuenta:['',[Validators.required,Validators.maxLength(6 ),Validators.minLength(6), Validators.pattern('[0-9]*')]],
   })
   constructor( 
     public dialogRef: MatDialogRef<DialogRegistrarTransferenciaComponent>,
@@ -30,17 +30,22 @@ export class DialogRegistrarTransferenciaComponent {
   onSubmit(){
     const valor = this.myForm.value
     const body = { 
-      "phone": valor.nro_cuenta,
+      "sender": valor.nro_cuenta,
       "name": valor.name,
       "method": 4,
+      "email": null,
       "client": this.user.id,
     }
     this.info.postMethod(body)
     .then((result) => {
       this.snack.openSnack('Transferencia registrada con exito','success')
       this.dialogRef.close(true)
-    }).catch((err) => {
-      console.log(err);
+    }).catch((error) => {
+      if (error== "Bad Request") {
+        this.snack.openSnack("Ya existe un registro con este enviante: "+valor.nro_cuenta, 'error')
+        return
+      }
+      this.snack.openSnack(error, 'error')
     });
   }
 }

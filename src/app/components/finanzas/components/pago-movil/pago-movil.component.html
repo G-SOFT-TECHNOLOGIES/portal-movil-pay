@@ -1,5 +1,5 @@
 <div class="relative">
-  <div class="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg  lg:overflow-visible">
+  <div class="grid  w-full place-items-center  rounded-lg ">
     <div role="alert" class="relative block w-full text-base font-regular px-4 py-2 rounded-lg bg-red-500 text-white">
       <div class="">
         <p class="font-bold text-gray-800">
@@ -7,8 +7,8 @@
           <span class="text-white">
             {{fechaActual |date:'d/MM/YYYY'}}
           </span>
-          la tasa  <span class="text-white">
-           Bs {{montoDollar$ |number:'1.2-2'}}
+          la tasa <span class="text-white">
+            Bs {{montoDollar$ |number:'1.2-2'}}
           </span>
         </p>
       </div>
@@ -39,7 +39,7 @@
         </div>
         <div class="flex justify-between  py-2 text-gray-600">
           <span>Total Descuento</span>
-          <span class="font-semibold text-gray-700">Bs.  {{convertirBolivares(descuento) |number:'1.2-2'}}</span>
+          <span class="font-semibold text-gray-700">Bs. {{convertirBolivares(descuento) |number:'1.2-2'}}</span>
         </div>
         <div class="flex justify-between  border-b py-2 text-gray-600">
           <span>Saldo a Favor</span>
@@ -90,7 +90,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Fecha Del Pago</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="date" />
+          <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date" />
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
@@ -166,21 +166,21 @@
     </ng-container>
 
   </div>
-</div>
-<ng-container mat-dialog-actions *ngIf="listaCuentas  && registradas.value">
-  <div class="grid grid-cols-1 my-2">
-    <div class="flex drop-shadow-md bg-gray-100 rounded-xl items-center my-2 p-4 gap-x-8" *ngFor="let item of cuentas"
-      (click)="showAccountBalance(item)">
-      <div class="flex-shrink-0  items-center ">
-        <mat-icon>account_balance</mat-icon>
-      </div>
-      <div class="flex flex-col flex-wrap font-medium ">
-        <span class="  "> {{item.method}} </span>
-        <span class=" ">{{item.name}} </span>
-        <span class=" ">{{item.phone ?? ''}} </span>
-        <span class="font-extralight text-clip">{{item.email ?? ''}}</span>
+  <ng-container mat-dialog-actions *ngIf="listaCuentas  && registradas.value">
+    <div class="grid grid-cols-1 my-2">
+      <div class="flex drop-shadow-md bg-gray-100 rounded-xl items-center my-2 p-4 gap-x-8" *ngFor="let item of cuentas"
+        (click)="showAccountBalance(item)">
+        <div class="flex-shrink-0  items-center ">
+          <mat-icon>account_balance</mat-icon>
+        </div>
+        <div class="flex flex-col flex-wrap font-medium ">
+          <span class="  "> {{item.method_name}} </span>
+          <span class=" ">{{item.name}} </span>
+          <span class=" ">{{item.sender ?? ''}} </span>
+          <span class="font-extralight text-clip">{{item.email ?? ''}}</span>
+        </div>
       </div>
     </div>
-  </div>
 
-</ng-container>
+  </ng-container>
+</div>

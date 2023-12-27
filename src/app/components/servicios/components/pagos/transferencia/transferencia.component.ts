@@ -65,7 +65,7 @@ export class TransferenciaComponent {
     });
     this.info.getMethod()
     this.info.datosTablas$.subscribe(data => {
-      this.cuentas = data.filter((pm) => pm.method === "TRANSFERENCIA").map(data => data)
+      this.cuentas = data.filter((pm) => pm.method === 4).map(data => data)
     })
   }
 

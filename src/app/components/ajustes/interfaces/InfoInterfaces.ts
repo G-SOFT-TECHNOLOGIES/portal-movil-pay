@@ -7,13 +7,14 @@ export interface ResultInfo {
   
   export interface Informacion {
     id: number
-    phone?: string
+    sender: string
     name: string
-    email?: string
-    method: string
+    email: any
+    method: number
+    method_name: string
     client: number
     created_at: string
-    created_by: any
-    created_by_name: any
+    created_by: number
+    created_by_name: string
   }
   

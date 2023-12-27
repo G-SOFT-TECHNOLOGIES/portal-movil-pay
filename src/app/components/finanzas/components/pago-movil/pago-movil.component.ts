@@ -51,6 +51,8 @@ export class PagoMovilComponent {
   user = this.core.getUser()
   saldoFavor = this.usuario.saldoFavor
   descuento=0
+  maxDate = new Date()
+
   constructor(private dialogRef: MatDialogRef<DialogPagarComponent>) { }
 
   ngOnInit(): void {
@@ -60,7 +62,7 @@ export class PagoMovilComponent {
     this.info.getMethod()
     this.descuento=Number(this.factura.monto)-Number(this.factura.montoDescuento)
     this.info.datosTablas$.subscribe(data => {
-      this.cuentas = data.filter((pm) => pm.method === "PAGO MOVIL").map(data => data)
+      this.cuentas = data.filter((pm) => pm.method === 1).map(data => data)
     })
   }
 
@@ -153,14 +155,15 @@ export class PagoMovilComponent {
   showAccountBalance(item: any) {
     this.listaCuentas = false
     this.myForm.patchValue({
-      sender: item.phone
+      sender: item.sender
     })
   }
   aggPm() {
     const valor = this.registro.value
     const body = {
-      "phone": valor.phone,
+      "sender": valor.phone,
       "name": valor.name,
+      "email":null,
       "method": 1,
       "client": this.user.id,
     }
@@ -168,8 +171,13 @@ export class PagoMovilComponent {
       .then((result) => {
         this.snack.openSnack('Pago Movil registrado con exito', 'success')
         this.dialogRef.close(true)
-      }).catch((err) => {
-        this.snack.openSnack(err, 'error')
+      }).catch((error) => {
+        if (error== "Bad Request") {
+          this.snack.openSnack("Ya existe un registro con este enviante: "+valor.phone, 'error')
+          return
+        }
+        this.snack.openSnack(error, 'error')
+        return
       });
   }
 }

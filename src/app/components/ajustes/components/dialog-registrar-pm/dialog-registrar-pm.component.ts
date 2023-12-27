@@ -19,30 +19,37 @@ export class DialogRegistrarPmComponent {
 
   user = this.core.getUser()
   myForm = this.form.group({
-    name:['',Validators.required],
-    phone:['',Validators.required, Validators.maxLength(11),Validators.minLength(11), Validators.pattern('[0-9]*')],
+    name: ['', Validators.required],
+    phone: ['', Validators.required, Validators.maxLength(11), Validators.minLength(11), Validators.pattern('[0-9]*')],
   })
 
   constructor(
     public dialogRef: MatDialogRef<DialogRegistrarPmComponent>,
-  ) {}
+  ) { }
 
-  
-  
-  onSubmit(){
+
+
+  onSubmit() {
     const valor = this.myForm.value
-    const body = { 
-      "phone": valor.phone,
+    const body = {
+      "sender": valor.phone,
       "name": valor.name,
+      "email": null,
       "method": 1,
       "client": this.user.id,
     }
     this.info.postMethod(body)
-    .then((result) => {
-      this.snack.openSnack('Pago Movil registrado con exito','success')
-      this.dialogRef.close(true)
-    }).catch((err) => {
-      this.snack.openSnack(err,'error')
-    });
+      .then((data) => {
+        console.log(data)
+        this.snack.openSnack('Pago Movil registrado con exito', 'success')
+        this.dialogRef.close(true)
+      }).catch(error => {
+        if (error== "Bad Request") {
+          this.snack.openSnack("Ya existe un registro con este enviante: "+valor.phone, 'error')
+          return
+        }
+        this.snack.openSnack(error, 'error')
+        return
+      });
   }
 }

@@ -58,7 +58,7 @@ export class PagoMovilComponent {
     });
     this.info.getMethod()
     this.info.datosTablas$.subscribe(data => {
-      this.cuentas = data.filter((pm) => pm.method === "PAGO MOVIL").map(data => data)
+      this.cuentas = data.filter((pm) => pm.method === 1).map(data => data)
     })
   }
 

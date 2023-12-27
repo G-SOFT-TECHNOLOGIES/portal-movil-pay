@@ -1,19 +1,20 @@
 <div class="relative">
     <div class="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg  lg:overflow-visible">
-        <div role="alert" class="relative block w-full text-base font-regular px-4 py-2 rounded-lg bg-red-500 text-white">
-          <div class="">
-            <p class="font-bold text-gray-800">
-              Tipo de cambio del día
-              <span class="text-white">
-                {{fechaActual |date:'d/MM/YYYY'}}
-              </span>
-              la tasa  <span class="text-white">
-               Bs {{montoDollar$ |number:'1.2-2'}}
-              </span>
-            </p>
-          </div>
+        <div role="alert"
+            class="relative block w-full text-base font-regular px-4 py-2 rounded-lg bg-red-500 text-white">
+            <div class="">
+                <p class="font-bold text-gray-800">
+                    Tipo de cambio del día
+                    <span class="text-white">
+                        {{fechaActual |date:'d/MM/YYYY'}}
+                    </span>
+                    la tasa <span class="text-white">
+                        Bs {{montoDollar$ |number:'1.2-2'}}
+                    </span>
+                </p>
+            </div>
         </div>
-      </div>
+    </div>
     <div class="mt-4 mb-6">
         <!-- Monto de factura -->
         <!-- <div class="rounded-md bg-blue-50 p-4">
@@ -28,26 +29,28 @@
               </div>
             </div>
           </div> -->
-          <div class="  bg-zinc-100 rounded-md my-2">
+        <div class="  bg-zinc-100 rounded-md my-2">
             <div class="px-8">
-              <div class="flex justify-between  py-2 text-gray-600">
-                  <span>Total de la Factura</span>
-                  <span class="font-semibold text-gray-700">Bs. {{convertidor() |number:'1.2-2'}}</span>
-              </div>
-              <div class="flex justify-between  py-2 text-gray-600">
-                <span>Total Descuento</span>
-                <span class="font-semibold text-gray-700">Bs.  {{convertirBolivares(descuento) |number:'1.2-2'}}</span>
-              </div>
-              <div class="flex justify-between  border-b py-2 text-gray-600">
-                  <span>Saldo a Favor</span>
-                  <span class="font-semibold text-green-700">Bs.  {{convertirBolivares(saldoFavor) |number:'1.2-2'}}</span>
-              </div>
-          </div>
-          <div class="font-semibold text-xl px-8 flex justify-between py-4 text-gray-600  ">
-              <span>Total a pagar</span>
-              <span>Bs.{{calcular()|number:'1.2-2'}}</span>
-          </div>
-          </div>
+                <div class="flex justify-between  py-2 text-gray-600">
+                    <span>Total de la Factura</span>
+                    <span class="font-semibold text-gray-700">Bs. {{convertidor() |number:'1.2-2'}}</span>
+                </div>
+                <div class="flex justify-between  py-2 text-gray-600">
+                    <span>Total Descuento</span>
+                    <span class="font-semibold text-gray-700">Bs. {{convertirBolivares(descuento)
+                        |number:'1.2-2'}}</span>
+                </div>
+                <div class="flex justify-between  border-b py-2 text-gray-600">
+                    <span>Saldo a Favor</span>
+                    <span class="font-semibold text-green-700">Bs. {{convertirBolivares(saldoFavor)
+                        |number:'1.2-2'}}</span>
+                </div>
+            </div>
+            <div class="font-semibold text-xl px-8 flex justify-between py-4 text-gray-600  ">
+                <span>Total a pagar</span>
+                <span>Bs.{{calcular()|number:'1.2-2'}}</span>
+            </div>
+        </div>
 
 
         <!-- <h3 class="text-gray-800 text-center font-light ">Monto a Pagar</h3> -->
@@ -69,13 +72,13 @@
         </div>
     </div>
     <div class="mt-8">
-        <ng-container *ngIf="!listaCuentas"> 
+        <ng-container *ngIf="!listaCuentas">
             <form class="space-y-3" [formGroup]="myForm" (submit)="onSubmit()">
                 <mat-form-field appearance="fill">
                     <mat-label>Nro de Cuenta</mat-label>
-                    <input matInput formControlName="sender" type="text" maxlength="4" pattern="[0-9]*" />
+                    <input matInput formControlName="sender" type="text" maxlength="6" pattern="[0-9]*" />
                     <mat-icon matPrefix>tag</mat-icon>
-                    <mat-hint class="text-xs">Ultimo 4 digitos de su cuenta</mat-hint>
+                    <mat-hint class="text-xs">Ultimo 6 digitos de su cuenta</mat-hint>
                     <mat-error *ngIf="myForm.controls['sender'].hasError('pattern')" class="text-xs ">
                         Solo caracteres númericos
                     </mat-error>
@@ -92,7 +95,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill">
                     <mat-label>Fecha Del Pago</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="date" />
+                    <input matInput [matDatepicker]="picker"  [max]="maxDate" formControlName="date" />
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -142,8 +145,8 @@
                             <label>Número de Cuenta</label>
                             <div>
                                 <mat-form-field class="w-full">
-                                    <input type="text" matInput #nro_cuenta formControlName="nro_cuenta" maxlength="4"
-                                        minlength="4" pattern="[0-9]*">
+                                    <input type="text" matInput #nro_cuenta formControlName="nro_cuenta" maxlength="6"
+                                        minlength="6" pattern="[0-9]*">
                                     <mat-icon matPrefix>tag</mat-icon>
                                     <mat-error *ngIf="registro.controls['nro_cuenta'].hasError('pattern')"
                                         class="text-xs ">
@@ -153,9 +156,9 @@
                                         class="text-xs">
                                         El número de cuenta es <strong>obligatorio</strong>
                                     </mat-error>
-                                    <mat-hint class="text-xs">Ultimo 4 digitos de su cuenta</mat-hint>
+                                    <mat-hint class="text-xs">Ultimo 6 digitos de su cuenta</mat-hint>
                                     <mat-hint align="end" class="text-xs">{{nro_cuenta.value.length}} /
-                                        4</mat-hint>
+                                        6</mat-hint>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -177,9 +180,9 @@
                         <mat-icon>account_balance</mat-icon>
                     </div>
                     <div class="flex flex-col flex-wrap font-medium ">
-                        <span class="  "> {{item.method}} </span>
+                        <span class="  "> {{item.method_name}} </span>
                         <span class=" ">{{item.name}} </span>
-                        <span class=" ">{{item.phone ?? ''}} </span>
+                        <span class=" ">{{item.sender ?? ''}} </span>
                         <span class="font-extralight text-clip">{{item.email ?? ''}}</span>
                     </div>
                 </div>

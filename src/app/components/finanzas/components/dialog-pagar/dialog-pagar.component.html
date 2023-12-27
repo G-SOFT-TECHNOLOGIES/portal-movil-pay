@@ -6,8 +6,8 @@
     </svg>
     <span class="sr-only">Close</span>
   </a></h1>
-<div mat-dialog-content>
-  <div class="grid grid-cols-1 lg:grid-cols-1 gap-4">
+<div mat-dialog-content class=" ">
+  <div class="grid grid-cols-1  gap-4 ">
     <div class="rounded-md bg-yellow-50 p-4">
       <div class="flex">
         <div class="flex-shrink-0">
@@ -49,17 +49,18 @@
 
     </mat-form-field>
     </div>
+    <div class="scroll-smooth">
+      <ng-container *ngIf="selectedOption == '1'">
+        <app-pago-movil [factura]="data"></app-pago-movil>
+      </ng-container>
+      <ng-container *ngIf="selectedOption == '2'">
+        <app-zelle [factura]="data"></app-zelle>
+      </ng-container>
+      <ng-container *ngIf="selectedOption == '3'">
+        <app-transferencia [factura]="data"></app-transferencia>
+      </ng-container>
+    </div>
   </div>
-  <div class="relative">
-    <ng-container *ngIf="selectedOption == '1'">
-      <app-pago-movil [factura]="data"></app-pago-movil>
-    </ng-container>
-    <ng-container *ngIf="selectedOption == '2'">
-      <app-zelle [factura]="data"></app-zelle>
-    </ng-container>
-    <ng-container *ngIf="selectedOption == '3'">
-      <app-transferencia [factura]="data"></app-transferencia>
-    </ng-container>
-  </div>
+ 
  
 </div>

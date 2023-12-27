@@ -26,7 +26,7 @@
                 <label>Número de Cuenta</label>
                 <div>
                     <mat-form-field class="w-full">
-                        <input type="text" matInput #nro_cuenta formControlName="nro_cuenta" maxlength="4" minlength="4"
+                        <input type="text" matInput #nro_cuenta formControlName="nro_cuenta" maxlength="6" minlength="6"
                             pattern="[0-9]*">
                         <mat-icon matPrefix>tag</mat-icon>
                         <mat-error *ngIf="myForm.controls['nro_cuenta'].hasError('pattern')" class="text-xs ">
@@ -35,9 +35,9 @@
                         <mat-error *ngIf="myForm.controls['nro_cuenta'].hasError('required')" class="text-xs">
                             El número de cuenta es <strong>obligatorio</strong>
                         </mat-error>
-                        <mat-hint align="start" class="text-xs">Ultimos 4 digitos</mat-hint>
+                        <mat-hint align="start" class="text-xs">Ultimos 6 digitos</mat-hint>
                         <mat-hint align="end" class="text-xs">{{nro_cuenta.value.length}} /
-                            4</mat-hint>
+                            6</mat-hint>
                     </mat-form-field>
                     <div class="flex justify-between">
                        

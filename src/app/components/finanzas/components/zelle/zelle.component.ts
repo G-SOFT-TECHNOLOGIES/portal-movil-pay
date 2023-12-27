@@ -17,7 +17,7 @@ export class ZelleComponent {
   @HostListener("window:scroll", ['$event'])
 
 
-  @Input() factura: { monto: string; id: number; contract: number;montoDescuento: string; } = {
+  @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
     monto: '0',
     montoDescuento: '0',
     id: 0,
@@ -38,6 +38,7 @@ export class ZelleComponent {
   });
   registro = new FormGroup({
     name: new FormControl('', Validators.required),
+    titular: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
   })
   registradas = new FormControl()
@@ -47,13 +48,14 @@ export class ZelleComponent {
   sinAfiliar: boolean = false
   user = this.core.getUser()
   saldoFavor = this.usuario.saldoFavor
-  descuento=0
+  descuento = 0
+  maxDate = new Date()
 
   ngOnInit(): void {
     this.info.getMethod()
-    this.descuento=Number(this.factura.monto)-Number(this.factura.montoDescuento)
+    this.descuento = Number(this.factura.monto) - Number(this.factura.montoDescuento)
     this.info.datosTablas$.subscribe(data => {
-      this.cuentas = data.filter((zelle) => zelle.method === "ZELLE").map(data => data)
+      this.cuentas = data.filter((zelle) => zelle.method === 3).map(data => data)
     })
   }
   onSubmit() {
@@ -69,8 +71,8 @@ export class ZelleComponent {
       date: this.core.formatearFecha(valor.date ?? ''),
     };
     this.registro.patchValue({
-      name: valor.sender
-    })    
+      titular: valor.sender
+    })
     this.usuario
       .validarPago(payment)
       .then((result) => {
@@ -124,18 +126,19 @@ export class ZelleComponent {
   showAccountBalance(item: any) {
     this.listaCuentas = false
     this.myForm.patchValue({
-      sender: item.name
+      sender: item.sender
     })
   }
-  get calcular(){
+  get calcular() {
     const f = Number(this.factura.montoDescuento) - this.usuario.saldoFavor;
-    const s = Math.max(f,0)
+    const s = Math.max(f, 0)
     return s
   }
   aggZelle() {
     const valor = this.registro.value
     const body = {
-      "phone": valor.email,
+      "sender": valor.titular,
+      "email": valor.email,
       "name": valor.name,
       "method": 3,
       "client": this.user.id,
@@ -144,11 +147,16 @@ export class ZelleComponent {
       .then((result) => {
         this.snack.openSnack('Zelle registrado con exito', 'success')
         this.dialogRef.close(true)
-      }).catch((err) => {
-        console.log(err);
+      }).catch((error) => {
+        if (error== "Bad Request") {
+          this.snack.openSnack("Ya existe un registro con este enviante: "+valor.titular, 'error')
+          return
+        }
+        this.snack.openSnack(error, 'error')
+        return
       });
   }
-  viewLinkAccount(event:any){
+  viewLinkAccount(event: any) {
     let scrollOffset = event.srcElement.children[0].scrollTop;
     console.log("window scroll: ", scrollOffset);
   }

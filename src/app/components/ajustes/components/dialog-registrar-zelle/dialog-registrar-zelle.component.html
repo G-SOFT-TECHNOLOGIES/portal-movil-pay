@@ -22,6 +22,19 @@
         </div>
       </div>
       <div>
+        <label>Titular del Zelle</label>
+        <div>
+          <mat-form-field class="w-full">
+            <input type="text" matInput  formControlName="titular">
+            <mat-icon matPrefix>person</mat-icon>
+            <mat-error *ngIf="myForm.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+            <mat-hint class="text-xs">Colocar el mismo nombre que aparece en su cuenta de Zelle </mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
         <label>Correo electrónico</label>
         <div>
           <mat-form-field class="w-full">

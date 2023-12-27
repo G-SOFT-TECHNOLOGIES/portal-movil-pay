@@ -19,7 +19,7 @@ export class TransferenciaComponent {
     id: 0,
     contract: 0,
   };
-  fechaActual= new Date()
+  fechaActual = new Date()
   private info = inject(InfoService);
   private usuario = inject(FacturaContratoService);
   private snack = inject(SnackbarService);
@@ -33,7 +33,7 @@ export class TransferenciaComponent {
   cuentas: any[] = []
   user = this.core.getUser()
   saldoFavor = this.usuario.saldoFavor
-  descuento=0
+  descuento = 0
 
   myForm = new FormGroup({
     bank: new FormControl('', [
@@ -47,16 +47,16 @@ export class TransferenciaComponent {
     ]),
     sender: new FormControl('', [
       Validators.required,
-      Validators.maxLength(4),
+      Validators.maxLength(6),
       Validators.pattern('[0-9]*')
     ]),
     amount: new FormControl('', Validators.required),
   });
   registro = new FormGroup({
     name: new FormControl('', Validators.required),
-    nro_cuenta: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.minLength(4), Validators.pattern('[0-9]*')]),
+    nro_cuenta: new FormControl('', [Validators.required, Validators.maxLength(6), Validators.minLength(6), Validators.pattern('[0-9]*')]),
   })
-
+  maxDate = new Date()
   constructor(private dialogRef: MatDialogRef<DialogPagarComponent>) { }
 
   ngOnInit(): void {
@@ -65,9 +65,9 @@ export class TransferenciaComponent {
       this.montoDollar$ = data;
     });
     this.info.getMethod()
-    this.descuento=Number(this.factura.monto)-Number(this.factura.montoDescuento)
+    this.descuento = Number(this.factura.monto) - Number(this.factura.montoDescuento)
     this.info.datosTablas$.subscribe(data => {
-      this.cuentas = data.filter((pm) => pm.method === "TRANSFERENCIA").map(data => data)
+      this.cuentas = data.filter((pm) => pm.method === 4).map(data => data)
     })
   }
 
@@ -142,7 +142,7 @@ export class TransferenciaComponent {
       });
   }
 
-  convertidor(){
+  convertidor() {
     const s = Number(this.factura.monto)
     const result = s * this.montoDollar$;
     const r = result.toFixed(2);
@@ -152,7 +152,7 @@ export class TransferenciaComponent {
   calcular(): number {
     // console.log(this.factura.monto, 'calcular', this.montoDollar$)
     const f = Number(this.factura.montoDescuento) - this.usuario.saldoFavor;
-    const s = Math.max(f,0)
+    const s = Math.max(f, 0)
     const result = s * this.montoDollar$;
     const r = result.toFixed(2);
     return Number(r);
@@ -166,14 +166,15 @@ export class TransferenciaComponent {
   showAccountBalance(item: any) {
     this.listaCuentas = false
     this.myForm.patchValue({
-      sender: item.phone
+      sender: item.sender
     })
   }
   aggTransferencia() {
     const valor = this.registro.value
     const body = {
-      "phone": valor.nro_cuenta,
+      "sender": valor.nro_cuenta,
       "name": valor.name,
+      "email": null,
       "method": 4,
       "client": this.user.id,
     }
@@ -181,8 +182,12 @@ export class TransferenciaComponent {
       .then((result) => {
         this.snack.openSnack('Transferencia registrada con exito', 'success')
         this.dialogRef.close(true)
-      }).catch((err) => {
-        console.log(err);
+      }).catch((error) => {
+        if (error == "Bad Request") {
+          this.snack.openSnack("Ya existe un registro con este enviante: " + valor.nro_cuenta, 'error')
+          return
+        }
+        this.snack.openSnack(error, 'error')
       });
   }
 }
