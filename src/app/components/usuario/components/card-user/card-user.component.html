@@ -95,8 +95,8 @@
       
       
       <div class="w-full text-center mt-28 ">
-        <ng-container *ngIf="contratos.client_type == 1 && contratos.status ==16">
-          <!-- <ng-container > -->
+        <!-- <ng-container *ngIf="contratos.client_type == 1 && contratos.status ==16"> -->
+          <ng-container >
           <div class="flex justify-center " >
             <a [routerLink]="[ 'canjear', contratos.id]"  class="rounded-full p-1 hover:scale-90 bg-slate-100" matTooltip="Canjear">
               <img src="../../../../../assets/img/MonedaPortal3.png" width="70" alt="">
