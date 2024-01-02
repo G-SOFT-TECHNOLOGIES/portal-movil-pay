@@ -8,7 +8,7 @@
   </a></h1>
 <div mat-dialog-content class=" ">
   <div class="grid grid-cols-1  gap-4 ">
-    <div class="rounded-md bg-green-100 p-4 text-green-700 ">
+    <div class="rounded-md bg-green-100 p-4 text-green-700 my-2">
       <div class="flex">
         <div class="flex-shrink-0">
           <svg class="h-5 w-5 text-green-800" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -22,7 +22,7 @@
           <div class="mt-2 text-sm ">
             <ul role="list" class="list-disc space-y-1 pl-5">
               <!-- <li>El sistema tomará como <strong>saldo a favor</strong> a partir de 1 USD.</li> -->
-              <li>Si el pago a cargar es mayor al monto de la factura, se tomará como <strong>saldo a favor</strong> a partir de 1 USD. </li>
+              <li>Si el monto a cargar es <strong>mayor</strong> al monto total de su factura, tomará como <strong>saldo a favor</strong> a partir de 1 USD.</li>
               <!-- <li>El sistema solo permite registrar un metodo de pago, razón por la cual solo podrá registrar el pago
                 por el monto total o mayor de su factura.
                 .</li>
@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <mat-form-field appearance="fill" class="w-full mt-8">
+    <mat-form-field appearance="fill" class="w-full my-4">
       <mat-label>Método de pago realizado</mat-label>
       <mat-select [(ngModel)]="selectedOption">
         <mat-option value="0">...</mat-option>
