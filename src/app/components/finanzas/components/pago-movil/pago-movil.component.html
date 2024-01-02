@@ -70,10 +70,30 @@
       </div>
     </div>
   </div>
-  <div class=" mt-8">
+
+  <div class=" mt-4">
 
     <ng-container *ngIf="!listaCuentas">
+      <!-- *ngIf="option | async" -->
+     
+      <div class="relative top-0 py-2" *ngIf="option | async">
+        <div class="grid  w-full place-items-center  rounded-lg z-10 my-2">
+          <div role="alert" class="relative block w-auto text-base font-regular px-4 py-2 rounded-lg bg-red-500 text-white">
+            <div class="flex-col flex   justify-center">
+              <p class="font-bold text-gray-800 text-center">
+                Desliza hacia abajo.
+              </p>
+              <span class="text-xs font-medium text-center ">Ahora podras afiliar tus cuentas frecuentes.</span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex mr-auto  items-center justify-center">
+          <img src="../../../../../assets/img/arrow_down.gif" alt="G-net"
+            class="flex-reverse object-contain mx-auto w-1/6 bg-transparent">
 
+        </div>
+      </div>
       <form class="space-y-3" [formGroup]="myForm" (submit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>Numero Emisor</mat-label>
@@ -115,6 +135,7 @@
 
         </mat-form-field>
       </form>
+
       <ng-container *ngIf="registrar_cuenta && !registradas.value">
         <div class="my-4 p-2">
           <div class="font-medium flex justify-center items-center">
@@ -166,7 +187,7 @@
     </ng-container>
 
   </div>
-  <ng-container mat-dialog-actions *ngIf="listaCuentas  && registradas.value">
+  <ng-container mat-dialog-actions *ngIf="listaCuentas  && registradas.value ">
     <div class="grid grid-cols-1 my-2">
       <div class="flex drop-shadow-md bg-gray-100 rounded-xl items-center my-2 p-4 gap-x-8" *ngFor="let item of cuentas"
         (click)="showAccountBalance(item)">
@@ -183,4 +204,5 @@
     </div>
 
   </ng-container>
+
 </div>

@@ -1,5 +1,6 @@
-<h1 mat-dialog-title class="bg-red-500"><span class="text-slate-50 text-xl font-medium">Pago de factura ({{data.id}})</span><a
-    mat-dialog-close class="absolute top-1 right-0 p-2.5 text-sm font-medium  text-white rounded-r-lg cursor-pointer ">
+<h1 mat-dialog-title class="bg-red-500"><span class="text-slate-50 text-xl font-medium">Pago de factura
+    ({{data.id}})</span><a mat-dialog-close
+    class="absolute top-1 right-0 p-2.5 text-sm font-medium  text-white rounded-r-lg cursor-pointer ">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
       stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -22,7 +23,8 @@
           <div class="mt-2 text-sm ">
             <ul role="list" class="list-disc space-y-1 pl-5">
               <!-- <li>El sistema tomará como <strong>saldo a favor</strong> a partir de 1 USD.</li> -->
-              <li>Si el monto a cargar es <strong>mayor</strong> al monto total de su factura, tomará como <strong>saldo a favor</strong> a partir de 1 USD.</li>
+              <li>Si el monto a cargar es <strong>mayor</strong> al monto total de su factura, tomará como <strong>saldo
+                  a favor</strong> a partir de 1 USD.</li>
               <!-- <li>El sistema solo permite registrar un metodo de pago, razón por la cual solo podrá registrar el pago
                 por el monto total o mayor de su factura.
                 .</li>
@@ -41,28 +43,36 @@
         <mat-option value="3">Transferencia</mat-option>
       </mat-select>
     </mat-form-field>
-    <div class="flex items-center justify-between border-t border-gray-200 pt-6" *ngIf="data.montoDescuento==data.monto && selectedOption=='0'">
-      <mat-form-field class="w-full" >
+    <div class="flex items-center justify-between border-t border-gray-200 pt-6"
+      *ngIf="data.montoDescuento==data.monto && selectedOption=='0'">
+      <mat-form-field class="w-full">
         <mat-label>Aplicar Cupon </mat-label>
         <input matInput placeholder="CUPON" [(ngModel)]="cupon" />
-        <button mat-icon-button matSuffix color="primary" matTooltip="Aplicar Cupon" (click)="validateCupon()" >
-            <mat-icon>confirmation_number</mat-icon>
+        <button mat-icon-button matSuffix color="primary" matTooltip="Aplicar Cupon" (click)="validateCupon()">
+          <mat-icon>confirmation_number</mat-icon>
         </button>
 
-    </mat-form-field>
+      </mat-form-field>
     </div>
-    <div class="scroll-smooth">
+    <div class="scroll-smooth  z-10">
       <ng-container *ngIf="selectedOption == '1'">
-        <app-pago-movil [factura]="data"></app-pago-movil>
+        <app-pago-movil [factura]="data" (option)="option =$event"></app-pago-movil>
       </ng-container>
       <ng-container *ngIf="selectedOption == '2'">
-        <app-zelle [factura]="data"></app-zelle>
+        <app-zelle [factura]="data" (option)="option =$event"></app-zelle>
       </ng-container>
       <ng-container *ngIf="selectedOption == '3'">
-        <app-transferencia [factura]="data"></app-transferencia>
+        <app-transferencia [factura]="data" (option)="option =$event"> </app-transferencia>
       </ng-container>
     </div>
   </div>
- 
- 
+  <div class="fixed bottom-0 xl:left-1/2 left-2/3  z-0" *ngIf="option">
+    <div
+      class="flex mr-auto transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
+      <img src="../../../../../assets/img/5_1.png" alt="G-net"
+        class="flex-reverse object-contain mx-auto xl:w-2/5 w-full">
+
+    </div>
+  </div>
+
 </div>

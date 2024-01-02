@@ -1,4 +1,4 @@
-import { Component, inject, Input, Inject } from '@angular/core';
+import { Component, inject, Input, Inject, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FacturaContratoService } from '../../services/usuario.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -13,6 +13,8 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
   styleUrls: ['./transferencia.component.css']
 })
 export class TransferenciaComponent {
+  @Output() option = new EventEmitter<boolean>()
+
   @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
     monto: '0',
     montoDescuento: '0',

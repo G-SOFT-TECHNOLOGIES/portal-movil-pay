@@ -1,4 +1,4 @@
-import { Component, inject, Input, Inject } from '@angular/core';
+import { Component, inject, Input, Inject, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FacturaContratoService } from '../../services/usuario.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -13,13 +13,14 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
   styleUrls: ['./pago-movil.component.css'],
 })
 export class PagoMovilComponent {
+  @Output() option = new EventEmitter<boolean>()
   @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
     monto: '0',
     montoDescuento: '0',
     id: 0,
     contract: 0,
   };
-  fechaActual= new Date()
+  fechaActual = new Date()
   private info = inject(InfoService);
   private form = inject(FormBuilder);
   private usuario = inject(FacturaContratoService);
@@ -50,7 +51,7 @@ export class PagoMovilComponent {
   })
   user = this.core.getUser()
   saldoFavor = this.usuario.saldoFavor
-  descuento=0
+  descuento = 0
   maxDate = new Date()
 
   constructor(private dialogRef: MatDialogRef<DialogPagarComponent>) { }
@@ -60,7 +61,7 @@ export class PagoMovilComponent {
       this.montoDollar$ = data;
     });
     this.info.getMethod()
-    this.descuento=Number(this.factura.monto)-Number(this.factura.montoDescuento)
+    this.descuento = Number(this.factura.monto) - Number(this.factura.montoDescuento)
     this.info.datosTablas$.subscribe(data => {
       this.cuentas = data.filter((pm) => pm.method === 1).map(data => data)
     })
@@ -69,6 +70,7 @@ export class PagoMovilComponent {
   onSubmit() {
     this.registrar_cuenta = true
     this.botonHabilitado = false
+    this.registrar_cuenta && !this.registradas.value ? this.option.emit(true) : this.option.emit(false)
     const valor = this.myForm.value;
     const calculo = this.calcular();
     const resultadoBS = this.convertirBolivares(Number(this.factura.monto))
@@ -147,7 +149,7 @@ export class PagoMovilComponent {
     const r = result.toFixed(2);
     return Number(r);
   }
- 
+
   convertirBolivares(monto: number): number {
     const resultado = monto * this.montoDollar$;
     return Number(Number(resultado));
@@ -163,7 +165,7 @@ export class PagoMovilComponent {
     const body = {
       "sender": valor.phone,
       "name": valor.name,
-      "email":null,
+      "email": null,
       "method": 1,
       "client": this.user.id,
     }
@@ -172,8 +174,8 @@ export class PagoMovilComponent {
         this.snack.openSnack('Pago Movil registrado con exito', 'success')
         this.dialogRef.close(true)
       }).catch((error) => {
-        if (error== "Bad Request") {
-          this.snack.openSnack("Ya existe un registro con este enviante: "+valor.phone, 'error')
+        if (error == "Bad Request") {
+          this.snack.openSnack("Ya existe un registro con este enviante: " + valor.phone, 'error')
           return
         }
         this.snack.openSnack(error, 'error')

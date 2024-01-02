@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, inject } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FacturaContratoService } from '../../services/usuario.service';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -15,6 +15,7 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
 export class ZelleComponent {
   @HostListener("scroll", ['$event'])
   @HostListener("window:scroll", ['$event'])
+  @Output() option = new EventEmitter<boolean>()
 
 
   @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
