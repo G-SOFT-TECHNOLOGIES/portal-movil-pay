@@ -62,12 +62,12 @@ export class ZelleComponent {
     this.registrar_cuenta = true
     this.botonHabilitado = false
     const valor = this.myForm.value;
-    if (Number(valor.amount) < Number(this.factura.monto)) {
-      return this.snack.openSnack(
-        'El monto enviado debe ser mayor o igual que el de la factura',
-        'error'
-      );
-    }
+    // if (Number(valor.amount) < Number(this.factura.monto)) {
+    //   return this.snack.openSnack(
+    //     'El monto enviado debe ser mayor o igual que el de la factura',
+    //     'error'
+    //   );
+    // }
     const payment: any = {
       bank: null,
       amount: Number(valor.amount ?? '0'),

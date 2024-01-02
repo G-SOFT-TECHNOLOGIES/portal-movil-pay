@@ -72,12 +72,12 @@ export class PagoMovilComponent {
     const valor = this.myForm.value;
     const calculo = this.calcular();
     const resultadoBS = this.convertirBolivares(Number(this.factura.monto))
-    if (Number(valor.amount) < Number(resultadoBS)) {
-      return this.snack.openSnack(
-        'El monto enviado debe ser mayor o igual que el de la factura',
-        'error'
-      );
-    } 
+    // if (Number(valor.amount) < Number(resultadoBS)) {
+    //   return this.snack.openSnack(
+    //     'El monto enviado debe ser mayor o igual que el de la factura',
+    //     'error'
+    //   );
+    // } 
     const payment = {
       bank: null,
       amount: Number(valor.amount ?? '0'),

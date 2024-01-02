@@ -78,12 +78,12 @@ export class TransferenciaComponent {
     const valor = this.myForm.value;
     const calculo = this.calcular();
     const resultadoBS = this.convertirBolivares(Number(this.factura.monto))
-    if (Number(valor.amount) < Number(resultadoBS)) {
-      return this.snack.openSnack(
-        'El monto enviado debe ser mayor o igual que el de la factura',
-        'error'
-      );
-    }
+    // if (Number(valor.amount) < Number(resultadoBS)) {
+    //   return this.snack.openSnack(
+    //     'El monto enviado debe ser mayor o igual que el de la factura',
+    //     'error'
+    //   );
+    // }
     this.registro.patchValue({
       nro_cuenta: valor.sender
     })
