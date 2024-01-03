@@ -15,7 +15,7 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
 export class ZelleComponent {
   @HostListener("scroll", ['$event'])
   @HostListener("window:scroll", ['$event'])
-  @Output() option = new EventEmitter<boolean>()
+  optionZL:boolean= false
 
 
   @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {

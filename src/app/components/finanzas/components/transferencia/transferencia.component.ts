@@ -13,7 +13,7 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
   styleUrls: ['./transferencia.component.css']
 })
 export class TransferenciaComponent {
-  @Output() option = new EventEmitter<boolean>()
+  optionTrans:boolean= false
 
   @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
     monto: '0',

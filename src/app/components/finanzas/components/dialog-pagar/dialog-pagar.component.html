@@ -56,23 +56,14 @@
     </div>
     <div class="scroll-smooth  z-10">
       <ng-container *ngIf="selectedOption == '1'">
-        <app-pago-movil [factura]="data" (option)="option =$event"></app-pago-movil>
+        <app-pago-movil [factura]="data" ></app-pago-movil>
       </ng-container>
       <ng-container *ngIf="selectedOption == '2'">
-        <app-zelle [factura]="data" (option)="option =$event"></app-zelle>
+        <app-zelle [factura]="data" ></app-zelle>
       </ng-container>
       <ng-container *ngIf="selectedOption == '3'">
-        <app-transferencia [factura]="data" (option)="option =$event"> </app-transferencia>
+        <app-transferencia [factura]="data" > </app-transferencia>
       </ng-container>
     </div>
   </div>
-  <div class="fixed bottom-0 xl:left-1/2 left-2/3  z-0" *ngIf="option">
-    <div
-      class="flex mr-auto transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
-      <img src="../../../../../assets/img/5_1.png" alt="G-net"
-        class="flex-reverse object-contain mx-auto xl:w-2/5 w-full">
-
-    </div>
   </div>
-
-</div>

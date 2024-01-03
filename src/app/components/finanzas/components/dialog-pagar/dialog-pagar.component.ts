@@ -18,7 +18,6 @@ export class DialogPagarComponent {
   private snack = inject(SnackbarService)
   private dialog = inject(MatDialog);
   cupon:any;
-  option:boolean= false
   ngOnInit(){
     console.log(this.data);
     
