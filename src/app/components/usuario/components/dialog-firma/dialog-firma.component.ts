@@ -9,8 +9,8 @@ import { UsuarioService } from '../../services/usuario.service';
   styleUrls: ['./dialog-firma.component.css']
 })
 export class DialogFirmaComponent {
-  private readonly dialog= inject(MatDialog)
-  private readonly usuario= inject(UsuarioService)
+  private readonly dialog = inject(MatDialog)
+  private readonly usuario = inject(UsuarioService)
 
   @ViewChild('signPad', { static: false }) signPad!: ElementRef<HTMLCanvasElement>;
   @Output() signatureSaved = new EventEmitter();
@@ -19,6 +19,10 @@ export class DialogFirmaComponent {
   private context: any;
   private isDrawing!: boolean;
   isMobile = window.innerWidth < 460;
+  public height = window.innerHeight
+  public width = window.innerWidth
+  private cx!: CanvasRenderingContext2D;
+
 
   constructor(
     public dialogRef: MatDialogRef<DialogFirmaComponent>,
@@ -26,10 +30,17 @@ export class DialogFirmaComponent {
   ) { }
   public ngAfterViewInit(): void {
     this.sigPadElement = this.signPad.nativeElement;
+    // this.render()
     this.context = this.sigPadElement.getContext('2d');
+    // this.context = this.cx.ge;
+    this.sigPadElement.width = window.innerWidth > 320 ? '650' : '220'
+    this.sigPadElement.height = window.innerWidth > 320 ? '450' : '450';
     this.context.strokeStyle = '#000';
+    this.context.lineWidth = 1
+    this.context.lineCap = 'round';
   }
 
+  @HostListener('document:mousemove', ['$event'])
   onMouseMove(e: any): void {
     if (this.isDrawing) {
       const coords = this.relativeCoords(e);
@@ -69,20 +80,20 @@ export class DialogFirmaComponent {
     // Obtener el tamaño del blob en bytes
     const imageSizeInBytes = blob.size;
     if (imageSizeInBytes <= 13451) {
-      return 
+      return
     }
-    const dialog = this.dialog.open(DialogConfirmComponent,{
+    const dialog = this.dialog.open(DialogConfirmComponent, {
     })
-    dialog.afterClosed().subscribe(d=>{
+    dialog.afterClosed().subscribe(d => {
       if (d) {
-        const body={
-          signe_base64:this.signatureImg
+        const body = {
+          signe_base64: this.signatureImg
         }
-        this.usuario.patchUsuario(body,this.data)
-        this.dialogRef.close(true)  
+        this.usuario.patchUsuario(body, this.data)
+        this.dialogRef.close(true)
         setTimeout(() => {
           location.reload()
-        }, 1000); 
+        }, 1000);
       }
     })
     // Convertir el tamaño a kilobytes (KB) o megabytes (MB) si lo deseas
@@ -99,6 +110,28 @@ export class DialogFirmaComponent {
     const x = cords.clientX - bounds.left;
     const y = cords.clientY - bounds.top;
     return { x, y };
+  }
+  private render(): any {
+    const canvasEl = this.signPad.nativeElement
+    canvasEl.width = this.width;
+    canvasEl.height = this.height;
+    this.cx.lineWidth = 3
+    this.cx.lineCap = 'round';
+    this.cx.strokeStyle = '#000'
+  }
+  private write(res: any): any {
+    const canvasEl = this.signPad.nativeElement
+    const rect = canvasEl.getBoundingClientRect();
+    const props = {
+      x: res.clientX - rect.left,
+      y: res.clientY - rect.top
+    }
+
+
+
+  }
+   pruebaA() {
+    alert('Prueba')
   }
 
 }

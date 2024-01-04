@@ -13,7 +13,6 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
   styleUrls: ['./pago-movil.component.css'],
 })
 export class PagoMovilComponent {
-  @Output() option = new EventEmitter<boolean>()
   @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
     monto: '0',
     montoDescuento: '0',
@@ -70,7 +69,6 @@ export class PagoMovilComponent {
   onSubmit() {
     this.registrar_cuenta = true
     this.botonHabilitado = false
-    // this.registrar_cuenta && !this.registradas.value ? this.option.emit(true) : this.option.emit(false)
     const valor = this.myForm.value;
     const calculo = this.calcular();
     const resultadoBS = this.convertirBolivares(Number(this.factura.monto))

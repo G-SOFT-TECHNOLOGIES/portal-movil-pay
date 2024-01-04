@@ -56,13 +56,13 @@
     </div>
     <div class="scroll-smooth  z-10">
       <ng-container *ngIf="selectedOption == '1'">
-        <app-pago-movil [factura]="data" (option)="option =$event"></app-pago-movil>
+        <app-pago-movil [factura]="data" ></app-pago-movil>
       </ng-container>
       <ng-container *ngIf="selectedOption == '2'">
-        <app-zelle [factura]="data" (option)="option =$event"></app-zelle>
+        <app-zelle [factura]="data" ></app-zelle>
       </ng-container>
       <ng-container *ngIf="selectedOption == '3'">
-        <app-transferencia [factura]="data" (option)="option =$event"> </app-transferencia>
+        <app-transferencia [factura]="data"> </app-transferencia>
       </ng-container>
     </div>
   </div>

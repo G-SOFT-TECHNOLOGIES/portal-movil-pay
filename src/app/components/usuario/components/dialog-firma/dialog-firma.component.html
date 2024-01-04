@@ -1,7 +1,7 @@
 <h1 mat-dialog-title class="bg-gray-900 " style="color:white;">Firma</h1>
-<div mat-dialog-content class="w-full" >
-        <canvas  (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)"
-                (touchstart)="onMouseDown($event)" #signPad [height]="isMobile?'280':'600'" [width]="isMobile?'400':'980'">
+<div mat-dialog-content class="w-full h-full m-0 p-0" >
+        <canvas class="scroll-m-0 scrol border m-0 p-0" (mouseleave)="onMouseUp($event)" (touchend)="onMouseUp($event)" (touchmove)="onMouseMove($event)" (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)"
+                (touchstart)="onMouseDown($event)" #signPad >
         </canvas><br>
 <p class="text-xs text-gray-400 text-center">Escribe en el medio de el panel</p> 
 </div>
