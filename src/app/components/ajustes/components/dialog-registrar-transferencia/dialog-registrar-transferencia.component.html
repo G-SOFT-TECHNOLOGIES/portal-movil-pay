@@ -49,6 +49,6 @@
 </div>
 <div mat-dialog-actions>
     <button mat-raised-button class="block w-full mt-5" color="warn" [disabled]="myForm.invalid"
-        (click)=" onSubmit()">Registrar
+        (click)=" onSubmit()">{{data !=null ? 'Actualizar': 'Agregar'}}
         Transferencia</button>
 </div>

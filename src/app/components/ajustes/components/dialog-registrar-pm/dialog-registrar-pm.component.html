@@ -13,7 +13,7 @@
         <label>Nombre</label>
         <div>
           <mat-form-field class="w-full">
-            <input type="text" matInput formControlName="name">
+            <input type="text" matInput formControlName="name" minlength="4">
             <mat-icon matPrefix>person</mat-icon>
   
             <mat-error  class="text-xs" *ngIf="myForm.hasError('required')">
@@ -45,5 +45,5 @@
 
 </div>
 <div mat-dialog-actions>    
-  <button mat-raised-button [disabled]="myForm.invalid" class="block w-full mt-5" color="warn" (click)="onSubmit()">Agregar</button>
+  <button mat-raised-button [disabled]="myForm.invalid" class="block w-full mt-5" color="warn" (click)="onSubmit()">{{data !=null ? 'Actualizar': 'Agregar'}} Pago Movil</button>
 </div>

@@ -1,6 +1,7 @@
-<ul role="list" class="flex-1 justify-content-center  divide my-2 space-y-4 ">
+<ul role="list" class="flex flex-col relative divide my-2 space-y-2 ">
 
-  <li class=" flex-1 justify-center py-4  text-gray-800 hover:text-red-700" [routerLink]="['inicio']"
+  <li class="flex-col   py-4 px-0 text-gray-800 hover:text-red-700 " [routerLink]="['inicio']"
+    [matBadge]="this.inicio.length" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="warn"
     routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
     <a class=" flex pointer justify-center   py-1" style="cursor: pointer;">
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-shop-window"
@@ -11,7 +12,8 @@
     </a>
     <span class="flex justify-center text-center text-xs"> INICIO </span>
   </li>
-  <li class=" flex-1 justify-center py-4  text-gray-800 hover:text-red-700" [routerLink]="['contratos']"
+  <li class=" flex-col py-4 px-0  text-gray-800 hover:text-red-700 " [routerLink]="['contratos']"
+    [matBadge]="this.contratos.length" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="warn"
     routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700"> <a class="flex pointer justify-center   py-1"
       style="cursor: pointer;">
       <svg class="w-[40px] h-[40px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -35,37 +37,46 @@
     <span class="flex justify-center text-center text-xs">SERVICIOS DE TV </span>
 
   </li> -->
-  <li class=" flex-1 justify-center py-4  text-gray-800 hover:text-red-700" [routerLink]="['tickets']"
-  routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
-  <a class="flex pointer justify-center   py-1" style="cursor: pointer;">
+  <li class=" flex-col py-4 px-0  text-gray-800 hover:text-red-700 " [routerLink]="['tickets']"
+    [matBadge]="this.tickets.length" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="warn"
+    routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
+    <a class="flex pointer justify-center   py-1" style="cursor: pointer;">
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-ticket-perforated" viewBox="0 0 16 16">
-      <path d="M4 4.85v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Z"/>
-      <path d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3h-13ZM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1.05a2.5 2.5 0 0 0 0 4.9v1.05a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-1.05a2.5 2.5 0 0 0 0-4.9V4.5Z"/>
-    </svg>
-  </a>
-  <span class="flex justify-center text-center text-xs">MIS TICKETS </span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-ticket-perforated"
+        viewBox="0 0 16 16">
+        <path
+          d="M4 4.85v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Z" />
+        <path
+          d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3h-13ZM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1.05a2.5 2.5 0 0 0 0 4.9v1.05a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-1.05a2.5 2.5 0 0 0 0-4.9V4.5Z" />
+      </svg>
+    </a>
+    <span class="flex justify-center text-center text-xs">MIS TICKETS </span>
 
-</li>
+  </li>
 
-<li class=" flex-1 justify-center py-4  text-gray-800 hover:text-red-700" [routerLink]="['canjes']"
-routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
-<a class="flex pointer justify-center   py-1" style="cursor: pointer;">
+  <li class="flex-col  py-4 px-0  text-gray-800 hover:text-red-700  " [routerLink]="['canjes']"
+    [matBadge]="this.canjes.length" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="warn"
+    routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
+    <a class="flex pointer justify-center   py-1" style="cursor: pointer;">
 
 
-  <svg fill="none" width="45" height="45" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"></path>
-</svg>
-</a>
-<span class="flex justify-center text-center text-xs">MIS CANJES </span>
+      <svg fill="none" width="45" height="45" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3">
+        </path>
+      </svg>
+    </a>
+    <span class="flex justify-center text-center text-xs">MIS CANJES </span>
 
-</li>
+  </li>
 
 </ul>
 <ul role="list" class="flex-1 justify-center   divide-y-2 space-y-4 ">
-  <li class=" flex-1  py-4 px-8  text-gray-800 hover:text-red-700 absolute bottom-0" [routerLink]="['ajustes']"
-    routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
+  <li class="flex-col py-4 px-8  text-gray-800 hover:text-red-700 absolute bottom-0" [routerLink]="['ajustes']"
+    routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700" [matBadge]="this.ajustes.length"
+    matBadgeSize="medium" matBadgePosition="after" matBadgeColor="warn">
     <a class="flex pointer justify-center   py-1" style="cursor: pointer;">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor"
         class="w-[42px] h-[42px] ">

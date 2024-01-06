@@ -1,0 +1,83 @@
+<div class="fixed xl:top-0 bottom-0 left-0 xl:right-20  mx-auto  py-4 my-4  ">
+    <ng-container *ngIf="msg1">
+        <div class="flex flex-col mx-10  xl:justify-center xl:align-self-center items-center z-0 gap-4 ">
+            <div
+                class="flex transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
+                <img src="../../../../../assets/img/7_1.png" alt="G-net"
+                    class="flex-reverse object-contain mx-auto xl:w-1/5 w-full">
+            </div>
+            <div class="xl:grid flex  xl:place-items-center  rounded-lg z-10 my-2">
+                <div role="alert"
+                    class="xl:relative block xl:w-auto w-full text-base font-regular px-4 py-2 rounded-lg bg-red-500 text-white">
+                    <div class="flex-col flex   justify-center">
+                        <p class="font-bold text-xl text-gray-800 text-center ">
+                            Ahora podras afiliar tus cuentas de pagos frecuentes. </p>
+                        <span class="text-base font-medium text-center ">Para mayor facilidad al momento de cancelar tus
+                            facturas.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-end justify-center">
+                <button mat-mini-fab color="warn"
+                    (click)="msg2 =true ; msg1=false"><mat-icon>arrow_forward</mat-icon></button>
+            </div>
+
+        </div>
+    </ng-container>
+    <ng-container *ngIf="msg2">
+        <div class="flex-col-reverse mx-10 align-self-start items-center top-20 left-10  z-0 gap-4 ">
+            <div
+                class="flex transform items-center justify-start transition-transform duration-150 ease-in-out hover:scale-105">
+                <img src="../../../../../assets/img/9_1.png" alt="G-net"
+                    class="flex-reverse object-contain mx-auto xl:w-1/5 w-full">
+            </div>
+            <div class="grid  place-items-center  rounded-lg z-10 my-2">
+                <div role="alert"
+                    class="relative block w-auto  text-base font-regular px-4 py-2 rounded-lg bg-red-500 text-white">
+                    <div class="flex-col flex   justify-center">
+                        <p class="font-bold text-xl text-gray-800 text-center ">
+                            Podrás agregar los siguientes métodos de pagos:  Pago móvil, Zelle y Transferencia
+                        </p>
+                        <span class="text-base font-medium text-center "> Al realizar un pago con algunos de los tres
+                            metodos anteriores, sus facturas seran pagadas de forma automatica</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-end justify-center">
+                <button mat-mini-fab color="primary" (click)="msg2 =false ; msg3=true" color="warn">
+                    <mat-icon>arrow_forward</mat-icon></button>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="msg3">
+        <div class="flex flex-col mx-10  justify-center align-self-center items-center top-20  z-0 gap-4 ">
+            <div class="flex  items-center justify-center ">
+                <img src="../../../../../assets/img/menu_pagos.png" alt="G-net"
+                class="flex-reverse object-contain mx-auto  w-full">
+            </div>
+            <div
+            class="flex transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
+            <img src="../../../../../assets/img/5_1.png" alt="G-net"
+            class="flex-reverse object-contain mx-auto xl:w-1/5 w-full">
+        </div>
+        <div class="grid  place-items-center  rounded-lg z-10 my-2">
+            <div role="alert"
+                class="relative block w-auto text-base font-regular px-4 py-2 rounded-lg bg-red-500 text-white">
+                <div class="flex-col flex   justify-center">
+                    <p class="font-semibold text-gray-50 text-center text-xl">Asimismo activar / desactivar el proceso de
+                        <strong>Pagos Automáticos</strong></p>
+                    <!-- <span class="text-base font-medium text-center "> Al realizar un pago con algunos de los tres
+                        metodos anteriores, sus facturas seran pagadas de forma automatica</span> -->
+                </div>
+            </div>
+        </div>
+            <div class="flex items-end justify-center">
+                <button [mat-dialog-close]="true" mat-raised-button color="warn">Ok, entendido</button>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+<!-- 
+    Al realizar un pago con algunos de los tres metodos anteriores, sus facturas seran pagadas de forma automatica
+ -->

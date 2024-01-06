@@ -33,6 +33,10 @@ export class InfoService {
     const obs$ = this.http.post(`${this.url}/api/gsoft/portal/payments/methods/`, body)
     return lastValueFrom(obs$)
   }
+  patchMethodId(body: any, id: number) {
+    const obs$ = this.http.patch(`${this.url}/api/gsoft/portal/payments/methods/${id}/`, body)
+    return lastValueFrom(obs$)
+  }
 
   postMethod2(body: any) {
     let headers = new HttpHeaders({'Content-Type':'application/json'});

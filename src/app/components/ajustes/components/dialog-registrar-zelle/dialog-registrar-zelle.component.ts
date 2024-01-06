@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CoreService } from 'src/app/components/service/core.service';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { InfoService } from '../../services/info.service';
@@ -18,35 +18,60 @@ export class DialogRegistrarZelleComponent {
   user = this.core.getUser()
 
   myForm = this.form.group({
-    name:['',Validators.required],
-    titular:['',Validators.required],
-    email:['',[Validators.required,Validators.email]],
+    name: ['', Validators.required],
+    titular: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
   })
   constructor(
-    public dialogRef: MatDialogRef<DialogRegistrarZelleComponent>,
-  ) {}
+    public dialogRef: MatDialogRef<DialogRegistrarZelleComponent>, @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
+  ngOnInit(): void {
+    if (this.data != null) {
+      this.myForm.patchValue({
+        name: this.data.name,
+        titular: this.data.sender,
+        email: this.data.email
+      })
+    }
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }
-  onSubmit(){
+  onSubmit() {
     const valor = this.myForm.value
-    const body = { 
+    const body = {
       "sender": valor.titular,
       "email": valor.email,
       "name": valor.name,
       "method": 3,
-      "client": this.user.id,
     }
-    this.info.postMethod(body)
-    .then((result) => {
-      this.snack.openSnack('Zelle registrado con exito','success')
-      this.dialogRef.close(true)
-    }).catch((error) => {
-      if (error== "Bad Request") {
-        this.snack.openSnack("Ya existe un registro con este enviante: "+valor.titular, 'error')
-        return
-      }
-      this.snack.openSnack(error, 'error')
-    });
+
+    if (this.data != null) {
+      this.info.patchMethodId(body, this.data.id)
+        .then((data) => {
+          this.snack.openSnack('Zelle actualizado con exito', 'success')
+          this.dialogRef.close(true)
+        }).catch(error => {
+          if (error == "Bad Request") {
+            this.snack.openSnack("Ya existe un registro con este enviante: " + valor.titular, 'error')
+            return
+          }
+          this.snack.openSnack(error, 'error')
+          return
+        });
+    } else {
+      let copia: any = { ...body, 'client': this.user.id };
+      this.info.postMethod(copia)
+        .then((result) => {
+          this.snack.openSnack('Zelle registrado con exito', 'success')
+          this.dialogRef.close(true)
+        }).catch((error) => {
+          if (error == "Bad Request") {
+            this.snack.openSnack("Ya existe un registro con este enviante: " + valor.titular, 'error')
+            return
+          }
+          this.snack.openSnack(error, 'error')
+        });
+    }
   }
 }

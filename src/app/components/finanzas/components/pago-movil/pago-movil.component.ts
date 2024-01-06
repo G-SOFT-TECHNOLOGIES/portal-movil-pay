@@ -17,7 +17,7 @@ import { DialogoActualizacionesComponent } from 'src/app/components/components/d
 export class PagoMovilComponent {
   private dialog = inject(MatDialog);
 
-  optionPM:boolean= false
+  optionPM: boolean = false
   @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
     monto: '0',
     montoDescuento: '0',
@@ -72,13 +72,8 @@ export class PagoMovilComponent {
     })
   }
 
-  openModal(){
-    const dialogRef = this.dialog.open(DialogoActualizacionesComponent, {
-          data: {
-     
-      }
-    })
-
+  openModal() {
+    const dialogRef = this.dialog.open(DialogoActualizacionesComponent)
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.closeForm = false
@@ -89,7 +84,7 @@ export class PagoMovilComponent {
   onSubmit() {
     this.registrar_cuenta = true
     this.botonHabilitado = false
-    this.registrar_cuenta && !this.registradas.value ?( this.optionPM =true, this.openModal()) : this.optionPM=false
+    this.registrar_cuenta && !this.registradas.value ? (this.optionPM = true, this.openModal()) : this.optionPM = false
     const valor = this.myForm.value;
     const calculo = this.calcular();
     const resultadoBS = this.convertirBolivares(Number(this.factura.monto))
@@ -149,7 +144,7 @@ export class PagoMovilComponent {
               this.botonHabilitado = true
             });
         }, 1000);
-       
+
       })
       .catch((err) => {
         this.snack.openSnack(err, 'error');

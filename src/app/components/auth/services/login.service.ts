@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, firstValueFrom, lastValueFrom } from 'rxjs';
-import { ResultsLogin } from '../interfaces/LoginInterfaces';
+import { Alerts, ResultsLogin } from '../interfaces/LoginInterfaces';
 import { environment } from 'src/environments/enviroments.prod';
 import { LoadingService } from '../../home/services/loading.service';
 import { SnackbarService } from '../../service/snackbar.service';
@@ -15,9 +15,10 @@ export class LoginService {
   private isLoggedSub = new BehaviorSubject<boolean>(this.status)
   private snack = inject(SnackbarService)
   isLoggedSub$ = this.isLoggedSub.asObservable()
-  url = environment.API_URL
+  url = environment.API_URL;
+  private alerts = new BehaviorSubject<Alerts[]>([])
+  alerts$ = this.alerts.asObservable()
   constructor(private http: HttpClient, private router: Router, private loading: LoadingService) { }
-
 
   async login(value: any) {
     this.loading.showLoading()
@@ -27,9 +28,10 @@ export class LoginService {
         this.loading.hideLoading()
         sessionStorage.setItem('user', JSON.stringify(result.client))
         sessionStorage.setItem('token', result.token)
-        this.snack.openSnack(result.message, 'success')
+        this.snack.openSnack(result.message, '')
         this.isLoggedSub.next(true)
         this.router.navigate(['home'])
+        this.getAlerts()
       }).catch((err) => {
         this.loading.hideLoading()
         console.log(err)
@@ -37,15 +39,11 @@ export class LoginService {
           return this.snack.openSnack("Por  favor comuníquese con el administrador.", 'error')
         }
         return this.snack.openSnack(err, 'error')
-
       });
   }
-
-
   setLoggin() {
     this.isLoggedSub.next(false)
   }
-
   async logout() {
     sessionStorage.clear()
     location.href = '/'
@@ -68,6 +66,14 @@ export class LoginService {
     return lastValueFrom(obs$)
   }
 
-
+  getAlerts() {
+    const obs$ = this.http.get<any>(`${this.url}/api/gsoft/portal/services/alerts/`)
+    lastValueFrom(obs$)
+      .then((result) => {
+        this.alerts.next(result)
+      }).catch((err) => {
+        this.alerts.error(err)
+      });
+  }
 
 }

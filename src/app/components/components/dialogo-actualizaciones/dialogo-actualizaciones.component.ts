@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./dialogo-actualizaciones.component.css']
 })
 export class DialogoActualizacionesComponent {
-
+  nextmsg: boolean= false
 }

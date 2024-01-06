@@ -16,5 +16,6 @@ export interface ResultInfo {
     created_at: string
     created_by: number
     created_by_name: string
+    status:string
   }
   

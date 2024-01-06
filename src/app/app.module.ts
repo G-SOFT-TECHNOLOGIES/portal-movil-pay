@@ -19,13 +19,15 @@ import { HeadersInterceptor } from './components/helper/headers.interceptor';
 import { TokenInvalidInterceptor } from './components/helper/token-invalid.interceptor';
 import { DialogConfirmComponent } from './components/components/dialog-confirm/dialog-confirm.component';
 import { DialogoActualizacionesComponent } from './components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
+import { DialogoPasosAfiliacionComponent } from './components/components/dialogo-pasos-afiliacion/dialogo-pasos-afiliacion.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogConfirmComponent,
-    DialogoActualizacionesComponent
+    DialogoActualizacionesComponent,
+    DialogoPasosAfiliacionComponent
   ],
   imports: [
     CommonModule,

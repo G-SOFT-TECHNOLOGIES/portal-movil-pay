@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, Validators } from '@angular/forms';
 import { InfoService } from '../../services/info.service';
@@ -24,32 +24,55 @@ export class DialogRegistrarPmComponent {
   })
 
   constructor(
-    public dialogRef: MatDialogRef<DialogRegistrarPmComponent>,
+    public dialogRef: MatDialogRef<DialogRegistrarPmComponent>, @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
-
+  ngOnInit(): void {
+    if (this.data != null) {
+      this.myForm.patchValue({
+        name: this.data.name,
+        phone: this.data.sender
+      })
+    }
+  }
 
 
   onSubmit() {
     const valor = this.myForm.value
-    const body = {
+    let body = {
       "sender": valor.phone,
       "name": valor.name,
       "email": null,
       "method": 1,
-      "client": this.user.id,
     }
-    this.info.postMethod(body)
-      .then((data) => {
-        console.log(data)
-        this.snack.openSnack('Pago Movil registrado con exito', 'success')
-        this.dialogRef.close(true)
-      }).catch(error => {
-        if (error== "Bad Request") {
-          this.snack.openSnack("Ya existe un registro con este enviante: "+valor.phone, 'error')
+
+    if (this.data != null) {
+
+      this.info.patchMethodId(body, this.data.id)
+        .then((data) => {
+          this.snack.openSnack('Pago Movil actualizado con exito', 'success')
+          this.dialogRef.close(true)
+        }).catch(error => {
+          if (error == "Bad Request") {
+            this.snack.openSnack("Ya existe un registro con este enviante: " + valor.phone, 'error')
+            return
+          }
+          this.snack.openSnack(error, 'error')
           return
-        }
-        this.snack.openSnack(error, 'error')
-        return
-      });
+        });
+    } else {
+      let copia: any = { ...body, 'client': this.user.id };
+      this.info.postMethod(copia)
+        .then((data) => {
+          this.snack.openSnack('Pago Movil registrado con exito', 'success')
+          this.dialogRef.close(true)
+        }).catch(error => {
+          if (error == "Bad Request") {
+            this.snack.openSnack("Ya existe un registro con este enviante: " + valor.phone, 'error')
+            return
+          }
+          this.snack.openSnack(error, 'error')
+          return
+        });
+    }
   }
 }
