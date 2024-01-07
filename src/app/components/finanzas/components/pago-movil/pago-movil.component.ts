@@ -84,7 +84,7 @@ export class PagoMovilComponent {
   onSubmit() {
     this.registrar_cuenta = true
     this.botonHabilitado = false
-    this.registrar_cuenta && !this.registradas.value ? (this.optionPM = true, this.openModal()) : this.optionPM = false
+    // this.registrar_cuenta && !this.registradas.value ? (this.optionPM = true, this.openModal()) : this.optionPM = false
     const valor = this.myForm.value;
     const calculo = this.calcular();
     const resultadoBS = this.convertirBolivares(Number(this.factura.monto))

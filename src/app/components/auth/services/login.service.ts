@@ -16,8 +16,19 @@ export class LoginService {
   private snack = inject(SnackbarService)
   isLoggedSub$ = this.isLoggedSub.asObservable()
   url = environment.API_URL;
-  private alerts = new BehaviorSubject<Alerts[]>([])
-  alerts$ = this.alerts.asObservable()
+  ajustes: Alerts[] = []
+  inicio: Alerts[] = []
+  contratos: Alerts[] = []
+  tickets: Alerts[] = []
+  canjes: Alerts[] = []
+
+  // private alerts = new BehaviorSubject<Alerts[] | []>(this.initAlerts)
+  // alerts$ = this.alerts.asObservable()
+  ajustes$ = new BehaviorSubject(this.ajustes)
+  inicio$ = new BehaviorSubject(this.inicio)
+  contratos$ = new BehaviorSubject(this.contratos)
+  tickets$ = new BehaviorSubject(this.tickets)
+  canjes$ = new BehaviorSubject(this.canjes)
   constructor(private http: HttpClient, private router: Router, private loading: LoadingService) { }
 
   async login(value: any) {
@@ -70,10 +81,83 @@ export class LoginService {
     const obs$ = this.http.get<any>(`${this.url}/api/gsoft/portal/services/alerts/`)
     lastValueFrom(obs$)
       .then((result) => {
-        this.alerts.next(result)
+        sessionStorage.setItem('alerts', JSON.stringify(result as never))
       }).catch((err) => {
-        this.alerts.error(err)
+        console.log(err)
       });
   }
 
+
+  alertsInicio() {
+    // this.alerts$.subscribe((data) => {
+    //   data.map((menu) => {
+
+    //     if (menu.menu_patch == 'ajustes') {
+    //       this.ajustes.push(menu)
+    //     }
+    //     if (menu.menu_patch == 'inicio') {
+    //       this.inicio.push(menu)
+    //     }
+    //     if (menu.menu_patch == 'contratos') {
+    //       this.contratos.push(menu)
+    //     }
+    //     if (menu.menu_patch == 'tickets') {
+    //       this.tickets.push(menu)
+    //     }
+    //     if (menu.menu_patch == 'canjes') {
+    //       this.canjes.push(menu)
+    //     }
+    //   })
+    // })
+    // return
+  }
+  get getDataAjustes() {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    session?.map((menu) => {
+      if (menu.menu_patch == 'ajustes') {
+        this.ajustes.push(menu)
+      }
+    })
+    return this.ajustes$.value
+  }
+  get getDataContratos() {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    session?.map((menu) => {
+      if (menu.menu_patch == 'contratos') {
+        this.contratos.push(menu)
+      }
+    })
+    return this.contratos$.value
+  }
+  get getDataInicio() {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    session?.map((menu) => {
+      if (menu.menu_patch == 'inicio') {
+        this.inicio.push(menu)
+      }
+    })
+    return this.inicio$.value
+  }
+  get getDataTickets() {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    session?.map((menu) => {
+      if (menu.menu_patch == 'tickets') {
+        this.tickets.push(menu)
+      }
+    })
+    return this.tickets$.value
+  }
+  get getDataCanjes() {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    session?.map((menu) => {
+      if (menu.menu_patch == 'canjes') {
+        this.canjes.push(menu)
+      }
+    })
+    return this.canjes$.value
+  }
+  updateAlerts(body: any): Promise<any> {
+    const obs$ = this.http.post<any>(`${this.url}/api/gsoft/portal/services/alerts/`, body)
+    return lastValueFrom(obs$)
+  }
 }

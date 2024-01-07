@@ -12,6 +12,7 @@ import { DialogoPagarComponent } from 'src/app/components/servicios/components/p
 import { DialogoPasosAfiliacionComponent } from 'src/app/components/components/dialogo-pasos-afiliacion/dialogo-pasos-afiliacion.component';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { LoadingService } from 'src/app/components/service/loading.service';
+import { LoginService } from 'src/app/components/auth/services/login.service';
 
 @Component({
   selector: 'app-info-pagos',
@@ -23,6 +24,8 @@ export class InfoPagosComponent {
   private dialog = inject(MatDialog);
   private snack = inject(SnackbarService)
   private loader = inject(LoadingService)
+  private login = inject(LoginService)
+
   data: Informacion[] = [];
   count: number = 0
   nextPageIndex: number = 1;
@@ -33,20 +36,16 @@ export class InfoPagosComponent {
     this.info.datosTablas$.subscribe(data => {
       this.data = data
     })
+   this.login.getDataAjustes.length > 0 ? this.openAlerts(): ''
+  }
+  openAlerts(){
     const dialogRef = this.dialog.open(DialogoPasosAfiliacionComponent, {
       disableClose: true
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // this.closeForm = false
-      }
-    })
-  }
-  openModal() {
-    const dialogRef = this.dialog.open(DialogoActualizacionesComponent)
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
         this.info.getMethod()
+        this.login.getAlerts()
       }
     })
   }

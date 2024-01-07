@@ -1,9 +1,13 @@
 <ul role="list" class="flex flex-col relative divide my-2 space-y-2 ">
 
   <li class="flex-col   py-4 px-0 text-gray-800 hover:text-red-700 " [routerLink]="['inicio']"
-    [matBadge]="this.inicio.length" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="warn"
     routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
-    <a class=" flex pointer justify-center   py-1" style="cursor: pointer;">
+    <a class=" flex pointer justify-center mx-auto  py-1" style="cursor: ponter;">
+      <svg *ngIf="this.inicio.length"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="w-6 h-6 text-orange-600 top-0 right-0 absolute animate-bounce mr-2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+      </svg>
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-shop-window"
         viewBox="0 0 16 16" stroke-width="0.7">
         <path
@@ -13,9 +17,14 @@
     <span class="flex justify-center text-center text-xs"> INICIO </span>
   </li>
   <li class=" flex-col py-4 px-0  text-gray-800 hover:text-red-700 " [routerLink]="['contratos']"
-    [matBadge]="this.contratos.length" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="warn"
-    routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700"> <a class="flex pointer justify-center   py-1"
-      style="cursor: pointer;">
+    routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
+    <a class="flex pointer justify-center   py-1" style="cursor: pointer;">
+      <svg *ngIf="this.contratos.length" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        stroke-width="1.5" stroke="currentColor"
+        class="w-6 h-6 text-orange-600 top-0 right-0 absolute animate-bounce mr-2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+      </svg>
       <svg class="w-[40px] h-[40px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
         viewBox="0 0 20 16">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
@@ -37,11 +46,14 @@
     <span class="flex justify-center text-center text-xs">SERVICIOS DE TV </span>
 
   </li> -->
-  <li class=" flex-col py-4 px-0  text-gray-800 hover:text-red-700 " [routerLink]="['tickets']"
-    [matBadge]="this.tickets.length" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="warn"
-    routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
+  <li class=" flex-col py-4 px-0  text-gray-800 hover:text-red-700 " [routerLink]="['tickets']"  routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
     <a class="flex pointer justify-center   py-1" style="cursor: pointer;">
-
+      <svg *ngIf="this.tickets.length" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+      stroke-width="1.5" stroke="currentColor"
+      class="w-6 h-6 text-orange-600 top-0 right-0 absolute animate-bounce mr-2">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+    </svg>
 
       <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-ticket-perforated"
         viewBox="0 0 16 16">
@@ -55,11 +67,14 @@
 
   </li>
 
-  <li class="flex-col  py-4 px-0  text-gray-800 hover:text-red-700  " [routerLink]="['canjes']"
-    [matBadge]="this.canjes.length" matBadgeSize="medium" matBadgePosition="after" matBadgeColor="warn"
-    routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
+  <li class="flex-col  py-4 px-0  text-gray-800 hover:text-red-700  " [routerLink]="['canjes']"  routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
     <a class="flex pointer justify-center   py-1" style="cursor: pointer;">
-
+      <svg *ngIf="this.canjes.length" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+      stroke-width="1.5" stroke="currentColor"
+      class="w-6 h-6 text-orange-600 fill-orange-600 top-0 right-0 absolute animate-bounce mr-2">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+    </svg>
 
       <svg fill="none" width="45" height="45" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -75,9 +90,14 @@
 </ul>
 <ul role="list" class="flex-1 justify-center   divide-y-2 space-y-4 ">
   <li class="flex-col py-4 px-8  text-gray-800 hover:text-red-700 absolute bottom-0" [routerLink]="['ajustes']"
-    routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700" [matBadge]="this.ajustes.length"
-    matBadgeSize="medium" matBadgePosition="after" matBadgeColor="warn">
+    routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
     <a class="flex pointer justify-center   py-1" style="cursor: pointer;">
+      <svg *ngIf="this.ajustes.length" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+      stroke-width="1.5" stroke="currentColor"
+      class="w-6 h-6 text-orange-600 top-0 right-0 absolute animate-bounce mx-auto">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+    </svg>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor"
         class="w-[42px] h-[42px] ">
         <path stroke-linecap="round" stroke-linejoin="round"

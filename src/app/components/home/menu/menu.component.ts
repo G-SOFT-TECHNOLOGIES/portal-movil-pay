@@ -15,39 +15,20 @@ export class MenuComponent {
 
   private breakpointObserver = inject(BreakpointObserver);
   private login = inject(LoginService)
-  alerts = this.login.alerts$
   valid: boolean = true;
-  ajustes: Alerts[]=[]
-  inicio: Alerts[]=[]
-  contratos: Alerts[]=[]
-  tickets: Alerts[]=[]
-  canjes: Alerts[]=[]
+  ajustes = this.login.getDataAjustes
+  inicio = this.login.getDataInicio
+  contratos = this.login.getDataContratos
+  tickets = this.login.getDataTickets
+  canjes = this.login.getDataCanjes
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
-
   ngOnInit(): void {
-    this.alerts.subscribe(data => {
-      data.map((menu) => {
-        if (menu.menu_patch == 'ajustes') {
-          this.ajustes.push(menu)
-        }
-        if (menu.menu_patch == 'inicio') {
-          this.inicio.push(menu)
-        }
-        if (menu.menu_patch == 'contratos') {
-          this.contratos.push(menu)
-        }
-        if (menu.menu_patch == 'tickets') {
-          this.tickets.push(menu)
-        }
-        if (menu.menu_patch == 'canjes') {
-          this.canjes.push(menu)
-        }
-      })
-    })
+    this.login.getAlerts()
   }
+
 }
