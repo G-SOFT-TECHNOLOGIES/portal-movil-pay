@@ -11,5 +11,5 @@ export class AjustesComponent {
   private login = inject(LoginService)
   alerts = this.login.ajustes
   afiliar =this.alerts.filter((menu) => menu.code == "payment_methods_add").map(data => data)
-  
+ 
 }

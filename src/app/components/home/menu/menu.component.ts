@@ -27,8 +27,5 @@ export class MenuComponent {
       map(result => result.matches),
       shareReplay()
     );
-  ngOnInit(): void {
-    this.login.getAlerts()
-  }
 
 }

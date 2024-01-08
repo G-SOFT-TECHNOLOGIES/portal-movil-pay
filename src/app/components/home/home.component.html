@@ -23,10 +23,20 @@
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content class="relative">
-            <mat-toolbar class="sticky flex items-end justify-between shadow-md z-10 ">
-                <button mat-icon-button (click)="drawer.toggle()"><span class="icon-menu text-red-500"></span></button>
-                <span class="font-bold text-gray-600">{{user.name}}, {{user.last_name}} </span>
-
+            <mat-toolbar class=" relative flex items-end justify-between shadow-md z-10 ">
+                <div class="inline-flex items-center">
+                    <button mat-icon-button (click)="drawer.toggle()"><span
+                            class="icon-menu text-red-500"></span></button>
+                    <ng-container *ngIf="mode_mobile">
+                        <button (click)="openAlerts()" mat-mini-fab color="warn" *ngIf="view_alerts"
+                            class="text-xs animate-bounce mx-1">
+                            <mat-icon>notifications_active</mat-icon>
+                        </button>
+                    </ng-container>
+                    <span class="font-bold text-gray-600 xl:text-lg text-xs">{{user.name}},
+                        {{user.last_name}}
+                    </span>
+                </div>
                 <span class="example-spacer"></span>
                 <button mat-icon-button (click)="logout()"><mat-icon class="text-red-500">
                         logout</mat-icon></button>

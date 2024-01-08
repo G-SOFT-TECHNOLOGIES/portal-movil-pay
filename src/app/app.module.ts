@@ -20,6 +20,7 @@ import { TokenInvalidInterceptor } from './components/helper/token-invalid.inter
 import { DialogConfirmComponent } from './components/components/dialog-confirm/dialog-confirm.component';
 import { DialogoActualizacionesComponent } from './components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
 import { DialogoPasosAfiliacionComponent } from './components/components/dialogo-pasos-afiliacion/dialogo-pasos-afiliacion.component';
+import { DialogoAlertasGlobalesComponent } from './components/components/dialogo-alertas-globales/dialogo-alertas-globales.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { DialogoPasosAfiliacionComponent } from './components/components/dialogo
     AppComponent,
     DialogConfirmComponent,
     DialogoActualizacionesComponent,
-    DialogoPasosAfiliacionComponent
+    DialogoPasosAfiliacionComponent,
+    DialogoAlertasGlobalesComponent
   ],
   imports: [
     CommonModule,

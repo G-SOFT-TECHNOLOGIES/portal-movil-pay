@@ -87,30 +87,6 @@ export class LoginService {
       });
   }
 
-
-  alertsInicio() {
-    // this.alerts$.subscribe((data) => {
-    //   data.map((menu) => {
-
-    //     if (menu.menu_patch == 'ajustes') {
-    //       this.ajustes.push(menu)
-    //     }
-    //     if (menu.menu_patch == 'inicio') {
-    //       this.inicio.push(menu)
-    //     }
-    //     if (menu.menu_patch == 'contratos') {
-    //       this.contratos.push(menu)
-    //     }
-    //     if (menu.menu_patch == 'tickets') {
-    //       this.tickets.push(menu)
-    //     }
-    //     if (menu.menu_patch == 'canjes') {
-    //       this.canjes.push(menu)
-    //     }
-    //   })
-    // })
-    // return
-  }
   get getDataAjustes() {
     const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
     session?.map((menu) => {

@@ -1,0 +1,28 @@
+<div class="flex flex-col fixed bottom-0  z-0 gap-4 py-2">
+    <div class="grid  w-full place-items-center  rounded-lg z-10 my-2">
+        <div role="alert"
+            class="relative bg-white/60 backdrop-blur-xl z-20 max-w-md  right-5 top-5 rounded-lg p-6 shadow">
+            <h1 class="text-xl text-slate-700 font-medium">Hola, soy Gnet 👋</h1>
+            <div class="flex justify-between items-center">
+                <div class="text-slate-800 hover:text-slate-900  inline-flex space-x-1 items-center">
+                    <span>Tienes nuevas actualizaciones!</span>
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </div>
+
+            </div>
+            <div class="flex items-center justify-center my-2">
+                <button [mat-dialog-close]="true" mat-flat-button color="primary">Ok, entendido</button>
+            </div>
+        </div>
+    </div>
+    <div
+        class="flex transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
+        <img src="../../../../../assets/img/6_1.png" alt="G-net"
+            class="flex-reverse object-contain mx-auto xl:w-2/5 w-full">
+
+    </div>
+</div>

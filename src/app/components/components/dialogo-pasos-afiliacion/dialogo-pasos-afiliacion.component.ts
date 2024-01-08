@@ -14,10 +14,7 @@ export class DialogoPasosAfiliacionComponent {
   msg1: boolean = true
   msg2: boolean = false
   msg3: boolean = false
-  constructor(private dialogRef: MatDialogRef<DialogoPasosAfiliacionComponent>) {
-   
-   }
-
+  constructor(private dialogRef: MatDialogRef<DialogoPasosAfiliacionComponent>) {}
 
   finalizarPasoAPaso() {
     console.log(this.afiliar[0]?.code)
