@@ -8,6 +8,7 @@ import { CoreService } from 'src/app/components/service/core.service';
 import { InfoService } from 'src/app/components/ajustes/services/info.service';
 import { DialogConfirmComponent } from 'src/app/components/components/dialog-confirm/dialog-confirm.component';
 import { DialogoActualizacionesComponent } from 'src/app/components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
+import { LoginService } from 'src/app/components/auth/services/login.service';
 
 @Component({
   selector: 'app-pago-movil',
@@ -16,8 +17,8 @@ import { DialogoActualizacionesComponent } from 'src/app/components/components/d
 })
 export class PagoMovilComponent {
   private dialog = inject(MatDialog);
-
-  optionPM: boolean = false
+  private login = inject(LoginService)
+  msg = this.login.contratos$.value.filter((menu) => menu.code == "payment_methods_add_contrato").map(data => data)
   @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
     monto: '0',
     montoDescuento: '0',
@@ -76,15 +77,15 @@ export class PagoMovilComponent {
     const dialogRef = this.dialog.open(DialogoActualizacionesComponent)
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.closeForm = false
+        // this.closeForm = false
       }
     })
   }
 
   onSubmit() {
-    this.registrar_cuenta = true
+  
     this.botonHabilitado = false
-    // this.registrar_cuenta && !this.registradas.value ? (this.optionPM = true, this.openModal()) : this.optionPM = false
+    
     const valor = this.myForm.value;
     const calculo = this.calcular();
     const resultadoBS = this.convertirBolivares(Number(this.factura.monto))
@@ -109,7 +110,7 @@ export class PagoMovilComponent {
       .validarPago(payment)
       .then((result) => {
         this.snack.openSnack(result.message, 'success');
-        setTimeout(() => {
+       
           const numero = Number(this.factura.montoDescuento) - Number(result.monto);
           const resultado = Number(numero.toFixed(2));
           const resultadoBS = this.convertirBolivares(resultado < 0 ? Number(this.factura.monto) : result.monto)
@@ -133,17 +134,20 @@ export class PagoMovilComponent {
               },
             ],
           };
+          setTimeout(() => {
           this.usuario
             .pagarFatura(pago)
             .then((result) => {
+              this.registrar_cuenta = true
               this.snack.openSnack('Pago Registrado con exito', 'success');
+              this.msg.length > 0 && !this.registradas.value ? this.openModal() : this.dialogRef.close(true)
               this.registradas.value ? this.dialogRef.close(true) : '';
             })
             .catch((err) => {
               this.snack.openSnack(err, 'error');
               this.botonHabilitado = true
             });
-        }, 1000);
+        }, 1500);
 
       })
       .catch((err) => {

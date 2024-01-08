@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogPagarComponent } from '../dialog-pagar/dialog-pagar.component';
 import { ActivatedRoute } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
+import { LoginService } from 'src/app/components/auth/services/login.service';
 
 @Component({
   selector: 'app-tabla-facturas',
@@ -19,6 +20,8 @@ export class TablaFacturasComponent {
   private loading = inject(LoadingService);
   private dialog = inject(MatDialog);
   private rout = inject(ActivatedRoute)
+  private login = inject(LoginService)
+
   dataSource = new MatTableDataSource<Invoice>([]);
   displayedColumns: string[] = [
     'factura',
@@ -41,7 +44,6 @@ export class TablaFacturasComponent {
     });
   }
   ngOnInit(): void {
-    console.log("Init",)
     this.getFacturas()
   }
   nextPageIndex(event: PageEvent) {
@@ -72,7 +74,6 @@ export class TablaFacturasComponent {
     const d = Number(descuento.toFixed(2))
     const dialogRef = this.dialog.open(DialogPagarComponent, {
       width: '520px',
-      // height: '80%',
       data: {
         monto: a,
         id,
@@ -81,17 +82,15 @@ export class TablaFacturasComponent {
         montoDescuento:d,
       }
     })
-
     dialogRef.afterClosed().subscribe(result => {
-      this.getFacturas()
-      // if (result) {
-      // }
+      if (result) {
+        window.location.reload()
+        // this.getFacturas()
+      }
     })
   }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.sub.unsubscribe()
   }
 }

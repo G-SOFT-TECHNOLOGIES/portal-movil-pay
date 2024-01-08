@@ -16,11 +16,11 @@ export class MenuComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private login = inject(LoginService)
   valid: boolean = true;
-  ajustes = this.login.getDataAjustes
-  inicio = this.login.getDataInicio
-  contratos = this.login.getDataContratos
-  tickets = this.login.getDataTickets
-  canjes = this.login.getDataCanjes
+  ajustes = this.login.ajustes$.value
+  inicio = this.login.inicio$.value
+  contratos = this.login.contratos$.value
+  tickets = this.login.tickets$.value
+  canjes = this.login.canjes$.value
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

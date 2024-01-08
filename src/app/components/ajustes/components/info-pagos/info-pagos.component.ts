@@ -29,24 +29,22 @@ export class InfoPagosComponent {
   data: Informacion[] = [];
   count: number = 0
   nextPageIndex: number = 1;
-  constructor() { }
+  constructor() { this.login.ajustes$.value.filter((menu) => menu.code == "payment_methods_add_ajustes").map(data => data).length > 0 ? this.openAlerts() : null;}
 
   ngOnInit(): void {
     this.info.getMethod()
     this.info.datosTablas$.subscribe(data => {
       this.data = data
     })
-   this.login.getDataAjustes.length > 0 ? this.openAlerts(): ''
   }
-  openAlerts(){
+  openAlerts() {
     const dialogRef = this.dialog.open(DialogoPasosAfiliacionComponent, {
       disableClose: true
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.info.getMethod()
-        this.login.getAlerts()
-      }
+        window.location.reload()
+        }
     })
   }
   registrarPM(data: any) {

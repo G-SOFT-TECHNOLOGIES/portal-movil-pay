@@ -33,9 +33,9 @@ export class HomeComponent {
   screenHeight: number = 0
   loading: Observable<boolean> = this.load.loading$
   user!: any
-  view_alerts: boolean = true 
+  view_alerts: boolean = this.alerts
   //this.alerts
-  mode_mobile= window.innerWidth > 639 ? (this.view_alerts ?  this.openAlerts() : false): true
+  mode_mobile = window.innerWidth > 639 ? (this.view_alerts ? this.openAlerts() : false) : true
   constructor() {
   }
   @HostListener('window:resize', ['$event'])
@@ -64,14 +64,17 @@ export class HomeComponent {
 
   get alerts(): boolean {
     const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
-    return session.length > 0
+    const view: boolean = JSON.parse(sessionStorage.getItem('view_alerts') as never)
+  
+    return session?.length > 0 && view !=null ?view :true
   }
   openAlerts() {
     const dialogRef = this.dialog.open(DialogoAlertasGlobalesComponent, {
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.view_alerts= false
+        this.view_alerts = false
+        sessionStorage.setItem('view_alerts', 'false')
       }
     })
   }

@@ -36,7 +36,7 @@
     </div>
     <mat-form-field appearance="fill" class="w-full my-4">
       <mat-label>Método de pago realizado</mat-label>
-      <mat-select [(ngModel)]="selectedOption">
+      <mat-select [formControl]="selectedOption">
         <mat-option value="0">...</mat-option>
         <mat-option value="1">Pago Movil</mat-option>
         <mat-option value="2">Zelle</mat-option>
@@ -44,7 +44,7 @@
       </mat-select>
     </mat-form-field>
     <div class="flex items-center justify-between border-t border-gray-200 pt-6"
-      *ngIf="data.montoDescuento==data.monto && selectedOption=='0'">
+      *ngIf="data.montoDescuento==data.monto && selectedOption.value=='0'">
       <mat-form-field class="w-full">
         <mat-label>Aplicar Cupon </mat-label>
         <input matInput placeholder="CUPON" [(ngModel)]="cupon" />
@@ -55,15 +55,18 @@
       </mat-form-field>
     </div>
     <div class="scroll-smooth  z-10">
-      <ng-container *ngIf="selectedOption == '1'">
+      <ng-container *ngIf="selectedOption.value == '1'">
         <app-pago-movil [factura]="data" ></app-pago-movil>
       </ng-container>
-      <ng-container *ngIf="selectedOption == '2'">
+      <ng-container *ngIf="selectedOption.value == '2'">
         <app-zelle [factura]="data" ></app-zelle>
       </ng-container>
-      <ng-container *ngIf="selectedOption == '3'">
+      <ng-container *ngIf="selectedOption.value == '3'">
         <app-transferencia [factura]="data" > </app-transferencia>
       </ng-container>
     </div>
+    <!-- <div *ngIf="selectedOption !='0' ? openAlerts() : '' ">
+
+    </div> -->
   </div>
   </div>

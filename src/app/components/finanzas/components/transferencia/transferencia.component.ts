@@ -1,11 +1,13 @@
 import { Component, inject, Input, Inject, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FacturaContratoService } from '../../services/usuario.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogPagarComponent } from '../dialog-pagar/dialog-pagar.component';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { CoreService } from 'src/app/components/service/core.service';
 import { InfoService } from 'src/app/components/ajustes/services/info.service';
+import { LoginService } from 'src/app/components/auth/services/login.service';
+import { DialogoActualizacionesComponent } from 'src/app/components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
 
 @Component({
   selector: 'app-transferencia',
@@ -13,7 +15,7 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
   styleUrls: ['./transferencia.component.css']
 })
 export class TransferenciaComponent {
-  optionTrans:boolean= false
+  optionTrans: boolean = false
 
   @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
     monto: '0',
@@ -26,6 +28,9 @@ export class TransferenciaComponent {
   private usuario = inject(FacturaContratoService);
   private snack = inject(SnackbarService);
   private core = inject(CoreService);
+  private login = inject(LoginService)
+  private dialog = inject(MatDialog);
+
   montoDollar$: number = 0;
   botonHabilitado = true;
   sinAfiliar: boolean = false;
@@ -36,6 +41,7 @@ export class TransferenciaComponent {
   user = this.core.getUser()
   saldoFavor = this.usuario.saldoFavor
   descuento = 0
+  msg = this.login.contratos$.value.filter((menu) => menu.code == "payment_methods_add_contrato").map(data => data)
 
   myForm = new FormGroup({
     bank: new FormControl('', [
@@ -74,7 +80,7 @@ export class TransferenciaComponent {
   }
 
   onSubmit() {
-    this.registrar_cuenta = true
+
     this.botonHabilitado = false
 
     const valor = this.myForm.value;
@@ -132,17 +138,21 @@ export class TransferenciaComponent {
             }
           ]
         };
-        this.registradas.value ? this.dialogRef.close(true) : '';
-        this.usuario
-          .pagarFatura(pago)
-          .then((result) => {
-            this.snack.openSnack('Pago Registrado con exito', 'success');
+        setTimeout(() => {
+          this.usuario
+            .pagarFatura(pago)
+            .then((result) => {
+              this.snack.openSnack('Pago Registrado con exito', 'success');
+              this.registrar_cuenta = true
+              this.msg.length > 0 && !this.registradas.value ? this.openModal() : this.dialogRef.close(true)
+              this.registradas.value ? this.dialogRef.close(true) : '';
+            })
+            .catch((err) => {
+              this.snack.openSnack(err, 'error');
+              this.botonHabilitado = true
+            });
+        }, 1500);
 
-          })
-          .catch((err) => {
-            this.snack.openSnack(err, 'error');
-            this.botonHabilitado = true
-          });
       })
       .catch((err) => {
         this.snack.openSnack(err, 'error');
@@ -197,6 +207,15 @@ export class TransferenciaComponent {
         }
         this.snack.openSnack(error, 'error')
       });
+  }
+  openModal() {
+    const dialogRef = this.dialog.open(DialogoActualizacionesComponent)
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // this.closeForm = false
+      }
+    })
   }
 }
 

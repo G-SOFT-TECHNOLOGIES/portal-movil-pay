@@ -1,7 +1,7 @@
 <div class="flex flex-col fixed bottom-0  z-0 gap-4 py-2">
     <div class="grid  w-full place-items-center  rounded-lg z-10 my-2">
         <div role="alert"
-            class="relative block w-auto text-base font-regular px-4 py-2 rounded-lg bg-red-500 text-white">
+            class="bg-white/40 backdrop-blur-xl z-20 max-w-md  right-5 top-5 rounded-lg p-6 shadow">
             <div class="flex-col flex   justify-center">
                 <p class="font-bold text-gray-800 text-center">
                     Desliza hacia abajo.
@@ -16,7 +16,7 @@
 
     </div>
     <div class="flex items-center justify-center">
-        <button [mat-dialog-close]="true" mat-raised-button color="warn" >Ok, entendido</button>
+        <button mat-raised-button color="warn"  (click)="closeMsg()">Ok, entendido</button>
     </div>
 
     <div

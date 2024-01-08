@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, firstValueFrom, lastValueFrom } from 'rxjs';
+import { BehaviorSubject, async, firstValueFrom, lastValueFrom } from 'rxjs';
 import { Alerts, ResultsLogin } from '../interfaces/LoginInterfaces';
 import { environment } from 'src/environments/enviroments.prod';
 import { LoadingService } from '../../home/services/loading.service';
@@ -82,6 +82,13 @@ export class LoginService {
     lastValueFrom(obs$)
       .then((result) => {
         sessionStorage.setItem('alerts', JSON.stringify(result as never))
+        const validate = JSON.parse(sessionStorage.getItem('view_alerts') as never)
+        validate !=null ? sessionStorage.setItem('view_alerts', JSON.stringify(validate)) : sessionStorage.setItem('view_alerts', JSON.stringify(true))
+        this.getDataAjustes
+        this.getDataContratos
+        this.getDataInicio
+        this.getDataTickets
+        this.getDataCanjes
       }).catch((err) => {
         console.log(err)
       });
@@ -89,51 +96,76 @@ export class LoginService {
 
   get getDataAjustes() {
     const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
-    session?.map((menu) => {
-      if (menu.menu_patch == 'ajustes') {
-        this.ajustes.push(menu)
-      }
-    })
-    return this.ajustes$.value
+    if (session) {
+      session?.map((menu) => {
+        if (menu.menu_patch == 'ajustes') {
+          this.ajustes.push(menu)
+        }
+      })
+      return this.ajustes
+    }
+    return []
+    // this.ajustes?.reduce((previousValue, array) => {
+    //   return this.ajustes = previousValue
+    // }, [])
+    // return this.ajustes$.value
   }
   get getDataContratos() {
     const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
-    session?.map((menu) => {
-      if (menu.menu_patch == 'contratos') {
-        this.contratos.push(menu)
-      }
-    })
-    return this.contratos$.value
+    if (session) {
+      session?.map((menu) => {
+        if (menu.menu_patch == 'contratos') {
+          this.contratos.push(menu)
+        }
+      })
+      return this.contratos
+    }
+    return []
   }
   get getDataInicio() {
     const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
-    session?.map((menu) => {
-      if (menu.menu_patch == 'inicio') {
-        this.inicio.push(menu)
-      }
-    })
-    return this.inicio$.value
+    if (session) {
+      session?.map((menu) => {
+        if (menu.menu_patch == 'inicio') {
+          this.inicio.push(menu)
+        }
+      })
+      return this.inicio
+    }
+    return []
   }
   get getDataTickets() {
     const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
-    session?.map((menu) => {
-      if (menu.menu_patch == 'tickets') {
-        this.tickets.push(menu)
-      }
-    })
-    return this.tickets$.value
+    if (session) {
+      session?.map((menu) => {
+        if (menu.menu_patch == 'tickets') {
+          this.tickets.push(menu)
+        }
+      })
+      return this.tickets
+    }
+    return []
   }
   get getDataCanjes() {
     const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
-    session?.map((menu) => {
-      if (menu.menu_patch == 'canjes') {
-        this.canjes.push(menu)
-      }
-    })
-    return this.canjes$.value
+    if (session) {
+      session?.map((menu) => {
+        if (menu.menu_patch == 'canjes') {
+          this.canjes.push(menu)
+        }
+      })
+      return this.canjes
+    }
+    return []
   }
   updateAlerts(body: any): Promise<any> {
     const obs$ = this.http.post<any>(`${this.url}/api/gsoft/portal/services/alerts/`, body)
     return lastValueFrom(obs$)
+  }
+  deleteAlertsAjuste(e: any) {
+    console.log(e)
+    const data = this.ajustes$.value.filter((d: any) => d.code !== e)
+    sessionStorage.setItem('alerts', JSON.stringify(data))
+    this.ajustes$.next(data)
   }
 }
