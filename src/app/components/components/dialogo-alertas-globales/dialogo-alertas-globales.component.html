@@ -1,0 +1,24 @@
+<div class="flex flex-col fixed bottom-0 xl:left-0  z-0 gap-4 py-2">
+    <div class="grid  w-full place-items-center  rounded-lg z-10 my-2">
+        <div role="alert"
+            class="relative  bg-white/50 backdrop-blur-xl z-20 max-w-xl  right-5 top-5 rounded-lg p-6 shadow text-center">
+            <h1 class="text-xl text-slate-800 font-medium">Hola, soy G-Net 👋</h1>
+            <div class="flex justify-between items-center">
+                <div class="flex flex-col text-slate-800 hover:text-slate-900 space-x-1 items-center">
+                    <span>Tienes nuevas actualizaciones!</span>
+                    <span>Verifícalo en el menú.</span>
+                </div>
+
+            </div>
+            <div class="flex items-center justify-center my-2">
+                <button [mat-dialog-close]="true" mat-flat-button color="primary">Ok, entendido</button>
+            </div>
+        </div>
+    </div>
+    <div
+        class="flex transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
+        <img src="../../../../../assets/img/1_1.png" alt="G-net"
+            class="flex-reverse object-contain mx-auto xl:w-[20%] w-full">
+
+    </div>
+</div>

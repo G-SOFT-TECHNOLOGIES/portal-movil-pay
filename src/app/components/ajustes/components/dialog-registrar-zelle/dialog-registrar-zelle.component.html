@@ -54,6 +54,6 @@
   </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button class="block w-full mt-5" color="warn" [disabled]="myForm.invalid" (click)=" onSubmit()">Registrar
+  <button mat-raised-button class="block w-full mt-5" color="warn" [disabled]="myForm.invalid" (click)=" onSubmit()">{{data !=null ? 'Actualizar': 'Agregar'}}
     Zelle</button>
 </div>

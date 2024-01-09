@@ -1,11 +1,13 @@
 import { Component, EventEmitter, HostListener, Input, Output, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FacturaContratoService } from '../../services/usuario.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogPagarComponent } from '../dialog-pagar/dialog-pagar.component';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { CoreService } from 'src/app/components/service/core.service';
 import { InfoService } from 'src/app/components/ajustes/services/info.service';
+import { DialogoActualizacionesComponent } from 'src/app/components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
+import { LoginService } from 'src/app/components/auth/services/login.service';
 
 @Component({
   selector: 'app-zelle',
@@ -15,7 +17,7 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
 export class ZelleComponent {
   @HostListener("scroll", ['$event'])
   @HostListener("window:scroll", ['$event'])
-  @Output() option = new EventEmitter<boolean>()
+  optionZL:boolean= false
 
 
   @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
@@ -29,6 +31,10 @@ export class ZelleComponent {
   private usuario = inject(FacturaContratoService);
   private core = inject(CoreService);
   private info = inject(InfoService);
+  private dialog = inject(MatDialog);
+  private login = inject(LoginService)
+
+  msg = this.login.contratos$.value.filter((menu) => menu.code == "payment_methods_add_contrato").map(data => data)
 
   constructor(private dialogRef: MatDialogRef<DialogPagarComponent>) { }
   botonHabilitado = true;
@@ -59,8 +65,16 @@ export class ZelleComponent {
       this.cuentas = data.filter((zelle) => zelle.method === 3).map(data => data)
     })
   }
+  openModal() {
+    const dialogRef = this.dialog.open(DialogoActualizacionesComponent)
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // this.closeForm = false
+      }
+    })
+  }
   onSubmit() {
-    this.registrar_cuenta = true
     this.botonHabilitado = false
     const valor = this.myForm.value;
     // if (Number(valor.amount) < Number(this.factura.monto)) {
@@ -85,6 +99,7 @@ export class ZelleComponent {
       .then((result) => {
         this.botonHabilitado = false
         this.snack.openSnack(result.message, 'success');
+
         const numero = Number(this.calcular) - Number(result.monto);
         const resultado = Number(numero.toFixed(2));
     
@@ -107,16 +122,20 @@ export class ZelleComponent {
             },
           ],
         };
+        setTimeout(() => {
         this.usuario
           .pagarFatura(pago)
           .then((result) => {
+            this.registrar_cuenta = true
             this.snack.openSnack('Pago Registrado con exito', 'success');
+            this.msg.length > 0 && !this.registradas.value ? this.openModal() : this.dialogRef.close(true)
             this.registradas.value ? this.dialogRef.close(true) : '';
           })
           .catch((err) => {
             this.snack.openSnack(err, 'error')
             this.botonHabilitado = true
           });
+        }, 1500);
       })
       .catch((err) => {
         this.snack.openSnack(err, 'error');

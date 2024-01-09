@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, firstValueFrom, lastValueFrom } from 'rxjs';
-import { ResultsLogin } from '../interfaces/LoginInterfaces';
+import { BehaviorSubject, Subject, async, firstValueFrom, lastValueFrom } from 'rxjs';
+import { Alerts, ResultsLogin } from '../interfaces/LoginInterfaces';
 import { environment } from 'src/environments/enviroments.prod';
 import { LoadingService } from '../../home/services/loading.service';
 import { SnackbarService } from '../../service/snackbar.service';
@@ -15,9 +15,20 @@ export class LoginService {
   private isLoggedSub = new BehaviorSubject<boolean>(this.status)
   private snack = inject(SnackbarService)
   isLoggedSub$ = this.isLoggedSub.asObservable()
-  url = environment.API_URL
+  url = environment.API_URL;
+  ajustes: Alerts[] = []
+  inicio: Alerts[] = []
+  contratos: Alerts[] = []
+  tickets: Alerts[] = []
+  canjes: Alerts[] = []
+  ajustes$ = new BehaviorSubject(this.ajustes)
+  inicio$ = new BehaviorSubject(this.inicio)
+  contratos$ = new BehaviorSubject(this.contratos)
+  tickets$ = new BehaviorSubject(this.tickets)
+  canjes$ = new BehaviorSubject(this.canjes)
+  msg_alerts = new BehaviorSubject<boolean>(JSON.parse(sessionStorage.getItem('view_alerts') as never))
+  arr_alerts = new BehaviorSubject<Alerts[]>([])
   constructor(private http: HttpClient, private router: Router, private loading: LoadingService) { }
-
 
   async login(value: any) {
     this.loading.showLoading()
@@ -27,9 +38,10 @@ export class LoginService {
         this.loading.hideLoading()
         sessionStorage.setItem('user', JSON.stringify(result.client))
         sessionStorage.setItem('token', result.token)
-        this.snack.openSnack(result.message, 'success')
+        this.snack.openSnack(result.message, '')
         this.isLoggedSub.next(true)
         this.router.navigate(['home'])
+        this.getAlerts()
       }).catch((err) => {
         this.loading.hideLoading()
         console.log(err)
@@ -37,15 +49,11 @@ export class LoginService {
           return this.snack.openSnack("Por  favor comuníquese con el administrador.", 'error')
         }
         return this.snack.openSnack(err, 'error')
-
       });
   }
-
-
   setLoggin() {
     this.isLoggedSub.next(false)
   }
-
   async logout() {
     sessionStorage.clear()
     location.href = '/'
@@ -68,6 +76,97 @@ export class LoginService {
     return lastValueFrom(obs$)
   }
 
+  getAlerts() {
+    const obs$ = this.http.get<any>(`${this.url}/api/gsoft/portal/services/alerts/`)
+    lastValueFrom(obs$)
+      .then((result) => {
+        sessionStorage.setItem('alerts', JSON.stringify(result as never))
+        this.arr_alerts.next(result.length > 0 ? result : [])
+        const validate = JSON.parse(sessionStorage.getItem('view_alerts') as never)
+        validate == null ? sessionStorage.setItem('view_alerts', JSON.stringify(result.length > 0)) : sessionStorage.setItem('view_alerts', JSON.stringify(validate))
+        this.msg_alerts.next(validate)
+        this.getDataAjustes
+        this.getDataContratos
+        this.getDataInicio
+        this.getDataTickets
+        this.getDataCanjes
+      }).catch((err) => {
+        console.log(err)
+      });
+  }
 
+  get getDataAjustes() {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    if (session) {
+      session?.map((menu) => {
+        if (menu.menu_patch == 'ajustes') {
+          this.ajustes.push(menu)
+        }
+      })
+      return this.ajustes
+    }
+    return []
+    // this.ajustes?.reduce((previousValue, array) => {
+    //   return this.ajustes = previousValue
+    // }, [])
+    // return this.ajustes$.value
+  }
+  get getDataContratos() {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    if (session) {
+      session?.map((menu) => {
+        if (menu.menu_patch == 'contratos') {
+          this.contratos.push(menu)
+        }
+      })
+      return this.contratos
+    }
+    return []
+  }
+  get getDataInicio() {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    if (session) {
+      session?.map((menu) => {
+        if (menu.menu_patch == 'inicio') {
+          this.inicio.push(menu)
+        }
+      })
+      return this.inicio
+    }
+    return []
+  }
+  get getDataTickets() {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    if (session) {
+      session?.map((menu) => {
+        if (menu.menu_patch == 'tickets') {
+          this.tickets.push(menu)
+        }
+      })
+      return this.tickets
+    }
+    return []
+  }
+  get getDataCanjes() {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    if (session) {
+      session?.map((menu) => {
+        if (menu.menu_patch == 'canjes') {
+          this.canjes.push(menu)
+        }
+      })
+      return this.canjes
+    }
+    return []
+  }
+  updateAlerts(body: any): Promise<any> {
+    const obs$ = this.http.post<any>(`${this.url}/api/gsoft/portal/services/alerts/`, body)
+    return lastValueFrom(obs$)
+  }
+  deleteAlerts(e: any) {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    const storage = session.filter((d: any) => d.code !== e)
+    sessionStorage.setItem('alerts', JSON.stringify([...storage]))
+  }
 
 }

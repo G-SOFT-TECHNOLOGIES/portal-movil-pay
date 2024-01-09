@@ -18,12 +18,18 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { HeadersInterceptor } from './components/helper/headers.interceptor';
 import { TokenInvalidInterceptor } from './components/helper/token-invalid.interceptor';
 import { DialogConfirmComponent } from './components/components/dialog-confirm/dialog-confirm.component';
+import { DialogoActualizacionesComponent } from './components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
+import { DialogoPasosAfiliacionComponent } from './components/components/dialogo-pasos-afiliacion/dialogo-pasos-afiliacion.component';
+import { DialogoAlertasGlobalesComponent } from './components/components/dialogo-alertas-globales/dialogo-alertas-globales.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    DialogoActualizacionesComponent,
+    DialogoPasosAfiliacionComponent,
+    DialogoAlertasGlobalesComponent
   ],
   imports: [
     CommonModule,

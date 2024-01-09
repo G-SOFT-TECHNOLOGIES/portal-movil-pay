@@ -11,4 +11,9 @@ export interface ResultsLogin {
     identification: string
     email: string
   }
+
+  export interface Alerts{
+    code: string
+    menu_patch:string
+  }
   

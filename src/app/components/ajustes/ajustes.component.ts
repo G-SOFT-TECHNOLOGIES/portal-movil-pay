@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { LoginService } from '../auth/services/login.service';
 
 @Component({
   selector: 'app-ajustes',
@@ -7,19 +8,10 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./ajustes.component.css']
 })
 export class AjustesComponent {
-  items: MenuItem[] | undefined;
+  private login = inject(LoginService)
+  afiliar :any
+  constructor() {
+    this.afiliar =this.login.ajustes$.value.filter((menu) => menu.code == "payment_methods_add_ajustes").map(data => data)
 
-  activeItem: MenuItem | undefined;
-
-  ngOnInit() {
-      this.items = [
-          { label: 'Home', icon: 'pi pi-fw pi-home' },
-          { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
-          { label: 'Edit', icon: 'pi pi-fw pi-pencil' },
-          { label: 'Documentation', icon: 'pi pi-fw pi-file' },
-          { label: 'Settings', icon: 'pi pi-fw pi-cog' }
-      ];
-
-      this.activeItem = this.items[0];
   }
 }

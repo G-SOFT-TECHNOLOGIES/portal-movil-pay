@@ -27,6 +27,7 @@ export interface Invoice {
   url?: string
   invoices_items_gsoft: InvoicesItemsGsoft[]
   created_by_name: string
+  amount_discount:any
 }
 
 export interface InvoicesItemsGsoft {

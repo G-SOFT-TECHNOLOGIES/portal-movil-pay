@@ -36,7 +36,7 @@
     </div>
     <mat-form-field appearance="fill" class="w-full my-4">
       <mat-label>Método de pago realizado</mat-label>
-      <mat-select [(ngModel)]="selectedOption">
+      <mat-select [formControl]="selectedOption">
         <mat-option value="0">...</mat-option>
         <mat-option value="1">Pago Movil</mat-option>
         <mat-option value="2">Zelle</mat-option>
@@ -44,7 +44,7 @@
       </mat-select>
     </mat-form-field>
     <div class="flex items-center justify-between border-t border-gray-200 pt-6"
-      *ngIf="data.montoDescuento==data.monto && selectedOption=='0'">
+      *ngIf="data.montoDescuento==data.monto && selectedOption.value=='0'">
       <mat-form-field class="w-full">
         <mat-label>Aplicar Cupon </mat-label>
         <input matInput placeholder="CUPON" [(ngModel)]="cupon" />
@@ -55,24 +55,18 @@
       </mat-form-field>
     </div>
     <div class="scroll-smooth  z-10">
-      <ng-container *ngIf="selectedOption == '1'">
+      <ng-container *ngIf="selectedOption.value == '1'">
         <app-pago-movil [factura]="data" ></app-pago-movil>
       </ng-container>
-      <ng-container *ngIf="selectedOption == '2'">
+      <ng-container *ngIf="selectedOption.value == '2'">
         <app-zelle [factura]="data" ></app-zelle>
       </ng-container>
-      <ng-container *ngIf="selectedOption == '3'">
-        <app-transferencia [factura]="data"> </app-transferencia>
+      <ng-container *ngIf="selectedOption.value == '3'">
+        <app-transferencia [factura]="data" > </app-transferencia>
       </ng-container>
     </div>
+    <!-- <div *ngIf="selectedOption !='0' ? openAlerts() : '' ">
+
+    </div> -->
   </div>
-  <!-- <div class="fixed bottom-0 xl:left-1/2 left-2/3  z-0" *ngIf="option">
-    <div
-      class="flex mr-auto transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
-      <img src="../../../../../assets/img/5_1.png" alt="G-net"
-        class="flex-reverse object-contain mx-auto xl:w-2/5 w-full">
-
-    </div>
-  </div> -->
-
-</div>
+  </div>

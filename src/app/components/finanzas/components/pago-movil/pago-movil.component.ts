@@ -1,11 +1,14 @@
 import { Component, inject, Input, Inject, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FacturaContratoService } from '../../services/usuario.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogPagarComponent } from '../dialog-pagar/dialog-pagar.component';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { CoreService } from 'src/app/components/service/core.service';
 import { InfoService } from 'src/app/components/ajustes/services/info.service';
+import { DialogConfirmComponent } from 'src/app/components/components/dialog-confirm/dialog-confirm.component';
+import { DialogoActualizacionesComponent } from 'src/app/components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
+import { LoginService } from 'src/app/components/auth/services/login.service';
 
 @Component({
   selector: 'app-pago-movil',
@@ -13,6 +16,9 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
   styleUrls: ['./pago-movil.component.css'],
 })
 export class PagoMovilComponent {
+  private dialog = inject(MatDialog);
+  private login = inject(LoginService)
+  msg = this.login.contratos$.value.filter((menu) => menu.code == "payment_methods_add_contrato").map(data => data)
   @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
     monto: '0',
     montoDescuento: '0',
@@ -32,6 +38,7 @@ export class PagoMovilComponent {
   cuentas: any[] = []
   registradas = new FormControl()
   registrar_cuenta: boolean = false;
+  closeForm: boolean = true
   myForm = new FormGroup({
     sender: new FormControl('', [
       Validators.required,
@@ -66,9 +73,19 @@ export class PagoMovilComponent {
     })
   }
 
+  openModal() {
+    const dialogRef = this.dialog.open(DialogoActualizacionesComponent)
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // this.closeForm = false
+      }
+    })
+  }
+
   onSubmit() {
-    this.registrar_cuenta = true
+  
     this.botonHabilitado = false
+    
     const valor = this.myForm.value;
     const calculo = this.calcular();
     const resultadoBS = this.convertirBolivares(Number(this.factura.monto))
@@ -93,39 +110,45 @@ export class PagoMovilComponent {
       .validarPago(payment)
       .then((result) => {
         this.snack.openSnack(result.message, 'success');
-        const numero = Number(this.factura.montoDescuento) - Number(result.monto);
-        const resultado = Number(numero.toFixed(2));
-        const resultadoBS = this.convertirBolivares(resultado < 0 ? Number(this.factura.monto) : result.monto)
-        const pago = {
-          payment: [
-            {
-              bank: null,
-              method: 1,
-              reference: valor.reference,
-              amount: result.monto,
-              amount_bs: Number(valor.amount),
-              sender: valor.sender,
-              date: this.core.formatearFecha(valor.date ?? ''),
-              contract: this.factura.contract,
-              payment_invoices: [
-                {
-                  invoice: this.factura.id,
-                  amount: resultado < 0 ? this.factura.montoDescuento : result.monto,
-                },
-              ],
-            },
-          ],
-        };
-        this.usuario
-          .pagarFatura(pago)
-          .then((result) => {
-            this.snack.openSnack('Pago Registrado con exito', 'success');
-            this.registradas.value ? this.dialogRef.close(true) : '';
-          })
-          .catch((err) => {
-            this.snack.openSnack(err, 'error');
-            this.botonHabilitado = true
-          });
+       
+          const numero = Number(this.factura.montoDescuento) - Number(result.monto);
+          const resultado = Number(numero.toFixed(2));
+          const resultadoBS = this.convertirBolivares(resultado < 0 ? Number(this.factura.monto) : result.monto)
+          const pago = {
+            payment: [
+              {
+                bank: null,
+                method: 1,
+                reference: valor.reference,
+                amount: result.monto,
+                amount_bs: Number(valor.amount),
+                sender: valor.sender,
+                date: this.core.formatearFecha(valor.date ?? ''),
+                contract: this.factura.contract,
+                payment_invoices: [
+                  {
+                    invoice: this.factura.id,
+                    amount: resultado < 0 ? this.factura.montoDescuento : result.monto,
+                  },
+                ],
+              },
+            ],
+          };
+          setTimeout(() => {
+          this.usuario
+            .pagarFatura(pago)
+            .then((result) => {
+              this.registrar_cuenta = true
+              this.snack.openSnack('Pago Registrado con exito', 'success');
+              this.msg.length > 0 && !this.registradas.value ? this.openModal() : this.dialogRef.close(true)
+              this.registradas.value ? this.dialogRef.close(true) : '';
+            })
+            .catch((err) => {
+              this.snack.openSnack(err, 'error');
+              this.botonHabilitado = true
+            });
+        }, 1500);
+
       })
       .catch((err) => {
         this.snack.openSnack(err, 'error');

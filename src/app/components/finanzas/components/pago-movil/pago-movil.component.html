@@ -1,4 +1,4 @@
-<div class="relative">
+<div class="relative z-10s">
   <div class="grid  w-full place-items-center  rounded-lg ">
     <div role="alert" class="relative block w-full text-base font-regular px-4 py-2 rounded-lg bg-red-500 text-white">
       <div class="">
@@ -74,7 +74,9 @@
   <div class=" mt-4">
 
     <ng-container *ngIf="!listaCuentas">
-     <form class="space-y-3" [formGroup]="myForm" (submit)="onSubmit()">
+      <!-- *ngIf="option | async" -->
+    
+      <form *ngIf="closeForm"  class="space-y-3" [formGroup]="myForm" (submit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>Numero Emisor</mat-label>
           <input matInput formControlName="sender" #sender type="text" maxlength="11" pattern="[0-9]*" />
@@ -185,4 +187,5 @@
 
   </ng-container>
 
+  
 </div>

@@ -4,6 +4,7 @@ import { environment } from 'src/environments/enviroments.prod';
 import { BehaviorSubject, Observable, catchError, lastValueFrom } from 'rxjs';
 import { Informacion, ResultInfo } from '../interfaces/InfoInterfaces';
 import { SnackbarService } from 'src/app//components/service/snackbar.service';
+import { LoadingService } from '../../service/loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { SnackbarService } from 'src/app//components/service/snackbar.service';
 export class InfoService {
   private http = inject(HttpClient)
   private snack = inject(SnackbarService)
+  private loading = inject(LoadingService)
 
   datosTablas = new BehaviorSubject<Informacion[]>([])
   datosTablas$ = this.datosTablas.asObservable()
@@ -20,12 +22,14 @@ export class InfoService {
   constructor() { }
 
   getMethod() {
+    this.loading.showLoading()
     const obs$ = this.http.get<ResultInfo>(`${this.url}/api/gsoft/portal/payments/methods/`)
     lastValueFrom(obs$)
       .then((result) => {
+        this.loading.hideLoading()
         this.datosTablas.next(result.results)
       }).catch((err) => {
-
+        this.loading.hideLoading()
       });
   }
 
@@ -33,16 +37,20 @@ export class InfoService {
     const obs$ = this.http.post(`${this.url}/api/gsoft/portal/payments/methods/`, body)
     return lastValueFrom(obs$)
   }
+  patchMethodId(body: any, id: number) {
+    const obs$ = this.http.patch(`${this.url}/api/gsoft/portal/payments/methods/${id}/`, body)
+    return lastValueFrom(obs$)
+  }
 
   postMethod2(body: any) {
-    let headers = new HttpHeaders({'Content-Type':'application/json'});
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const obs$ = this.http.post(`${this.url}/api/gsoft/portal/payments/methods/`, body, { headers })
     lastValueFrom(obs$).then((value) => {
       console.log(value)
     }).catch((error) => {
       console.log(error)
     });
-   
+
   }
 
   deleteMethod(id: any) {

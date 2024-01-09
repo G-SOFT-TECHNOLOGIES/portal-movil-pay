@@ -1,77 +1,155 @@
-<div class=" example-containermt-10 mat-elevation-z2">
-  <div class="example-table-container">
-    <table mat-table [dataSource]="dataSource">
+<ng-container *ngIf="mode_mobile">
+  <mat-accordion multi class="" *ngFor="let item of factura">
+    <div class="my-4">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header [ngClass]="{'bg-red-700 text-gray-400':item.status === 23}">
+          <mat-panel-title> <span>Nro Factura: <strong>{{item.id}}</strong></span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="factura">
-        <th mat-header-cell *matHeaderCellDef> Factura </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container>
+        <dl class="max-w-md text-gray-900 divide-y divide-gray-200 ">
+          <div class="flex flex-col pb-3">
+            <dt class="mb-1 text-gray-500 md:text-lg ">
+              Fecha de Emision
+            </dt>
+            <dd class="text-sm font-semibold">{{item.date_emission }}</dd>
+          </div>
+          <div class="flex flex-col pb-3">
+            <dt class="mb-1 text-gray-500 md:text-lg ">
+              Fecha de Pago
+            </dt>
+            <dd class="text-sm font-semibold">{{item.date_payment }}</dd>
+          </div>
+          <div class="flex flex-col pb-3">
+            <dt class="mb-1 text-gray-500 md:text-lg ">
+              Servicio
+            </dt>
+            <dd class="text-sm font-semibold">{{item.invoices_items_gsoft.length == 0 ?'' :
+              item.invoices_items_gsoft[0].details}}</dd>
+          </div>
+          <div class="flex flex-col pb-3">
+            <dt class="mb-1 text-gray-500 md:text-lg ">
+              Facturado
+            </dt>
+            <dd class="text-sm font-semibold">${{item.amount}}</dd>
+          </div>
+          <div class="flex flex-col pb-3">
+            <dt class="mb-1 text-gray-500 md:text-lg ">
+              Pendiente
+            </dt>
+            <dd class="text-sm font-semibold">${{calcular(item.amount , item.charged)}}</dd>
+          </div>
+          <div class="flex flex-col pb-3">
+            <dt class="mb-1 text-gray-500 md:text-lg ">
+              Pagado
+            </dt>
+            <dd class="text-sm font-semibold">${{item.charged}}</dd>
+          </div>
+          <div class="flex justify-between items-center pt-3">
+            <div class="flex flex-col">
+              <button *ngIf="item.status === 23" mat-raised-button color="warn" class="block w-full"
+                (click)="pagar(item.amount,item.charged,item.id,item.contract,item.amount_discount)">
+                Pagar
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-6 h-6 inline mb-1">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </button>
+            </div>
+            <div class="flex flex-col justify-center">
+              <a mat-raised-button color="primary" [href]="item.url" target="_blank" class="block w-full"
+                *ngIf="!!item.url">
+                Imprimir
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="w-6 h-6 inline  mb-1">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </dl>
+      </mat-expansion-panel>
+    </div>
+  </mat-accordion>
+</ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="fechaEmision">
-        <th mat-header-cell *matHeaderCellDef> Fecha de Emision </th>
-        <td mat-cell *matCellDef="let element"> {{element.date_emission}} </td>
-      </ng-container>
+<ng-container *ngIf="!mode_mobile">
+  <div class=" example-containermt-10 mat-elevation-z2">
+    <div class="example-table-container">
+      <table mat-table [dataSource]="dataSource">
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="fechaPago">
-        <th mat-header-cell *matHeaderCellDef> Fecha de Pago </th>
-        <td mat-cell *matCellDef="let element"> {{element.date_payment}} </td>
-      </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="factura">
+          <th mat-header-cell *matHeaderCellDef> Factura </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="servicio">
-        <th mat-header-cell *matHeaderCellDef> Servicio </th>
-        <td mat-cell *matCellDef="let element"> {{element.invoices_items_gsoft.length == 0 ?'' :
-          element.invoices_items_gsoft[0].details}} </td>
-      </ng-container>
-      <ng-container matColumnDef="facturado">
-        <th mat-header-cell *matHeaderCellDef> Facturado </th>
-        <td mat-cell *matCellDef="let element"> ${{element.amount}} </td>
-      </ng-container>
-      <ng-container matColumnDef="pendiente">
-        <th mat-header-cell *matHeaderCellDef> Pendiente </th>
-        <td mat-cell *matCellDef="let element"> ${{(element.amount - element.charged)|number:'1.2-2' }} </td>
-      </ng-container>
-      <ng-container matColumnDef="pagado">
-        <th mat-header-cell *matHeaderCellDef> Pagado </th>
-        <td mat-cell *matCellDef="let element"> ${{element.charged}} </td>
-      </ng-container>
-      <ng-container matColumnDef="pagar">
-        <th mat-header-cell *matHeaderCellDef> Pagar </th>
-        <td mat-cell *matCellDef="let element">
-          <!-- <button -->
-          <button mat-icon-button color="warn" *ngIf="element.status === 23"
-             (click)="pagar(element.amount,element.charged,element.id,element.contract,element.amount_discount)">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" class="w-6 h-6 inline">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </button>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="imprimir">
-        <th mat-header-cell *matHeaderCellDef> Imprimir </th>
-        <td mat-cell *matCellDef="let element">
-          <a [href]="element.url" target="_blank" mat-icon-button color="warn" *ngIf="!!element.url">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-              stroke="currentColor" class="w-6 h-6 inline">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
-            </svg>
-          </a>
-        </td>
-      </ng-container>
+        <!-- Name Column -->
+        <ng-container matColumnDef="fechaEmision">
+          <th mat-header-cell *matHeaderCellDef> Fecha de Emision </th>
+          <td mat-cell *matCellDef="let element"> {{element.date_emission}} </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky :true" ></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="fechaPago">
+          <th mat-header-cell *matHeaderCellDef> Fecha de Pago </th>
+          <td mat-cell *matCellDef="let element"> {{element.date_payment}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="servicio">
+          <th mat-header-cell *matHeaderCellDef> Servicio </th>
+          <td mat-cell *matCellDef="let element"> {{element.invoices_items_gsoft.length == 0 ?'' :
+            element.invoices_items_gsoft[0].details}} </td>
+        </ng-container>
+        <ng-container matColumnDef="facturado">
+          <th mat-header-cell *matHeaderCellDef> Facturado </th>
+          <td mat-cell *matCellDef="let element"> ${{element.amount}} </td>
+        </ng-container>
+        <ng-container matColumnDef="pendiente">
+          <th mat-header-cell *matHeaderCellDef> Pendiente </th>
+          <td mat-cell *matCellDef="let element"> ${{(element.amount - element.charged)|number:'1.2-2' }} </td>
+        </ng-container>
+        <ng-container matColumnDef="pagado">
+          <th mat-header-cell *matHeaderCellDef> Pagado </th>
+          <td mat-cell *matCellDef="let element"> ${{element.charged}} </td>
+        </ng-container>
+        <ng-container matColumnDef="pagar">
+          <th mat-header-cell *matHeaderCellDef> Pagar </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="warn" *ngIf="element.status === 23"
+            (click)="pagar(element.amount,element.charged,element.id,element.contract,element.amount_discount)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6 inline">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="imprimir">
+          <th mat-header-cell *matHeaderCellDef> Imprimir </th>
+          <td mat-cell *matCellDef="let element">
+            <a [href]="element.url" target="_blank" mat-icon-button color="warn" *ngIf="!!element.url">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6 inline">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
+              </svg>
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky :true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+    <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons [length]="count" (page)="nextPageIndex($event)"
+      aria-label="Select page of periodic elements">
+    </mat-paginator>
 
   </div>
-  <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons [length]="count" (page)="nextPageIndex($event)"
-    aria-label="Select page of periodic elements">
-  </mat-paginator>
-
-</div>
+</ng-container>

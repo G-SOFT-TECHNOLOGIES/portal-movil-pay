@@ -12,15 +12,15 @@
         <mat-icon>add</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="registrarPM()">
+        <button mat-menu-item (click)="registrarPM(null)">
           <mat-icon>phone_iphone</mat-icon>
           <span> Pago Móvil</span>
         </button>
-        <button mat-menu-item (click)="registrarZelle()">
+        <button mat-menu-item (click)="registrarZelle(null)">
           <mat-icon>payments</mat-icon>
           <span> Zelle</span>
         </button>
-        <button mat-menu-item (click)="registrarTransferencia()">
+        <button mat-menu-item (click)="registrarTransferencia(null)">
           <mat-icon>sync_alt</mat-icon>
           <span> Transferencia</span>
         </button>
@@ -38,7 +38,8 @@
     </mat-divider>
     <div class="mt-5 flow-root ">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 my-8">
-        <div class="flex flex-row space-x-2 drop-shadow-2xl rounded-2xl items-center justify-between p-8 bg-gradient-to-r from-red-700 to-red-600 text-white"
+        <div
+          class="flex flex-row space-x-2 drop-shadow-2xl rounded-2xl items-center justify-between p-8 bg-gradient-to-r from-red-700 to-red-600 text-white"
           *ngFor="let item of data">
           <div class="flex-shrink-0  items-center ">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bank"
@@ -53,10 +54,35 @@
             <span class=" ">{{item.sender }} </span>
             <span class="font-extralight text-clip">{{item.email ?? ''}}</span>
           </div>
-          <div class="flex-shrink-1 items-center ">
-            <button mat-icon-button matTooltip="Eliminar cuenta" (click)="confirm(item.id)">
-              <mat-icon class="text-white">delete</mat-icon>
+          <div class="flex items-center ">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
             </button>
+            <mat-menu #menu="matMenu">
+              <div mat-menu-item>
+                <mat-slide-toggle (change)="confirmPaymentsAuth(item)" [checked]="item.status">Pago Automático</mat-slide-toggle>
+              </div>
+              <button mat-menu-item (click)="registrarPM(item)" *ngIf="item.method == 1">
+                <mat-icon>edit</mat-icon>
+                <span>Editar cuenta</span>
+              </button>
+              <button mat-menu-item (click)="registrarZelle(item)" *ngIf="item.method == 3">
+                <mat-icon>edit</mat-icon>
+                <span> Editar cuenta</span>
+              </button>
+              <button mat-menu-item (click)="registrarTransferencia(item)" *ngIf="item.method == 4">
+                <mat-icon>edit</mat-icon>
+                <span> Editar cuenta</span>
+              </button>
+              <!-- <button  mat-menu-item (click)="edit(item)">
+                <mat-icon class="text-white">edit</mat-icon>Editar cuenta
+              </button> -->
+              <button  mat-menu-item  (click)="confirm(item.id)">
+                <mat-icon class="text-white">delete</mat-icon> Eliminar cuenta
+              </button>
+            </mat-menu>
+
+
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogPagarComponent } from '../dialog-pagar/dialog-pagar.component';
 import { ActivatedRoute } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
+import { LoginService } from 'src/app/components/auth/services/login.service';
 
 @Component({
   selector: 'app-tabla-facturas',
@@ -19,7 +20,10 @@ export class TablaFacturasComponent {
   private loading = inject(LoadingService);
   private dialog = inject(MatDialog);
   private rout = inject(ActivatedRoute)
+  private login = inject(LoginService)
+
   dataSource = new MatTableDataSource<Invoice>([]);
+  factura: Invoice[] = []
   displayedColumns: string[] = [
     'factura',
     'fechaEmision',
@@ -35,13 +39,14 @@ export class TablaFacturasComponent {
   id: number = 0
   nextPage: number = 1;
   count: number = 1
+  mode_mobile: boolean = window.innerWidth > 639 ? false : true
   constructor() {
     this.sub = this.rout.params.subscribe((data) => {
       this.id = data['id'];
     });
   }
+
   ngOnInit(): void {
-    console.log("Init",)
     this.getFacturas()
   }
   nextPageIndex(event: PageEvent) {
@@ -57,6 +62,7 @@ export class TablaFacturasComponent {
     this.loading.showLoading()
     this.facturaServ.getFacturas(params).then((result) => {
       this.loading.hideLoading()
+      this.factura = result.results
       this.dataSource = new MatTableDataSource(result.results)
       this.count = result.count
     }).catch((err) => {
@@ -65,33 +71,34 @@ export class TablaFacturasComponent {
   }
 
 
-  pagar(monto: string, charged: string, id: number, contract: number, montoDescuento:string) {
+  pagar(monto: string, charged: string, id: number, contract: number, montoDescuento: string) {
     const resultado = Number(monto) - Number(charged)
     const descuento = Number(montoDescuento) - Number(charged)
     const a = Number(resultado.toFixed(2))
     const d = Number(descuento.toFixed(2))
     const dialogRef = this.dialog.open(DialogPagarComponent, {
       width: '520px',
-      // height: '80%',
       data: {
         monto: a,
         id,
         contract,
         opcion: '',
-        montoDescuento:d,
+        montoDescuento: d,
       }
     })
-
     dialogRef.afterClosed().subscribe(result => {
-      this.getFacturas()
-      // if (result) {
-      // }
+      if (result) {
+        window.location.reload()
+        // this.getFacturas()
+      }
     })
   }
-
+  calcular(amount:string,charged:string):number{
+    const a =Number(amount) 
+    const c =Number(charged)    
+    return a - c
+  }
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.sub.unsubscribe()
   }
 }
