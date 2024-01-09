@@ -19,17 +19,10 @@ export class DialogoActualizacionesComponent {
     }
     this.login.updateAlerts(body).then((value) => {
       this.dialogRef.close(true)
-      this.deletePaquetes(this.msg[0].code)
+      this.login.deleteAlerts(this.msg[0].code)
     }).catch((error) => {
       console.log(error)
       this.msg = []
     })
-  }
-  async deletePaquetes(e: any) {
-    const data = this.msg.filter((d: any) => d.code !== e.code)
-    await sessionStorage.setItem('alerts', JSON.stringify(data as never))
-    this.login.getDataContratos
-    this.msg = []
-
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, async, firstValueFrom, lastValueFrom } from 'rxjs';
+import { BehaviorSubject, Subject, async, firstValueFrom, lastValueFrom } from 'rxjs';
 import { Alerts, ResultsLogin } from '../interfaces/LoginInterfaces';
 import { environment } from 'src/environments/enviroments.prod';
 import { LoadingService } from '../../home/services/loading.service';
@@ -21,14 +21,13 @@ export class LoginService {
   contratos: Alerts[] = []
   tickets: Alerts[] = []
   canjes: Alerts[] = []
-
-  // private alerts = new BehaviorSubject<Alerts[] | []>(this.initAlerts)
-  // alerts$ = this.alerts.asObservable()
   ajustes$ = new BehaviorSubject(this.ajustes)
   inicio$ = new BehaviorSubject(this.inicio)
   contratos$ = new BehaviorSubject(this.contratos)
   tickets$ = new BehaviorSubject(this.tickets)
   canjes$ = new BehaviorSubject(this.canjes)
+  msg_alerts = new BehaviorSubject<boolean>(JSON.parse(sessionStorage.getItem('view_alerts') as never))
+  arr_alerts = new BehaviorSubject<Alerts[]>([])
   constructor(private http: HttpClient, private router: Router, private loading: LoadingService) { }
 
   async login(value: any) {
@@ -82,8 +81,10 @@ export class LoginService {
     lastValueFrom(obs$)
       .then((result) => {
         sessionStorage.setItem('alerts', JSON.stringify(result as never))
+        this.arr_alerts.next(result.length > 0 ? result : [])
         const validate = JSON.parse(sessionStorage.getItem('view_alerts') as never)
-        validate !=null ? sessionStorage.setItem('view_alerts', JSON.stringify(validate)) : sessionStorage.setItem('view_alerts', JSON.stringify(true))
+        validate == null ? sessionStorage.setItem('view_alerts', JSON.stringify(result.length > 0)) : sessionStorage.setItem('view_alerts', JSON.stringify(validate))
+        this.msg_alerts.next(validate)
         this.getDataAjustes
         this.getDataContratos
         this.getDataInicio
@@ -162,10 +163,10 @@ export class LoginService {
     const obs$ = this.http.post<any>(`${this.url}/api/gsoft/portal/services/alerts/`, body)
     return lastValueFrom(obs$)
   }
-  deleteAlertsAjuste(e: any) {
-    console.log(e)
-    const data = this.ajustes$.value.filter((d: any) => d.code !== e)
-    sessionStorage.setItem('alerts', JSON.stringify(data))
-    this.ajustes$.next(data)
+  deleteAlerts(e: any) {
+    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    const storage = session.filter((d: any) => d.code !== e)
+    sessionStorage.setItem('alerts', JSON.stringify([...storage]))
   }
+
 }

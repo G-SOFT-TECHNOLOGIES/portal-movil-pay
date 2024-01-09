@@ -1,5 +1,5 @@
 <div class="grid grid-cols-1 lg:grid-cols-4 gap-x-4 mx-auto max-w-screen px-6 lg:px-4">
-    <div class=" flex flex-col justify-center self-center ">
+    <div class="relative overflow-hidden md:flex flex-col justify-center self-center hidden">
         <div class=" xl:pb-10 mx-auto  flex items-center justify-center ">
             <div
                 class="flex mr-auto transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
@@ -26,11 +26,21 @@
                     </svg>
                 </div>
                 <span class="flex justify-center text-center font-medium tfont-medium text-sm "> Deuda pendiente </span>
-                <span class="flex flex-col justify-center text-center font-extralight text-3xl"> {{deuda | currency: 'USD'}}
-                    <span class="flex justify-center text-center font-extralight text-base">{{calculo(deuda) |currency:'Bs '}}
-                    </span>
+                <span class="flex flex-col justify-center text-center font-extralight text-3xl"> {{deuda | currency:
+                    'USD'}} 
+                <span class="flex justify-center text-center font-extralight text-xl">{{calculo(deuda) |currency:'Bs '}}
                 </span>
-               
+            </span>
+                <span class="flex justify-center items-center text-center font-extralight text-base ">{{deuda > 0
+                    ?'Pagar deuda': 'Mis contratos'}}
+                    <svg class="w-3 h-3 mx-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg></span>
+
+
+
             </div>
         </div>
     </a>
@@ -51,6 +61,12 @@
                 <span class="flex justify-center text-center font-medium text-sm "> G-Club </span>
                 <span class="flex justify-center text-center font-extralight text-3xl"> {{acumulado_pts }} Gigas
                 </span>
+                <span class="flex justify-center items-center text-center font-extralight text-base "> Mi G-Club
+                    <svg class="w-3 h-3 mx-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg></span>
             </div>
         </div>
     </a>
@@ -69,6 +85,12 @@
                 </div>
                 <span class="flex justify-center text-center font-medium text-sm "> Tickets Abiertos </span>
                 <span class="flex justify-center text-center font-extralight text-3xl "> {{tickets.length}} </span>
+                <span class="flex justify-center items-center text-center font-extralight text-base "> Mis tickets
+                    <svg class="w-3 h-3 mx-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg></span>
             </div>
         </div>
     </a>

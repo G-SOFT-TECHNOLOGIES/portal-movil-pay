@@ -23,7 +23,7 @@ export class DialogoPasosAfiliacionComponent {
       code: this.afiliar[0].code
     }
     this.login.updateAlerts(body).then((value) => {
-      this.login.deleteAlertsAjuste(this.afiliar[0].code)
+      this.login.deleteAlerts(this.afiliar[0].code)
       this.dialogRef.close(true)
     }).catch((error) => {
       console.log(error)

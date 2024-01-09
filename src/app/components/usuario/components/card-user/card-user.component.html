@@ -92,15 +92,25 @@
           </span>
         </div>
       </ng-container>
-      
-      
+
+
       <div class="w-full text-center mt-28 ">
         <ng-container *ngIf="contratos.client_type == 1 && contratos.status ==16">
           <!-- <ng-container > -->
-          <div class="flex justify-center " >
-            <a [routerLink]="[ 'canjear', contratos.id]"  class="rounded-full p-1 hover:scale-90 bg-slate-100" matTooltip="Canjear">
+          <div class="flex  mx-auto justify-center">
+            <a [routerLink]="[ 'canjear', contratos.id]" class="rounded-full p-1 hover:scale-90 bg-slate-100"
+              matTooltip="Canjear">
               <img src="../../../../../assets/img/MonedaPortal3.png" width="70" alt="">
             </a>
+          </div>
+            <div class="flex  mx-auto justify-center">
+              <span class="flex  justify-center items-center text-center font-extralight text-base "> Canjear
+                <svg class="w-3 h-3 mx-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3">
+                  </path>
+                </svg>
+              </span>
           </div>
         </ng-container>
         <div class="flex justify-center items-end lg:pt-4 pt-8 pb-0 divide-x-4">

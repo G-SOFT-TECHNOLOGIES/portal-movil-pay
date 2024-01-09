@@ -10,6 +10,7 @@ import { FacturaContratoService } from '../finanzas/services/usuario.service';
 import { Alerts } from '../auth/interfaces/LoginInterfaces';
 import { DialogoAlertasGlobalesComponent } from '../components/dialogo-alertas-globales/dialogo-alertas-globales.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ViewEncapsulation } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
@@ -33,25 +34,31 @@ export class HomeComponent {
   screenHeight: number = 0
   loading: Observable<boolean> = this.load.loading$
   user!: any
-  view_alerts: boolean = this.alerts
-  //this.alerts
-  mode_mobile = window.innerWidth > 639 ? (this.view_alerts ? this.openAlerts() : false) : true
-  constructor() {
-  }
+  mode_mobile = window.innerWidth > 639 ? (this.login.msg_alerts.value ? this.openAlerts() : false) : true
+  view_alerts: boolean = this.login.msg_alerts.value
+
+  constructor() { }
+
   @HostListener('window:resize', ['$event'])
   getScreenSize(event: any) {
+    this.mode_mobile = window.innerWidth > 639 ? false : true
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
+    this.view_alerts = this.login.msg_alerts.value == null ? (this.login.arr_alerts.value.length > 0 ? true : false) : this.login.msg_alerts.value
   }
   menuClick(event: MouseEvent): void {
     event.stopPropagation();
   }
-  ngOnInit(): void {
-
-    this.user = this.core.getUser()
-    this.facturaContrato.getDollar()
+  ngAfterViewInit(): void {
     this.login.getAlerts()
   }
+  ngOnInit(): void {
+    this.user = this.core.getUser()
+    this.facturaContrato.getDollar()
+    this.mode_mobile = window.innerWidth > 639 ? false : true
+    this.view_alerts = this.login.msg_alerts.value == null ? (this.login.arr_alerts.value.length > 0 ? true : false) : this.login.msg_alerts.value
+  }
+
   logout() {
     this.services.logout()
   }
@@ -62,12 +69,7 @@ export class HomeComponent {
       shareReplay()
     );
 
-  get alerts(): boolean {
-    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
-    const view: boolean = JSON.parse(sessionStorage.getItem('view_alerts') as never)
-  
-    return session?.length > 0 && view !=null ?view :true
-  }
+
   openAlerts() {
     const dialogRef = this.dialog.open(DialogoAlertasGlobalesComponent, {
     })
@@ -75,6 +77,7 @@ export class HomeComponent {
       if (result) {
         this.view_alerts = false
         sessionStorage.setItem('view_alerts', 'false')
+        // this.login.msg_alerts.next(false)
       }
     })
   }

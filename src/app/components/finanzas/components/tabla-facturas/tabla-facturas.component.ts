@@ -23,6 +23,7 @@ export class TablaFacturasComponent {
   private login = inject(LoginService)
 
   dataSource = new MatTableDataSource<Invoice>([]);
+  factura: Invoice[] = []
   displayedColumns: string[] = [
     'factura',
     'fechaEmision',
@@ -38,11 +39,13 @@ export class TablaFacturasComponent {
   id: number = 0
   nextPage: number = 1;
   count: number = 1
+  mode_mobile: boolean = window.innerWidth > 639 ? false : true
   constructor() {
     this.sub = this.rout.params.subscribe((data) => {
       this.id = data['id'];
     });
   }
+
   ngOnInit(): void {
     this.getFacturas()
   }
@@ -59,6 +62,7 @@ export class TablaFacturasComponent {
     this.loading.showLoading()
     this.facturaServ.getFacturas(params).then((result) => {
       this.loading.hideLoading()
+      this.factura = result.results
       this.dataSource = new MatTableDataSource(result.results)
       this.count = result.count
     }).catch((err) => {
@@ -67,7 +71,7 @@ export class TablaFacturasComponent {
   }
 
 
-  pagar(monto: string, charged: string, id: number, contract: number, montoDescuento:string) {
+  pagar(monto: string, charged: string, id: number, contract: number, montoDescuento: string) {
     const resultado = Number(monto) - Number(charged)
     const descuento = Number(montoDescuento) - Number(charged)
     const a = Number(resultado.toFixed(2))
@@ -79,7 +83,7 @@ export class TablaFacturasComponent {
         id,
         contract,
         opcion: '',
-        montoDescuento:d,
+        montoDescuento: d,
       }
     })
     dialogRef.afterClosed().subscribe(result => {
@@ -89,7 +93,11 @@ export class TablaFacturasComponent {
       }
     })
   }
-
+  calcular(amount:string,charged:string):number{
+    const a =Number(amount) 
+    const c =Number(charged)    
+    return a - c
+  }
   ngOnDestroy(): void {
     this.sub.unsubscribe()
   }
