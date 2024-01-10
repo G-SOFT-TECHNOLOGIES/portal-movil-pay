@@ -34,29 +34,27 @@ export class HomeComponent {
   screenHeight: number = 0
   loading: Observable<boolean> = this.load.loading$
   user!: any
-  mode_mobile = window.innerWidth > 639 ? (this.login.msg_alerts.value ? this.openAlerts() : false) : true
-  view_alerts: boolean = this.login.msg_alerts.value
+  mode_mobile: any = window.innerWidth > 639 ? false : true
+  view_alerts: boolean = this.login.msg_alerts.value == null ? (this.login.arr_alerts.value.length > 0 ? true : false) : this.login.msg_alerts.value
+  campana: boolean = this.mode_mobile
+  constructor() {
 
-  constructor() { }
+  }
 
   @HostListener('window:resize', ['$event'])
   getScreenSize(event: any) {
-    this.mode_mobile = window.innerWidth > 639 ? false : true
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
-    this.view_alerts = this.login.msg_alerts.value == null ? (this.login.arr_alerts.value.length > 0 ? true : false) : this.login.msg_alerts.value
+
   }
   menuClick(event: MouseEvent): void {
     event.stopPropagation();
   }
-  ngAfterViewInit(): void {
-    this.login.getAlerts()
-  }
+
   ngOnInit(): void {
+    this.getStatusMenu()
     this.user = this.core.getUser()
     this.facturaContrato.getDollar()
-    this.mode_mobile = window.innerWidth > 639 ? false : true
-    this.view_alerts = this.login.msg_alerts.value == null ? (this.login.arr_alerts.value.length > 0 ? true : false) : this.login.msg_alerts.value
   }
 
   logout() {
@@ -80,5 +78,17 @@ export class HomeComponent {
         // this.login.msg_alerts.next(false)
       }
     })
+  }
+  getStatusMenu() {
+    setTimeout(() => {
+      this.campana = this.mode_mobile ? true :  false;
+      let msg_alerts = JSON.parse(sessionStorage.getItem('view_alerts') as never)
+      this.campana && this.mode_mobile ? '' : (msg_alerts == true ? this.openAlerts() : '')
+      this.login.getDataAjustes
+      this.login.getDataContratos
+      this.login.getDataInicio
+      this.login.getDataTickets
+      this.login.getDataCanjes
+    }, 700)
   }
 }

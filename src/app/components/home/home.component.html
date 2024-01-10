@@ -27,7 +27,7 @@
                 <div class="inline-flex items-center">
                     <button mat-icon-button (click)="drawer.toggle()"><span
                             class="icon-menu text-red-500"></span></button>
-                    <ng-container *ngIf="mode_mobile">
+                    <ng-container *ngIf="campana">
                         <button (click)="openAlerts()" mat-mini-fab color="warn" *ngIf="view_alerts"
                             class="text-xs animate-bounce mx-1">
                             <mat-icon>notifications_active</mat-icon>

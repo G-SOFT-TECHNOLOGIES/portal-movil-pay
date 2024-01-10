@@ -22,7 +22,7 @@ export class InforCardsComponent {
   tickets: any;
   ngOnInit() {
     this.deuda = this.contratos.map(c => c.debt).reduce((acc, value) => acc + value, 0);
-    this.acumulado_pts = this.contratos.map(c => c.pts).reduce((acc, value) => acc + value, 0);
+    this.acumulado_pts = this.contratos.map(c => c.pts).reduce((acc, value) => Number(acc)+  Number(value), 0);
     this.ticketservices.getTickets();
     this.ticketservices.datosTablasTickets$.subscribe(data => {
       this.tickets = data.filter((status) => status.status == 38).map((ticket) => ticket)

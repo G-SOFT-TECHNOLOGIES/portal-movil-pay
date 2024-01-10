@@ -28,20 +28,21 @@ export class LoginService {
   canjes$ = new BehaviorSubject(this.canjes)
   msg_alerts = new BehaviorSubject<boolean>(JSON.parse(sessionStorage.getItem('view_alerts') as never))
   arr_alerts = new BehaviorSubject<Alerts[]>([])
+  arr_alerts$ = this.arr_alerts.asObservable()
   constructor(private http: HttpClient, private router: Router, private loading: LoadingService) { }
 
-  async login(value: any) {
+   login(value: any) {
     this.loading.showLoading()
     const obs$ = this.http.post<ResultsLogin>(`${this.url}/portal/login/`, value)
-    await firstValueFrom(obs$)
+     firstValueFrom(obs$)
       .then((result) => {
         this.loading.hideLoading()
         sessionStorage.setItem('user', JSON.stringify(result.client))
         sessionStorage.setItem('token', result.token)
+        this.getAlerts()
         this.snack.openSnack(result.message, '')
         this.isLoggedSub.next(true)
         this.router.navigate(['home'])
-        this.getAlerts()
       }).catch((err) => {
         this.loading.hideLoading()
         console.log(err)
@@ -85,11 +86,6 @@ export class LoginService {
         const validate = JSON.parse(sessionStorage.getItem('view_alerts') as never)
         validate == null ? sessionStorage.setItem('view_alerts', JSON.stringify(result.length > 0)) : sessionStorage.setItem('view_alerts', JSON.stringify(validate))
         this.msg_alerts.next(validate)
-        this.getDataAjustes
-        this.getDataContratos
-        this.getDataInicio
-        this.getDataTickets
-        this.getDataCanjes
       }).catch((err) => {
         console.log(err)
       });
