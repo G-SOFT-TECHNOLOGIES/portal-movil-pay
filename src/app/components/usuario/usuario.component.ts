@@ -13,9 +13,11 @@ export class UsuarioComponent {
   private loader = inject(LoadingService)
   private login = inject(LoginService)
   contratos$ = this.usuario.contractos$
-  afiliar = this.login.contratos$.value.filter((menu) => menu.code == "payment_methods_add_contrato").map(data => data)
+  afiliar: any
+  constructor() {
+    this.afiliar = this.login.ajustes$.value.filter((menu) => menu.code == "payment_methods_add_contrato").map(data => data)
+  }
   ngOnInit(): void {
     this.usuario.getContratos()
-    this.login.getDataContratos
   }
 }

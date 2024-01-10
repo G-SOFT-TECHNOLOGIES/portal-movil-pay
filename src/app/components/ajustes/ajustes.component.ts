@@ -12,6 +12,5 @@ export class AjustesComponent {
   afiliar :any
   constructor() {
     this.afiliar =this.login.ajustes$.value.filter((menu) => menu.code == "payment_methods_add_ajustes").map(data => data)
-
   }
 }
