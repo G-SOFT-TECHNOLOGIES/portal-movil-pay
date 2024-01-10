@@ -3,12 +3,10 @@
   <li class="flex-col   py-4 px-0 text-gray-800 hover:text-red-700 " [routerLink]="['inicio']"
     routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
     <a class="relative flex pointer justify-center mx-auto  py-1" style="cursor: ponter;">
-      <span *ngIf="inicio.length" class="bg-red-700 rounded-full  top-0 right-0 absolute animate-pulse">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-8 h-8 text-white  m-auto p-1">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
-        </svg>
+      <span *ngIf="inicio.length" class="top-0 right-1 absolute animate-pulse">
+        <button mat-mini-fab color="warn">
+          <mat-icon>notifications_active</mat-icon>
+        </button>
       </span>
       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-shop-window"
         viewBox="0 0 16 16" stroke-width="0.7">
@@ -21,12 +19,10 @@
   <li class=" flex-col py-4 px-0  text-gray-800 hover:text-red-700 " [routerLink]="['contratos']"
     routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
     <a class="relative flex pointer justify-center   py-1" style="cursor: pointer;">
-      <span *ngIf="contratos.length" class="bg-red-700 rounded-full  top-0 right-0 absolute animate-pulse">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-8 h-8 text-white  m-auto p-1">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
-        </svg>
+      <span *ngIf="contratos.length" class="top-0 right-1 absolute animate-pulse">
+        <button mat-mini-fab color="warn">
+          <mat-icon>notifications_active</mat-icon>
+        </button>
       </span>
       <svg class="w-[40px] h-[40px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
         viewBox="0 0 20 16">
@@ -52,12 +48,10 @@
   <li class=" flex-col py-4 px-0  text-gray-800 hover:text-red-700 " [routerLink]="['tickets']"
     routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
     <a class="relative flex pointer justify-center   py-1" style="cursor: pointer;">
-      <span *ngIf="tickets.length" class="bg-red-700rounded-full  top-0 right-0 absolute animate-pulse">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-8 h-8 text-white  m-auto p-1">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
-        </svg>
+      <span *ngIf="tickets.length" class="top-0 right-1 absolute animate-pulse">
+        <button mat-mini-fab color="warn">
+          <mat-icon>notifications_active</mat-icon>
+        </button>
       </span>
       <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-ticket-perforated"
         viewBox="0 0 16 16">
@@ -74,12 +68,10 @@
   <li class="flex-col  py-4 px-0  text-gray-800 hover:text-red-700  " [routerLink]="['canjes']"
     routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
     <a class="relative flex pointer justify-center   py-1" style="cursor: pointer;">
-      <span *ngIf="canjes.length" class="bg-red-700 rounded-full  top-0 right-0 absolute animate-pulse">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-8 h-8 text-white  m-auto p-1">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
-        </svg>
+      <span *ngIf="canjes.length" class="top-0 right-1 absolute animate-pulse">
+        <button mat-mini-fab color="warn">
+          <mat-icon>notifications_active</mat-icon>
+        </button>
       </span>
       <svg fill="none" width="45" height="45" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -91,27 +83,40 @@
     <span class="flex justify-center text-center text-xs">MIS CANJES </span>
 
   </li>
+  <li class="flex-col  py-4 px-0  text-gray-800 hover:text-red-700 bottom-0 " [routerLink]="['ajustes']"
+  routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
+  <a class="relative flex pointer justify-center   py-1" style="cursor: pointer;">
+    <span *ngIf="ajustes.length" class="top-0 right-1 absolute animate-pulse">
+      <button mat-mini-fab color="warn">
+        <mat-icon>notifications_active</mat-icon>
+      </button>
+    </span>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor"
+    class="w-[42px] h-[42px] ">
+    <path stroke-linecap="round" stroke-linejoin="round"
+      d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+  </svg>
+  </a>
+  <!-- <a class="relative flex pointer justify-center   py-1" style="cursor: pointer;">
+    <span *ngIf="ajustes.length"  class=" animate-pulse ">
+      <button mat-mini-fab color="warn">
+        <mat-icon>notifications_active</mat-icon>
+      </button>
+    </span>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor"
+      class="w-[42px] h-[42px] ">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  </a> -->
+  <span class="flex justify-center text-center text-xs">AJUSTES</span>
 
+</li>
 </ul>
-<ul role="list" class="flex-1 justify-center   divide-y-2 space-y-4 ">
-  <li class="flex-col py-4 px-8  text-gray-800 hover:text-red-700 absolute bottom-0" [routerLink]="['ajustes']"
-    routerLinkActive="ml-1 text-red-700 border-l-4 border-red-700">
-    <a class=" flex pointer justify-center   py-1" style="cursor: pointer;">
-      <span *ngIf="ajustes.length" class="bg-red-700  hover:bg-red-700 rounded-full  top-0 right-0 absolute animate-pulse">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-8 h-8 text-white  m-auto p-1">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
-        </svg>
-      </span>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor"
-        class="w-[42px] h-[42px] ">
-        <path stroke-linecap="round" stroke-linejoin="round"
-          d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z" />
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    </a>
-    <span class="flex justify-center text-center text-xs">AJUSTES</span>
-
-  </li>
+<div class="flex-1">
+</div>
+<ul role="list" class="flex flex-col absolute divide my-2 space-y-2 ">
+ 
 </ul>
