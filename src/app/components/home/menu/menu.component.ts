@@ -27,5 +27,13 @@ export class MenuComponent {
       map(result => result.matches),
       shareReplay()
     );
+ngOnInit(): void {
+//   setInterval(()=>{
+//     console.log(this.login.getDataAjustes)
+//   console.log(this.login.ajustes$.value)
 
+// },5000)
+
+
+}
 }

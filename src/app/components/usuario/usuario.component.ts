@@ -19,5 +19,6 @@ export class UsuarioComponent {
   }
   ngOnInit(): void {
     this.usuario.getContratos()
+
   }
 }

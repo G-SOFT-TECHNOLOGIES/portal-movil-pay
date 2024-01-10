@@ -86,6 +86,11 @@ export class LoginService {
         const validate = JSON.parse(sessionStorage.getItem('view_alerts') as never)
         validate == null ? sessionStorage.setItem('view_alerts', JSON.stringify(result.length > 0)) : sessionStorage.setItem('view_alerts', JSON.stringify(validate))
         this.msg_alerts.next(validate)
+        this.getDataAjustes
+        this.getDataInicio
+        this.getDataContratos
+        this.getDataTickets
+        this.getDataCanjes
       }).catch((err) => {
         console.log(err)
       });
@@ -99,7 +104,8 @@ export class LoginService {
           this.ajustes.push(menu)
         }
       })
-      return this.ajustes
+      this.ajustes$.next(this.ajustes)
+      return this.ajustes$.value
     }
     return []
     // this.ajustes?.reduce((previousValue, array) => {
@@ -115,7 +121,8 @@ export class LoginService {
           this.contratos.push(menu)
         }
       })
-      return this.contratos
+      this.contratos$.next(this.contratos)
+      return this.contratos$.value
     }
     return []
   }
@@ -127,7 +134,8 @@ export class LoginService {
           this.inicio.push(menu)
         }
       })
-      return this.inicio
+      this.inicio$.next(this.inicio)
+      return this.inicio$.value
     }
     return []
   }
@@ -139,7 +147,8 @@ export class LoginService {
           this.tickets.push(menu)
         }
       })
-      return this.tickets
+      this.tickets$.next(this.tickets)
+      return this.tickets$.value
     }
     return []
   }
@@ -151,7 +160,8 @@ export class LoginService {
           this.canjes.push(menu)
         }
       })
-      return this.canjes
+      this.canjes$.next(this.canjes)
+      return this.canjes$.value
     }
     return []
   }

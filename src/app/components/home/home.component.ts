@@ -10,7 +10,7 @@ import { FacturaContratoService } from '../finanzas/services/usuario.service';
 import { Alerts } from '../auth/interfaces/LoginInterfaces';
 import { DialogoAlertasGlobalesComponent } from '../components/dialogo-alertas-globales/dialogo-alertas-globales.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ViewEncapsulation } from '@angular/compiler';
+import { ConstantPool, ViewEncapsulation } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
@@ -45,15 +45,16 @@ export class HomeComponent {
   getScreenSize(event: any) {
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
-
   }
   menuClick(event: MouseEvent): void {
     event.stopPropagation();
   }
 
   ngOnInit(): void {
+    this.login.getAlerts()
     this.getStatusMenu()
     this.user = this.core.getUser()
+
     this.facturaContrato.getDollar()
   }
 
@@ -84,11 +85,7 @@ export class HomeComponent {
       this.campana = this.mode_mobile ? true :  false;
       let msg_alerts = JSON.parse(sessionStorage.getItem('view_alerts') as never)
       this.campana && this.mode_mobile ? '' : (msg_alerts == true ? this.openAlerts() : '')
-      this.login.getDataAjustes
-      this.login.getDataContratos
-      this.login.getDataInicio
-      this.login.getDataTickets
-      this.login.getDataCanjes
-    }, 700)
+     console.log( this.login.contratos$.value)
+    }, 1500)
   }
 }
