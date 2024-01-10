@@ -82,10 +82,10 @@ export class HomeComponent {
   }
   getStatusMenu() {
     setTimeout(() => {
-      this.campana = this.mode_mobile ? true :  false;
+      this.campana = this.mode_mobile ? true : false;
       let msg_alerts = JSON.parse(sessionStorage.getItem('view_alerts') as never)
       this.campana && this.mode_mobile ? '' : (msg_alerts == true ? this.openAlerts() : '')
-     console.log( this.login.contratos$.value)
+      console.log(this.login.contratos$.value)
     }, 1500)
   }
 }

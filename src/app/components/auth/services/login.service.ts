@@ -39,10 +39,8 @@ export class LoginService {
         this.loading.hideLoading()
         sessionStorage.setItem('user', JSON.stringify(result.client))
         sessionStorage.setItem('token', result.token)
-        this.getAlerts()
         this.snack.openSnack(result.message, '')
-        this.isLoggedSub.next(true)
-        this.router.navigate(['home'])
+        this.getAlerts()
       }).catch((err) => {
         this.loading.hideLoading()
         console.log(err)
@@ -91,7 +89,14 @@ export class LoginService {
         this.getDataContratos
         this.getDataTickets
         this.getDataCanjes
+        this.isLoggedSub.next(true)
+        this.router.navigate(['home'])
+        this.loading.hideLoading()
       }).catch((err) => {
+        if (err.status == 500) {
+          this.isLoggedSub.next(true)
+          this.router.navigate(['home'])
+        }
         console.log(err)
       });
   }
