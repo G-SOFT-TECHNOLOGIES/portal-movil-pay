@@ -2,6 +2,7 @@
 
 #environments
 environments/
+/environments/
 /src/environments
 
 # Compiled output
