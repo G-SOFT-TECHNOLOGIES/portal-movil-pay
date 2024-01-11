@@ -51,10 +51,8 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this.login.getAlerts()
     this.getStatusMenu()
     this.user = this.core.getUser()
-
     this.facturaContrato.getDollar()
   }
 

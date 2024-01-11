@@ -28,6 +28,8 @@ export class MenuComponent {
       shareReplay()
     );
 ngOnInit(): void {
+  console.log('iniciando')
+  this.login.getAlerts()
 //   setInterval(()=>{
 //     console.log(this.login.getDataAjustes)
 //   console.log(this.login.ajustes$.value)
