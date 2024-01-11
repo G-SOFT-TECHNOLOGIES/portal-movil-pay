@@ -8,8 +8,8 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 })
 export class PublicidadGifsComponent {
   image1 = '../../../assets/img/fondo-2.gif'
-  image2 = '../../../assets/img/proximamente-blanco-rojo.gif'
-  contador = new BehaviorSubject<string>(this.image1)
+  // image2 = '../../../assets/img/proximamente-blanco-rojo.gif'
+  // contador = new BehaviorSubject<string>(this.image1)
   intervalo: any;
   ngOnInit(): void {
     // this.cambiodePublicidad()

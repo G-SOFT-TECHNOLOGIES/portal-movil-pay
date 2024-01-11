@@ -85,8 +85,8 @@ export class LoginService {
     lastValueFrom(obs$)
       .then((result) => {
         localStorage.setItem('alerts', JSON.stringify(result as never))
-        const validate = JSON.parse(sessionStorage.getItem('view_alerts') as never)
-        validate == null ? sessionStorage.setItem('view_alerts', JSON.stringify(result.length > 0)) : sessionStorage.setItem('view_alerts', JSON.stringify(validate))
+        const validate = JSON.parse(localStorage.getItem('view_alerts') as never)
+        validate == null ? localStorage.setItem('view_alerts', JSON.stringify(result.length > 0)) : localStorage.setItem('view_alerts', JSON.stringify(validate))
         this.msg_alerts.next(result.length > 0)
         result?.filter((menu: Alerts) => {
           if (menu.menu_patch == 'ajustes') {
@@ -110,90 +110,9 @@ export class LoginService {
             this.canjes$.next(this.canjes)
           }
         })
-
-        // this.getDataAjustes
-        // this.getDataInicio
-        // this.getDataContratos
-        // this.getDataTickets
-        // this.getDataCanjes
-
       }).catch((err) => {
-        // if (err.status == 500) {
-        //   this.isLoggedSub.next(true)
-        //   this.router.navigate(['home'])
-        // }
         console.log(err)
       });
-  }
-
-  get getDataAjustes() {
-    const session: Alerts[] = JSON.parse(localStorage.getItem('alerts') as never)
-    if (session) {
-      session?.map((menu) => {
-        if (menu.menu_patch == 'ajustes') {
-          this.ajustes.push(menu)
-        }
-      })
-      this.ajustes$.next(this.ajustes)
-      return this.ajustes$.value
-    }
-    return []
-    // this.ajustes?.reduce((previousValue, array) => {
-    //   return this.ajustes = previousValue
-    // }, [])
-    // return this.ajustes$.value
-  }
-  get getDataContratos() {
-    const session: Alerts[] = JSON.parse(localStorage.getItem('alerts') as never)
-    if (session) {
-      session?.map((menu) => {
-        if (menu.menu_patch == 'contratos') {
-          this.contratos.push(menu)
-        }
-      })
-      this.contratos$.next(this.contratos)
-      return this.contratos$.value
-    }
-    return []
-  }
-  get getDataInicio() {
-    const session: Alerts[] = JSON.parse(localStorage.getItem('alerts') as never)
-    if (session) {
-      session?.map((menu) => {
-        if (menu.menu_patch == 'inicio') {
-          this.inicio.push(menu)
-        }
-      })
-      this.inicio$.next(this.inicio)
-      return this.inicio$.value
-    }
-    return []
-  }
-  get getDataTickets() {
-    const session: Alerts[] = JSON.parse(localStorage.getItem('alerts') as never)
-    if (session) {
-      session?.map((menu) => {
-        if (menu.menu_patch == 'tickets') {
-          this.tickets.push(menu)
-        }
-      })
-      this.tickets$.next(this.tickets)
-      return this.tickets$.value
-    }
-    return []
-  }
-  get getDataCanjes() {
-    const session: Alerts[] = JSON.parse(localStorage.getItem('alerts') as never)
-    if (session) {
-      session?.map((menu) => {
-        if (menu.menu_patch == 'canjes') {
-          this.canjes.push(menu)
-        }
-      })
-      this.canjes$.next(this.canjes)
-      return this.canjes$.value
-    }
-    return []
   }
   updateAlerts(body: any): Promise<any> {
     const obs$ = this.http.post<any>(`${this.url}/api/gsoft/portal/services/alerts/`, body)
