@@ -85,8 +85,8 @@ export class LoginService {
     lastValueFrom(obs$)
       .then((result) => {
         localStorage.setItem('alerts', JSON.stringify(result as never))
-        this.arr_alerts.next(result.length > 0 ? result : [])
-        localStorage.setItem('view_alerts', JSON.stringify(result.length > 0))
+        const validate = JSON.parse(sessionStorage.getItem('view_alerts') as never)
+        validate == null ? sessionStorage.setItem('view_alerts', JSON.stringify(result.length > 0)) : sessionStorage.setItem('view_alerts', JSON.stringify(validate))
         this.msg_alerts.next(result.length > 0)
         result?.filter((menu: Alerts) => {
           if (menu.menu_patch == 'ajustes') {
