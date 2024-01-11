@@ -45,13 +45,12 @@ export class ComplementosComponent {
     });
   }
   ngOnInit(): void {
-    this.tvservices.id_contrato$.subscribe(data => this.id_contrato = data)
+    this.id_contrato = this.tvservices.initIdContrato
     this.tvservices.getPlan()
     this.tvservices.getPaquetes()
     this.tvservices.getEquipo()
     this.tvservices.getTotalAcumm()
     this.tvservices.getTotalItems()
-    this.tvservices.getIdContract()
   }
 
   previosPagePlanes() {
@@ -60,8 +59,7 @@ export class ComplementosComponent {
   registrar() {
     this.loader.showLoading()
     this.loading = true;
-    let contrato = 0
-    this.tvservices.id_contrato$.subscribe(data => contrato = data)
+    let contrato = this.tvservices.initIdContrato
     let idplan = 0
     this.tvservices.plan$.subscribe(data => (idplan = data[0].id));
     let idpackage: [] = []
@@ -133,8 +131,8 @@ export class ComplementosComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       this.tvservices.pagoTvBox$.subscribe(data => this.payments = data)
-      console.log(this.payments) 
-      if (this.payments !=null) { 
+      console.log(this.payments)
+      if (this.payments != null) {
         // console.log()
         // console.log(this.payments.amount, monto, this.payments.amount < monto)
         if (this.payments.amount < monto) {

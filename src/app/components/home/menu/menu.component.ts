@@ -21,6 +21,7 @@ export class MenuComponent {
   contratos: boolean = false
   tickets: boolean = false
   canjes: boolean = false
+  tv: boolean = false
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -35,6 +36,7 @@ export class MenuComponent {
       this.contratos = this.login.contratos$.value.length > 0
       this.tickets = this.login.tickets$.value.length > 0
       this.canjes = this.login.canjes$.value.length > 0
+      this.tv = this.login.tv$.value.length > 0
       console.log(this.contratos)
       console.log(this.ajustes)
     }, 2000)

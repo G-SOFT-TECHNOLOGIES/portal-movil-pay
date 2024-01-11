@@ -21,11 +21,13 @@ export class LoginService {
   contratos: Alerts[] = []
   tickets: Alerts[] = []
   canjes: Alerts[] = []
+  tv: Alerts[] = []
   ajustes$ = new BehaviorSubject(this.ajustes)
   inicio$ = new BehaviorSubject(this.inicio)
   contratos$ = new BehaviorSubject(this.contratos)
   tickets$ = new BehaviorSubject(this.tickets)
   canjes$ = new BehaviorSubject(this.canjes)
+  tv$ = new BehaviorSubject(this.tv)
   msg_alerts = new BehaviorSubject<boolean>(JSON.parse(localStorage.getItem('view_alerts') as never))
   arr_alerts = new BehaviorSubject<Alerts[]>([])
   arr_alerts$ = this.arr_alerts.asObservable()
@@ -108,6 +110,10 @@ export class LoginService {
           if (menu.menu_patch == 'canjes') {
             this.canjes.push(menu)
             this.canjes$.next(this.canjes)
+          }
+          if (menu.menu_patch == 'tv') {
+            this.tv.push(menu)
+            this.tv$.next(this.tv)
           }
         })
       }).catch((err) => {
