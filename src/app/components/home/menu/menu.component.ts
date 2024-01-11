@@ -16,26 +16,28 @@ export class MenuComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private login = inject(LoginService)
   valid: boolean = true;
-  ajustes = this.login.ajustes$.value
-  inicio = this.login.inicio$.value
-  contratos = this.login.contratos$.value
-  tickets = this.login.tickets$.value
-  canjes = this.login.canjes$.value
+  ajustes: boolean = false
+  inicio: boolean = false
+  contratos: boolean = false
+  tickets: boolean = false
+  canjes: boolean = false
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
-ngOnInit(): void {
-  console.log('iniciando')
-  this.login.getAlerts()
-//   setInterval(()=>{
-//     console.log(this.login.getDataAjustes)
-//   console.log(this.login.ajustes$.value)
+  ngAfterViewInit(): void {
+    this.login.getAlerts()
+    setTimeout(() => {
+      this.ajustes = this.login.ajustes$.value.length > 0
+      this.inicio = this.login.inicio$.value.length > 0
+      this.contratos = this.login.contratos$.value.length > 0
+      this.tickets = this.login.tickets$.value.length > 0
+      this.canjes = this.login.canjes$.value.length > 0
+      console.log(this.contratos)
+      console.log(this.ajustes)
+    }, 2000)
 
-// },5000)
-
-
-}
+  }
 }

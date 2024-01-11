@@ -50,8 +50,11 @@ export class HomeComponent {
     event.stopPropagation();
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.getStatusMenu()
+
+  }
+  ngOnInit(): void {
     this.user = this.core.getUser()
     this.facturaContrato.getDollar()
   }
@@ -73,7 +76,7 @@ export class HomeComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.view_alerts = false
-        sessionStorage.setItem('view_alerts', 'false')
+        localStorage.setItem('view_alerts', 'false')
         // this.login.msg_alerts.next(false)
       }
     })
@@ -81,9 +84,8 @@ export class HomeComponent {
   getStatusMenu() {
     setTimeout(() => {
       this.campana = this.mode_mobile ? true : false;
-      let msg_alerts = JSON.parse(sessionStorage.getItem('view_alerts') as never)
+      let msg_alerts = JSON.parse(localStorage.getItem('view_alerts') as never)
       this.campana && this.mode_mobile ? '' : (msg_alerts == true ? this.openAlerts() : '')
-      console.log(this.login.contratos$.value)
     }, 1500)
   }
 }

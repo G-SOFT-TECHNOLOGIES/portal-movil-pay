@@ -25,7 +25,7 @@ export class PlanesComponent {
 
 
   ngOnInit() {
-    this.selectedPaquetes = sessionStorage.getItem('paquetes') as never
+    this.selectedPaquetes = localStorage.getItem('paquetes') as never
     this.getShoppingCant()
   }
 

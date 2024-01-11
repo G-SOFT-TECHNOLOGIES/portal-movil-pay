@@ -26,25 +26,25 @@ export class LoginService {
   contratos$ = new BehaviorSubject(this.contratos)
   tickets$ = new BehaviorSubject(this.tickets)
   canjes$ = new BehaviorSubject(this.canjes)
-  msg_alerts = new BehaviorSubject<boolean>(JSON.parse(sessionStorage.getItem('view_alerts') as never))
+  msg_alerts = new BehaviorSubject<boolean>(JSON.parse(localStorage.getItem('view_alerts') as never))
   arr_alerts = new BehaviorSubject<Alerts[]>([])
   arr_alerts$ = this.arr_alerts.asObservable()
   constructor(private http: HttpClient, private router: Router, private loading: LoadingService) { }
 
-   login(value: any) {
+  login(value: any) {
     this.loading.showLoading()
     const obs$ = this.http.post<ResultsLogin>(`${this.url}/portal/login/`, value)
-     firstValueFrom(obs$)
+    firstValueFrom(obs$)
       .then((result) => {
         this.loading.hideLoading()
-        sessionStorage.setItem('user', JSON.stringify(result.client))
+        localStorage.setItem('user', JSON.stringify(result.client))
         sessionStorage.setItem('token', result.token)
         this.snack.openSnack(result.message, '')
         this.router.navigate(['home'])
         this.loading.hideLoading()
         this.isLoggedSub.next(true)
 
-        // this.getAlerts()
+        this.getAlerts()
       }).catch((err) => {
         this.loading.hideLoading()
         console.log(err)
@@ -58,6 +58,7 @@ export class LoginService {
     this.isLoggedSub.next(false)
   }
   async logout() {
+    localStorage.clear();
     sessionStorage.clear()
     location.href = '/'
     this.isLoggedSub.next(false)
@@ -83,17 +84,39 @@ export class LoginService {
     const obs$ = this.http.get<any>(`${this.url}/api/gsoft/portal/services/alerts/`)
     lastValueFrom(obs$)
       .then((result) => {
-        sessionStorage.setItem('alerts', JSON.stringify(result as never))
+        localStorage.setItem('alerts', JSON.stringify(result as never))
         this.arr_alerts.next(result.length > 0 ? result : [])
-        const validate = JSON.parse(sessionStorage.getItem('view_alerts') as never)
-        validate == null ? sessionStorage.setItem('view_alerts', JSON.stringify(result.length > 0)) : sessionStorage.setItem('view_alerts', JSON.stringify(validate))
-        this.msg_alerts.next(validate)
-        this.getDataAjustes
-        this.getDataInicio
-        this.getDataContratos
-        this.getDataTickets
-        this.getDataCanjes
-     
+        localStorage.setItem('view_alerts', JSON.stringify(result.length > 0))
+        this.msg_alerts.next(result.length > 0)
+        result?.filter((menu: Alerts) => {
+          if (menu.menu_patch == 'ajustes') {
+            this.ajustes.push(menu)
+            this.ajustes$.next(this.ajustes)
+          }
+          if (menu.menu_patch == 'contratos') {
+            this.contratos.push(menu)
+            this.contratos$.next(this.contratos)
+          }
+          if (menu.menu_patch == 'tickets') {
+            this.tickets.push(menu)
+            this.tickets$.next(this.tickets)
+          }
+          if (menu.menu_patch == 'inicio') {
+            this.inicio.push(menu)
+            this.inicio$.next(this.inicio)
+          }
+          if (menu.menu_patch == 'canjes') {
+            this.canjes.push(menu)
+            this.canjes$.next(this.canjes)
+          }
+        })
+
+        // this.getDataAjustes
+        // this.getDataInicio
+        // this.getDataContratos
+        // this.getDataTickets
+        // this.getDataCanjes
+
       }).catch((err) => {
         // if (err.status == 500) {
         //   this.isLoggedSub.next(true)
@@ -104,7 +127,7 @@ export class LoginService {
   }
 
   get getDataAjustes() {
-    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    const session: Alerts[] = JSON.parse(localStorage.getItem('alerts') as never)
     if (session) {
       session?.map((menu) => {
         if (menu.menu_patch == 'ajustes') {
@@ -121,7 +144,7 @@ export class LoginService {
     // return this.ajustes$.value
   }
   get getDataContratos() {
-    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    const session: Alerts[] = JSON.parse(localStorage.getItem('alerts') as never)
     if (session) {
       session?.map((menu) => {
         if (menu.menu_patch == 'contratos') {
@@ -134,7 +157,7 @@ export class LoginService {
     return []
   }
   get getDataInicio() {
-    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    const session: Alerts[] = JSON.parse(localStorage.getItem('alerts') as never)
     if (session) {
       session?.map((menu) => {
         if (menu.menu_patch == 'inicio') {
@@ -147,7 +170,7 @@ export class LoginService {
     return []
   }
   get getDataTickets() {
-    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    const session: Alerts[] = JSON.parse(localStorage.getItem('alerts') as never)
     if (session) {
       session?.map((menu) => {
         if (menu.menu_patch == 'tickets') {
@@ -160,7 +183,7 @@ export class LoginService {
     return []
   }
   get getDataCanjes() {
-    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    const session: Alerts[] = JSON.parse(localStorage.getItem('alerts') as never)
     if (session) {
       session?.map((menu) => {
         if (menu.menu_patch == 'canjes') {
@@ -177,9 +200,9 @@ export class LoginService {
     return lastValueFrom(obs$)
   }
   deleteAlerts(e: any) {
-    const session: Alerts[] = JSON.parse(sessionStorage.getItem('alerts') as never)
+    const session: Alerts[] = JSON.parse(localStorage.getItem('alerts') as never)
     const storage = session.filter((d: any) => d.code !== e)
-    sessionStorage.setItem('alerts', JSON.stringify([...storage]))
+    localStorage.setItem('alerts', JSON.stringify([...storage]))
   }
 
 }

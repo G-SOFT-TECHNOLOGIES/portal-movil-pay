@@ -43,7 +43,7 @@ export class ServicoTvService {
   }
   //ID del contrato
   get initIdContrato() {
-    const session = JSON.parse(sessionStorage.getItem('contrato') as never)
+    const session = JSON.parse(localStorage.getItem('contrato') as never)
     if (session) {
       return session
     }
@@ -53,17 +53,17 @@ export class ServicoTvService {
     let id_cont = id.toString()
     console.log(id_cont, 'serv')
     this.id_contrato.next(id_cont.toString())
-    sessionStorage.setItem('paquetes', JSON.stringify(this.id_contrato.value))
+    localStorage.setItem('paquetes', JSON.stringify(this.id_contrato.value))
     // if (isNaN(Number(this.id_contrato.value))) {
     //   this.id_contrato.next(id)
     //   console.log(this.id_contrato.value, 'el mismo')
-    //   sessionStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
+    //   localStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
     //   return
     // }
     // console.log(id_cont, 'id_cont')
     // this.id_contrato.next(id)
     // console.log(this.id_contrato.value, 'valor')
-    // sessionStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
+    // localStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
     // return this
     // if (Number(this.id_contrato.value) !== id) {
     //   console.log(id, "id difer")
@@ -79,11 +79,11 @@ export class ServicoTvService {
     return this.id_contrato.value
   }
   deleteIdContrato() {
-    sessionStorage.removeItem('contrato')
+    localStorage.removeItem('contrato')
   }
   // Paquetes
   get initPaquete() {
-    const session = JSON.parse(sessionStorage.getItem('paquetes') as never)
+    const session = JSON.parse(localStorage.getItem('paquetes') as never)
     if (session) {
       return session
     }
@@ -91,12 +91,12 @@ export class ServicoTvService {
   } 
   setPaquetes(e: any) {
     this.paquetes.next([...this.paquetes.value, e])
-    sessionStorage.setItem('paquetes', JSON.stringify([...this.paquetes.value]))
+    localStorage.setItem('paquetes', JSON.stringify([...this.paquetes.value]))
   }
   deletePaquetes(e: any) {
     const data = this.paquetes.value.filter((d: any) => d.id !== e.id)
     this.paquetes.next(data as never)
-    sessionStorage.setItem('paquetes', JSON.stringify(data as never))
+    localStorage.setItem('paquetes', JSON.stringify(data as never))
   }
   getPaquetes() {
     this.paquetes$.subscribe(data => {
@@ -114,7 +114,7 @@ export class ServicoTvService {
   }
   // Plan
   get initPlan() {
-    const session = JSON.parse(sessionStorage.getItem('plan') as never)
+    const session = JSON.parse(localStorage.getItem('plan') as never)
     if (session) {
       return session
     }
@@ -122,12 +122,12 @@ export class ServicoTvService {
   }
   setPlan(e: any) {
     this.plan.next([e])
-    sessionStorage.setItem('plan', JSON.stringify([...this.plan.value]))
+    localStorage.setItem('plan', JSON.stringify([...this.plan.value]))
   }
   deletePlan(e: any) {
     const data = this.plan.value.filter((d: any) => d.key !== e.key)
     this.plan.next(data as never)
-    sessionStorage.setItem('plan', JSON.stringify(data as never))
+    localStorage.setItem('plan', JSON.stringify(data as never))
   }
   getPlan() {
     this.plan$.subscribe(data => {
@@ -144,7 +144,7 @@ export class ServicoTvService {
   }
   // Equipo
   get initEquipo() {
-    const session = JSON.parse(sessionStorage.getItem('equipo') as never)
+    const session = JSON.parse(localStorage.getItem('equipo') as never)
     if (session) {
       return session
     }
@@ -152,14 +152,14 @@ export class ServicoTvService {
   }
   setEquipo(e: any) {
     this.equipo.next([e])
-    sessionStorage.setItem('equipo', JSON.stringify(this.equipo.value))
+    localStorage.setItem('equipo', JSON.stringify(this.equipo.value))
   }
   deleteEquipo(e: any) {
     const data = this.equipo.value.pop()
-    sessionStorage.setItem('equipo', JSON.stringify(this.equipo.value))
+    localStorage.setItem('equipo', JSON.stringify(this.equipo.value))
   }
   deleteItemEquipo(e: any) {
-    sessionStorage.removeItem('equipo')
+    localStorage.removeItem('equipo')
     this.totalCostEquipo = 0
     this.getTotalAcumm()
   }
@@ -185,9 +185,9 @@ export class ServicoTvService {
     return this.itemsCount.next(this.paquetes.value.length + this.totalItemsEquipo)
   }
   deleteItems() {
-    sessionStorage.removeItem('paquetes')
-    sessionStorage.removeItem('plan')
-    sessionStorage.removeItem('equipo')
+    localStorage.removeItem('paquetes')
+    localStorage.removeItem('plan')
+    localStorage.removeItem('equipo')
     this.totalCostEquipo = 0
     this.totalCostPaquetes = 0
     this.totalCostPlan = 0

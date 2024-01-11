@@ -130,7 +130,7 @@ export class DialogRegistrarTicketsComponent {
   }
   notificarTicket(ticket:any){
     console.log('notificandoPortal');
-    const token=sessionStorage.getItem('token') ?? '';
+    const token=localStorage.getItem('token') ?? '';
     const body={
       ticket:ticket,
       token: token 

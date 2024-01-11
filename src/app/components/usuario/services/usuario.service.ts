@@ -62,7 +62,7 @@ export class UsuarioService {
 
   // Paquetes
   get initCampaings() {
-    const session = JSON.parse(sessionStorage.getItem('campaings') as never)
+    const session = JSON.parse(localStorage.getItem('campaings') as never)
     if (session) {
       return session
     }
@@ -70,12 +70,12 @@ export class UsuarioService {
   }
   setCampaings(e: any) {
     this.campaings.next([...this.campaings.value, e])
-    sessionStorage.setItem('campaings', JSON.stringify([...this.campaings.value]))
+    localStorage.setItem('campaings', JSON.stringify([...this.campaings.value]))
   }
   deleteCampaings(e: any) {
     const data = this.campaings.value.filter((d: any) => d.id !== e.id)
     this.campaings.next(data as never)
-    sessionStorage.setItem('campaings', JSON.stringify(data as never))
+    localStorage.setItem('campaings', JSON.stringify(data as never))
   }
 
   getCampaings() {
@@ -97,7 +97,7 @@ export class UsuarioService {
     return
   }
   deleteAllItems() {
-    sessionStorage.removeItem('campaings')
+    localStorage.removeItem('campaings')
     this.campaings.next(this.initCampaings)
     this.totalCostCampaings = 0
     this.itemsCount.next(0)
