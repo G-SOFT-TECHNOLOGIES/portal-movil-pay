@@ -38,7 +38,7 @@ export class ContratoComponent {
         }
        return this.contrato = result
       })
-      localStorage.setItem('contrato', JSON.stringify(this.id))
+      this.tvservices.setIdContrato(this.id)
     }).catch((err) => {
       console.log(err)
       this.loader.hideLoading()

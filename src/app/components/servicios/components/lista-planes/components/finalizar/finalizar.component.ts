@@ -29,7 +29,7 @@ export class FinalizarComponent {
   visible: boolean = false;
   subscription!: Subscription;
   id: number = 0
-  id_contrato = this.tvservices.initIdContrato
+  id_contrato = this.tvservices.id_contrato$
   total: number = 0;
   acumulado = this.tvservices.totalAcumulado$
   equipoCount = this.tvservices.equipo$
@@ -60,6 +60,7 @@ export class FinalizarComponent {
   }
 
   ngOnInit() {
+    this.tvservices.getIdContract()
     this.tvservices.getPlan()
     this.tvservices.getEquipo()
     this.getItemsTotalCount()

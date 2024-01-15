@@ -19,7 +19,9 @@ export class DatosValidadosComponent {
   id_contrato: number = 0
   ngOnInit(): void {
     this.tvservices.itemsCount.next(0)
-    this.id_contrato = this.tvservices.initIdContrato
+    this.tvservices.id_contrato$.subscribe(data => {
+      this.id_contrato = data
+    })
   }
   finalizar() {
     this.router.navigate(['home/contratos', this.id_contrato]);

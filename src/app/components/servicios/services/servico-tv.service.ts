@@ -26,6 +26,8 @@ export class ServicoTvService {
   totalItemsEquipo: number = 0
   totalAcumulado = new BehaviorSubject<number>(0)
   totalAcumulado$ = this.totalAcumulado.asObservable()
+  id_contrato = new BehaviorSubject<number | any>(this.initIdContrato)
+  id_contrato$ = this.id_contrato.asObservable()
   itemsCount = new BehaviorSubject<number>(0)
   totalTvBox$ = new BehaviorSubject<number>(this.totalCostEquipo)
   pagoTvBox$ = new BehaviorSubject<any>(null)
@@ -45,9 +47,37 @@ export class ServicoTvService {
     if (session) {
       return session
     }
-    return 0
+    return []
   }
+  setIdContrato(id: number | string){
+    let id_cont = id.toString()
+    console.log(id_cont, 'serv')
+    this.id_contrato.next(id_cont.toString())
+    localStorage.setItem('paquetes', JSON.stringify(this.id_contrato.value))
+    // if (isNaN(Number(this.id_contrato.value))) {
+    //   this.id_contrato.next(id)
+    //   console.log(this.id_contrato.value, 'el mismo')
+    //   localStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
+    //   return
+    // }
+    // console.log(id_cont, 'id_cont')
+    // this.id_contrato.next(id)
+    // console.log(this.id_contrato.value, 'valor')
+    // localStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
+    // return this
+    // if (Number(this.id_contrato.value) !== id) {
+    //   console.log(id, "id difer")
 
+    // } else {
+
+    // }
+  }
+  getIdContract() {
+    this.id_contrato$.subscribe(data => {
+      return this.id_contrato = data
+    })
+    return this.id_contrato.value
+  }
   deleteIdContrato() {
     localStorage.removeItem('contrato')
   }
