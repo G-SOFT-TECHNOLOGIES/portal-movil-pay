@@ -95,7 +95,8 @@
 
 
       <div class="w-full text-center mt-28 ">
-        <ng-container *ngIf="contratos.client_type == 1  || contratos.client_type == 7 && contratos.status ==16">
+        <ng-container *ngIf="contratos.client_type == 1 || contratos.client_type == 2 || contratos.client_type == 7 && contratos.status ==16">
+          <!-- <ng-container *ngIf="contratos.status ==16"> -->
           <!-- <ng-container > -->
           <div class="flex  mx-auto justify-center">
             <a [routerLink]="[ 'canjear', contratos.id]" class="rounded-full p-1 hover:scale-90 bg-slate-100"
@@ -190,16 +191,17 @@
     <dl class=" grid grid-cols-1 gap-5 lg:grid-cols-2 p-4" *ngIf="contract">
       <div *ngIf="contratos.status ==16 && contract.length <= 1   ">
         <div class=" bg-white px-4 py-2  text-center flex flex-col items-center justify-center">
-          <!-- <dt class=" text-sm font-medium text-gray-500 uppercase">Adquiere ya</dt> -->
           <dt class=" text-sm font-medium text-gray-500 uppercase">Próximamente</dt>
           <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">SERVICIO DE TV </dd>
           <div class="my-1 flex justify-center">
+            <!-- Esto va comentado -->
             <div class="w-full inline-flex rounded-md bg-white shadow">
               <button mat-raised-button color="warn" (click)="IrDetalle(contratos.id)"
                 class="w-full py-2 px-6"><mat-icon class="ml-2">shopping_cart</mat-icon>
                 Contratar
               </button>
             </div>
+            <!-- Fin del comentado  -->
           </div>
         </div>
       </div>
@@ -209,6 +211,7 @@
           <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{item.plan_type.name}}</dd>
 
           <ng-container *ngIf="item.service_type.id == 4 else INTERNET">
+            <!-- Comienza el comentado  de GTV-->
             <div class="flex justify-center  divide-x-2">
               <div class=" px-3 text-center">
                 <span
@@ -225,6 +228,7 @@
             </div>
             <button mat-raised-button color="warn" (click)="miServicio(contratos.id)" class="flex w-full m-1">
               Ir a Servicio TV <mat-icon class="mr-2 right-0">tv</mat-icon>
+               <!-- Termina el comentado -->
             </button>
           </ng-container>
           <ng-template #INTERNET>

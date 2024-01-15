@@ -19,7 +19,7 @@ export class TokenInvalidInterceptor implements HttpInterceptor {
         if ([401].includes(err.status) || [403].includes(err.status)) {
           this.auth.logout()
         }
-        const error = err.error?.message || err.statusText;
+        const error = err;
         // this.loading.hideLoading()
         return throwError(() => error);
       })
