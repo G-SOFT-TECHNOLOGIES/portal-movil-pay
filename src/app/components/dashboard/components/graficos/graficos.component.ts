@@ -62,11 +62,13 @@ export class GraficosComponent {
         this.servicesDash.getTrafickContract(body).then((result) => {
             if (result.length > 0) {
                 this.consumo.next(result);
-                this.subida = result.map((up) => this.calcularFormula(up.up))
-                this.bajada = result.map((down) => this.calcularFormula(down.dw))
+                result.map(d=>{
+                    this.subida = [this.calcularFormula(d.up)]
+                    this.bajada = [this.calcularFormula(d.dw)]
+                    this.totalBajada = this.calcularFormula(d.dw)
+                    this.totalSubida = this.calcularFormula(d.up)
+                })
                 this.labels = result.map((label) => label.date)
-                this.totalBajada = this.bajada.reduce((acc, value) => Number(acc) + Number(value)).toFixed(2)
-                this.totalSubida = this.subida.reduce((acc, value) => Number(acc) + Number(value)).toFixed(2)
                 this.loadingChart()
             } else {
                 this.consumo.next(false);
@@ -102,10 +104,13 @@ export class GraficosComponent {
             end: new Date(ultimoDiaDelMes),
         })
     }
-    calcularFormula(variable: any) {
-        return (Number(variable) / (1000 * 1000 * 1000)).toFixed(2)
-        // return 1.0e-9 * Number(variable);
-    }
+    // calcularFormula(variable: any) {
+    //     return (Number(variable) / (1000 * 1000 * 1000)).toFixed(2)
+    //     // return 1.0e-9 * Number(variable);
+    // }
+    calcularFormula(variable:any) {
+        return 1.0e-9 * Number(variable);
+      }
     loadingChart() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
