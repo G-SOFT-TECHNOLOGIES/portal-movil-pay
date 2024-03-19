@@ -144,14 +144,14 @@ export class PagoMovilComponent {
               this.registradas.value ? this.dialogRef.close(true) : '';
             })
             .catch((err) => {
-              this.snack.openSnack(err, 'error');
+              this.snack.openSnack(err?.error.message || "", 'error');
               this.botonHabilitado = true
             });
         }, 1500);
 
       })
       .catch((err) => {
-        this.snack.openSnack(err, 'error');
+        this.snack.openSnack(err?.error.message || "", 'error');
         this.botonHabilitado = true
       });
   }
@@ -195,11 +195,11 @@ export class PagoMovilComponent {
         this.snack.openSnack('Pago Movil registrado con exito', 'success')
         this.dialogRef.close(true)
       }).catch((error) => {
-        if (error == "Bad Request") {
+        if (error.statusText == "Bad Request") {
           this.snack.openSnack("Ya existe un registro con este enviante: " + valor.phone, 'error')
           return
         }
-        this.snack.openSnack(error, 'error')
+        this.snack.openSnack(error?.message, 'error')
         return
       });
   }

@@ -132,13 +132,13 @@ export class ZelleComponent {
             this.registradas.value ? this.dialogRef.close(true) : '';
           })
           .catch((err) => {
-            this.snack.openSnack(err, 'error')
+            this.snack.openSnack(err?.error.message || "", 'error');
             this.botonHabilitado = true
           });
         }, 1500);
       })
       .catch((err) => {
-        this.snack.openSnack(err, 'error');
+        this.snack.openSnack(err?.error.message || "", 'error');
         this.botonHabilitado = true
       });
 
