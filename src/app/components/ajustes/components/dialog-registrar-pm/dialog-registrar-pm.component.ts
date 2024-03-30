@@ -66,6 +66,8 @@ export class DialogRegistrarPmComponent {
           this.snack.openSnack('Pago Movil registrado con exito', 'success')
           this.dialogRef.close(true)
         }).catch(error => {
+          console.log(error.status)
+
           // if (error.status == 400) {
             this.snack.openSnack("Ya existe un registro con este enviante: " + valor.phone, 'error')
             return

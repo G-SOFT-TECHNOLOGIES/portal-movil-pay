@@ -66,6 +66,7 @@ export class DialogRegistrarZelleComponent {
           this.snack.openSnack('Zelle registrado con exito', 'success')
           this.dialogRef.close(true)
         }).catch((error) => {
+          console.log(error.status)
           // if (error.status == 400) {
             this.snack.openSnack("Ya existe un registro con este enviante: " + valor.titular, 'error')
             return

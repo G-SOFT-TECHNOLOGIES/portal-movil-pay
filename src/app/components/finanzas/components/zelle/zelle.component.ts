@@ -132,14 +132,22 @@ export class ZelleComponent {
             this.registradas.value ? this.dialogRef.close(true) : '';
           })
           .catch((err) => {
-            this.snack.openSnack(err.error.message || "", 'error');
+            console.log(err.status)
             this.botonHabilitado = true
+            if (err.status === 400) {
+              this.snack.openSnack(err.error.message || "", 'error');
+              return
+            }
           });
         }, 1500);
       })
       .catch((err) => {
-        this.snack.openSnack(err.error.message || "", 'error');
+        console.log(err.status)
         this.botonHabilitado = true
+        if (err.status === 400) {
+          this.snack.openSnack(err.error.message || "", 'error');
+          return
+        }
       });
 
 
