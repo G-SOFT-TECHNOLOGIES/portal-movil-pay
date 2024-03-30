@@ -49,12 +49,12 @@ export class DialogRegistrarTransferenciaComponent {
           this.snack.openSnack('Transferencia actualizada con exito', 'success')
           this.dialogRef.close(true)
         }).catch(error => {
-          if (error.status == 400) {
+          // if (error.status == 400) {
             this.snack.openSnack("Ya existe un registro con este enviante: " + valor.nro_cuenta, 'error')
             return
-          }
-          this.snack.openSnack(error.error.message, 'error')
-          return
+          // }
+          // this.snack.openSnack(error.error.message, 'error')
+          // return
         });
     } else {
       let copia: any = { ...body, 'client': this.user.id };
@@ -63,12 +63,12 @@ export class DialogRegistrarTransferenciaComponent {
           this.snack.openSnack('Transferencia registrada con exito', 'success')
           this.dialogRef.close(true)
         }).catch((error) => {
-          if (error.status == 400) {
+          // if (error.status == 400) {
             this.snack.openSnack("Ya existe un registro con este enviante: " + valor.nro_cuenta, 'error')
             return
-          }
-          this.snack.openSnack(error.error.message, 'error')
-          return
+          // }
+          // this.snack.openSnack(error.error.message, 'error')
+          // return
         });
     }
   }
