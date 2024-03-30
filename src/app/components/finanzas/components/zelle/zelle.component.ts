@@ -132,13 +132,13 @@ export class ZelleComponent {
             this.registradas.value ? this.dialogRef.close(true) : '';
           })
           .catch((err) => {
-            this.snack.openSnack(err?.error.message || "", 'error');
+            this.snack.openSnack(err.error.message || "", 'error');
             this.botonHabilitado = true
           });
         }, 1500);
       })
       .catch((err) => {
-        this.snack.openSnack(err?.error.message || "", 'error');
+        this.snack.openSnack(err.error.message || "", 'error');
         this.botonHabilitado = true
       });
 
@@ -169,11 +169,11 @@ export class ZelleComponent {
         this.snack.openSnack('Zelle registrado con exito', 'success')
         this.dialogRef.close(true)
       }).catch((error) => {
-        if (error== "Bad Request") {
-          this.snack.openSnack("Ya existe un registro con este enviante: "+valor.titular, 'error')
+        if (error.status == 400) {
+          this.snack.openSnack("Ya existe un registro con este enviante: " + valor.titular, 'error')
           return
         }
-        this.snack.openSnack(error, 'error')
+        this.snack.openSnack(error.error.message, 'error')
         return
       });
   }

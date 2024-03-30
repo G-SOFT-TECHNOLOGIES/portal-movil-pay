@@ -52,11 +52,11 @@ export class DialogRegistrarPmComponent {
           this.snack.openSnack('Pago Movil actualizado con exito', 'success')
           this.dialogRef.close(true)
         }).catch(error => {
-          if (error == "Bad Request") {
+          if (error.status == 400) {
             this.snack.openSnack("Ya existe un registro con este enviante: " + valor.phone, 'error')
             return
           }
-          this.snack.openSnack(error, 'error')
+          this.snack.openSnack(error.error.message, 'error')
           return
         });
     } else {
@@ -66,11 +66,11 @@ export class DialogRegistrarPmComponent {
           this.snack.openSnack('Pago Movil registrado con exito', 'success')
           this.dialogRef.close(true)
         }).catch(error => {
-          if (error == "Bad Request") {
+          if (error.status == 400) {
             this.snack.openSnack("Ya existe un registro con este enviante: " + valor.phone, 'error')
             return
           }
-          this.snack.openSnack(error, 'error')
+          this.snack.openSnack(error.error.message, 'error')
           return
         });
     }
