@@ -132,7 +132,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="contratos.invoice_date_cicle !=null" class="flex items-center my-2 p-2  text-xs text-center text-red-800 rounded-lg bg-red-50" role="alert">
+      <div *ngIf="contratos.date_cicle !=null" class="flex items-center my-2 p-2  text-xs text-center text-red-800 rounded-lg bg-red-50" role="alert">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
           class="flex-shrink-0 inline w-5 h-5  me-3">
           <path fill-rule="evenodd"
@@ -142,7 +142,7 @@
         <span class="sr-only">Info</span>
         <div >
           <span class=" font-medium leading-6 mr-2 ">Tiene hasta el <span class="text-lg font-bold text-red-800">
-              {{contratos.invoice_date_cicle}} <span
+              {{contratos.date_cicle}} <span
                 class="text-xs font-medium ">c/mes</span></span>
             para realizar el pago de su factura</span>
           <p class=" font-medium text-red-800">Evite el corte de su servicio</p>
