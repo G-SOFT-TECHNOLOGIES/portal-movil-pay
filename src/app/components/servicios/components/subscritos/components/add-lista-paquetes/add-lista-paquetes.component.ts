@@ -6,6 +6,7 @@ import { ServicoTvService } from 'src/app/components/servicios/services/servico-
 import { LoadingService } from 'src/app/components/service/loading.service';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { DialogoDetallePaqueteComponent } from '../../../lista-planes/components/dialogo-detalle-paquete/dialogo-detalle-paquete.component';
+import { ParamsGTV } from 'src/app/components/usuario/interfaces/contractosInterfaces';
 
 @Component({
   selector: 'app-add-lista-paquetes',
@@ -25,7 +26,9 @@ export class AddListaPaquetesComponent {
     package: new FormControl<any>('')
   })
   ngOnInit(): void {
-    this.tvservices.getAllPackages().then((result) => {
+    const params: ParamsGTV = new ParamsGTV();
+    params.status = 'true'
+    this.tvservices.getAllPackages(params).then((result) => {
       if (this.paquetes.length >0) {
         this.paquetes.map((pack) => {
           this.packages = result.filter((pack_repet) => pack_repet.id != pack.package).map(data => data)

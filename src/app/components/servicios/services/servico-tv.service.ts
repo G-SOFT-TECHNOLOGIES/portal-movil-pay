@@ -7,11 +7,14 @@ import { Packages, PackegeID } from '../interface/paquetes.interface';
 import { ConstantPool } from '@angular/compiler';
 import { ContratoID } from '../../finanzas/interfaces/UsuarioIDInterface';
 import { GtvRoot } from '../interface/gtv.interface';
+import { ParamsGTV } from '../../usuario/interfaces/contractosInterfaces';
+import { QueryParamsService } from '../../utils/query-params.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicoTvService {
+  private queryservices = inject(QueryParamsService)
   private http = inject(HttpClient)
   url = environment.API_URL
   private paquetes = new BehaviorSubject<any[]>(this.initPaquete)
@@ -49,11 +52,11 @@ export class ServicoTvService {
     }
     return []
   }
-  setIdContrato(id: number | string){
+  setIdContrato(id: number | string) {
     let id_cont = id.toString()
     console.log(id_cont, 'serv')
     this.id_contrato.next(id_cont.toString())
-    localStorage.setItem('paquetes', JSON.stringify(this.id_contrato.value))
+    localStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
     // if (isNaN(Number(this.id_contrato.value))) {
     //   this.id_contrato.next(id)
     //   console.log(this.id_contrato.value, 'el mismo')
@@ -73,9 +76,9 @@ export class ServicoTvService {
     // }
   }
   getIdContract() {
-    this.id_contrato$.subscribe(data => {
-      return this.id_contrato = data
-    })
+    // this.id_contrato$.subscribe(data => {
+    //   return this.id_contrato = data
+    // })
     return this.id_contrato.value
   }
   deleteIdContrato() {
@@ -88,7 +91,7 @@ export class ServicoTvService {
       return session
     }
     return []
-  } 
+  }
   setPaquetes(e: any) {
     this.paquetes.next([...this.paquetes.value, e])
     localStorage.setItem('paquetes', JSON.stringify([...this.paquetes.value]))
@@ -204,8 +207,9 @@ export class ServicoTvService {
     const resp = this.http.get<PlanID>(`${this.url}/api/gsoft/portal/services/type/${id}/`)
     return lastValueFrom(resp)
   }
-  getAllPackages(): Promise<Packages[]> {
-    const resp = this.http.get<Packages[]>(`${this.url}/api/gsoft/portal/gtv/package/`)
+  getAllPackages(params: ParamsGTV): Promise<Packages[]> {
+    const resparams = this.queryservices.buildQueryParams(params)
+    const resp = this.http.get<Packages[]>(`${this.url}/api/gsoft/portal/gtv/package/`,{ params: resparams })
     return lastValueFrom(resp)
   }
   getPackages(id: number): Promise<PackegeID[]> {

@@ -41,37 +41,45 @@ export class CardUserComponent {
   }
   IrDetalle(contrato: number) {
     let plan = 0
-    this.tvservices.id_servicestv$.subscribe(data => plan = data)
     if (contrato) {
-      this.tvservices.setIdContrato(contrato)
-    } else {
-      this.router.navigate([`home/contratos`])
-    }
-    if (plan == 0) {
       this.snack.openSnack("Seleccione el plan", '')
-      this.router.navigate(['home/servicios_tv/contratos', contrato])
-    } else {
-      this.router.navigate(['home/servicios_tv/planes/informacion', plan])
+      this.router.navigate(['home/gtv', contrato])
+      this.tvservices.setIdContrato(contrato)
+      return
     }
-  } 
-  miServicio(contrato: number) {
-    this.router.navigate(['home/servicios_tv/contratos', contrato])
-  }
+    // this.router.navigate(['home/servicios_tv/planes/informacion', plan])
+    // return
+  // this.tvservices.id_servicestv$.subscribe(data => plan = data)
+  // if (contrato) {
+  //   this.tvservices.setIdContrato(contrato)
+  // } else {
+  //   this.router.navigate([`home/contratos`])
+  // }
+  // if (plan == 0) {
+  //   this.snack.openSnack("Seleccione el plan", '')
+  //   this.router.navigate(['home/servicios_tv/contratos', contrato])
+  // } else {
+  //   this.router.navigate(['home/servicios_tv/planes/informacion', plan])
+  // }
+}
+miServicio(contrato: number) {
+  this.router.navigate(['home/gtv', contrato])
+}
 
-  abrirFirma(){
-    const dialog = this.dialog.open(DialogFirmaComponent,{
-      data:this.contratos.id,
-      width: window.innerWidth > 639 ? 'auto' : 'auto',
-      height: window.innerWidth > 639 ? 'auto' : 'auto'
-    })
-    dialog.afterClosed().subscribe(d=>{
-      if (d) {
-        this.usuario.getContratos()        
-      }
-    })
-  }
-  
-  calculo(monto: number) {
-    return this.fuser.calcularBs(monto)
-  }
+abrirFirma() {
+  const dialog = this.dialog.open(DialogFirmaComponent, {
+    data: this.contratos.id,
+    width: window.innerWidth > 639 ? 'auto' : 'auto',
+    height: window.innerWidth > 639 ? 'auto' : 'auto'
+  })
+  dialog.afterClosed().subscribe(d => {
+    if (d) {
+      this.usuario.getContratos()
+    }
+  })
+}
+
+calculo(monto: number) {
+  return this.fuser.calcularBs(monto)
+}
 }

@@ -1,12 +1,12 @@
 export interface ResultContract {
-    count: number
-    next: any
-    previous: any
-    results: Contract[]
-  }
-  
-  export interface Contract {
-    id: number
+  count: number
+  next: any
+  previous: any
+  results: Contract[]
+}
+
+export interface Contract {
+  id: number
   client: number
   client_name: string
   client_email: string
@@ -33,10 +33,13 @@ export interface ResultContract {
   client_name_name: string
   client_name_lastname: string
   bank_associated: number
-  }
-  
-  export class ParamsCampaing{
-    search?:string
-    page?: number
-    
-  }
+}
+
+export class ParamsCampaing {
+  search?: string
+  page?: number
+
+}
+export class ParamsGTV {
+  status?: string
+}

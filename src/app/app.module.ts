@@ -21,6 +21,7 @@ import { DialogConfirmComponent } from './components/components/dialog-confirm/d
 import { DialogoActualizacionesComponent } from './components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
 import { DialogoPasosAfiliacionComponent } from './components/components/dialogo-pasos-afiliacion/dialogo-pasos-afiliacion.component';
 import { DialogoAlertasGlobalesComponent } from './components/components/dialogo-alertas-globales/dialogo-alertas-globales.component';
+import { GtvComponent } from './components/gtv/gtv.component';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { DialogoAlertasGlobalesComponent } from './components/components/dialogo
     DialogConfirmComponent,
     DialogoActualizacionesComponent,
     DialogoPasosAfiliacionComponent,
-    DialogoAlertasGlobalesComponent
+    DialogoAlertasGlobalesComponent,
   ],
   imports: [
     CommonModule,

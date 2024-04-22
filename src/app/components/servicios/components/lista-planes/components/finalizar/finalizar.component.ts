@@ -7,6 +7,7 @@ import { Subscription, count } from 'rxjs';
 import { ConfirmService } from 'src/app/components/service/confirm.service';
 import { Packages } from 'src/app/components/servicios/interface/paquetes.interface';
 import { ServicoTvService } from 'src/app/components/servicios/services/servico-tv.service';
+import { ParamsGTV } from 'src/app/components/usuario/interfaces/contractosInterfaces';
 
 @Component({
   selector: 'app-finalizar',
@@ -120,7 +121,9 @@ export class FinalizarComponent {
     this.getItemsTotalCount()
   }
   getAllPackage() {
-    this.tvservices.getAllPackages().then((result) => {
+    const params: ParamsGTV = new ParamsGTV();
+    params.status = 'true'
+    this.tvservices.getAllPackages(params).then((result) => {
       this.packages = result
     }).catch((err) => {
       console.log(err)

@@ -109,12 +109,14 @@ export class ComplementosComponent {
         this.router.navigate(['home/servicios_tv/planes/suscripcion']);
       }).catch((err) => {
         console.log(err)
-        if (err.statuts == 400) {
-          this.snack.openSnack(err, "error")
-        } else {
-          this.snack.openSnack(err, "error")
-        }
         this.loader.hideLoading()
+        if (err.status == 400) {
+          this.snack.openSnack(err.error?.message, "error")
+          this.snack.openSnack(err.error?.non_field_errors[0], "error")
+          return
+        }
+        this.snack.openSnack(err?.statusText, "error")
+        return
 
       })
     }, 500);
@@ -133,8 +135,8 @@ export class ComplementosComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       this.tvservices.pagoTvBox$.subscribe(data => this.payments = data)
-      console.log(this.payments) 
-      if (this.payments !=null) { 
+      console.log(this.payments)
+      if (this.payments != null) {
         // console.log()
         // console.log(this.payments.amount, monto, this.payments.amount < monto)
         if (this.payments.amount < monto) {

@@ -1,22 +1,19 @@
 import { Component, inject } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription, BehaviorSubject } from 'rxjs';
-import { ContratoID } from 'src/app/components/finanzas/interfaces/UsuarioIDInterface';
-import { FacturaContratoService } from 'src/app/components/finanzas/services/usuario.service';
-import { LoadingService } from 'src/app/components/service/loading.service';
-import { ServicesTV } from '../../interface/servicestv.interface';
-import { ServicoTvService } from '../../services/servico-tv.service';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ContratoID } from '../finanzas/interfaces/UsuarioIDInterface';
+import { LoadingService } from '../service/loading.service';
+import { ServicoTvService } from '../servicios/services/servico-tv.service';
 
 @Component({
-  selector: 'app-contrato',
-  templateUrl: './contrato.component.html',
-  styleUrls: ['./contrato.component.css']
+  selector: 'app-gtv',
+  templateUrl: './gtv.component.html',
+  styleUrls: ['./gtv.component.css']
 })
-export class ContratoComponent {
-  private router = inject(Router)
+export class GtvComponent {
   private tvservices = inject(ServicoTvService)
   private loader = inject(LoadingService)
-  suscrito: boolean = false
+  suscrito: boolean | null = null 
   private rout = inject(ActivatedRoute)
   sub !: Subscription
   id: number = 0
@@ -32,11 +29,13 @@ export class ContratoComponent {
     this.loader.hideLoading()
     this.tvservices.getContratoTV(this.id).then((result) => {
       result.contract_detail.map((contract) => {
-        console.log(contract.service_type.id)
+        this.contrato = result
         if (contract.service_type.id == 4) {
           this.suscrito = true
+          return
         }
-       return this.contrato = result
+        this.suscrito = false
+       return 
       })
       this.tvservices.setIdContrato(this.id)
     }).catch((err) => {
@@ -45,5 +44,4 @@ export class ContratoComponent {
 
     })
   }
-
 }

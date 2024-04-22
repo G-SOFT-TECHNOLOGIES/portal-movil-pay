@@ -16,6 +16,7 @@ const routes: Routes = [
       { path: 'inicio', loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule)  },
       { path: 'contratos', loadChildren: () => import('../usuario/usuario.module').then(m => m.UsuarioModule)  },
       { path: 'servicios_tv', loadChildren: () => import('../servicios/servicios.module').then(m => m.ServiciosModule)  },
+      { path: 'gtv/:id', loadChildren: () => import('../gtv/gtv.module').then(m => m.GtvModule)  },
       { path: 'tickets', loadChildren: () => import('../tickets/tickets.module').then(m => m.TicketsModule)  },
       { path: 'ajustes', loadChildren: () => import('../ajustes/ajustes.module').then(m => m.AjustesModule) },
       { path: 'canjes', loadChildren: () => import('../canjes/canjes.module').then(m => m.CanjesModule) },
