@@ -83,9 +83,9 @@ export class PagoMovilComponent {
   }
 
   onSubmit() {
-  
+
     this.botonHabilitado = false
-    
+
     const valor = this.myForm.value;
     const calculo = this.calcular();
     const resultadoBS = this.convertirBolivares(Number(this.factura.monto))
@@ -110,31 +110,31 @@ export class PagoMovilComponent {
       .validarPago(payment)
       .then((result) => {
         this.snack.openSnack(result.message, 'success');
-       
-          const numero = Number(this.factura.montoDescuento) - Number(result.monto);
-          const resultado = Number(numero.toFixed(2));
-          const resultadoBS = this.convertirBolivares(resultado < 0 ? Number(this.factura.monto) : result.monto)
-          const pago = {
-            payment: [
-              {
-                bank: null,
-                method: 1,
-                reference: valor.reference,
-                amount: result.monto,
-                amount_bs: Number(valor.amount),
-                sender: valor.sender,
-                date: this.core.formatearFecha(valor.date ?? ''),
-                contract: this.factura.contract,
-                payment_invoices: [
-                  {
-                    invoice: this.factura.id,
-                    amount: resultado < 0 ? this.factura.montoDescuento : result.monto,
-                  },
-                ],
-              },
-            ],
-          };
-          setTimeout(() => {
+
+        const numero = Number(this.factura.montoDescuento) - Number(result.monto);
+        const resultado = Number(numero.toFixed(2));
+        const resultadoBS = this.convertirBolivares(resultado < 0 ? Number(this.factura.monto) : result.monto)
+        const pago = {
+          payment: [
+            {
+              bank: null,
+              method: 1,
+              reference: valor.reference,
+              amount: result.monto,
+              amount_bs: Number(valor.amount),
+              sender: valor.sender,
+              date: this.core.formatearFecha(valor.date ?? ''),
+              contract: this.factura.contract,
+              payment_invoices: [
+                {
+                  invoice: this.factura.id,
+                  amount: resultado < 0 ? this.factura.montoDescuento : result.monto,
+                },
+              ],
+            },
+          ],
+        };
+        setTimeout(() => {
           this.usuario
             .pagarFatura(pago)
             .then((result) => {
@@ -144,15 +144,23 @@ export class PagoMovilComponent {
               this.registradas.value ? this.dialogRef.close(true) : '';
             })
             .catch((err) => {
-              this.snack.openSnack(err, 'error');
+              console.log(err.status)
               this.botonHabilitado = true
+              if (err.status === 400) {
+                this.snack.openSnack(err.error.message || "", 'error');
+                return
+              }
             });
         }, 1500);
 
       })
       .catch((err) => {
-        this.snack.openSnack(err, 'error');
+        console.log(err.status)
         this.botonHabilitado = true
+        if (err.status === 400) {
+          this.snack.openSnack(err.error.message || "", 'error');
+          return
+        }
       });
   }
 
@@ -195,12 +203,12 @@ export class PagoMovilComponent {
         this.snack.openSnack('Pago Movil registrado con exito', 'success')
         this.dialogRef.close(true)
       }).catch((error) => {
-        if (error == "Bad Request") {
-          this.snack.openSnack("Ya existe un registro con este enviante: " + valor.phone, 'error')
-          return
-        }
-        this.snack.openSnack(error, 'error')
+        //  if (error.status == 400) {
+        this.snack.openSnack("Ya existe un registro con este enviante: " + valor.phone, 'error')
         return
+        // }
+        // this.snack.openSnack(error.error.message, 'error')
+        // return
       });
   }
 }

@@ -19,7 +19,7 @@ export class DialogRegistrarTicketsComponent {
   private ticket = inject(TicketService);
   private form = inject(FormBuilder);
   private core = inject(CoreService);
-  private snack = inject(SnackbarService);
+  private snack:any = inject(SnackbarService);
   private home = inject(UsuarioService);
   contratos$ = this.home.contractos$;
   user = this.core.getUser();
@@ -82,6 +82,7 @@ export class DialogRegistrarTicketsComponent {
     this.ticket
       .postMethod(body)
       .then((result:any) => {
+        console.log(result);
         this.ticket.createNotification(result.id).then((resp:any)=>{
           this.notificarTicket(result)
           this.snack.openSnack('Ticket registrado con exito', 'success');
@@ -90,7 +91,14 @@ export class DialogRegistrarTicketsComponent {
         })
        
       })
-      .catch((err) => {
+      .catch((err:any) => {
+        if (err.status == 400) {
+          console.log(err.status)
+          console.log(err[0])
+          this.snack.openSnack(err.error[0]);
+        }
+        console.log(err);
+        return 
         input?.removeAttribute('disabled');
         console.log(err);
       });

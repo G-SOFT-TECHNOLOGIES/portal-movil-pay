@@ -54,7 +54,7 @@
                                     <span class="flex justify-center text-center font-medium text-sm ">Total Subida
                                     </span>
                                     <span class="flex justify-center text-center font-extralight text-2xl">
-                                        {{totalSubida}} GB</span>
+                                        {{totalSubida | number : "1.2-2"}} GB</span>
                                 </div>
                             </div>
                             <div class="flex-1 ">
@@ -63,7 +63,7 @@
                                     <span class="flex justify-center text-center font-medium text-sm "> Total Bajada
                                     </span>
                                     <span class="flex justify-center text-center font-extralight text-2xl">
-                                        {{totalBajada}} GB </span>
+                                        {{totalBajada | number : "1.2-2"}} GB </span>
                                 </div>
                             </div>
                         </div>

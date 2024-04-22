@@ -132,14 +132,22 @@ export class ZelleComponent {
             this.registradas.value ? this.dialogRef.close(true) : '';
           })
           .catch((err) => {
-            this.snack.openSnack(err, 'error')
+            console.log(err.status)
             this.botonHabilitado = true
+            if (err.status === 400) {
+              this.snack.openSnack(err.error.message || "", 'error');
+              return
+            }
           });
         }, 1500);
       })
       .catch((err) => {
-        this.snack.openSnack(err, 'error');
+        console.log(err.status)
         this.botonHabilitado = true
+        if (err.status === 400) {
+          this.snack.openSnack(err.error.message || "", 'error');
+          return
+        }
       });
 
 
@@ -169,12 +177,12 @@ export class ZelleComponent {
         this.snack.openSnack('Zelle registrado con exito', 'success')
         this.dialogRef.close(true)
       }).catch((error) => {
-        if (error== "Bad Request") {
-          this.snack.openSnack("Ya existe un registro con este enviante: "+valor.titular, 'error')
-          return
-        }
-        this.snack.openSnack(error, 'error')
-        return
+          // if (error.status == 400) {
+            this.snack.openSnack("Ya existe un registro con este enviante: " + valor.titular, 'error')
+            return
+          // }
+          // this.snack.openSnack(error.error.message, 'error')
+          // return
       });
   }
   viewLinkAccount(event: any) {

@@ -52,12 +52,12 @@ export class DialogRegistrarZelleComponent {
           this.snack.openSnack('Zelle actualizado con exito', 'success')
           this.dialogRef.close(true)
         }).catch(error => {
-          if (error == "Bad Request") {
+           // if (error.status == 400) {
             this.snack.openSnack("Ya existe un registro con este enviante: " + valor.titular, 'error')
             return
-          }
-          this.snack.openSnack(error, 'error')
-          return
+          // }
+          // this.snack.openSnack(error.error.message, 'error')
+          // return
         });
     } else {
       let copia: any = { ...body, 'client': this.user.id };
@@ -66,11 +66,13 @@ export class DialogRegistrarZelleComponent {
           this.snack.openSnack('Zelle registrado con exito', 'success')
           this.dialogRef.close(true)
         }).catch((error) => {
-          if (error == "Bad Request") {
+          console.log(error.status)
+          // if (error.status == 400) {
             this.snack.openSnack("Ya existe un registro con este enviante: " + valor.titular, 'error')
             return
-          }
-          this.snack.openSnack(error, 'error')
+          // }
+          // this.snack.openSnack(error.error.message, 'error')
+          // return
         });
     }
   }

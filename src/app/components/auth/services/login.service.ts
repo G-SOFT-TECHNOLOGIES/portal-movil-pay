@@ -48,10 +48,8 @@ export class LoginService {
       }).catch((err) => {
         this.loading.hideLoading()
         console.log(err)
-        if (err == 'Unknown Error' || err == 'Not Found' || err == 'Internal Server Error') {
-          return this.snack.openSnack("Por  favor comuníquese con el administrador.", 'error')
-        }
-        return this.snack.openSnack(err, 'error')
+        return this.snack.openSnack(err.error.message, 'error')
+        
       });
   }
   setLoggin() {
