@@ -1,0 +1,35 @@
+<div
+  class="relative bg-neutral-800 opacity-95 bg-center p-4 m-4 w-full mx-auto rounded-2xl"
+>
+  <div class="mx-auto text-left text-white">
+    <span
+      aria-hidden="true"
+      class="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-gray-800 opacity-80 rounded-2xl"
+    ></span>
+    <div class="flex items-center justify-center">
+      <div class="grid relative px-2 justify-center text-center gap-y-4">
+        <h1 class="text-xl font-medium">{{ paquetes.name }}</h1>
+        <h1 class="text-2xl font-medium">
+          ${{ paquetes.price }}<span class="text-xl"> / mensual</span>
+        </h1>
+        <div class="inline-flex justify-center gap-2 items-center">
+          <mat-icon>check</mat-icon
+          >{{ paquetes.channels_package_gtv_count }} Canales incluidos
+        </div>
+        <div class="flex flex-col justify-center my-4 gap-y-4">
+          <div class="inline-flex justify-center items-center rounded-2xl" 
+          [ngClass]="checked ? 'border-2 border-red-600': 'bg-red-600'">
+            <mat-checkbox
+              color="warn"
+              [checked]="checked"
+              (change)="setShopping($event.checked); checked = !checked"
+              [value]="paquetes"
+            >
+              <span class="font-bold py-2 px-6 text-xl text-white">{{checked ? 'Cancelar': 'Adquirir'}}</span>
+            </mat-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

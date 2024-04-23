@@ -1,60 +1,72 @@
-<div class="fixed-background">
-  <span
-    aria-hidden="true"
-    class="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-gray-800 opacity-80"
-  ></span>
-</div>
-<div class="max-w-xl self-center mx-auto p-2 items-center mt-16">
-  <div class="w-full text-center">
-    <div class="inset-x-0 top-8 mx-auto drop-shadow-sm">
-      <span class="inline-flex items-center gap-x-2">
+<div class="flex justify-between gap-2 self-center mx-8">
+  <div class="flex items-center gap-2 mt-16 mx-4">
+    <a [routerLink]="['/home/contratos']" mat-mini-fab color="warn">
+      <mat-icon>chevron_left</mat-icon>
+    </a>
+    <div>
+      <span class="inline-flex justify-center items-center">
         <img
-          src="../../../../../assets/img/logotvplusblanco.svg"
+          src="../../../../../assets/img/logotvplusnegro.svg"
           alt=""
-          height="10"
-          width="300"
+          class="w-1/2"
         />
       </span>
     </div>
   </div>
-</div>
-<div class="flex justify-around max-w-4xl  self-center mx-auto items-center my-4">
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 w-full text-white  mx-auto ">
-    <section
-      *ngFor="let plan of planesTv"
-      class="flex flex-col gap-y-4 justify-center"
+
+  <div class="flex justify-end mx-4">
+    <div
+      class="flex flex-col justify-end w-full text-center"
+      *ngIf="planActivo | async as planActivo"
     >
-      <span class="text-2xl font-medium my-8 text-center z-10">
-        Adquiere tu servicio de IPTV
-      </span>
       <div
-        class="relative bg-neutral-800 opacity-95 bg-center py-20 m-4  w-full rounded-2xl"
+        class="inline-flex items-center gap-2 p-4"
+        *ngFor="let plan of planActivo"
       >
-        <div class="container mx-auto text-left text-white">
-          <span
-            aria-hidden="true"
-            class="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-gray-800 opacity-80 rounded-2xl"
-          ></span>
-          <div class="flex items-center justify-center">
-            <div class="w-full relative px-2 text-center leading-6">
-              <h1 class="text-5xl font-medium">{{ plan.name }}</h1>
-              <p class="text-5xl font-medium">
-                ${{ plan.cost }}<span class="text-xl"> / mensual</span>
-              </p>
-              <div class="mt-8 flex justify-center">
-                <div class="inline-flex rounded-md bg-red-600 shadow">
-                  <button
-                    (click)="IrDetalles(plan.id)"
-                    class="font-bold py-2 px-6 w-full text-2xl"
-                  >
-                    Ver plan
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <svg
+          width="68"
+          height="81"
+          viewBox="0 0 68 81"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M30.2105 40.3157C30.8805 40.3157 31.5231 40.5819 31.9968 41.0556C32.4706 41.5294 32.7368 42.172 32.7368 42.842C32.7368 43.512 32.4706 44.1546 31.9968 44.6284C31.5231 45.1021 30.8805 45.3683 30.2105 45.3683H22.6315C21.9615 45.3683 21.3189 45.1021 20.8452 44.6284C20.3714 44.1546 20.1052 43.512 20.1052 42.842C20.1052 42.172 20.3714 41.5294 20.8452 41.0556C21.3189 40.5819 21.9615 40.3157 22.6315 40.3157H30.2105ZM45.3683 32.7368C45.3683 32.0667 45.1021 31.4242 44.6284 30.9504C44.1546 30.4766 43.512 30.2105 42.842 30.2105H22.6315C21.9615 30.2105 21.3189 30.4766 20.8452 30.9504C20.3714 31.4242 20.1052 32.0667 20.1052 32.7368C20.1052 33.4068 20.3714 34.0494 20.8452 34.5231C21.3189 34.9969 21.9615 35.2631 22.6315 35.2631H42.842C43.512 35.2631 44.1546 34.9969 44.6284 34.5231C45.1021 34.0494 45.3683 33.4068 45.3683 32.7368ZM22.6315 25.1578H42.842C43.512 25.1578 44.1546 24.8917 44.6284 24.4179C45.1021 23.9441 45.3683 23.3016 45.3683 22.6315C45.3683 21.9615 45.1021 21.3189 44.6284 20.8452C44.1546 20.3714 43.512 20.1052 42.842 20.1052H22.6315C21.9615 20.1052 21.3189 20.3714 20.8452 20.8452C20.3714 21.3189 20.1052 21.9615 20.1052 22.6315C20.1052 23.3016 20.3714 23.9441 20.8452 24.4179C21.3189 24.8917 21.9615 25.1578 22.6315 25.1578ZM52.9472 59.1215V68.8049C52.9474 69.1652 52.8407 69.5176 52.6405 69.8173C52.4404 70.117 52.1559 70.3506 51.8229 70.4885C51.49 70.6265 51.1236 70.6625 50.7702 70.5922C50.4167 70.5218 50.0921 70.3482 49.8373 70.0933L47.8946 68.1531L45.9519 70.0933C45.6971 70.3482 45.3725 70.5218 45.0191 70.5922C44.6656 70.6625 44.2992 70.6265 43.9663 70.4885C43.6334 70.3506 43.3488 70.117 43.1487 69.8173C42.9486 69.5176 42.8418 69.1652 42.842 68.8049V59.1215C40.9153 58.0145 39.4087 56.3015 38.5569 54.2492C37.7051 52.1969 37.5559 49.9205 38.1324 47.7745C38.709 45.6286 39.979 43.7335 41.7447 42.3844C43.5103 41.0354 45.6726 40.308 47.8946 40.3157C48.7486 40.3264 49.5977 40.4469 50.4209 40.6744V22.6315C50.4209 20.6215 49.6224 18.6938 48.2011 17.2724C46.7798 15.8511 44.8521 15.0526 42.842 15.0526H22.6315C20.6215 15.0526 18.6938 15.8511 17.2724 17.2724C15.8511 18.6938 15.0526 20.6215 15.0526 22.6315V52.9472C15.0526 54.9573 15.8511 56.885 17.2724 58.3063C18.6938 59.7277 20.6215 60.5262 22.6315 60.5262H35.2631C35.9331 60.5262 36.5757 60.7923 37.0494 61.2661C37.5232 61.7399 37.7894 62.3824 37.7894 63.0525C37.7894 63.7225 37.5232 64.3651 37.0494 64.8388C36.5757 65.3126 35.9331 65.5788 35.2631 65.5788H22.6315C19.2827 65.5748 16.0721 64.2426 13.7041 61.8746C11.3361 59.5066 10.004 56.2961 10 52.9472V22.6315C10.004 19.2827 11.3361 16.0721 13.7041 13.7041C16.0721 11.3361 19.2827 10.004 22.6315 10L42.842 10C46.1909 10.004 49.4014 11.3361 51.7694 13.7041C54.1374 16.0721 55.4695 19.2827 55.4735 22.6315V43.807C56.4631 44.9184 57.1917 46.2369 57.6058 47.6662C58.0199 49.0955 58.1091 50.5993 57.8669 52.0675C57.6247 53.5357 57.0572 54.9312 56.206 56.1517C55.3548 57.3722 54.2413 58.3869 52.9472 59.1215ZM52.9472 50.4209C52.9472 49.4216 52.6509 48.4447 52.0957 47.6138C51.5405 46.7829 50.7514 46.1353 49.8282 45.7529C48.9049 45.3705 47.889 45.2704 46.9089 45.4654C45.9288 45.6603 45.0285 46.1416 44.3219 46.8482C43.6153 47.5548 43.134 48.4551 42.9391 49.4352C42.7441 50.4153 42.8442 51.4312 43.2266 52.3545C43.609 53.2777 44.2566 54.0668 45.0875 54.622C45.9184 55.1772 46.8953 55.4735 47.8946 55.4735C49.2346 55.4735 50.5198 54.9412 51.4674 53.9937C52.4149 53.0461 52.9472 51.761 52.9472 50.4209Z"
+            fill="#595959"
+          />
+        </svg>
+        <span class="text-2xl font-medium">Nº: {{ contrato }}</span>
       </div>
-    </section>
+      <p
+        class="text-xl font-semibold"
+        *ngIf="acumulado | async as acumulado; else Cero"
+      >
+        Pago mensual actual : <span class="text-5xl">$ {{ acumulado }}</span>
+      </p>
+      <ng-template #Cero>
+        <p class="text-xl font-semibold">
+          Pago mensual actual :
+          <span class="text-5xl">$ {{ 0 | number : "1.2-2" }}</span>
+        </p>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<div class="max-w-4xl self-center mx-auto p-2">
+  <div class="grid gap-2 w-full mx-auto">
+    <div class="gap-4 m-4 p-4 grid grid-cols-1 mx-auto">
+      <app-package-gtv
+        *ngFor="let item of packages"
+        [paquetes]="item"
+      ></app-package-gtv>
+    </div>
+  </div>
+  <div class="flex justify-center gap-2">
+    <button
+      class="p-3 rounded-full text-white w-1/2 font-semibold text-xl bg-red-600"
+      (click)="registrar()"
+    >
+      Finalizar
+    </button>
   </div>
 </div>

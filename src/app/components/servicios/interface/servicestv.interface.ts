@@ -12,6 +12,7 @@ export interface ServicesTV {
   image: any
   profit_id: any
   status: boolean
+  channel_count:number
 }
 
 export interface PlanID {

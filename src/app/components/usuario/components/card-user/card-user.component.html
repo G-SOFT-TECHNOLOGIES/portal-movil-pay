@@ -112,11 +112,14 @@
           </span>
         </div>
       </ng-container>
-
-
-      <div class="w-full text-center mt-28 ">
-        <ng-container *ngIf="contratos.client_type == 1  || contratos.client_type == 7 && contratos.status ==16">
-          <!-- <ng-container > -->
+      <div class="w-full text-center mt-28">
+        <ng-container
+          *ngIf="
+            contratos.client_type == 1 ||
+            contratos.client_type == 2 ||
+            (contratos.client_type == 7 && contratos.status == 16)
+          "
+        >
           <div class="flex mx-auto justify-center">
             <a
               [routerLink]="['canjear', contratos.id]"
@@ -176,10 +179,7 @@
           </div>
         </div>
       </div>
-      <div class="flex items-center my-2 p-2  text-xs text-center text-red-800 rounded-lg bg-red-50" role="alert">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-          class="flex-shrink-0 inline w-5 h-5  me-3">
-          <path fill-rule="evenodd"
+
       <div
         *ngIf="contratos.invoice_date_cicle != null"
         class="flex items-center my-2 p-2 text-xs text-center text-red-800 rounded-lg bg-red-50"
@@ -199,165 +199,173 @@
         </svg>
         <span class="sr-only">Info</span>
         <div>
-          <span class=" font-medium leading-6 mr-2 ">Tiene hasta el <span class="text-lg font-bold text-red-800">
-              {{contratos.date_cicle}} <span
-                class="text-xs font-medium ">c/mes</span></span>
-            para realizar el pago de su factura</span>
-          <p class=" font-medium text-red-800">Evite el corte de su servicio</p>
-=======
-          <span class="font-medium leading-6 mr-2"
-            >Tiene hasta el
-            <span class="text-lg font-bold text-red-800">
-              {{ contratos.invoice_date_cicle }}
-              <span class="text-xs font-medium">c/mes</span></span
+          <div>
+            <span class="font-medium leading-6 mr-2"
+              >Tiene hasta el
+              <span class="text-lg font-bold text-red-800">
+                {{ contratos.date_cicle }}
+                <span class="text-xs font-medium">c/mes</span></span
+              >
+              para realizar el pago de su factura</span
             >
-            para realizar el pago de su factura</span
-          >
-          <p class="font-medium text-red-800">Evite el corte de su servicio</p>
->>>>>>> Stashed changes
-        </div>
-      </div>
-
-      <div class="w-full flex justify-evenly items-center text-center">
-        <h3
-          class="text-xl text-slate-700 font-bold leading-normal mb-1"
-          matTooltip="Nro. Contrato"
-        >
-          <mat-icon class="">description</mat-icon>{{ contratos.id }}
-        </h3>
-
-        <div>
-          <div class="">
-            <ng-container *ngIf="contratos.signe">
-              <img
-                [src]="contratos.signe"
-                alt=""
-                height="150"
-                width="150"
-                class="mx-2"
-                matTooltip="Firma"
-              />
-            </ng-container>
-          </div>
-          <div class="">
-            <ng-container *ngIf="!contratos.signe">
-              <button mat-raised-button color="primary" (click)="abrirFirma()">
-                Firmar
-              </button>
-            </ng-container>
-          </div>
-        </div>
-        <div class="text-sm mt-0 text-slate-400 font-bold uppercase">
-          <span
-            class="inline-flex items-center"
-            matTooltip="Orden de Instalacion"
-          >
-            <svg
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
-              />
-            </svg>
-            {{ contratos.installation_order }}
-          </span>
-        </div>
-      </div>
-      <div class="mt-6 py-6 border-t border-slate-200 text-center">
-        <div class="flex flex-wrap justify-center">
-          <div class="w-full h-[80px] px-4">
-            <p class="font-light text-slate-600 text-sm">
-              {{ contratos.address_tax }}
+            <p class="font-medium text-red-800">
+              Evite el corte de su servicio
             </p>
+           
+          </div>
+        </div>
+      </div>
+
+        <div class="w-full flex justify-evenly items-center text-center">
+          <h3
+            class="text-xl text-slate-700 font-bold leading-normal mb-1"
+            matTooltip="Nro. Contrato"
+          >
+            <mat-icon class="">description</mat-icon>{{ contratos.id }}
+          </h3>
+
+          <div>
+            <div class="">
+              <ng-container *ngIf="contratos.signe">
+                <img
+                  [src]="contratos.signe"
+                  alt=""
+                  height="150"
+                  width="150"
+                  class="mx-2"
+                  matTooltip="Firma"
+                />
+              </ng-container>
+            </div>
+            <div class="">
+              <ng-container *ngIf="!contratos.signe">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="abrirFirma()"
+                >
+                  Firmar
+                </button>
+              </ng-container>
+            </div>
+          </div>
+          <div class="text-sm mt-0 text-slate-400 font-bold uppercase">
+            <span
+              class="inline-flex items-center"
+              matTooltip="Orden de Instalacion"
+            >
+              <svg
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
+                />
+              </svg>
+              {{ contratos.installation_order }}
+            </span>
+          </div>
+        </div>
+        <div class="mt-6 py-6 border-t border-slate-200 text-center">
+          <div class="flex flex-wrap justify-center">
+            <div class="w-full h-[80px] px-4">
+              <p class="font-light text-slate-600 text-sm">
+                {{ contratos.address_tax }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <mat-divider></mat-divider>
+  <!-- </div> -->
+    <mat-divider></mat-divider>
 
-  <!-- component -->
-  <div>
-    <dl class="grid grid-cols-1 gap-5 lg:grid-cols-2 p-4" *ngIf="contract">
-      <div *ngIf="contratos.status == 16 && contract.length <= 1">
-        <div
-          class="bg-white px-4 py-2 text-center flex flex-col items-center justify-center"
-        >
-          <dt class="text-sm font-medium text-gray-500 uppercase">
-            Próximamente
-          </dt>
-          <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">
-            SERVICIO DE TV
-          </dd>
-          <div class="my-1 flex justify-center">
-            <!-- Esto va comentado -->
-            <div class="w-full inline-flex rounded-md bg-white shadow">
+    <!-- component -->
+    <div>
+      <dl class="grid grid-cols-1 gap-5 lg:grid-cols-2 p-4" *ngIf="contract">
+        <div *ngIf="contratos.status == 16 && contract.length <= 1">
+          <div
+            class="bg-white px-4 py-2 text-center flex flex-col items-center justify-center"
+          >
+            <dt class="text-sm font-medium text-gray-500 uppercase">
+              Próximamente
+            </dt>
+            <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">
+              SERVICIO DE TV
+            </dd>
+            <div class="my-1 flex justify-center">
+              <!-- Esto va comentado -->
+              <div class="w-full inline-flex rounded-md bg-white shadow">
+                <button
+                  mat-raised-button
+                  color="warn"
+                  (click)="IrDetalle(contratos.id)"
+                  class="w-full py-2 px-6"
+                >
+                  <mat-icon class="ml-2">shopping_cart</mat-icon>
+                  Contratar
+                </button>
+              </div>
+              <!-- Fin del comentado  -->
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let item of contract">
+          <div class="bg-white px-4 py-5 text-center">
+            <dt class="text-sm font-medium text-gray-500">
+              {{ item.service_type.description }}
+            </dt>
+            <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">
+              {{ item.plan_type.name }}
+            </dd>
+
+            <ng-container *ngIf="item.service_type.id == 4; else INTERNET">
+              <div class="flex justify-center divide-x-2">
+                <div class="px-3 text-center">
+                  <span
+                    class="text-sm font-bold block uppercase tracking-wide text-slate-600"
+                    >{{ item.contract_detail_package.length ?? 0 }}
+                    <span class="text-xs font-bold uppercase ml-1"
+                      >paquetes</span
+                    ></span
+                  >
+                </div>
+                <div class="px-3 text-center">
+                  <span
+                    class="text-sm font-bold block uppercase tracking-wide text-slate-600"
+                    >{{ item.contract_detail_product.length ?? 0 }}
+                    <span class="text-xs font-bold uppercase ml-1"
+                      >TV BOX</span
+                    ></span
+                  >
+                </div>
+              </div>
               <button
                 mat-raised-button
                 color="warn"
-                (click)="IrDetalle(contratos.id)"
-                class="w-full py-2 px-6"
+                (click)="miServicio(contratos.id)"
+                class="flex w-full m-1"
               >
-                <mat-icon class="ml-2">shopping_cart</mat-icon>
-                Contratar
+                Ir a Servicio TV <mat-icon class="mr-2 right-0">tv</mat-icon>
               </button>
-            </div>
-            <!-- Fin del comentado  -->
+            </ng-container>
+            <!-- Termina el comentado -->
+            <!-- </button> -->
+            <!-- </ng-container> -->
+            <ng-template #INTERNET>
+              <dt class="text-sm font-medium text-gray-500">
+                {{ item.plan_type.profile }}
+              </dt>
+            </ng-template>
           </div>
         </div>
-      </div>
-      <div *ngFor="let item of contract">
-        <div class="bg-white px-4 py-5 text-center">
-          <dt class="text-sm font-medium text-gray-500">
-            {{ item.service_type.description }}
-          </dt>
-          <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">
-            {{ item.plan_type.name }}
-          </dd>
-
-          <ng-container *ngIf="item.service_type.id == 4; else INTERNET">
-            <div class="flex justify-center divide-x-2">
-              <div class="px-3 text-center">
-                <span
-                  class="text-sm font-bold block uppercase tracking-wide text-slate-600"
-                  >{{ item.contract_detail_package.length ?? 0 }}
-                  <span class="text-xs font-bold uppercase ml-1"
-                    >paquetes</span
-                  ></span
-                >
-              </div>
-              <div class="px-3 text-center">
-                <span
-                  class="text-sm font-bold block uppercase tracking-wide text-slate-600"
-                  >{{ item.contract_detail_product.length ?? 0 }}
-                  <span class="text-xs font-bold uppercase ml-1"
-                    >TV BOX</span
-                  ></span
-                >
-              </div>
-            </div>
-            <button
-              mat-raised-button
-              color="warn"
-              (click)="miServicio(contratos.id)"
-              class="flex w-full m-1"
-            >
-              Ir a Servicio TV <mat-icon class="mr-2 right-0">tv</mat-icon>
-            </button>
-          </ng-container> -->
-          <ng-template #INTERNET>
-            <dt class="text-sm font-medium text-gray-500">
-              {{ item.plan_type.profile }}
-            </dt>
-          </ng-template>
-        </div>
-      </div>
-    </dl>
+      </dl>
+    </div>
   </div>
-</div>
+<!-- </div> -->
+

@@ -1,7 +1,6 @@
-
 <ng-container *ngIf="suscrito">
-<app-contrato-gtv [contrato]=contrato></app-contrato-gtv>
+  <app-contrato-gtv [contrato]="contrato"></app-contrato-gtv>
 </ng-container>
 <ng-container *ngIf="!suscrito">
-    <app-suscribir-gtv></app-suscribir-gtv>
-  </ng-container>
+  <app-home-gtv></app-home-gtv>
+</ng-container>

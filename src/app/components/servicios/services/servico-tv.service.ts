@@ -51,10 +51,9 @@ export class ServicoTvService {
       return session
     }
     return []
-  }
+  } 
   setIdContrato(id: number | string) {
     let id_cont = id.toString()
-    console.log(id_cont, 'serv')
     this.id_contrato.next(id_cont.toString())
     localStorage.setItem('contrato', JSON.stringify(this.id_contrato.value))
     // if (isNaN(Number(this.id_contrato.value))) {

@@ -43,7 +43,7 @@ export class CardUserComponent {
     let plan = 0
     if (contrato) {
       this.snack.openSnack("Seleccione el plan", '')
-      this.router.navigate(['home/gtv', contrato])
+      this.router.navigate(['home/gtv'])
       this.tvservices.setIdContrato(contrato)
       return
     }
@@ -64,6 +64,7 @@ export class CardUserComponent {
 }
 miServicio(contrato: number) {
   this.router.navigate(['home/gtv', contrato])
+  this.tvservices.setIdContrato(contrato)
 }
 
 abrirFirma() {

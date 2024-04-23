@@ -28,7 +28,7 @@ export class ComplementosComponent {
   sub !: Subscription
   id: number = 0
   id_contrato: number = 0
-  shopping$ = this.tvservices.paquetes$
+  shopping$ = this.tvservices.paquetes$ 
   loading: boolean = false;
   siguiente: boolean = false
   equipoValido: boolean = false
