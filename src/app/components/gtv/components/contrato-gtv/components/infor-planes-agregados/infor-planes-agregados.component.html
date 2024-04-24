@@ -1,0 +1,48 @@
+<!-- <ul class="flex flex-wrap items-center m-4  gap-4" *ngIf="channels_plan_gtv.length> 0">
+  <li
+    class="flex items-center rounded-full w-20 h-20   bg-cover  drop-shadow-xl shadow-lg shadow-gray-500/50  ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 duration-300"
+    *ngFor="let item of channels_plan_gtv">
+    <ng-container *ngIf="item.channel.file_logo else SinImagen">
+      <img [src]="item.channel.file_logo" [alt]="item.channel.name" class="p-2" [matTooltip]="item.channel.name">
+    </ng-container>
+    <ng-template #SinImagen>
+      <span class="p-4 flex justify-center items-center text-black" [matTooltip]="item.channel.name"><svg
+          xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+          class="bi bi-camera-video-fill text-gray-800" viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5z" />
+        </svg>
+      </span> </ng-template>
+
+
+  </li>
+</ul> -->
+<p-carousel [value]="channels_plan_gtv" [numVisible]="4" [numScroll]="3" [circular]="true"
+  [responsiveOptions]="responsiveOptions" [autoplayInterval]="3000">
+  <ng-template let-product pTemplate="item">
+    <div class=" flex items-center  m-2 text-center py-5 px-3 ">
+
+      <div
+        class="mb-3 flex items-center justify-center    rounded-2xl xl:rounded-full bg-neutral-400 w-24 h-24 lg:backdrop-opacity-5  lg:backdrop-blur-sm lg:backdrop-invert  lg:bg-cover  lg:drop-shadow-xl lg:shadow-lg shadow-gray-500/50  ease-in-out delay-100  hover:-translate-y-1 hover:scale-110 duration-300">
+        <ng-container *ngIf="product.channel.file_logo else SinImagen">
+          <div class="overflow-hidden">
+            <div class="bg-contain bg-center bg-no-repeat border-round  w-full">
+              <img [src]="product.channel.file_logo" [alt]="product.channel.name" class="p-2"
+                [matTooltip]="product.channel.name">
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #SinImagen>
+          <span class="p-8 flex justify-center items-center text-black " [matTooltip]="product.channel.name"><svg
+              xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
+              class="bi bi-camera-video-fill text-gray-800" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5z" />
+            </svg>
+          </span>
+        </ng-template>
+
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>

@@ -4,6 +4,7 @@ import { GtvComponent } from './gtv.component';
 import { ContratoGtvComponent } from './components/contrato-gtv/contrato-gtv.component';
 import { SuscribirGtvComponent } from './components/suscribir-gtv/suscribir-gtv.component';
 import { CuentasGtvComponent } from './components/cuentas-gtv/cuentas-gtv.component';
+import { HomeGtvComponent } from './components/home-gtv/home-gtv.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,16 @@ const routes: Routes = [
   {
     path: 'cuentas',
     component: CuentasGtvComponent
+  }
+  ,
+  {
+    path: 'servicio/:id',
+    component: ContratoGtvComponent
+  }
+  ,
+  {
+    path: 'planes',
+    component: HomeGtvComponent
   }
 ];
 

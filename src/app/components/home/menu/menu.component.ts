@@ -35,8 +35,6 @@ export class MenuComponent {
       this.contratos = this.login.contratos$.value.length > 0
       this.tickets = this.login.tickets$.value.length > 0
       this.canjes = this.login.canjes$.value.length > 0
-      console.log(this.contratos)
-      console.log(this.ajustes)
     }, 2000)
 
   }

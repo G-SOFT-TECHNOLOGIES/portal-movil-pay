@@ -1,6 +1,15 @@
-<ng-container *ngIf="suscrito">
-  <app-contrato-gtv [contrato]="contrato"></app-contrato-gtv>
-</ng-container>
-<ng-container *ngIf="!suscrito">
-  <app-home-gtv></app-home-gtv>
-</ng-container>
+
+<!-- 
+<ng-container *ngIf="suscrito | async as suscribir">
+  <div *ngIf="id | async as ID">
+    <app-contrato-gtv
+      *ngIf="suscribir == true else Nuevo"
+      [contrato]="contrato"
+    ></app-contrato-gtv>
+    
+    <ng-template #Nuevo>
+      <app-home-gtv></app-home-gtv>
+    </ng-template>
+  </div>
+  </ng-container> -->
+<router-outlet></router-outlet>

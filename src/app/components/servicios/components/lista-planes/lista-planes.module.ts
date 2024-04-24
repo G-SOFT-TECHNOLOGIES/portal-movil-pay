@@ -28,7 +28,7 @@ import { DatosValidadosComponent } from './components/datos-validados/datos-vali
     HomeModule,
     ServiciosModule
   ],
-  exports: [ResumenCuentaComponent],
+  exports: [ResumenCuentaComponent,],
   
   providers: [MessageService]
 

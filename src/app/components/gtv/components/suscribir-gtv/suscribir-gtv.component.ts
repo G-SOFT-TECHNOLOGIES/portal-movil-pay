@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoadingService } from 'src/app/components/service/loading.service';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
+import { DialogoPagarComponent } from 'src/app/components/servicios/components/pagos/dialogo-pagar/dialogo-pagar.component';
 import { Validate } from 'src/app/components/servicios/interface/pagos.interface';
 import { Packages } from 'src/app/components/servicios/interface/paquetes.interface';
 import { ServicesTV } from 'src/app/components/servicios/interface/servicestv.interface';
@@ -19,32 +21,38 @@ export class SuscribirGtvComponent {
   private loader = inject(LoadingService);
   private snack = inject(SnackbarService);
   private router = inject(Router)
+  private dialog = inject(MatDialog);
   contrato: number = 0
-  plan: any | null
   tvbox: any[] = []
   packages: Packages[] = []
   acumulado = this.services.totalAcumulado$
   equipoCount = this.services.equipo$
   planActivo = this.services.plan$
+  paquetes = this.services.paquetes$
   loading: boolean = false;
-  // aceptar: boolean = true
+  totalTvBox = this.services.totalTvBox$
+  aceptar: boolean = true
   payments!: Validate;
   id: number = 0
+  montoMenor: boolean = false
+
   constructor() {
     this.id = this.services.id_contrato.value;
   }
   ngOnInit(): void {
     if (this.id == 0) {
-      this.router.navigate(['home/contratos'])
       this.services.deleteItems()
+      this.router.navigate(['home/contratos'])
     }
+
     this.contrato = this.services.id_contrato.value
-    this.plan = this.services.getPlan()
     this.getAllPackage()
     this.getTVBox()
     this.services.getPlan()
+    this.services.getPaquetes()
     this.services.getEquipo()
     this.getItemsTotalCount()
+    console.log(this.services.initPaquete)
   }
   getItemsTotalCount() {
     this.services.getTotalAcumm()
@@ -133,4 +141,30 @@ export class SuscribirGtvComponent {
     }, 500);
 
   }
+  pagar(monto: any) {
+
+    const dialogRef = this.dialog.open(DialogoPagarComponent, {
+      width: '520px',
+      data: {
+        monto,
+        contract: this.id,
+        opcion: 'gtv'
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.services.pagoTvBox$.subscribe(data => this.payments = data)
+      console.log(this.payments)
+      if (this.payments != null) {
+        // console.log()
+        // console.log(this.payments.amount, monto, this.payments.amount < monto)
+        if (this.payments.amount < monto) {
+          this.aceptar = this.payments.amount < monto
+          this.montoMenor = true
+          this.snack.openSnack("El monto es menor a la cantidad a Pagar", "error")
+        }
+      }
+    })
+  }
+
 }

@@ -20,6 +20,7 @@ import {CdkDrag} from '@angular/cdk/drag-drop';
     HomeModule,
     CdkDrag, 
     ListaPlanesModule
-  ]
+  ],
+  exports: [TerminosComponent],
 })
 export class ComplementosModule { }

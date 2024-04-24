@@ -1,8 +1,8 @@
 .button input ~ label {
-    background-color: #d8d8d8;
+    /* background-color: #d8d8d8; */
     color: rgb(184, 184, 184);
   }
   .button input:checked ~ label {
-    background-color: rgb(163 163 163 / var(--tw-bg-opacity));
+    /* background-color: rgb(163 163 163 / var(--tw-bg-opacity)); */
     color: white;
   }

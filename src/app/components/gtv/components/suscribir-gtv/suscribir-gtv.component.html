@@ -15,14 +15,8 @@
   </div>
 
   <div class="flex justify-end mx-4">
-    <div
-      class="flex flex-col justify-end w-full text-center"
-      *ngIf="planActivo | async as planActivo"
-    >
-      <div
-        class="inline-flex items-center gap-2 p-4"
-        *ngFor="let plan of planActivo"
-      >
+    <div class="flex flex-col justify-end w-full text-center">
+      <div class="inline-flex items-center gap-2 p-2">
         <svg
           width="68"
           height="81"
@@ -35,38 +29,227 @@
             fill="#595959"
           />
         </svg>
-        <span class="text-2xl font-medium">Nº: {{ contrato }}</span>
+        <span class="text-3xl font-semibold">Nº: {{ contrato }}</span>
       </div>
-      <p
-        class="text-xl font-semibold"
-        *ngIf="acumulado | async as acumulado; else Cero"
-      >
-        Pago mensual actual : <span class="text-5xl">$ {{ acumulado }}</span>
-      </p>
-      <ng-template #Cero>
-        <p class="text-xl font-semibold">
+      <div class="flex flex-col text-center"  *ngIf="acumulado | async as acumulado; else Cero">
+        <p class="text-3xl font-semibold">$ {{ acumulado | number : "1.2-2" }}</p>
+        <p class="text-base font-semibold">
           Pago mensual actual :
-          <span class="text-5xl">$ {{ 0 | number : "1.2-2" }}</span>
         </p>
+        </div>
+      
+      <ng-template #Cero>
+        <div class="flex flex-col text-center">
+          <p class="text-3xl font-semibold">$ {{ 0 | number : "1.2-2" }}</p>
+        <p class="text-base font-semibold">
+          Pago mensual actual :
+        </p>
+        </div>
       </ng-template>
     </div>
   </div>
 </div>
-<div class="max-w-4xl self-center mx-auto p-2">
-  <div class="grid gap-2 w-full mx-auto">
+<div class="max-w-5xl self-center mx-auto p-2">
+  <div class="grid xl:grid-cols-2 gap-2 w-full mx-auto">
     <div class="gap-4 m-4 p-4 grid grid-cols-1 mx-auto">
       <app-package-gtv
         *ngFor="let item of packages"
         [paquetes]="item"
       ></app-package-gtv>
+
+      <app-terminos (response)="aceptar = $event"></app-terminos>
+    </div>
+    <div class="w-full flex-1 items-start">
+      <section class="items-center px-5 py-8">
+        <div
+          class="w-full flex flex-col m-4 p-4 text-red-700 border rounded-lg shadow-xl mx-auto my-4"
+        >
+          <dl class="my-6 space-y-4">
+            <div
+              *ngIf="planActivo | async as planActivo"
+             
+            >
+              <div
+                class="flex items-center justify-between my-4 border-b border-gray-200 py-2"
+                *ngFor="let plan of planActivo"
+              >
+                <dt class="text-base text-gray-600 font-medium">
+                  {{ plan.name }}
+                </dt>
+                <dd class="text-xl font-medium text-gray-900">
+                  ${{ plan?.cost || 0.0 | number : "1.2-2" }}
+                </dd>
+            </div>
+            </div>
+            <div
+              *ngIf="paquetes | async as paquetes"
+            >
+              <div
+                class="flex items-center justify-between my-4 border-b border-gray-200 py-2"
+                *ngFor="let paq of paquetes"
+              >
+                <dt class="text-base text-gray-600 font-medium">
+                  {{ paq.name }}
+                </dt>
+                <dd class="text-xl font-medium text-gray-900">
+                  ${{ paq?.price || 0.0 | number : "1.2-2" }}
+                </dd>
+            </div>
+          </div>
+          </dl>
+          <div class="flex items-center justify-between px-6">
+            <div class="inline-flex gap-2 items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="mr-4 icon icon-tabler icon-tabler-alert-triangle"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <circle cx="12" cy="12" r="9"></circle>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                <polyline points="11 12 12 12 12 16 13 16"></polyline>
+              </svg>
+              <p
+                class="text-sm lg:text-2xl font-semibold tracking-wide uppercase"
+              >
+                TOTAL
+              </p>
+            </div>
+            <div>
+              <dd
+                class="text-2xl font-medium"
+                *ngIf="acumulado | async as acumulado; else CERO"
+              >
+                ${{ acumulado | number : "1.2-2" }} /
+                <span class="text-xs">mensual</span>
+              </dd>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div *ngIf="totalTvBox | async as totalTvBox">
+        <section class="">
+          <div class="relative items-center w-full py-4 mx-auto max-w-7xl">
+            <div
+              class="p-6 border-l-4 border-yellow-500 rounded-r-xl bg-yellow-100"
+            >
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg
+                    class="h-5 w-5 text-yellow-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <ul
+                    role="list"
+                    class="text-base text-yellow-600 list-disc space-y-1 pl-5"
+                  >
+                    <li>
+                      Antes de procesar el pago debe verificar que el
+                      <strong>monto</strong> sea mayor o igual al monto a pagar
+                      por el producto.
+                    </li>
+                    <li>
+                      No se procesará el pago si el monto es menor al monto a
+                      pagar.
+                    </li>
+                    <li>
+                      Deberá contactar al área de Antención al Cliente en caso
+                      de que haya cancelado un monto menor al costo del
+                      producto.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- <h2 class="text-lg font-medium text-gray-900">Order summary</h2> -->
+
+      <!-- Order summary -->
+      <section
+        aria-labelledby="summary-heading"
+        class="mt-16 border rounded-lg shadow-xl px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8 w-full"
+      >
+        <!-- *ngIf="montoMenor" -->
+
+        <dl class="mt-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <dt class="text-sm text-gray-600">Subtotal</dt>
+            <dd class="text-sm font-medium text-gray-900">$0.00</dd>
+          </div>
+          <div
+            class="flex items-center justify-between border-t border-gray-200 pt-4"
+          >
+            <dt class="text-base font-medium text-gray-900">Total a Pagar</dt>
+            <dd
+              class="text-base font-medium text-gray-900"
+              *ngIf="totalTvBox | async as totalTvBox; else CERO"
+            >
+              ${{ totalTvBox | number : "1.2-2" }}
+            </dd>
+            <ng-template #CERO>
+              <dd class="text-base font-medium text-gray-900">
+                ${{ 0 | number : "1.2-2" }}
+              </dd>
+            </ng-template>
+          </div>
+        </dl>
+
+        <div
+          class="flex justify-center gap-2 mt-6"
+          *ngIf="totalTvBox | async as totalTvBox; else Registrar"
+        >
+          <button
+            type="submit"
+            (click)="pagar(totalTvBox)"
+            [disabled]="aceptar"
+            [ngClass]="!aceptar ? 'bg-red-600' : 'bg-neutral-400'"
+            *ngIf="payments == null; else Registrar"
+            class="w-full inline-flex p-2 mx-4 rounded-2xl text-white font-semibold justify-center items-center"
+          >
+            <mat-icon class="mx-2">check_small</mat-icon> Pagar
+          </button>
+        </div>
+        <ng-template #Registrar>
+          <div class="flex justify-center gap-2 mt-6">
+            <button
+              type="submit"
+              (click)="registrar()"
+              [disabled]="aceptar"
+              [ngClass]="!aceptar ? 'bg-red-600' : 'bg-neutral-400'"
+              class="w-full inline-flex p-2 mx-4 rounded-2xl text-white font-semibold justify-center items-center"
+            >
+              <mat-icon class="mx-2">check_small</mat-icon> Registrar
+            </button>
+          </div>
+        </ng-template>
+      </section>
     </div>
   </div>
-  <div class="flex justify-center gap-2">
+  <!-- <div class="flex justify-center gap-2">
     <button
       class="p-3 rounded-full text-white w-1/2 font-semibold text-xl bg-red-600"
       (click)="registrar()"
     >
       Finalizar
     </button>
-  </div>
+  </div> -->
 </div>

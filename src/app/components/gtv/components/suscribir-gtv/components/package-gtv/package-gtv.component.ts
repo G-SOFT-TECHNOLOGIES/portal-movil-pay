@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ConfirmService } from 'src/app/components/service/confirm.service';
 import { DialogoDetallePaqueteComponent } from 'src/app/components/servicios/components/lista-planes/components/dialogo-detalle-paquete/dialogo-detalle-paquete.component';
 import { ServicoTvService } from 'src/app/components/servicios/services/servico-tv.service';
+import { DialogDetallePlanComponent } from '../../../dialog-detalle-plan/dialog-detalle-plan.component';
+import { DialogDetallePaquetesGtvComponent } from '../../../dialog-detalle-paquetes-gtv/dialog-detalle-paquetes-gtv.component';
 
 @Component({
   selector: 'app-package-gtv',
@@ -29,8 +31,9 @@ export class PackageGtvComponent {
   }
 
   setShopping(e: any) {
-    console.log(e)
-    if (e) {
+    let target = e.target as HTMLInputElement
+    console.log(target.checked)
+    if (target.checked) {
       this.tvservices.setPaquetes(this.paquetes)
       this.getShoppingCant()
       return
@@ -39,7 +42,7 @@ export class PackageGtvComponent {
       this.getShoppingCant()
       return
     }
-  }
+  } 
 
   getShoppingCant() {
     this.tvservices.getPaquetes()
@@ -52,7 +55,7 @@ export class PackageGtvComponent {
   }
   verDetalles(id: any) {
     this.tvservices.getPackages(Number(id)).then((result) => {
-      const dialogRef = this.dialog.open(DialogoDetallePaqueteComponent, {
+      const dialogRef = this.dialog.open(DialogDetallePaquetesGtvComponent, {
         width: '520px',
         data: result
       })

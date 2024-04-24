@@ -82,12 +82,14 @@ export class SubscritosComponent {
               this.loader.hideLoading()
               this.getPackageId()
             }).catch((error) => {
-              if (error.status == 400) {
-                this.snack.openSnack(error, '')
-              } else {
-                this.snack.openSnack(error, '')
-              }
+              console.log(error.status)
               this.loader.hideLoading()
+              if (error.status == 400) {
+                this.snack.openSnack(error.error?.message, '')
+                return
+              }
+              this.snack.openSnack("Error. Por favor comuniquese con el atencion al cliente", '')
+              return
             })
         }
 

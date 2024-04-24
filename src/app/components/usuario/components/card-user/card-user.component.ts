@@ -63,7 +63,7 @@ export class CardUserComponent {
   // }
 }
 miServicio(contrato: number) {
-  this.router.navigate(['home/gtv', contrato])
+  this.router.navigate(['home/gtv'])
   this.tvservices.setIdContrato(contrato)
 }
 

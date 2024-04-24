@@ -1,0 +1,113 @@
+<h1 mat-dialog-title class="bg-black"><span class="text-slate-50 text-xl font-medium">Información de la
+        pantalla</span><a mat-dialog-close
+        class="absolute top-1 right-0 p-2.5 text-sm font-medium  text-white rounded-r-lg cursor-pointer ">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        <span class="sr-only">Close</span>
+    </a></h1>
+<div mat-dialog-content>
+    <div class="grid grid-cols-1 lg:grid-cols-1 gap-4 py-4">
+        <ng-container *ngIf="data.opcion === 0">
+            <!-- disponibles -->
+            <div class="p-4  bg-white ">
+                <div class="flex justify-between items-center mb-4">
+                    <!-- <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Pantallas disponibles</h3> -->
+                </div>
+                <div class="flow-root">
+                    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                        <li class="py-3 sm:py-4" *ngFor="let item of data.item">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex-shrink-0">
+                                    <i class="fa fa-tv  items-center" style="font-size:25px;"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm py-1">
+                                        <dt class="text-gray-900 font-semibold">Fecha de expiración</dt>
+                                        <dd class="text-gray-700"><time datetime="2022-12-13">
+                                                {{item.expirationTime |date:'d/M/YYY, hh:mm a'}}</time></dd>
+                                    </p>
+                                    <p class="text-sm py-1">
+                                        <dt class="text-gray-900 font-semibold">Código de Activación</dt>
+                                        <dd class="text-gray-700">{{item.activationCodeId}}</dd>
+                                    </p>
+                                    <p class="text-sm py-1">
+                                        <dt class="text-gray-900 font-semibold">Código</dt>
+                                        <dd class="text-gray-700">{{item.linkCode}}</dd>
+                                    </p>
+                                </div>
+                                <!-- <div
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    <button mat-mini-fab (click)="unlinkSession(item)" color="warn">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div> -->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="data.opcion === 1">
+            <!-- ocupadas -->
+            <div class="p-4  bg-white ">
+                <div class="flex justify-between items-center mb-4">
+                    <!-- <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Pantallas disponibles</h3> -->
+                </div>
+                <div class="flow-root">
+                    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                        <li class="py-3 sm:py-4" *ngFor="let item of data.item">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex-shrink-0">
+                                    <i class="fa fa-tv  items-center" style="font-size:25px;"></i>
+                                </div>
+                                <div class="flex-1 min-w-0 justify-center items-center">
+                                    <p class=" py-1 flex justify-between">
+                                        <dt class="text-gray-900 font-semibold">Identificador</dt>
+                                        <dd class="text-gray-700">
+                                            {{item.identifier}}</dd>
+                                    </p>
+                                    <p class=" py-1 flex justify-between">
+                                        <dt class="text-gray-900 font-semibold">Modelo</dt>
+                                        <dd class="text-gray-700">{{item.deviceOs
+                                            }}</dd>
+                                    </p>
+                                    <p class=" py-1 flex justify-between">
+                                        <dt class="text-gray-900 font-semibold">Plataforma</dt>
+                                        <dd class="text-gray-700">{{item.platform
+                                            }}</dd>
+                                    </p>
+                                    <p class=" py-1 flex justify-between">
+                                        <dt class="text-gray-900 font-semibold">MAC</dt>
+                                        <dd class="text-gray-700">{{item.macAddress}}</dd>
+                                    </p>
+                                    <p class=" py-1 flex justify-between">
+                                        <dt class="text-gray-900 font-semibold">Aplicacion</dt>
+                                        <dd class="text-gray-700">{{item.appName}}</dd>
+                                    </p>
+                                    <p class=" py-1 flex justify-between">
+                                        <dt class="text-gray-900 font-semibold">Ubicacion</dt>
+                                        <dd class="text-gray-700 text-end">{{item.location}}</dd>
+                                    </p>
+                                </div>
+                                <div
+                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                    <button mat-mini-fab (click)="unlinkSession(item)" color="warn">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- <div class="flex justify-center">
+                <button mat-raised-button color="primary" class="w-full" type="submit">Guardar Cambios</button>
+
+            </div> -->
+        </ng-container>
+
+
+
+    </div>

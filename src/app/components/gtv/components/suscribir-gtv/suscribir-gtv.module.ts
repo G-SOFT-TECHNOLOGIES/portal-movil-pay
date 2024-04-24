@@ -5,6 +5,7 @@ import { SuscribirGtvRoutingModule } from './suscribir-gtv-routing.module';
 import { SuscribirGtvComponent } from './suscribir-gtv.component';
 import { MaterialExampleModule } from 'src/material.module';
 import { PackageGtvComponent } from './components/package-gtv/package-gtv.component';
+import { ComplementosModule } from 'src/app/components/servicios/components/lista-planes/components/complementos/complementos.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { PackageGtvComponent } from './components/package-gtv/package-gtv.compon
   imports: [
     CommonModule,
     SuscribirGtvRoutingModule,
-    MaterialExampleModule
+    MaterialExampleModule,
+    ComplementosModule
   ]
 })
 export class SuscribirGtvModule { }

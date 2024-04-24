@@ -1,0 +1,71 @@
+<form [formGroup]="listPackage" class="">
+  <div *ngFor="let paquete of paquetes" class="w-full my-4 relative">
+    <div
+      class="relative button bg-neutral-800 opacity-95 bg-center p-4 m-4 w-full mx-auto rounded-2xl"
+    >
+      
+      <div class="mx-auto text-left text-white">
+        <span
+          aria-hidden="true"
+          class="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-gray-800 opacity-80 rounded-2xl"
+        ></span>
+        <div class="flex items-center justify-center">
+          <div class="grid relative px-2 justify-center text-center gap-y-4 mx-2">
+            <h1 class="text-xl font-medium">{{ paquete.package_name }} <button class="absolute inset-x-0 top-0 right-0 text-xs" mat-mini-fab color="warn" matTooltip="Eliminar Paquete">
+              <mat-icon>delete</mat-icon>
+            </button></h1>
+            <span class="text-3xl font-medium">
+              ${{ paquete.package_price
+              }}<span class="text-xl"> / mensual</span>
+            </span>
+            <div class="inline-flex justify-center gap-2 items-center">
+              <mat-icon>check</mat-icon>
+              Canales incluidos
+              {{ paquete.date_end | date : "d/M/YYY, hh:mm a" }}
+              <div class="flex-shrink-0">
+                <button
+                  class="p-2 flex rounded-full bg-red-600 text-white font-mono font-semibold mx-2 my-4 cursor-pointer"
+                  (click)="verDetalles(paquete.package)"
+                >
+                  <mat-icon>queue_play_next</mat-icon>
+
+                  <!-- {{paquete.channels_package_gtv_count}} + -->
+                </button>
+              </div>
+              <div
+                class="inline-flex justify-center gap-2 items-center"
+                *ngIf="paquete.date_end != null"
+              >
+                <mat-icon>event_busy</mat-icon>
+                {{ paquete.date_end | date : "d/M/YYY, hh:mm a" }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div
+            class="h-24 mx-4 px-6 w-full gap-x-4 flex justify-between items-center p-3 rounded-xl border-2 border-slate-100 shadow-lg transition-all transform-all hover:scale-105 cursor-pointer relative">
+           
+
+            <div class="flex-shrink-0">
+                <button class="p-2 flex rounded-full bg-red-600 text-white font-mono font-semibold mx-2 my-4"
+                    (click)="verDetalles(paquete.package)">
+                    <mat-icon>queue_play_next</mat-icon>
+                   
+                </button>
+            </div>
+            <div class="flex-shrink-1 items-center font-mono">
+                <div class="text-slate-800 text-center">{{paquete.package_name}}</div>
+                <div class="font-mono text-xs"> {{paquete.date_end | date:'d/M/YYY, hh:mm a'}}</div>
+                <div class="text-slate-800 text-center">{{paquete.package_price |
+                    number:'1.1-2'}} <span class="text-xs">/ mensual</span></div>
+                
+            </div>
+            <div class="flex-shrink-1  text-slate-800 text-center items-center font-mono">
+            
+            </div>
+        </div> -->
+  </div>
+</form>
