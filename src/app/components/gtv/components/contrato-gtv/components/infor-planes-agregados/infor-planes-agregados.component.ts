@@ -22,17 +22,17 @@ export class InforPlanesAgregadosComponent {
     this.responsiveOptions = [
       {
         breakpoint: '1199px',
-        numVisible: 1,
-        numScroll: 1
+        numVisible: 3,
+        numScroll: 3
       },
       {
         breakpoint: '991px',
-        numVisible: 2,
-        numScroll: 1
+        numVisible: 3,
+        numScroll: 3
       },
       {
         breakpoint: '767px',
-        numVisible: 1,
+        numVisible: 3,
         numScroll: 1
       }
     ];

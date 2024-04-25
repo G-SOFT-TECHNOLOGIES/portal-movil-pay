@@ -2,7 +2,6 @@ import { Component, Input, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmService } from 'src/app/components/service/confirm.service';
-import { DialogoDetallePaqueteComponent } from 'src/app/components/servicios/components/lista-planes/components/dialogo-detalle-paquete/dialogo-detalle-paquete.component';
 import { ServicoTvService } from 'src/app/components/servicios/services/servico-tv.service';
 import { UsuarioService } from '../../services/usuario.service';
 

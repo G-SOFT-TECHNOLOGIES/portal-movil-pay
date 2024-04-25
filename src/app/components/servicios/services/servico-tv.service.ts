@@ -248,4 +248,13 @@ export class ServicoTvService {
     const resp = this.http.post(`${this.url}/api/gsoft/portal/gtv/account/${id}/package/`, body)
     return lastValueFrom(resp)
   }
+  updatePackageAccountTv(body: any, id: number) {
+    const obs$ = this.http.post(`${this.url}/api/gsoft/portal/gtv/account/package/${id}/`, body)
+    return lastValueFrom(obs$)
+  }
+  getAllPackagesContractDetail(id:number,params: ParamsGTV): Promise<any> {
+    const resparams = this.queryservices.buildQueryParams(params)
+    const resp = this.http.get<Packages[]>(`${this.url}/api/gsoft/gtv/account/${id}/package/`,{ params: resparams })
+    return lastValueFrom(resp)
+  }
 }

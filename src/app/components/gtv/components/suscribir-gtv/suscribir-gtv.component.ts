@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoadingService } from 'src/app/components/service/loading.service';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
-import { DialogoPagarComponent } from 'src/app/components/servicios/components/pagos/dialogo-pagar/dialogo-pagar.component';
 import { Validate } from 'src/app/components/servicios/interface/pagos.interface';
 import { Packages } from 'src/app/components/servicios/interface/paquetes.interface';
 import { ServicesTV } from 'src/app/components/servicios/interface/servicestv.interface';
@@ -143,28 +142,28 @@ export class SuscribirGtvComponent {
   }
   pagar(monto: any) {
 
-    const dialogRef = this.dialog.open(DialogoPagarComponent, {
-      width: '520px',
-      data: {
-        monto,
-        contract: this.id,
-        opcion: 'gtv'
-      }
-    })
+    // const dialogRef = this.dialog.open(DialogoPagarComponent, {
+    //   width: '520px',
+    //   data: {
+    //     monto,
+    //     contract: this.id,
+    //     opcion: 'gtv'
+    //   }
+    // })
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.services.pagoTvBox$.subscribe(data => this.payments = data)
-      console.log(this.payments)
-      if (this.payments != null) {
-        // console.log()
-        // console.log(this.payments.amount, monto, this.payments.amount < monto)
-        if (this.payments.amount < monto) {
-          this.aceptar = this.payments.amount < monto
-          this.montoMenor = true
-          this.snack.openSnack("El monto es menor a la cantidad a Pagar", "error")
-        }
-      }
-    })
+    // dialogRef.afterClosed().subscribe(result => {
+    //   this.services.pagoTvBox$.subscribe(data => this.payments = data)
+    //   console.log(this.payments)
+    //   if (this.payments != null) {
+    //     // console.log()
+    //     // console.log(this.payments.amount, monto, this.payments.amount < monto)
+    //     if (this.payments.amount < monto) {
+    //       this.aceptar = this.payments.amount < monto
+    //       this.montoMenor = true
+    //       this.snack.openSnack("El monto es menor a la cantidad a Pagar", "error")
+    //     }
+    //   }
+    // })
   }
 
 }

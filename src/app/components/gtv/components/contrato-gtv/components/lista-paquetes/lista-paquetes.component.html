@@ -1,30 +1,39 @@
-<form [formGroup]="listPackage" class="">
-  <div *ngFor="let paquete of paquetes" class="w-full my-4 relative">
+<form [formGroup]="listPackage" class="relative">
+  <div *ngFor="let paquete of paquetes" class="h-60 w-96 my-4 relative">
     <div
       class="relative button bg-neutral-800 opacity-95 bg-center p-4 m-4 w-full mx-auto rounded-2xl"
     >
-      
       <div class="mx-auto text-left text-white">
         <span
           aria-hidden="true"
           class="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-gray-800 opacity-80 rounded-2xl"
         ></span>
         <div class="flex items-center justify-center">
-          <div class="grid relative px-2 justify-center text-center gap-y-4 mx-2">
-            <h1 class="text-xl font-medium">{{ paquete.package_name }} <button class="absolute inset-x-0 top-0 right-0 text-xs" mat-mini-fab color="warn" matTooltip="Eliminar Paquete">
-              <mat-icon>delete</mat-icon>
-            </button></h1>
+          <div
+            class="grid relative px-2 justify-center text-center gap-y-3 mx-2"
+          >
+            <h1 class="text-xl font-medium inline-flex justify-between gap-x-2">
+              {{ paquete.package_name }}
+              <button
+                (click)="delete.emit(paquete.id)"
+                class="absolute inset-x-0 top-0 right-0 text-xs"
+                mat-mini-fab
+                color="warn"
+                matTooltip="Eliminar Paquete"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </h1>
             <span class="text-3xl font-medium">
               ${{ paquete.package_price
               }}<span class="text-xl"> / mensual</span>
             </span>
-            <div class="inline-flex justify-center gap-2 items-center">
+            <div class="inline-flex justify-center items-center">
               <mat-icon>check</mat-icon>
               Canales incluidos
-              {{ paquete.date_end | date : "d/M/YYY, hh:mm a" }}
               <div class="flex-shrink-0">
                 <button
-                  class="p-2 flex rounded-full bg-red-600 text-white font-mono font-semibold mx-2 my-4 cursor-pointer"
+                  class="p-2 flex rounded-full bg-red-600 text-white font-mono font-semibold mx-2 cursor-pointer"
                   (click)="verDetalles(paquete.package)"
                 >
                   <mat-icon>queue_play_next</mat-icon>
@@ -32,13 +41,24 @@
                   <!-- {{paquete.channels_package_gtv_count}} + -->
                 </button>
               </div>
-              <div
-                class="inline-flex justify-center gap-2 items-center"
-                *ngIf="paquete.date_end != null"
-              >
-                <mat-icon>event_busy</mat-icon>
-                {{ paquete.date_end | date : "d/M/YYY, hh:mm a" }}
-              </div>
+            </div>
+            <div
+              class="inline-flex justify-center items-center"
+              *ngIf="paquete.date_end != null"
+              matTooltip="Vencimiento del Paquete"
+            >
+              <mat-icon>event_busy</mat-icon>
+              {{ paquete.date_end | date : "d/M/YYY" }}
+            </div>
+            <div
+              class="inline-flex justify-center"
+              *ngIf="paquete.finish_date != null"
+            >
+              <mat-icon>history</mat-icon>
+              <span class="text-xs text-red-700">
+                Su paquete se encuentra vencido desde la fecha
+                {{ paquete.finish_date | date : "d/M/YYY" }}
+              </span>
             </div>
           </div>
         </div>

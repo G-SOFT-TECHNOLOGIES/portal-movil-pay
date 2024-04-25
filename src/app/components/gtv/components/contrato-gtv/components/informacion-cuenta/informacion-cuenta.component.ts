@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ContratoID } from 'src/app/components/finanzas/interfaces/UsuarioIDInterface';
 import { LoadingService } from 'src/app/components/service/loading.service';
-import { Gtv } from 'src/app/components/servicios/interface/gtv.interface';
+import { ActivationCode, Device, Gtv } from 'src/app/components/servicios/interface/gtv.interface';
 import { PlanID } from 'src/app/components/servicios/interface/servicestv.interface';
 import { ServicoTvService } from 'src/app/components/servicios/services/servico-tv.service';
 import { DialogEditPanatallaComponent } from '../dialog-edit-panatalla/dialog-edit-panatalla.component';
@@ -22,6 +22,8 @@ export class InformacionCuentaComponent {
   private dialog = inject(MatDialog);
   private snack = inject(SnackbarService);
   private loader = inject(LoadingService); 
+  devices: Device[]=[]
+  activateCode: ActivationCode[]=[]
   cuenta = new FormGroup({
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.minLength(6), Validators.pattern('[A-Za-z0-9]*')]),
@@ -39,11 +41,12 @@ export class InformacionCuentaComponent {
     this.modificar = false;
     this.is_edit = false
   }
-  verPantallaUtilizadas() {
+  verPantallaUtilizadas(serialNumber:string) {
     // console.log(item, "Pantalla")
+    let item =this.devices.filter((account:Device)=> account.serialNumber == serialNumber).map((account: Device)=> account) 
     const dialogRef = this.dialog.open(DialogEditPanatallaComponent, {
       width: '600px',
-      data: { item: this.cuentaTv.devices, contrato: this.contrato.contract_detail_account.contract_detail, opcion: 1 }
+      data: { item: item, contrato: this.contrato.contract_detail_account.contract_detail, opcion: 1 }
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -53,11 +56,12 @@ export class InformacionCuentaComponent {
     })
   }
 
-  verPantallaDisponibles() {
+  verPantallaDisponibles(link:any) {
+    let item =this.activateCode.filter((account)=> account.linkCode == link).map(account=> account) 
     // console.log(item, "Pantalla")
     const dialogRef = this.dialog.open(DialogEditPanatallaComponent, {
       width: '600px',
-      data: { item: this.cuentaTv.activationCodes, contrato: '', opcion: 0 }
+      data: { item: item, contrato: '', opcion: 0 }
     })
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -83,6 +87,8 @@ export class InformacionCuentaComponent {
     this.tvservices.getDetailGtv(this.contrato.id).then((value) => {
       console.log(value, 'datos')
       this.cuentaTv = value.result
+      this.devices = value.result.devices
+      this.activateCode = value.result.activationCodes
       this.cuenta.patchValue({
         username: value.result.userName,
         password: value.result.password,

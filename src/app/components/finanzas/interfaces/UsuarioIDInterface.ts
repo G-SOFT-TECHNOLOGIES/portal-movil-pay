@@ -26,7 +26,7 @@ export interface ContractDetail {
   contract: number
   service_type: ServiceType
   plan_type: PlanType
-  contract_detail_package: ContractDetailPackage[]
+  contract_detail_package_count: number
   contract_detail_product: ContractDetailProduct[]
   status: number
   nodo: number
@@ -57,6 +57,8 @@ export interface ContractDetailPackage {
   date_end: any
   created_by: number
   created_by_name: string
+  active?:boolean
+  finish_date?:any
 }
 
 export interface ContractDetailProduct {

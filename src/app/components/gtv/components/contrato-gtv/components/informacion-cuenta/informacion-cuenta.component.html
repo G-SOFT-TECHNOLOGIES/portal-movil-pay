@@ -1,14 +1,17 @@
 <!-- component -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+/>
 
 <div>
-  <div class="flex justify-end gap-2 self-center mx-8">
+  <div class="flex justify-end gap-2 self-center mx-8 -mt-8">
     <div class="flex items-center gap-2 mx-4">
       <div class="flex flex-col justify-end w-full text-center text-white">
         <div class="inline-flex items-center gap-2 px-4">
           <svg
-            width="68"
-            height="81"
+            width="58"
+            height="71"
             viewBox="0 0 68 81"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -34,298 +37,277 @@
             {{ cuentaTv?.expirationTime | date : "d/M/YYYY, h:mm a" }}
           </span>
         </div>
-        <h1 class="font-medium text-2xl">
+        <h1 class="font-medium text-xl">
           {{ contrato.plan_type.name }}
         </h1>
       </div>
     </div>
   </div>
-
-  <div class="">
-    <div
-      class="grid grid-cols-1 gap-4 {{
-        contrato.contract_detail_product.length > 0
-          ? 'lg:grid-cols-3'
-          : 'lg:grid-cols-2'
-      }}  "
-    >
-      <div class="p-2 lg:p-8 justify-center text-center ">
-        <div
-          class="py-4 max-w-lg mx-auto overflow-hidden shadow-lg text-white transition duration-500 bg-neutral-500 opacity-95 bg-center m-4 rounded-2xl"
-        >
-          <div class="space-y-4">
-            
-            <div class="px-6 py-4">
-              <div class="space-y-5">
-                <div class="font-bold text-xl mb-2">DATOS DE ACCESO G-TV</div>
-                <div class="flex flex-col gap-x-4 px-10 gap-y-4 justify-evenly">
-                  <div class="flex justify-between text-start p-2">
-                    <form [formGroup]="cuenta" class="relative w-full">
-                      <div>
-                        <label
-                          for="search"
-                          class="block text-sm font-medium leading-6 text-white"
-                          >Usuario</label
+  <div class="xl:flex grid justify-center gap-4 mx-auto">
+    <div class="p-2 justify-center text-center">
+      <div
+        class="py-4 max-w-lg mx-auto overflow-hidden shadow-lg text-white transition duration-500 bg-neutral-500 opacity-95 bg-center m-2 rounded-2xl"
+      >
+        <div class="space-y-2">
+          <div class="px-6 py-2">
+            <div class="space-y-2">
+              <div class="font-bold text-xl mb-2">DATOS DE ACCESO G-TV</div>
+              <div class="flex flex-col gap-x-4 px-4justify-evenly">
+                <div class="flex justify-between text-start">
+                  <form [formGroup]="cuenta" class="relative w-full">
+                    <div>
+                      <label
+                        for="search"
+                        class="block text-sm font-medium leading-6 text-white"
+                        >Usuario</label
+                      >
+                      <div class="relative mt-2 flex items-center">
+                        <input
+                          type="text"
+                          formControlName="username"
+                          readonly
+                          class="block w-full rounded-md py-1.5 px-1.5 pr-14 text-black shadow-sm bg-gray-300 sm:text-sm sm:leading-6"
+                        />
+                        <div
+                          class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5"
                         >
-                        <div class="relative mt-2 flex items-center">
-                          <input
-                            type="text"
-                            formControlName="username"
-                            readonly
-                            class="block w-full rounded-md py-1.5 px-1.5 pr-14 text-black  shadow-sm  bg-gray-300 sm:text-sm sm:leading-6"
-                          />
-                          <div
-                            class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5"
+                          <mat-icon class="mat-18 mr-2"
+                            >account_circle</mat-icon
                           >
-                            <mat-icon class="mat-18 mr-2"
-                              >account_circle</mat-icon
-                            >
-                          </div>
                         </div>
                       </div>
-                      <div class="w-full">
-                        <label
-                          for="search"
-                          class="block text-sm font-medium leading-6 text-white"
-                          >Contraseña</label
+                    </div>
+                    <div class="w-full">
+                      <label
+                        for="search"
+                        class="block text-sm font-medium leading-6 text-white"
+                        >Contraseña</label
+                      >
+                      <div class="relative mt-1 flex items-center">
+                        <input
+                          matInput
+                          type="text"
+                          formControlName="password"
+                          #password
+                          pattern="[A-Za-z0-9]*"
+                          [readonly]="is_edit"
+                          maxlength="10"
+                          required
+                          class="block w-full rounded-md border-0 text-black py-1.5 px-1.5 pr-14 shadow-sm ring-1 ring-gray-300 sm:text-sm sm:leading-6"
+                        />
+                        <div
+                          class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5"
                         >
-                        <div class="relative mt-1 flex items-center">
-                          <input
-                            matInput
-                            type="text"
-                            formControlName="password"
-                            #password
-                            pattern="[A-Za-z0-9]*"
-                            [readonly]="is_edit"
-                            maxlength="10"
-                            required
-                            class="block w-full rounded-md border-0 text-black py-1.5 px-1.5 pr-14 shadow-sm ring-1 ring-gray-300 sm:text-sm sm:leading-6"
-                          />
-                          <div
-                            class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5"
-                          >
-                            <mat-icon class="mat-18 mr-2">password</mat-icon>
-                          </div>
+                          <mat-icon class="mat-18 mr-2">password</mat-icon>
                         </div>
-                        <div class="flex justify-between">
-                          <mat-hint align="start" class="text-xs"
-                            >Ingresar solo cáracteres alfanuméricos
-                          </mat-hint>
-                          <mat-hint align="end" class="text-xs"
-                            >{{ password.value.length }} / 10</mat-hint
-                          >
+                      </div>
+                      <div class="flex justify-between">
+                        <mat-hint align="start" class="text-xs"
+                          >Ingresar solo cáracteres alfanuméricos
+                        </mat-hint>
+                        <mat-hint align="end" class="text-xs"
+                          >{{ password.value.length }} / 10</mat-hint
+                        >
+                      </div>
+                      <mat-error
+                        *ngIf="cuenta.controls['password'].hasError('pattern')"
+                        class="text-xs"
+                      >
+                        No permite caracteres especiales
+                      </mat-error>
+                      <mat-error
+                        *ngIf="cuenta.controls['password'].hasError('required')"
+                        class="text-xs"
+                      >
+                        La contraseña es <strong>obligatorio</strong>
+                      </mat-error>
+                    </div>
+                    <div>
+                      <label
+                        for="search"
+                        class="block text-sm font-medium leading-6 text-white"
+                        >Pin</label
+                      >
+                      <div class="relative mt-1 flex items-center">
+                        <input
+                          type="text"
+                          formControlName="pincode"
+                          [readonly]="is_edit"
+                          #pinCode
+                          maxlength="4"
+                          pattern="[0-9]*"
+                          required
+                          class="block w-full rounded-md border-0 py-1.5 px-1.5 pr-14 text-black shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
+                        />
+                        <div
+                          class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5"
+                        >
+                          <mat-icon class="mat-18 mr-2">vpn_key</mat-icon>
                         </div>
+                      </div>
+                      <div class="flex justify-between">
                         <mat-error
-                          *ngIf="
-                            cuenta.controls['password'].hasError('pattern')
-                          "
+                          *ngIf="cuenta.controls['pincode'].hasError('pattern')"
                           class="text-xs"
                         >
-                          No permite caracteres especiales
+                          Solo caracteres numericos
                         </mat-error>
-                        <mat-error
-                          *ngIf="
-                            cuenta.controls['password'].hasError('required')
-                          "
-                          class="text-xs"
+                        <mat-hint align="end" class="text-xs"
+                          >{{ pinCode.value.length }} / 4</mat-hint
                         >
-                          La contraseña es <strong>obligatorio</strong>
-                        </mat-error>
                       </div>
-                      <div>
-                        <label
-                          for="search"
-                          class="block text-sm font-medium leading-6 text-white"
-                          >Pin</label
-                        >
-                        <div class="relative mt-1 flex items-center">
-                          <input
-                            type="text"
-                            formControlName="pincode"
-                            [readonly]="is_edit"
-                            #pinCode
-                            maxlength="4"
-                            pattern="[0-9]*"
-                            required
-                            class="block w-full rounded-md border-0 py-1.5 px-1.5 pr-14 text-black  shadow-sm  placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-                          />
-                          <div
-                            class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5"
-                          >
-                            <mat-icon class="mat-18 mr-2">vpn_key</mat-icon>
-                          </div>
-                        </div>
-                        <div class="flex justify-between">
-                          <mat-error
-                            *ngIf="
-                              cuenta.controls['pincode'].hasError('pattern')
-                            "
-                            class="text-xs"
-                          >
-                            Solo caracteres numericos
-                          </mat-error>
-                          <mat-hint align="end" class="text-xs"
-                            >{{ pinCode.value.length }} / 4</mat-hint
-                          >
-                        </div>
-                      </div>
-                      <div class="flex my-4">
-                        <ng-container *ngIf="modificar; else Guardar">
-                          <div class="flex justify-center gap-2 mt-6 w-full">
-                            <button
+                    </div>
+                    <div class="flex my-2">
+                      <ng-container *ngIf="modificar; else Guardar">
+                        <div class="flex justify-center gap-2 w-full">
+                          <button
                             type="submit"
                             (click)="isEditar()"
-                            class="w-full inline-flex p-2 mx-4 rounded-2xl text-white  font-semibold justify-center items-center bg-red-600"
-                            >
+                            class="w-full inline-flex p-2 mx-4 rounded-2xl text-white font-semibold justify-center items-center bg-red-600"
+                          >
                             <mat-icon class="mx-2">edit</mat-icon> Modificar
-                            </button>
-                          </div>
-                        
-                        </ng-container>
-                        <ng-template #Guardar>
-                          <div class="flex justify-center gap-2 mt-6 w-full">
-                            <button
+                          </button>
+                        </div>
+                      </ng-container>
+                      <ng-template #Guardar>
+                        <div class="flex justify-center gap-2 w-full">
+                          <button
                             type="submit"
                             [disabled]="cuenta.invalid"
                             (click)="updateAccount()"
-                            class="w-full inline-flex p-2 mx-4 rounded-2xl text-white font-semibold justify-center items-center  border-2 border-white "
-                            >
+                            class="w-full inline-flex p-2 mx-4 rounded-2xl text-white font-semibold justify-center items-center border-2 border-white"
+                          >
                             <mat-icon class="mx-2">edit</mat-icon> Guardar
-                            </button>
-                          </div>
-                          
-                        </ng-template>
-                      </div>
-                      <div class="flex justify-center items-center space-x-4">
-                        <a
-                          href="http://play.google.com/store/apps/details?id=com.gnettv.android&hl=en"
-                          target="_blank"
-                        >
-                          <img
-                            src="https://www.svgrepo.com/show/303139/google-play-badge-logo.svg"
-                            width="130"
-                            height="110"
-                            alt=""
-                          />
-                        </a>
-                        <a
-                          href="https://apps.apple.com/uz/app/g-tv/id6450960460"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <img
-                            src="https://www.svgrepo.com/show/303128/download-on-the-app-store-apple-logo.svg"
-                            width="130"
-                            height="110"
-                            alt=""
-                          />
-                        </a>
-                        <a
-                          href="https://channelstore.roku.com/es-mx/details/2b6f7a91903cd81be416208e0802faf6/g-tv"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <img
-                            src="../../../../../../../assets/img/downloadRoku.png"
-                            width="130"
-                            height="110"
-                            alt=""
-                          />
-                        </a>
-                      </div>
-                    </form>
-                  </div>
+                          </button>
+                        </div>
+                      </ng-template>
+                    </div>
+                    <div class="flex justify-center items-center space-x-4">
+                      <a
+                        href="http://play.google.com/store/apps/details?id=com.gnettv.android&hl=en"
+                        target="_blank"
+                      >
+                        <img
+                          src="https://www.svgrepo.com/show/303139/google-play-badge-logo.svg"
+                          width="130"
+                          height="110"
+                          alt=""
+                        />
+                      </a>
+                      <a
+                        href="https://apps.apple.com/uz/app/g-tv/id6450960460"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          src="https://www.svgrepo.com/show/303128/download-on-the-app-store-apple-logo.svg"
+                          width="130"
+                          height="110"
+                          alt=""
+                        />
+                      </a>
+                      <a
+                        href="https://channelstore.roku.com/es-mx/details/2b6f7a91903cd81be416208e0802faf6/g-tv"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          src="../../../../../../../assets/img/downloadRoku.png"
+                          width="130"
+                          height="110"
+                          alt=""
+                        />
+                      </a>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="p-2 sm:p-10 text-center cursor-pointer text-white">
-        <div
-          class="py-16 max-w-lg mx-auto rounded-2xl overflow-hidden shadow-lg bg-red-700 hover:bg-black transition duration-400"
-        >
-          <div class="space-y-4">
-            <div class="flex flex-col items-center justify-center">
-              <i class="fa fa-tv p2 items-center" style="font-size: 50px"></i>
-              <span class="text-sm font-light my-2"
-                >{{ cuentaTv?.deviceCount || '' }} PANTALLAS</span
+    <div class="p-2 text-center cursor-pointer text-white">
+      <div class="py-4 max-w-lg mx-auto overflow-hidden">
+        <div class="space-y-2">
+          <div class="flex flex-col items-center justify-center">
+            <!-- <i class="fa fa-tv p2 items-center" style="font-size: 50px"></i> -->
+            <span class="text-xl font-light my-2">PANTALLAS</span>
+          </div>
+
+          <div class="px-6 py-2">
+            <div class="space-y-2">
+              <div
+                class="grid grid-cols-1 lg:grid-cols-3  gap-y-4 lg:gap-x-2 mx-2"
               >
-            </div>
-
-            <div class="px-6 py-2">
-              <div class="space-y-4">
-                <div class="flex justify-around">
-                  <div class="gap-y-4">
-                    <div
-                      class="flex justify-center items-center rounded-full w-20 h-20 bg-white shadow-lg shadow-gray-500/50 ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300"
-                      (click)="verPantallaDisponibles()"
-                    >
-                      <i
-                        class="fa fa-tv p2 text-red-700 items-center"
-                        style="font-size: 25px"
-                      ></i>
-                    </div>
-                    <span class="text-sm font-light py-4"
-                      >{{ cuentaTv.activationCodes.length }} DISPONIBLES</span
-                    >
-                  </div>
-                  <div>
-                    <div
-                      class="flex justify-center items-center rounded-full w-20 h-20 bg-white shadow-lg shadow-gray-500/50 ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300"
-                      (click)="
-                        cuentaTv.devices.length > 0
-                          ? verPantallaUtilizadas()
-                          : ''
-                      "
-                    >
-                      <i
-                        class="fa fa-tv p2 text-green-700 items-center"
-                        style="font-size: 25px"
-                      ></i>
-                    </div>
-                    <span class="gap-y-4 text-sm font-light my-4"
-                      >{{ cuentaTv.devices.length }} OCUPADAS</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="p-2 sm:p-10 text-center cursor-pointer translate-x-2"
-        *ngIf="contrato.contract_detail_product.length > 0"
-      >
-        <div
-          class="py-16 max-w-sm rounded overflow-hidden shadow-lg hover:bg-white transition duration-500 bg-white"
-        >
-          <div class="space-y-4">
-            <div class="flex flex-col items-center justify-center">
-              <i class="fa fa-film" style="font-size: 50px"></i>
-              <span class="text-sm font-light my-2">TV BOX</span>
-            </div>
-
-            <div class="px-6 py-2">
-              <div class="space-y-4">
-                <div class="flex justify-around">
+                <div class="gap-y-2" *ngFor="let activate of activateCode">
                   <div
-                    class="flex justify-center items-center rounded-full w-20 h-20 bg-red-700 shadow-lg shadow-gray-500/50 ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300"
-                    (click)="verTvBox(tvbox)"
-                    *ngFor="let tvbox of contrato.contract_detail_product"
+                    class="flex justify-center items-center rounded-full w-20 h-20 bg-white shadow-lg shadow-gray-500/50 ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300"
+                    (click)="verPantallaDisponibles(activate.linkCode)"
                   >
                     <i
-                      class="fa fa-film p2 text-gray-50 items-center"
+                      class="fa fa-tv p2 text-red-700 items-center"
                       style="font-size: 25px"
                     ></i>
                   </div>
+                  <span class="text-sm font-light py-4"
+                    >{{ activate.linkCode }} </span
+                  >
+                </div>
+                <div ></div>
+                <div class=></div>
+                <div *ngFor="let device of devices">
+                  <div
+                    class="flex justify-center items-center rounded-full w-20 h-20 bg-white shadow-lg shadow-gray-500/50 ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300"
+                    (click)="verPantallaUtilizadas(device.serialNumber)"
+                  >
+                    <i
+                      class="fa fa-tv p2 text-green-700 items-center"
+                      style="font-size: 25px"
+                    ></i>
+                  </div>
+                  <span class="gap-y-4 text-sm font-light my-4"
+                    >{{ device.deviceOs }}
+                  </span>
                 </div>
               </div>
             </div>
-            <!-- <div class="px-6 py-2">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="p-2 sm:p-10 text-center cursor-pointer translate-x-2"
+      *ngIf="contrato.contract_detail_product?.length > 0"
+    >
+      <div
+        class="py-16 max-w-sm rounded overflow-hidden shadow-lg hover:bg-white transition duration-500 bg-white"
+      >
+        <div class="space-y-4">
+          <div class="flex flex-col items-center justify-center">
+            <i class="fa fa-film" style="font-size: 50px"></i>
+            <span class="text-sm font-light my-2">TV BOX</span>
+          </div>
+
+          <div class="px-6 py-2">
+            <div class="space-y-4">
+              <div class="flex justify-around">
+                <div
+                  class="flex justify-center items-center rounded-full w-20 h-20 bg-red-700 shadow-lg shadow-gray-500/50 ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 duration-300"
+                  (click)="verTvBox(tvbox)"
+                  *ngFor="let tvbox of contrato.contract_detail_product"
+                >
+                  <i
+                    class="fa fa-film p2 text-gray-50 items-center"
+                    style="font-size: 25px"
+                  ></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="px-6 py-2">
                             <div class="space-y-4">
                                 <div class="font-bold text-xl mb-2">TV BOX</div>
                                 <p class="text-lg font-mono">
@@ -338,7 +320,6 @@
                                 </p>
                             </div>
                         </div> -->
-          </div>
         </div>
       </div>
     </div>

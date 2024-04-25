@@ -7,12 +7,10 @@ import { DialogRegistrarPmComponent } from '../dialog-registrar-pm/dialog-regist
 import { DialogRegistrarZelleComponent } from '../dialog-registrar-zelle/dialog-registrar-zelle.component';
 import { PageEvent } from '@angular/material/paginator';
 import { DialogRegistrarTransferenciaComponent } from '../dialog-registrar-transferencia/dialog-registrar-transferencia.component';
-import { DialogoActualizacionesComponent } from 'src/app/components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
-import { DialogoPagarComponent } from 'src/app/components/servicios/components/pagos/dialogo-pagar/dialogo-pagar.component';
 import { DialogoPasosAfiliacionComponent } from 'src/app/components/components/dialogo-pasos-afiliacion/dialogo-pasos-afiliacion.component';
-import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { LoadingService } from 'src/app/components/service/loading.service';
 import { LoginService } from 'src/app/components/auth/services/login.service';
+import { SnackbarService } from 'src/app/components/service/snackbar.service';
 
 @Component({
   selector: 'app-info-pagos',

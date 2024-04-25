@@ -23,7 +23,7 @@ export interface GtvRoot {
     expirationTime: string
     deviceCount: number
     activationCodes: ActivationCode[]
-    devices: any[]
+    devices: Device[]
     payments: Payment[]
     paymentStatus: string
     enabled: boolean
@@ -36,6 +36,23 @@ export interface GtvRoot {
     activationCodeId: number
     expirationTime: string
     linkCode: string
+  }
+  
+  export interface Device {
+    serialNumber: string
+    macAddress: string
+    deviceOs: string
+    deviceOsVersion: string
+    appName: string
+    appVersion: string
+    ipAddress: string
+    location: string
+    name: any
+    identifier: string
+    role: string
+    timezone: string
+    status: string
+    platform: string
   }
   
   export interface Payment {
@@ -56,7 +73,7 @@ export interface GtvRoot {
   
   export interface SubscriptionStatus {
     status: string
-    reason: any
+    reason?: string
   }
   
   export interface CurrentSubscriptionStatus {

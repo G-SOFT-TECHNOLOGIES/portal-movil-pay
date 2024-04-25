@@ -1,0 +1,12 @@
+.button input ~ label {
+  /* background: url("../../../../../../../assets/img/more.svg") no-repeat; */
+  background-color: #dc2626;
+  color: white;
+}
+.button input:checked ~ label {
+    /* background: url("../../../../../../../assets/img/check.svg") no-repeat; */
+    background-color: transparent;
+    border-width: 2px;
+    border-color: #dc2626;
+    color: white;
+}

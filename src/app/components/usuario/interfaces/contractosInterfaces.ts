@@ -42,4 +42,5 @@ export class ParamsCampaing {
 }
 export class ParamsGTV {
   status?: string
+  gtv_package_active?:string
 }

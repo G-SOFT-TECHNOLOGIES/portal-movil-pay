@@ -1,16 +1,7 @@
 <div class="flex justify-center px-8 py-4">
     <div>
-        <div class="flex justify-center gap-2 text-sm">
-            <button
-              class="inline-flex p-3 mx-4 rounded-2xl text-white font-semibold  bg-red-600 items-center"
-              (click)="showDialog()"
-            >
-            <mat-icon  class="mx-2">open_in_new</mat-icon>
-            Aceptar terminos y condiciones
-            </button>
-          </div>
-        <!-- <p-button (click)="showDialog()" icon="pi pi-external-link" rounded="true" severity="danger" class="p-button p-button-danger"
-            label="Aceptar terminos y condiciones"></p-button>  -->
+        <p-button (click)="showDialog()" icon="pi pi-external-link" styleClass="p-button-danger bg-red-700"
+            label="Aceptar terminos y condiciones"></p-button>
         <p-dialog header="TERMINOS Y CONDICIONES" [modal]="true" [draggable]="false" [(visible)]="visible" [style]="{ width: '50vw', height: '50hw' }"
             [maximizable]="true" position="top">
             <p>

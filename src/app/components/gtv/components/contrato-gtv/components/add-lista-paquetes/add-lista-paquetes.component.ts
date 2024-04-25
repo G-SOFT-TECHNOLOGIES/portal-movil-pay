@@ -20,21 +20,25 @@ export class AddListaPaquetesComponent {
   private loader = inject(LoadingService)
   checked: boolean = false
 
-  @Input() paquetes: ContractDetailPackage[] = []
-  @Output() selected: EventEmitter<any> = new EventEmitter()
-  packages: any[] = []
   selecionados: any[] = []
+  @Input() paquetes: ContractDetailPackage[] = []
+  @Output() selected = new EventEmitter()
+  packages: any[] = []
   listPackage = new FormGroup({
     package: new FormControl<any>('')
   })
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    this.selecionados =[]
     const params: ParamsGTV = new ParamsGTV();
     params.status = 'true'
     this.tvservices.getAllPackages(params).then((result) => {
-      if (this.paquetes.length >0) {
+      if (this.paquetes.length > 0) {
+
         this.paquetes.map((pack) => {
-          this.packages = result.filter((pack_repet) => pack_repet.id != pack.package).map(data => data)
+          let packs = result.filter((pack_repet) => pack_repet.id != pack.package).map(data => data)
+          this.packages.push({ ...packs[0], active: true })
         })
+
       } else {
         this.packages = result
       }
@@ -45,14 +49,13 @@ export class AddListaPaquetesComponent {
 
   setShopping(e: any, paquete: any) {
     let target = e.target as HTMLInputElement
-    console.log(target.checked)
+    console.log(target.checked, 'true')
     if (target.checked) {
       this.selecionados.push(paquete.id)
       this.selected.emit(this.selecionados)
-
       return
     } else {
-      this.selecionados =  this.selecionados.filter(sel => sel != paquete.id);
+      this.selecionados = this.selecionados.filter(sel => sel != paquete.id);
       this.selected.emit(this.selecionados)
       return
     }
