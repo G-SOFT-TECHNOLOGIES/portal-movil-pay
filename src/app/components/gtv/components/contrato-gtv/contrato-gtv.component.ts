@@ -63,6 +63,7 @@ export class ContratoGtvComponent {
       if (res.service_type.id == 4) {
         this.contract_detail_Tv = res
         const params: ParamsGTV = new ParamsGTV()
+        params.status = 'true'
         this.tvservices.getAllPackagesContractDetail(res.id, params)
           .then((result) => {
             this.paquetes = result
