@@ -254,7 +254,7 @@ export class ServicoTvService {
   }
   getAllPackagesContractDetail(id:number,params: ParamsGTV): Promise<any> {
     const resparams = this.queryservices.buildQueryParams(params)
-    const resp = this.http.get<Packages[]>(`${this.url}/api/gsoft/portal/gtv/account/${id}/package/`,{ params: resparams })
+    const resp = this.http.get<any>(`${this.url}/api/gsoft/portal/gtv/account/${id}/package/`,{ params: resparams })
     return lastValueFrom(resp)
   }
 } 

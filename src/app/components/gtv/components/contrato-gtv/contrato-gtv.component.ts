@@ -64,9 +64,10 @@ export class ContratoGtvComponent {
         this.contract_detail_Tv = res
         const params: ParamsGTV = new ParamsGTV()
         params.status = 'true'
+        params.remove_pagination='true'
         this.tvservices.getAllPackagesContractDetail(res.id, params)
           .then((result) => {
-            this.paquetes = result
+            this.paquetes = result.results
             // this.canales.channels_plan_gtv.map((data) => {
             //   this.channels_plan_gtv.push(data)
             // })
