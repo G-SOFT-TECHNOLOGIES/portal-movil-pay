@@ -62,29 +62,23 @@ export class ContratoGtvComponent {
       this.loader.hideLoading()
       if (res.service_type.id == 4) {
         this.contract_detail_Tv = res
+        this.tvservices.getTypesServicesTVId(res.plan_type.id).then((result) => {
+          console.log(result)
+          this.canales = result
+          this.showCanales = result.channels_plan_gtv.length > 0? true : false
+        }).catch((err) => {
+          console.log(err)
+        })
         const params: ParamsGTV = new ParamsGTV()
         params.status = 'true'
         params.remove_pagination='true'
         this.tvservices.getAllPackagesContractDetail(res.id, params)
           .then((result) => {
             this.paquetes = result.results
-            // this.canales.channels_plan_gtv.map((data) => {
-            //   this.channels_plan_gtv.push(data)
-            // })
-            this.showCanales = true
           }).catch((err) => {
             console.log(err)
           })
 
-        this.tvservices.getTypesServicesTVId(res.plan_type.id).then((result) => {
-          this.canales = result
-          // this.canales.channels_plan_gtv.map((data) => {
-          //   this.channels_plan_gtv.push(data)
-          // })
-          this.showCanales = true
-        }).catch((err) => {
-          console.log(err)
-        })
       }
       return this.loader.hideLoading()
 

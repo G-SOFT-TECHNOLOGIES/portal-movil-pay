@@ -114,7 +114,7 @@ export class InformacionCuentaComponent {
     }).catch((error) => {
       console.log(error)
       if (error.status == 400) {
-        this.snack.openSnack(error, 'error')
+        this.snack.openSnack(error?.error.message, 'error')
       } else {
         this.snack.openSnack(error, 'error')
       }
