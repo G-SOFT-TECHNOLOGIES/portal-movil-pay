@@ -4,10 +4,6 @@ import { ContractDetailPackage } from 'src/app/components/finanzas/interfaces/Us
 import { ServicoTvService } from 'src/app/components/servicios/services/servico-tv.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DialogDetallePaquetesGtvComponent } from '../../../dialog-detalle-paquetes-gtv/dialog-detalle-paquetes-gtv.component';
-import { ConfirmComponent } from 'src/app/components/home/confirm/confirm.component';
-import { LoadingService } from 'src/app/components/service/loading.service';
-import { SnackbarService } from 'src/app/components/service/snackbar.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-paquetes',
@@ -22,9 +18,7 @@ export class ListaPaquetesComponent {
     package: new FormControl<any>('')
   })
   @Input() paquetes: ContractDetailPackage[] = []
-  constructor() {
-    console.log(this.paquetes)
-  }
+  constructor() {}
 
   verDetalles(id: any) {
     this.tvservices.getPackages(Number(id)).then((result) => {

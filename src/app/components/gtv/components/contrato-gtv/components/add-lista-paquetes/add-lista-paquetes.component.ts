@@ -8,6 +8,7 @@ import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { ParamsGTV } from 'src/app/components/usuario/interfaces/contractosInterfaces';
 import { DialogDetallePlanComponent } from '../../../dialog-detalle-plan/dialog-detalle-plan.component';
 import { DialogDetallePaquetesGtvComponent } from '../../../dialog-detalle-paquetes-gtv/dialog-detalle-paquetes-gtv.component';
+import { Package } from 'src/app/components/servicios/interface/paquetes.interface';
 
 @Component({
   selector: 'app-add-lista-paquetes',
@@ -21,35 +22,17 @@ export class AddListaPaquetesComponent {
   checked: boolean = false
 
   selecionados: any[] = []
-  @Input() paquetes: ContractDetailPackage[] = []
+  @Input() packages: Package[] = []
   @Output() selected = new EventEmitter()
-  packages: any[] = []
   listPackage = new FormGroup({
     package: new FormControl<any>('')
   })
   ngAfterViewInit(): void {
     this.selecionados =[]
-    const params: ParamsGTV = new ParamsGTV();
-    params.status = 'true'
-    this.tvservices.getAllPackages(params).then((result) => {
-      if (this.paquetes.length > 0) {
-
-        this.paquetes.map((pack) => {
-          let packs = result.filter((pack_repet) => pack_repet.id != pack.package).map(data => data)
-          this.packages.push({ ...packs[0], active: true })
-        })
-
-      } else {
-        this.packages = result
-      }
-    }).catch((err) => {
-      console.log(err)
-    })
   }
 
   setShopping(e: any, paquete: any) {
     let target = e.target as HTMLInputElement
-    console.log(target.checked, 'true')
     if (target.checked) {
       this.selecionados.push(paquete.id)
       this.selected.emit(this.selecionados)

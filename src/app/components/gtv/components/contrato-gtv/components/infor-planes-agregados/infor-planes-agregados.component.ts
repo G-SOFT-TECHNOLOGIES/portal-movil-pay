@@ -16,9 +16,7 @@ export class InforPlanesAgregadosComponent {
   responsiveOptions: any[] | undefined;
 
   ngOnInit(): void {
-    console.log(this.canales, 'canales');
-    
-    this.canales.channels_plan_gtv.map((data) => {
+      this.canales.channels_plan_gtv.map((data) => {
       this.channels_plan_gtv.push(data)
     })
     this.responsiveOptions = [

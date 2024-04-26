@@ -47,9 +47,13 @@ export class LoginService {
         this.getAlerts()
       }).catch((err) => {
         this.loading.hideLoading()
+        if (err.status == 400) {
+          this.snack.openSnack(err.error?.message, 'error')
+          return
+        }
+        this.snack.openSnack(err.error?.message, 'error')
         console.log(err)
-        return this.snack.openSnack(err.error.message, 'error')
-        
+        return
       });
   }
   setLoggin() {

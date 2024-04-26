@@ -1,3 +1,4 @@
+import { getAllPackages } from './../../../servicios/interface/paquetes.interface';
 import { Component, Input, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -20,7 +21,7 @@ export class ContratoGtvComponent {
   private loader = inject(LoadingService)
   private dialog = inject(MatDialog);
   private snack = inject(SnackbarService)
-
+  packages: any[] = []
   contrato!: ContratoID
   selected: any = []
   delete: number = 0
@@ -40,13 +41,14 @@ export class ContratoGtvComponent {
   }
   getContract() {
     this.loader.showLoading()
-
     this.tvservices.getContratoTV(this.id).then((result: ContratoID) => {
       this.loader.hideLoading()
       this.contrato = result;
       let res = result.contract_detail.filter((contract) => contract.service_type.id === 4).map((contract) => contract)
       if (res.length > 0) {
-        return this.getPackageId()
+
+        this.getPackageId()
+        return
       }
       this.router.navigate(['home/contratos'])
       return
@@ -56,39 +58,34 @@ export class ContratoGtvComponent {
     })
   }
   getPackageId() {
-
-    // this.loader.showLoading()
     this.contrato.contract_detail.map((res) => {
       this.loader.hideLoading()
       if (res.service_type.id == 4) {
         this.contract_detail_Tv = res
         this.tvservices.getTypesServicesTVId(res.plan_type.id).then((result) => {
-          console.log(result)
           this.canales = result
-          this.showCanales = result.channels_plan_gtv.length > 0? true : false
+          this.showCanales = result.channels_plan_gtv.length > 0 ? true : false
         }).catch((err) => {
           console.log(err)
         })
         const params: ParamsGTV = new ParamsGTV()
         params.status = 'true'
-        params.remove_pagination='true'
+        params.remove_pagination = 'true'
         this.tvservices.getAllPackagesContractDetail(res.id, params)
           .then((result) => {
             this.paquetes = result.results
+            this.getAllPackages()
           }).catch((err) => {
             console.log(err)
           })
-
       }
       return this.loader.hideLoading()
-
     })
     this.loader.hideLoading()
   }
 
 
   Add() {
-
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: { message: "¿Esta seguro de agregar los paquetes a su plan?" },
     })
@@ -100,7 +97,9 @@ export class ContratoGtvComponent {
             .then((value) => {
               this.loader.hideLoading()
               this.paquetes = []
+              this.packages = []
               this.getContract()
+              this.getAllPackages()
             }).catch((error) => {
               console.log(error.status)
               this.loader.hideLoading()
@@ -119,7 +118,6 @@ export class ContratoGtvComponent {
     })
   }
   deletePackage() {
-
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: { message: "¿Esta seguro de eliminar este paquete?" },
     })
@@ -132,6 +130,7 @@ export class ContratoGtvComponent {
           this.snack.openSnack("Eliminado exitosamente", '')
           this.router.navigate(['home/gtv/servicio', this.tvservices.id_contrato.value])
           this.getContract()
+          this.getAllPackages()
         }).catch((error) => {
           console.log(error)
           this.loader.hideLoading()
@@ -139,7 +138,23 @@ export class ContratoGtvComponent {
         })
       }
     })
+  }
 
-
+  getAllPackages() {
+    const params: ParamsGTV = new ParamsGTV();
+    params.status = 'true'
+    this.tvservices.getAllPackages(params).then((result) => {
+      if (this.paquetes.length > 0) {
+        this.paquetes.map((pack) => {
+          let packs = result.filter((pack_repet) => pack_repet.id != pack.package).map((data) => ({ ...data, active: true }))
+          this.packages = packs
+        })
+        return this.packages
+      } else {
+        return this.packages = result
+      }
+    }).catch((err) => {
+      console.log(err)
+    })
   }
 }

@@ -25,6 +25,7 @@ export interface Package {
   file_logo: any
   status: boolean
   channels_package_gtv_count:number
+  active?:boolean
 }
 
 export interface Channel {

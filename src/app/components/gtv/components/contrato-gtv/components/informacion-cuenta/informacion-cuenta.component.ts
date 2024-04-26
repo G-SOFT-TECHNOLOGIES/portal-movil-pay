@@ -23,6 +23,7 @@ export class InformacionCuentaComponent {
   private snack = inject(SnackbarService);
   private loader = inject(LoadingService); 
   devices: Device[]=[]
+
   activateCode: ActivationCode[]=[]
   cuenta = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -85,14 +86,18 @@ export class InformacionCuentaComponent {
   }
   getDetailGtv() {
     this.tvservices.getDetailGtv(this.contrato.id).then((value) => {
-      console.log(value, 'datos')
       this.cuentaTv = value.result
       this.devices = value.result.devices
       this.activateCode = value.result.activationCodes
+      // this.cuenta.patchValue({
+      //   username: value.result.userName,
+      //   password: value.result.password,
+      //   pincode: value.result.pinCode
+      // })
       this.cuenta.patchValue({
-        username: value.result.userName,
-        password: value.result.password,
-        pincode: value.result.pinCode
+        username: this.contrato.contract_detail_account.username,
+        password: this.contrato.contract_detail_account.password,
+        pincode:  this.contrato.contract_detail_account.pin_code
       })
     }).catch((err) => {
 
@@ -107,7 +112,6 @@ export class InformacionCuentaComponent {
       "contract_detail": this.contrato.contract_detail_account.contract_detail
     }
     this.tvservices.updateAccountTv(body, this.contrato.contract_detail_account.id).then((value) => {
-      console.log(value, 'respuesta')
       this.loader.hideLoading()
       this.modificar = true;
       this.is_edit = true

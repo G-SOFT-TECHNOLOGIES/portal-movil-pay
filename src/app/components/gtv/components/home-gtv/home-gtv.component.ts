@@ -53,8 +53,8 @@ export class HomeGtvComponent {
   IrDetalles(plan: any) {
     const dialogo = this.dialog.open(DialogDetallePlanComponent, {
       data: plan,
-      width: 'auto',
-      // height: '80%'
+      width: window.innerWidth > 632 ?  '60%' : 'auto',
+      height: window.innerWidth > 632 ?  'auto' : 'auto'
     })
   }
 }

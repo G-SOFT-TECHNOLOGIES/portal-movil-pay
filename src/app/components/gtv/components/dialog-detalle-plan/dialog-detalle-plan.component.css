@@ -1,0 +1,4 @@
+mat-dialog-container .mat-mdc-dialog-container .mdc-dialog__surface{
+    border-radius: var(--mdc-dialog-container-shape, 20px);
+   
+}

@@ -4,12 +4,12 @@
     class="relative h-60 w-96 button mx-auto my-4"
   >
     <div
-      class="relative opacity-95 bg-center p-4 m-4 w-full mx-auto rounded-2xl"
-      [ngClass]="paquetes?.active ? 'bg-neutral-500' : 'bg-neutral-800'"
+      class="relative opacity-95 bg-center p-4 m-4 w-full mx-auto rounded-2xl bg-neutral-800"
+      [ngClass]="paquetes?.status? 'bg-neutral-500' : 'bg-neutral-800'"
     >
       <div class="mx-auto text-left text-white">
         <span
-          *ngIf="!paquetes?.active"
+          
           aria-hidden="true"
           class="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-gray-800 opacity-80 rounded-2xl"
         ></span>
@@ -20,7 +20,7 @@
             <h1 class="text-xl font-medium inline-flex justify-between">
               {{ paquetes.name }}
 
-              <div  
+              <div   
                 class="flex flex-col justify-center text-center top-0 right-0 text-xs mx-4"
               >
                 <input
