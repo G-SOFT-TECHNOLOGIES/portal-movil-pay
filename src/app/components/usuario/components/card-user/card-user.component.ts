@@ -36,15 +36,14 @@ export class CardUserComponent {
     })
   }
   permisosFechaZona(): Boolean {
-    console.log(this.contratos.zone, 'date')
-    console.log(this.date.getMonth(), 'date', this.date.getDate())
-    // Carayaca
-    let option: boolean =false
-    if (this.date.getDay() == 1 || this.date.getDay() == 3 && this.date.getMonth() +1 == 5 && this.contratos.zone==9) {
+    // console.log(this.contratos.zone, 'date', this.date.getDate(), this.date.getMonth()+1)
+    // Carayaca y Naiguata
+    let option: boolean =true
+    if (this.date.getDate() == 1 || this.date.getDate() == 3 && this.date.getMonth() +1 == 5 && this.contratos.zone==9) {
       option = true
     }
     // Centro
-    if (this.date.getDay() == 5 && this.date.getMonth()+1 == 5 && this.contratos.zone==2) {
+    if (this.date.getDate() == 25 && this.date.getMonth()+1 == 5 ) {
       option = true
     }
       // Este
