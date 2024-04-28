@@ -271,9 +271,9 @@
             </span>
           </div>
         </div>
-        <div class="mt-6 py-6 border-t border-slate-200 text-center">
+        <div class="mt-6 py-6 border-t border-slate-200 text-center w-full">
           <div class="flex flex-wrap justify-center">
-            <div class="w-full h-[80px] px-4">
+            <div class="w-full px-4">
               <p class="font-light text-slate-600 text-sm">
                 {{ contratos.address_tax }}
               </p>
@@ -287,10 +287,10 @@
 
     <!-- component -->
     <div>
-      <dl class="grid grid-cols-1 gap-5 lg:grid-cols-2 p-4" *ngIf="contract">
+      <dl class="grid grid-cols-1 gap-2 md:grid-cols-2 p-2" *ngIf="contract">
         <div *ngIf="contratos.status == 16 && contract.length <= 1">
           <div
-            class="bg-white px-4 py-2 text-center flex flex-col items-center justify-center"
+            class="bg-white px-1 py-2 text-center flex flex-col items-center justify-center"
           >
             <!-- <dt class="text-sm font-medium text-gray-500 uppercase">
               Próximamente
@@ -349,9 +349,9 @@
                 mat-raised-button
                 color="warn"
                 (click)="miServicio(contratos.id)"
-                class="flex w-full m-1"
+                class="flex w-full h-auto my-1"
               >
-                Ir a Servicio TV <mat-icon class="mr-2 right-0">tv</mat-icon>
+              GTV+ <mat-icon class="mr-2 right-0">tv</mat-icon>
               </button>
             </ng-container>
             <!-- Termina el comentado -->
