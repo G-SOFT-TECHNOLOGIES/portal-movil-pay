@@ -16,7 +16,11 @@ export class TerminosComponent {
   private router = inject(Router)
   disabled: boolean = true
   loading: boolean = false;
-  formGroup!: FormGroup;
+  formGroup =new FormGroup({
+    value: new FormControl('off'),
+    checked: new FormControl<boolean>(false)
+  });
+  checked: boolean = false
   uploadedFiles: any[] = [];
   @Output() response = new EventEmitter<boolean>()
 
@@ -26,10 +30,11 @@ export class TerminosComponent {
     this.visible = true;
   }
   ngOnInit() {
-    this.formGroup = new FormGroup({
-      value: new FormControl('off'),
-      checked: new FormControl(false)
-    });
+    this.formGroup.valueChanges.subscribe(data=> {
+      this.visible = false
+      this.checked =!this.checked
+      this.response.emit(!data.checked)
+    })
   }
 
   changeOption(event: any) {

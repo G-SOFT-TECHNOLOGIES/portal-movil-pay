@@ -61,28 +61,12 @@ export class CardUserComponent {
     this.router.navigate([`contratos/finanzas`])
   }
   IrDetalle(contrato: number) {
-    let plan = 0
     if (contrato) {
-      this.snack.openSnack("Seleccione el plan", '')
+      
       this.router.navigate(['home/gtv'])
       this.tvservices.setIdContrato(contrato)
       return
     }
-
-    // this.router.navigate(['home/servicios_tv/planes/informacion', plan])
-    // return
-    // this.tvservices.id_servicestv$.subscribe(data => plan = data)
-    // if (contrato) {
-    //   this.tvservices.setIdContrato(contrato)
-    // } else {
-    //   this.router.navigate([`home/contratos`])
-    // }
-    // if (plan == 0) {
-    //   this.snack.openSnack("Seleccione el plan", '')
-    //   this.router.navigate(['home/servicios_tv/contratos', contrato])
-    // } else {
-    //   this.router.navigate(['home/servicios_tv/planes/informacion', plan])
-    // }
   }
   miServicio(contrato: number) {
     this.router.navigate(['home/gtv'])

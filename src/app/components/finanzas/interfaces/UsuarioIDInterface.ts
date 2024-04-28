@@ -52,13 +52,11 @@ export interface ContractDetailPackage {
   id: number
   package: number
   package_name: string
-  package_file_logo: any
-  package_price: number
-  date_end: any
+  package_price?:string
+  contract_detail: number
+  date_end: string
+  finish_date?: any
   created_by: number
-  created_by_name: string
-  active?:boolean
-  finish_date?:any
 }
 
 export interface ContractDetailProduct {

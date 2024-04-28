@@ -1,7 +1,8 @@
 import { getAllPackages } from './../../../servicios/interface/paquetes.interface';
 import { Component, Input, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ContractDetailPackage, ContratoID } from 'src/app/components/finanzas/interfaces/UsuarioIDInterface';
 import { ConfirmComponent } from 'src/app/components/home/confirm/confirm.component';
 import { LoadingService } from 'src/app/components/service/loading.service';
@@ -21,6 +22,7 @@ export class ContratoGtvComponent {
   private loader = inject(LoadingService)
   private dialog = inject(MatDialog);
   private snack = inject(SnackbarService)
+  private activateRoute = inject(ActivatedRoute)
   packages: any[] = []
   contrato!: ContratoID
   selected: any = []
@@ -31,8 +33,11 @@ export class ContratoGtvComponent {
   channels_plan_gtv: any[] = []
   paquetes: ContractDetailPackage[] = []
   id: number = 0
+  sub!: Subscription
   constructor() {
-    this.id = this.tvservices.id_contrato.value
+    this.sub = this.activateRoute.params.subscribe(data => {
+      this.id = Number(data['id'])
+    })
   }
   ngOnInit(): void {
     this.id == 0 ? (this.router.navigate(['home/contratos']), this.tvservices.deleteItems(), this.loader.hideLoading()
@@ -40,7 +45,7 @@ export class ContratoGtvComponent {
 
   }
   getContract() {
-    this.loader.showLoading()
+    // this.loader.showLoading()
     this.tvservices.getContratoTV(this.id).then((result: ContratoID) => {
       this.loader.hideLoading()
       this.contrato = result;

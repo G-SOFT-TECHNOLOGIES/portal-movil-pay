@@ -31,20 +31,15 @@ export class GtvComponent {
   Option(id: number) {
     this.tvservices.getContratoTV(id).then((result: ContratoID) => {
       let res = result.contract_detail.filter((contract) => contract.service_type.id === 4).map((contract) => contract)
-      console.log(res)
       this.loader.hideLoading();
       if (res.length > 0) {
-        return this.router.navigate(['home/gtv/servicio', id])
+        this.router.navigate(['home/gtv/servicio', id])
+        this.tvservices.deleteIdContrato()
+        return 
       }
+      this.loader.hideLoading();
+
       return this.router.navigate(['home/gtv/planes'])
-      // result.contract_detail.map((contract) => {
-      // if (contract.service_type.id === 4) {
-      //   console.log(contract?.service_type, 'service_type')
-      //   this.suscrito.next(true)
-      //   this.contrato = result
-      //   return
-      // }
-      // })
     }).catch((err) => {
       console.log(err)
       this.loader.hideLoading()

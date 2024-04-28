@@ -23,7 +23,7 @@
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content class="relative">
-            <mat-toolbar class=" relative flex items-end justify-between shadow-md z-10 ">
+            <mat-toolbar class="sticky top-0 left-0 right-0  flex items-end justify-between shadow-md z-10 ">
                 <div class="inline-flex items-center">
                     <button mat-icon-button (click)="drawer.toggle()"><span
                             class="icon-menu text-red-500"></span></button>
@@ -41,7 +41,7 @@
                 <button mat-icon-button (click)="logout()"><mat-icon class="text-red-500">
                         logout</mat-icon></button>
             </mat-toolbar>
-            <div>
+            <div class="overflow-auto ">
                 <ng-container *ngIf="loading |async; else elseTemplate ">
                     <app-loading></app-loading>
                 </ng-container>

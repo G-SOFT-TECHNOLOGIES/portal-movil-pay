@@ -2,8 +2,9 @@
     <div>
         <p-button (click)="showDialog()" icon="pi pi-external-link" styleClass="p-button-danger bg-red-700"
             label="Aceptar terminos y condiciones"></p-button>
-        <p-dialog header="TERMINOS Y CONDICIONES" [modal]="true" [draggable]="false" [(visible)]="visible" [style]="{ width: '50vw', height: '50hw' }"
-            [maximizable]="true" position="top">
+        <p-dialog header="TERMINOS Y CONDICIONES" [modal]="true" [draggable]="false" [(visible)]="visible"
+            [breakpoints]="{ '960px': '80vw' }" [style]="{ width: '50vw', height: '50hw' }" [maximizable]="true"
+            position="top">
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
@@ -44,36 +45,18 @@
 
             </div>
             <ng-template pTemplate="footer">
-                <!-- <div class="flex flex-row-reverse">
-                    <div class="border-l-4 border-yellow-400 bg-yellow-50 p-4">
-                        <div class="flex ">
-                            <div class="flex-shrink-0 items-end">
-                                <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <div class="ml-3 text-start">
-                                <h3 class="text-base text-yellow-700">
-                                    Normas para realizar el Pago
-                                </h3>
-                                <ul role="list" class="text-base text-yellow-600 list-disc space-y-1 pl-5">
-                                    <li>Antes de procesar el pago debe verificar que el <strong>monto</strong> sea mayor o igual al monto a pagar por el producto.</li>
-                                    <li>No se procesará el pago si el monto es menor al monto a pagar.</li>
-                                    <li>Deberá contactar al área de Antención al Cliente en caso de que haya cancelado un monto menor al costo del producto.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                 <div class=" flex justify-center gap-y-4">
-
                     <form [formGroup]="formGroup" class="inline-flex gap-x-4 my-4">
-                        <span id="aceptar" class="font-mono font-semibold">Aceptar y continuar</span>
-                        <mat-slide-toggle formControlName="checked" color="warn"
-                            (change)="changeOption($event.checked)"></mat-slide-toggle>
+                        <label for="check">
+                            <div class="inline-flex justify-center items-center rounded-full w-full "
+                                [ngClass]="checked ?'border-2 border-red-600 text-red-600' : 'bg-red-600 text-white'">
+                                <input id="check" type="checkbox" [checked]="checked" hidden="hidden"
+                                    formControlName="checked" />
+                                <span class="font-bold py-2 px-6 text-xl "> Aceptar y continuar</span>
+
+                            </div>
+                        </label>
+                        <!-- <mat-slide-toggle formControlName="checked" color="warn"> <span id="aceptar" class="font-mono font-semibold">Aceptar y continuar</span></mat-slide-toggle> -->
                     </form>
                 </div>
             </ng-template>
