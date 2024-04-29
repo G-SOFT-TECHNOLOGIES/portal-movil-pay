@@ -1,4 +1,4 @@
-<form [formGroup]="listPackage" class="relative">
+<form [formGroup]="listPackage" class="relative" *ngIf="packages.length > 0 else SinDatos">
   <div
     *ngFor="let paquetes of packages"
     class="relative h-60 w-96 button mx-auto my-4"
@@ -65,27 +65,40 @@
     </div>
   </div>
 </form>
-<!-- <div
-            class="h-24 mx-4 px-6 w-full gap-x-4 flex justify-between items-center p-3 rounded-xl border-2 border-slate-100 shadow-lg transition-all transform-all hover:scale-105 cursor-pointer relative">
-            <!-- <div class="flex-shrink-0 items-center w-1/3">
-              
-            <div class="flex-shrink-0">
-                <button
-                    class="p-2 inline-flex items-center rounded-full bg-red-600 text-white font-mono font-semibold mx-2 my-4"
-                    (click)="verDetalles(paquete.id)">
-                    {{paquete.channels_package_gtv_count}} +
-                </button>
-            </div>
-            <div class="flex-shrink-1 items-center font-mono">
-                <div class="text-slate-800 text-center">{{paquete.name}}</div>
-                <div class="text-slate-800 text-center">{{paquete.price |
-                    number:'1.1-2'}} <span class="text-xs">/ mensual</span></div>
-              
+<ng-template #SinDatos>
+  <div class="max-h-screen flex flex-col justify-center gap-4 my-4 text-center">
+    <div class="flex justify-center items-center">
+      <div class="flex items-center w-32 h-32 mx-auto text-neutral-200">
+        <svg
+          width="130"
+          height="130"
+          viewBox="0 0 82 82"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+          d="M65 55.6667C65 57.1413 63.808 58.3333 62.3333 58.3333H57C55.5253 58.3333 54.3333 57.1413 54.3333 55.6667C54.3333 54.192 55.5253 53 57 53H62.3333C63.808 53 65 54.192 65 55.6667ZM77 53V66.3333C77 72.216 72.216 77 66.3333 77H23.6667C17.784 77 13 72.216 13 66.3333V53C13 47.1173 17.784 42.3333 23.6667 42.3333H26.3333V23.6667C26.3333 17.784 31.1173 13 37 13H53C58.8827 13 63.6667 17.784 63.6667 23.6667V42.3333H66.3333C72.216 42.3333 77 47.1173 77 53ZM31.6667 42.3333H58.3333V23.6667C58.3333 20.7253 55.9413 18.3333 53 18.3333H37C34.0587 18.3333 31.6667 20.7253 31.6667 23.6667V42.3333ZM23.6667 71.6667H42.3333V47.6667H23.6667C20.7253 47.6667 18.3333 50.0587 18.3333 53V66.3333C18.3333 69.2747 20.7253 71.6667 23.6667 71.6667ZM71.6667 53C71.6667 50.0587 69.2747 47.6667 66.3333 47.6667H47.6667V71.6667H66.3333C69.2747 71.6667 71.6667 69.2747 71.6667 66.3333V53ZM33 53H27.6667C26.192 53 25 54.192 25 55.6667C25 57.1413 26.192 58.3333 27.6667 58.3333H33C34.4747 58.3333 35.6667 57.1413 35.6667 55.6667C35.6667 54.192 34.4747 53 33 53ZM50.3333 26.3333C50.3333 24.8587 49.1413 23.6667 47.6667 23.6667H42.3333C40.8587 23.6667 39.6667 24.8587 39.6667 26.3333C39.6667 27.808 40.8587 29 42.3333 29H47.6667C49.1413 29 50.3333 27.808 50.3333 26.3333Z"
+          fill="currentColor" />
+        </svg>
+      </div>
+    </div>
+    <p class="pt-2 text-xl font-semibold text-neutral-200">
+    Sin paquetes disponibles
+    </p>
+  </div>
+  <!-- <div class="grid  text-neutral-300">
+    <div class="flex justify-centeritems-center mx-auto  rounded-full  text-neutral-300">
+        <div class="flex flex-col justify-end">
+        <svg width="131" height="131" viewBox="0 0 131 131" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M65 55.6667C65 57.1413 63.808 58.3333 62.3333 58.3333H57C55.5253 58.3333 54.3333 57.1413 54.3333 55.6667C54.3333 54.192 55.5253 53 57 53H62.3333C63.808 53 65 54.192 65 55.6667ZM77 53V66.3333C77 72.216 72.216 77 66.3333 77H23.6667C17.784 77 13 72.216 13 66.3333V53C13 47.1173 17.784 42.3333 23.6667 42.3333H26.3333V23.6667C26.3333 17.784 31.1173 13 37 13H53C58.8827 13 63.6667 17.784 63.6667 23.6667V42.3333H66.3333C72.216 42.3333 77 47.1173 77 53ZM31.6667 42.3333H58.3333V23.6667C58.3333 20.7253 55.9413 18.3333 53 18.3333H37C34.0587 18.3333 31.6667 20.7253 31.6667 23.6667V42.3333ZM23.6667 71.6667H42.3333V47.6667H23.6667C20.7253 47.6667 18.3333 50.0587 18.3333 53V66.3333C18.3333 69.2747 20.7253 71.6667 23.6667 71.6667ZM71.6667 53C71.6667 50.0587 69.2747 47.6667 66.3333 47.6667H47.6667V71.6667H66.3333C69.2747 71.6667 71.6667 69.2747 71.6667 66.3333V53ZM33 53H27.6667C26.192 53 25 54.192 25 55.6667C25 57.1413 26.192 58.3333 27.6667 58.3333H33C34.4747 58.3333 35.6667 57.1413 35.6667 55.6667C35.6667 54.192 34.4747 53 33 53ZM50.3333 26.3333C50.3333 24.8587 49.1413 23.6667 47.6667 23.6667H42.3333C40.8587 23.6667 39.6667 24.8587 39.6667 26.3333C39.6667 27.808 40.8587 29 42.3333 29H47.6667C49.1413 29 50.3333 27.808 50.3333 26.3333Z"
+            fill="currentColor" />
 
-            </div>
-            <div class="flex-shrink-1  text-slate-800 text-center items-center font-mono">
-                <mat-checkbox color="warn" [checked]="paquete" (change)="setShopping($event.checked, paquete)"
-                [value]="paquete" formControlName="package"><mat-icon>add_shopping_cart</mat-icon></mat-checkbox>
-            </div>
+        </svg>
+        <span class=" text-xl font-semibold text-center ">Sin paquetes</span>
+      </div>
+    </div>
 
-        </div> -->
+
+  </div> -->
+</ng-template>

@@ -15,7 +15,7 @@
       Adquiere tu servicio de IPTV
     </span></div>
 
-  <div class="grid md:grid-cols-2 gap-x-8  text-white mx-auto">
+  <div class="flex justify-center self-center gap-x-8  text-white mx-auto">
     <section *ngFor="let plan of planesTv" class="flex flex-col gap-y-4 justify-center">
       <div class="relative bg-neutral-800 opacity-95 bg-center px-10 py-10 m-4 w-full rounded-2xl">
         <div class="  mx-auto text-left text-white">
@@ -28,12 +28,12 @@
                 ${{ plan.cost }}<span class="text-xl"> / mensual</span>
               </h1>
               <div class="inline-flex justify-center gap-2 items-center">
-                <mat-icon>check</mat-icon>{{ plan.channel_count }} Canales
+                <mat-icon>check</mat-icon>+130 Canales
                 incluidos
               </div>
-              <div class="inline-flex justify-center gap-2 items-center">
+              <!-- <div class="inline-flex justify-center gap-2 items-center">
                 <mat-icon>check</mat-icon> 2 Meses gratis
-              </div>
+              </div> -->
               <div class="flex flex-col justify-center my-2 gap-y-2 p-4">
                 <div class="inline-flex justify-center items-center rounded-2xl border-2 border-white shadow">
                   <button (click)="IrDetalles(plan)" class="font-bold py-2 px-6 text-xl">

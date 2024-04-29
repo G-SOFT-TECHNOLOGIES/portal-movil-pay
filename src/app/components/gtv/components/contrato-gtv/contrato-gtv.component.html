@@ -24,16 +24,19 @@
     <app-informacion-cuenta
       [contrato]="contract_detail_Tv"
     ></app-informacion-cuenta>
-    <div class="flex justify-center py-8 w-full bg-transparent">
-      <div
-        class="grid grid-cols-1 lg:grid-cols-2 lg:divide-x-2 divide-neutral-100 gap-y-4 lg:gap-x-2"
+    <div class="p-2 flex flex-col justify-center text-center">
+      <div class="px-1 py-1 text-center my-4">
+        <span class="font-bold text-2xl font-sans text-white uppercase">Paquetes</span>
+      </div>
+      <div 
+        class="grid grid-cols-1 lg:grid-cols-2 self-center lg:divide-x-2 divide-neutral-100 gap-y-4 lg:gap-x-2"
       >
         <div class="w-full relative p-4">
           <div
             class="sticky top-0 left-0 right-0 z-10 px-1 py-1 flex justify-center"
           >
             <span class="font-bold text-xl font-sans text-white uppercase"
-              >Servicios activos</span
+              > Activos</span
             >
           </div>
           <div
@@ -47,7 +50,7 @@
             class="sticky top-0 left-0 right-0 z-10 px-1 py-1 flex justify-center"
           >
             <span class="inline-flex justify-between font-bold text-xl font-sans text-white uppercase gap-x-2 m-0">
-              Servicios disponibles
+              Disponibles
               <button
                 class="mx-2"
                 mat-mini-fab

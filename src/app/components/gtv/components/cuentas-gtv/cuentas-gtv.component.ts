@@ -15,7 +15,7 @@ export class CuentasGtvComponent {
   private loader = inject(LoadingService);
   private snack = inject(SnackbarService);
   cuenta = this.tvservices.datos_cuentas$
-  pantallas = ['1', '2', '3']
+  pantallas = ['1', '2']
   id_contrato: number = 0
   ngOnInit(): void {
     this.tvservices.itemsCount.next(0)
