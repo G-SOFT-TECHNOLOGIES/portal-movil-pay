@@ -9,6 +9,7 @@ import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogFirmaComponent } from '../dialog-firma/dialog-firma.component';
 import { FacturaContratoService } from 'src/app/components/finanzas/services/usuario.service';
+import { LoginService } from 'src/app/components/auth/services/login.service';
 
 @Component({
   selector: 'app-card-user',
@@ -23,7 +24,11 @@ export class CardUserComponent {
   private dialog = inject(MatDialog);
   private usuario = inject(UsuarioService);
   private fuser = inject(FacturaContratoService)
-
+  private login = inject(LoginService)
+  gtv :any
+  constructor() {
+    this.gtv =this.login.contratos$.value.filter((menu) => menu.code == "gtv_contrato").map(data => data)
+  }
   contract: ContractDetail | any
   date = new Date()
   ngOnInit(): void {

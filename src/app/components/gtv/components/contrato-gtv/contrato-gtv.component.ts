@@ -3,6 +3,8 @@ import { Component, Input, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LoginService } from 'src/app/components/auth/services/login.service';
+import { DialogoGtvPasosComponent } from 'src/app/components/components/dialogo-gtv-pasos/dialogo-gtv-pasos.component';
 import { ContractDetailPackage, ContratoID } from 'src/app/components/finanzas/interfaces/UsuarioIDInterface';
 import { ConfirmComponent } from 'src/app/components/home/confirm/confirm.component';
 import { LoadingService } from 'src/app/components/service/loading.service';
@@ -23,6 +25,7 @@ export class ContratoGtvComponent {
   private dialog = inject(MatDialog);
   private snack = inject(SnackbarService)
   private activateRoute = inject(ActivatedRoute)
+  private login = inject(LoginService)
   packages: any[] = []
   contrato!: ContratoID
   selected: any = []
@@ -34,7 +37,10 @@ export class ContratoGtvComponent {
   paquetes: ContractDetailPackage[] = []
   id: number = 0
   sub!: Subscription
+
+
   constructor() {
+
     this.sub = this.activateRoute.params.subscribe(data => {
       this.id = Number(data['id'])
     })
@@ -44,14 +50,25 @@ export class ContratoGtvComponent {
     ) : (this.getContract())
 
   }
+  openAlerts() {
+    const dialogRef = this.dialog.open(DialogoGtvPasosComponent, {
+      disableClose: true
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        window.location.reload()
+      }
+    })
+  }
   getContract() {
+
     // this.loader.showLoading()
     this.tvservices.getContratoTV(this.id).then((result: ContratoID) => {
       this.loader.hideLoading()
       this.contrato = result;
       let res = result.contract_detail.filter((contract) => contract.service_type.id === 4).map((contract) => contract)
       if (res.length > 0) {
-
+        this.login.contratos$.value.filter((menu) => menu.code == "gtv_contrato").map(data => data).length > 0 ? this.openAlerts() : null;
         this.getPackageId()
         return
       }

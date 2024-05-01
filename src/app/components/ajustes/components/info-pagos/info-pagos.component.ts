@@ -27,7 +27,7 @@ export class InfoPagosComponent {
   data: Informacion[] = [];
   count: number = 0
   nextPageIndex: number = 1;
-  constructor() { this.login.ajustes$.value.filter((menu) => menu.code == "payment_methods_add_ajustes").map(data => data).length > 0 ? this.openAlerts() : null;}
+  constructor() { this.login.ajustes$.value.filter((menu) => menu.code == "payment_methods_add_ajustes").map(data => data).length > 0 ? this.openAlerts() : null; }
 
   ngOnInit(): void {
     this.info.getMethod()
@@ -42,7 +42,7 @@ export class InfoPagosComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         window.location.reload()
-        }
+      }
     })
   }
   registrarPM(data: any) {

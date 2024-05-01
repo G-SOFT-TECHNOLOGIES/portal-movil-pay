@@ -1,0 +1,140 @@
+<div class="fixed xl:top-0 bottom-0 left-0 xl:right-20  mx-auto  py-4 my-4  ">
+    <ng-container *ngIf="msg1">
+        <div class="flex flex-col mx-10  xl:justify-center xl:align-self-center items-center z-0 gap-4 ">
+            <div
+                class="flex transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
+                <img src="../../../../../assets/img/6_1.png" alt="G-net"
+                    class="flex-reverse object-contain mx-auto xl:w-1/5 w-2/3">
+            </div>
+            <div class="xl:grid flex  xl:place-items-center  rounded-lg z-10 my-2">
+                <div role="alert"
+                    class=" bg-white/40 backdrop-blur-xl z-20 max-w-md  right-5 top-5 rounded-lg p-6 shadow">
+                    <div class="flex-col flex   justify-center">
+                        <p class="font-bold text-2xl text-gray-800 text-center ">
+                            Podras cambiar tu pin y contraseña.</p>
+                        <span class="text-xl font-medium text-center text-gray-700">Al hacer click en el botón, <span
+                                class="font-semibold"> se habilitarán los campos de PIN y contraseña</span>. Después,
+                            debes guardar los cambios. 😊 </span>
+                        <img src="../../../../assets/img/btn_mod.png" />
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-end justify-center">
+                <button mat-mini-fab color="warn"
+                    (click)="msg2 =true ; msg1=false"><mat-icon>arrow_forward</mat-icon></button>
+            </div>
+
+        </div>
+    </ng-container>
+    <ng-container *ngIf="msg2">
+        <div class="flex-col-reverse mx-10 align-self-start items-center top-20 left-10  z-0 gap-4 ">
+            <div
+                class="flex transform items-center justify-start transition-transform duration-150 ease-in-out hover:scale-105">
+                <img src="../../../../../assets/img/3_1.png" alt="G-net"
+                    class="flex-reverse object-contain mx-auto xl:w-1/5 w-2/3">
+            </div>
+            <div class="grid  place-items-center  rounded-lg z-10 my-2">
+                <div role="alert"
+                    class=" bg-white/40 backdrop-blur-xl z-20 max-w-md  right-5 top-5 rounded-lg p-6 shadow">
+                    <div class="flex-col flex   justify-center">
+                        <p class="font-bold text-2xl text-gray-800 text-center ">
+                            Gestiona tus pantallas
+                        </p>
+                        <span class="text-xl font-medium text-center text-gray-700"> <span class="font-semibold">
+                                Podrás ver las pantallas que están ocupadas y las pantallas disponibles</span>. Al hacer
+                            click, se mostrará más información.</span>
+                            <div class="flex  items-center justify-center gap-4 my-2">
+                                <img src="../../../../assets/img/dispo.png" alt="G-net"
+                                    class="flex-reverse object-contain mx-auto rounded-full   w-1/6">
+                                <img src="../../../../assets/img/ocup.png" alt="G-net"
+                                    class="flex-reverse object-contain mx-auto  rounded-full  w-1/6">
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-end justify-center my-2">
+                <button mat-mini-fab color="primary" (click)="msg2 =false ; msg3=true" color="warn">
+                    <mat-icon>arrow_forward</mat-icon></button>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="msg3">
+        <div class="flex flex-col mx-10  justify-center align-self-center items-center top-20  z-0 gap-4 ">
+            <!-- <div class="flex  items-center justify-center ">
+                <img src="../../../../../assets/img/menu_pagos.png" alt="G-net"
+                    class="flex-reverse object-contain mx-auto  w-full">
+            </div> -->
+            <div
+                class="flex transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
+                <img src="../../../../../assets/img/7.png" alt="G-net"
+                    class="flex-reverse object-contain mx-auto xl:w-1/5 w-2/3">
+            </div>
+            <div class="grid  place-items-center  rounded-lg z-10 my-2">
+                <div role="alert"
+                    class=" bg-white/40 backdrop-blur-xl z-20 max-w-md  right-5 top-5 rounded-lg p-6 shadow">
+                    <div class="flex-col flex   justify-center">
+                        <p class="font-semibold text-gray-800 text-center text-2xl">Adquirir paquetes.
+                        </p>
+                        <span class="text-xl font-medium text-center text-gray-700 "> También podrás adquirir paquetes
+                            que se encuentren <span class="font-semibold">disponibles</span>.</span>
+                        <div class="flex  items-center justify-center ">
+                            <span class="mx-2 bg-red-600 rounded-full flex justify-center items-center" mat-mini-fab>
+                                <mat-icon class="m-2 text-white">add_shopping_cart</mat-icon>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-end justify-center my-2">
+                <button mat-mini-fab color="primary" (click)="msg3 =false ; msg4=true" color="warn">
+                    <mat-icon>arrow_forward</mat-icon></button>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="msg4">
+        <div class="flex flex-col mx-10  justify-center align-self-center items-center top-20  z-0 gap-4 ">
+            <!-- <div class="flex  items-center justify-center ">
+                <img src="../../../../../assets/img/menu_pagos.png" alt="G-net"
+                    class="flex-reverse object-contain mx-auto  w-full">
+            </div> -->
+           
+            <!-- <div
+                class="flex transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
+                <a href="https://g-network.tv/sign-in" target="_blank" matTooltip="Ir a G-TV"
+                    class="inline-flex justify-center items-center cursor-pointer">
+                    <img src="../../../../../assets/img/logotvplusblanco.svg" alt="" class="w-full" />
+                </a>
+            </div> -->
+            <div class="grid  place-items-center  rounded-lg z-10 my-2">
+                <div role="alert"
+                    class=" bg-white/40 backdrop-blur-xl z-20 max-w-md  right-5 top-5 rounded-lg p-6 shadow">
+                    <div class="flex-col flex   justify-center my-4">
+                        <p class="font-semibold text-gray-800 text-center text-4xl">Bienvenido G-TV .
+                        </p>
+                        <div
+                            class="mt-4 flex transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
+                            <a href="https://g-network.tv/sign-in" target="_blank" matTooltip="Ir a G-TV"
+                                class="inline-flex justify-center items-center cursor-pointer">
+                                <img src="../../../../../assets/img/logotvplusnegro.svg" alt="" class="w-full" />
+                            </a>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+            <div
+            class="flex transform items-center justify-center transition-transform duration-150 ease-in-out hover:scale-105">
+            <img src="../../../../../assets/img/9_1.png" alt="G-net"
+                class="flex-reverse object-contain mx-auto xl:w-1/5 w-2/3">
+        </div>
+            <div class="flex items-end justify-center">
+                <button (click)="finalizarPasoAPaso()" mat-raised-button color="warn">Ok, entendido</button>
+            </div>
+        </div>
+
+    </ng-container>
+</div>
+
+<!-- 
+    Al realizar un pago con algunos de los tres metodos anteriores, sus facturas seran pagadas de forma automatica
+ -->
