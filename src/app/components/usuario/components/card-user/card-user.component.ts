@@ -4,7 +4,6 @@ import { UsuarioService } from '../../services/usuario.service';
 import { Contract } from '../../interfaces/contractosInterfaces';
 import { Router } from '@angular/router';
 import { ServicoTvService } from 'src/app/components/servicios/services/servico-tv.service';
-import { ContractDetailPackage } from 'src/app/components/finanzas/interfaces/UsuarioIDInterface';
 import { ContractDetail } from 'src/app/components/ajustes/interfaces/TicketInterfaces';
 import { SnackbarService } from 'src/app/components/service/snackbar.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,6 +27,7 @@ export class CardUserComponent {
   contract: ContractDetail | any
   date = new Date()
   ngOnInit(): void {
+
     this.tvservices.getContratoTV(this.contratos.id).then((value) => {
       this.contract = value.contract_detail
     }).catch((error) => {
@@ -37,13 +37,20 @@ export class CardUserComponent {
   }
   permisosFechaZona(): Boolean {
     // console.log(this.contratos.zone, 'date', this.date.getDate(), this.date.getMonth()+1)
-    // Carayaca y Naiguata
-    let option: boolean =true
-    if (this.date.getDate() == 1 || this.date.getDate() == 3 && this.date.getMonth() +1 == 5 && this.contratos.zone==9) {
+    // Carayaca 
+    let option: boolean =false
+    // if (this.date.getDate() == 30 && this.date.getMonth() +1 == 4 && this.contratos.zone==2) {
+    //   option = true
+    // }
+    if (this.date.getDate() == 1 && this.date.getMonth() +1 == 5 && this.contratos.parish==5) {
+      option = true
+    }
+    // y Naiguata
+    if ( this.date.getDate() == 3 && this.date.getMonth() +1 == 5 && this.contratos.parish==11) {
       option = true
     }
     // Centro
-    if (this.date.getDate() == 25 && this.date.getMonth()+1 == 5 ) {
+    if (this.date.getDate() == 5 && this.date.getMonth()+1 == 5 && this.contratos.zone==2 ) {
       option = true
     }
       // Este

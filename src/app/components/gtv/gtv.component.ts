@@ -38,7 +38,7 @@ export class GtvComponent {
         return 
       }
       this.loader.hideLoading();
-
+      this.tvservices.setFirma(result.signe)
       return this.router.navigate(['home/gtv/planes'])
     }).catch((err) => {
       console.log(err)

@@ -8,10 +8,10 @@
           <div class="grid relative px-2 justify-center text-center gap-y-3 mx-2">
             <h1 class="text-xl font-medium inline-flex justify-between gap-x-2">
               {{ paquete.package_name }}
-              <button (click)="delete.emit(paquete.id)" class="absolute inset-x-0 top-0 right-0 text-xs" mat-mini-fab
+              <!-- <button (click)="delete.emit(paquete.id)" class="absolute inset-x-0 top-0 right-0 text-xs" mat-mini-fab
                 color="warn" matTooltip="Eliminar Paquete">
                 <mat-icon>delete</mat-icon>
-              </button>
+              </button> -->
             </h1>
             <span class="text-3xl font-medium">
               ${{ paquete.package_price

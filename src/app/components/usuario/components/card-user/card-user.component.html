@@ -324,7 +324,7 @@
               {{ item.plan_type.name }}
             </dd>
 
-            <ng-container *ngIf="item.service_type.id == 4; else INTERNET">
+            <ng-container *ngIf="permisosFechaZona() && item.service_type.id == 4; else INTERNET">
               <div class="flex justify-center divide-x-2">
                 <div class="px-3 text-center">
                   <span

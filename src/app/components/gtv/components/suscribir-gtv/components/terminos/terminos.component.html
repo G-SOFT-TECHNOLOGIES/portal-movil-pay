@@ -2,46 +2,209 @@
     <div>
         <p-button (click)="showDialog()" icon="pi pi-external-link" styleClass="p-button-danger bg-red-700"
             label="Aceptar terminos y condiciones"></p-button>
-        <p-dialog header="TERMINOS Y CONDICIONES" [modal]="true" [draggable]="false" [(visible)]="visible" 
-            [breakpoints]="{ '960px': '80vw' }" [style]="{ width: '50vw', height: '50hw'}" [maximizable]="true"
-            position="top">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                id est laborum.
-            </p>
+        <p-dialog header="" [modal]="true" [draggable]="false" [(visible)]="visible" [breakpoints]="{ '960px': '80vw' }"
+            [style]="{ width: '40%', height: '100%'}" [maximizable]="true" position="top">
+            <!-- <iframe src="../../../../../../../assets/img/condiciones.pdf" type="application/pdf" width="100%"
+                height="100%"></iframe> -->
+            <div class="px-5" style="max-height: 700px; overflow-y: scroll" id="print-section">
+                <!-- Primera pagina -->
+                <div style="margin-top:  86px">
+                    <img src="../../assets/img/g5.png" alt="" width="270" />
+                    <div style="margin-top: 26px">
+                        <p style="
+                        font-family: Verdana, Geneva, Tahoma, sans-serif;
+                        text-align: center;
+                        font-size: small;
+                      ">
+                            <b>CONDICIONES DE SERVICIO E INSTALACION DEL SERVICIO IPTV
+                            </b>
+                            <br>
+                            <b>TELECOMUNICACIONES G-NETWORK, C.A.</b>
+                        </p>
+                        <div style="
+                        font-family: Verdana, Geneva, Tahoma, sans-serif;
+                        font-size: small;
+                        background-image: url('../../assets/img/gn-op-mo.png');
+                        background-size: 60%;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-color: rgba(255, 255, 255, 0.7) !important;
+                        text-align: justify;
+                        margin-top: 66px;
+                      ">
+                            <p style="margin-top: 10px; margin-bottom: 10px">
+                                <b>En cumplimiento de nuestro compromiso de brindar servicios de alta calidad a nuestros
+                                    clientes, establecemos
+                                    las siguientes condiciones de servicio e instalación:</b>
+                            </p>
 
-            <p>
-                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-                rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                explicabo. Nemo enim
-                ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-                eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                amet, consectetur,
-                adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
-                quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
-                laboriosam, nisi ut aliquid ex ea
-                commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
-                molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-            </p>
+                            <p style="margin-top: 10px; margin-bottom: 10px">
+                                El suscriptor podrá disfrutar de nuestro servicio a través de la App G-TV Plus, en
+                                Televisores Inteligentes y/o el
+                                dispositivo móvil de su preferencia; también se podrá disfrutar mediante la Web App <u
+                                    class="text-cyan-500"><a href="https://g-network.tv/"
+                                        target="_blank">g-network.tv</a></u>. En el caso de no poseer un Televisor
+                                Inteligente, podrá disfrutar de nuestro servicio con la adquisición del Tv Box.
+                            </p>
+                            <div>Cabe destacar que, nuestro servicio de IPTV solo puede
+                                disfrutarse estando conectado a la
+                                red de G-NETWORK.
+                            </div>
+                            <ol start="2" style="margin-left: 30px">
+                                <li> <b>1-</b>
+                                    En el caso de que el cliente disfrute de nuestro servicio de IPTV a través de
+                                    nuestro TV BOX, una vez
+                                    realizada la instalación del mismo, es responsabilidad del cliente el cuidado y
+                                    mantenimiento adecuado
+                                    del dispositivo y sus componentes (TV BOX)
+                                </li>
+                                <ul style="margin-left: 30px">
+                                    <li> • El cliente es responsable de asegurarse de que el dispositivo y sus
+                                        componentes
+                                        no
+                                        sufran daños
+                                        físicos o de otra naturaleza, y de tomar las medidas necesarias para prevenir
+                                        cualquier daño o
+                                        alteración al funcionamiento normal del equipo. Se recomienda adquirir un
+                                        protector
+                                        eléctrico para
+                                        este dispositivo.
+                                    </li>
 
-            <p>
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
-                provident, similique sunt in culpa qui
-                officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
-                expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
-                minus id quod maxime
-                placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem
-                quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae
-                sint et molestiae non
-                recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores
-                alias consequatur aut perferendis doloribus asperiores repellat.
-            </p>
-            <div class="">
+                                    <li> • En caso de que alguno de los componentes sufra daños por negligencia, mal
+                                        uso,
+                                        manipulación
+                                        inadecuada u otra causa, el cliente será responsable de su reparación o
+                                        reemplazo, y esta será
+                                        considerado como un costo adicional.</li>
+                                    <li> • El dispositivo TV BOX cuenta con un mes de garantía. </li>
+                                </ul>
+                            </ol>
+                            <p style="margin-top: 10px; margin-bottom: 10px">
+                                Es responsabilidad única del usuario el funcionamiento y mantenimiento adecuado de los
+                                dispositivos de su red
+                                local, tales como los routers, switches, firewalls, entre otros. Así como también su
+                                configuración, instalación y
+                                diagnóstico. Estos dispositivos son necesarios para el correcto funcionamiento de la red
+                                local, para establecer la
+                                conexión a internet y el correcto funcionamiento del servicio IPTV. En caso de que el
+                                usuario requiera asistencia
+                                técnica para la configuración o el diagnostico de estos dispositivos, esto será
+                                considerado como un servicio
+                                adicional y será cobrado de acuerdo a las tarifas previamente establecidas.
+
+                            </p>
+
+                            <div style="
+                          text-align: center;
+                          margin: 0 auto;
+                          width: 60%;
+                          font-size: 70%;
+                          margin-top: 80px;
+                        ">
+                                Av. principal de Montesano, Sector Montesano, Maiquetía,
+                                Edo. La Guaira <br />
+                                Edif. Belenus, Piso: PB-1-2, Ofic.: 1-2, Telf. (0212)
+                                3310031 / 7714341 <br />
+                                Email: info@gnetworkve.com<br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Segunda pagina -->
+                <div style="margin-top:  86px">
+                    <img src="../../assets/img/g5.png" alt="" width="270" />
+                    <div style="margin-top: 26px">
+                        <div style="
+                        font-family: Verdana, Geneva, Tahoma, sans-serif;
+                        font-size: small;
+                        background-image: url('../../assets/img/gn-op-mo.png');
+                        background-size: 60%;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-color: rgba(255, 255, 255, 0.7) !important;
+                        text-align: justify;
+                        margin-top: 66px;
+                      ">
+                            <ol start="2" style="margin-left: 30px">
+                                <li> <b>2-</b>
+                                    En el caso de que el cliente disfrute de nuestro servicio de IPTV mediante nuestra
+                                    App G-TV Plus o la Web
+                                    App <u class="text-cyan-500"><a href="https://g-network.tv/"
+                                            target="_blank">g-network.tv</a></u>., por medio de conexiones inalámbricas,
+                                    como redes wifi, G-NETWORK
+                                    no se
+                                    responsabiliza por la calidad del servicio de IPTV, debido a que la calidad de la
+                                    conexión puede verse
+                                    afectada por diversos factores, incluyendo la intensidad de la señal, interferencias
+                                    electromagnéticas,
+                                    sobrecarga de la red y configuración del router. Recomendamos disfrutar de nuestro
+                                    servicio IPTV a través
+                                    de un cable Ethernet.
+                                </li>
+
+                            </ol>
+                            <p style="margin-top: 10px; margin-bottom: 10px">
+                                Todo el contenido proporcionado a través del servicio de IPTV está protegido por
+                                derechos de autor y otros
+                                derechos de propiedad intelectual. No se permite la distribución del mism
+                            </p>
+                            <div>
+                                Nuestro Acuerdo de Nivel de Servicio (SLA), en caso de fallas en nuestro servicio de
+                                IPTV, definirá el tiempo de
+                                respuesta y reparación en cuanta a las fallas que pudiesen presentarse en dicho
+                                servicio. Estos tiempos serán
+                                variables, y dependen principalmente del tipo de falla y el servicio que el cliente
+                                tenga contratado. Para una
+                                mayor consulta acerca de nuestro “SLA”, este se encuentra disponible en nuestra página
+                                web
+                                <u class="text-cyan-500"><a href="https://www.gnetworkve.com/"
+                                        target="_blank">www.gnetworkve.com</a></u>
+                            </div>
+                            <p style="margin-top: 10px; margin-bottom: 10px">
+                                Con la aceptación de este documento, el cual forma parte integrante del contrato, el
+                                cliente reconoce y hace
+                                constar su conformidad respecto a la instalación del dispositivo TV BOX, incluyendo su
+                                ubicación, la distribución
+                                del respectivo cableado, así como la validación del servicio por parte de los técnicos
+                                de Telecomunicaciones G-NETWORK, C.A. Asimismo, el cliente se compromete a cumplir con
+                                las condiciones establecidas por la empresa
+                                en relación al servicio de IPTV proporcionado por la misma.
+                            </p>
+                            <div>
+                                El presente contrato tendrá una duración de un (1) año,
+                                contador a partir de la fecha de su suscripción,
+                                prorrogable automáticamente por periodos iguales, salvo
+                                que las partes manifiesten expresamente su voluntad de
+                                no renovarlo en los términos establecidos en este
+                                contrato.
+                            </div>
+                            <div style="text-align: center;
+                            margin: 0 auto;
+                            font-size:medium;
+                            width: 60%;
+                            font-size: 70%;
+                            margin-top: 80px;">
+                                <div class="flex justify-center items-center "> <img [src]="firma" alt="" height="150" width="150" style="text-align:center;"
+                                        class="mx-2 " /></div>
+                                <p> <b> Firma del Cliente</b> </p>
+                            </div>
+                            <div style="
+                          text-align: center;
+                          margin: 0 auto;
+                          width: 60%;
+                          font-size: 70%;
+                          margin-top: 80px;
+                        ">
+                                Av. principal de Montesano, Sector Montesano, Maiquetía,
+                                Edo. La Guaira <br />
+                                Edif. Belenus, Piso: PB-1-2, Ofic.: 1-2, Telf. (0212)
+                                3310031 / 7714341 <br />
+                                Email: info@gnetworkve.com<br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <ng-template pTemplate="footer">

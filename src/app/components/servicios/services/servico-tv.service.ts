@@ -31,6 +31,8 @@ export class ServicoTvService {
   totalAcumulado$ = this.totalAcumulado.asObservable()
   id_contrato = new BehaviorSubject<number | any>(this.initIdContrato)
   id_contrato$ = this.id_contrato.asObservable()
+  firma = new BehaviorSubject<any>(null)
+  firma$ = this.firma.asObservable()
   itemsCount = new BehaviorSubject<number>(0)
   totalTvBox$ = new BehaviorSubject<number>(this.totalCostEquipo)
   pagoTvBox$ = new BehaviorSubject<any>(null)
@@ -52,6 +54,9 @@ export class ServicoTvService {
     }
     return []
   } 
+  setFirma(data:string){
+    return this.firma.next(data)
+  }
   setIdContrato(id: number | string) {
     let id_cont = id.toString()
     this.id_contrato.next(id_cont.toString())

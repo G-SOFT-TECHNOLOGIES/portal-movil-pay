@@ -2,6 +2,8 @@ import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild, i
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { SnackbarService } from 'src/app/components/service/snackbar.service';
+import { ServicoTvService } from 'src/app/components/servicios/services/servico-tv.service';
 
 interface UploadEvent {
   originalEvent: Event;
@@ -14,25 +16,32 @@ interface UploadEvent {
 })
 export class TerminosComponent {
   private router = inject(Router)
+  private snack = inject(SnackbarService)
+  private services = inject(ServicoTvService)
   disabled: boolean = true
   loading: boolean = false;
-  formGroup =new FormGroup({
+  formGroup = new FormGroup({
     value: new FormControl('off'),
     checked: new FormControl<boolean>(false)
   });
   checked: boolean = false
   uploadedFiles: any[] = [];
   @Output() response = new EventEmitter<boolean>()
-
+  firma: any = this.services.firma.value
   visible: boolean = false;
 
   showDialog() {
     this.visible = true;
   }
   ngOnInit() {
-    this.formGroup.valueChanges.subscribe(data=> {
+    if (this.firma == null) {
+      this.snack.openSnack("Por favor debe firmar su contrato para poder adquirir el servicio de GTV", 'X')
+      this.services.deleteItems()
+      this.router.navigate(['home/contratos'])
+    }
+    this.formGroup.valueChanges.subscribe(data => {
       this.visible = false
-      this.checked =!this.checked
+      this.checked = !this.checked
       this.response.emit(!data.checked)
     })
   }
