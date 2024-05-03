@@ -25,9 +25,9 @@ export class CardUserComponent {
   private usuario = inject(UsuarioService);
   private fuser = inject(FacturaContratoService)
   private login = inject(LoginService)
-  gtv :any
+  gtv: any
   constructor() {
-    this.gtv =this.login.contratos$.value.filter((menu) => menu.code == "gtv_contrato").map(data => data)
+    this.gtv = this.login.contratos$.value.filter((menu) => menu.code == "gtv_contrato").map(data => data)
   }
   contract: ContractDetail | any
   date = new Date()
@@ -43,29 +43,29 @@ export class CardUserComponent {
   permisosFechaZona(): Boolean {
     // console.log(this.contratos.zone, 'date', this.date.getDate(), this.date.getMonth()+1)
     // Carayaca 
-    let option: boolean =false
+    let option: boolean = false
     // if (this.date.getDate() == 30 && this.date.getMonth() +1 == 4 && this.contratos.zone==2) {
     //   option = true
     // }
-    if (this.date.getDate() >= 1 && this.date.getMonth() +1 == 5 && this.contratos.parish==5) {
+    if (this.date.getDate() >= 1 && this.date.getMonth() + 1 == 5 && this.contratos.parish == 5) {
       option = true
     }
     // y Naiguata
-    if ( this.date.getDate() >= 3 && this.date.getMonth() +1 == 5 && this.contratos.parish==11) {
+    if (this.date.getDate() >= 3 && this.date.getMonth() + 1 == 5 && this.contratos.parish == 11) {
+      option = true
+    }
+    // Este
+    if (this.date.getDay() >= 6 && this.date.getMonth() + 1 == 5 && this.contratos.zone == 3) {
       option = true
     }
     // Centro
-    if (this.date.getDate() >= 5 && this.date.getMonth()+1 == 5 && this.contratos.zone==2 ) {
+    if (this.date.getDate() >= 13 && this.date.getMonth() + 1 == 5 && this.contratos.zone == 2) {
       option = true
     }
-      // Este
-    if (this.date.getDay() >= 8 && this.date.getMonth()+1 == 5 && this.contratos.zone==3) {
+    // Oeste
+    if (this.date.getDay() >= 20 && this.date.getMonth() + 1 == 5 && this.contratos.zone == 1) {
       option = true
     }
-      // Oeste
-      if (this.date.getDay() >= 10 && this.date.getMonth()+1 == 5 && this.contratos.zone==1) {
-        option = true
-      }
     return option
   }
   redireccionar(contrato: Contract) {
@@ -74,7 +74,7 @@ export class CardUserComponent {
   }
   IrDetalle(contrato: number) {
     if (contrato) {
-      
+
       this.router.navigate(['home/gtv'])
       this.tvservices.setIdContrato(contrato)
       return

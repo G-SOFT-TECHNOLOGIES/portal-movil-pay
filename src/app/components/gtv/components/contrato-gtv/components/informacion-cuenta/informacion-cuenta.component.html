@@ -13,13 +13,13 @@
           </svg>
           <span class="text-3xl text-white font-medium" matTooltip="Contrato">Nº: {{ contrato.contract || "" }}</span>
         </div>
-        <div *ngIf="cuentaTv?.expirationTime != null"
+        <!-- <div *ngIf="cuentaTv?.expirationTime != null"
           class="ml-2 inset-x-0 top-0 w-full mx-auto text-md uppercase text-center font-light text-white">
           <span class="inline-flex items-center gap-x-2" matTooltip="Fecha de vencimiento">
             <mat-icon class="ml-2">event_busy</mat-icon>
             {{ cuentaTv?.expirationTime | date : "d/M/YYYY, h:mm a" }}
           </span>
-        </div>
+        </div> -->
         <h1 class="font-medium text-xl">
           {{ contrato.plan_type.name }}
         </h1>

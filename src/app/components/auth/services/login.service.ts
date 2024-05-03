@@ -83,7 +83,6 @@ export class LoginService {
   }
 
   getAlerts() {
-    // this.contratos$.next([{"code":"gtv_contrato","menu_patch":"contratos"}])
     const obs$ = this.http.get<any>(`${this.url}/api/gsoft/portal/services/alerts/`)
     lastValueFrom(obs$)
       .then((result) => {
