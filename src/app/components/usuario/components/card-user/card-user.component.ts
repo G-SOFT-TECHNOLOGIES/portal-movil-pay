@@ -44,7 +44,7 @@ export class CardUserComponent {
     // console.log(this.contratos.zone, 'date', this.date.getDate(), this.date.getMonth()+1)
     // Carayaca 
     let option: boolean = false
-    let nodo = this.contract.nodo
+    let nodo = this.contratos.contract_detail.filter((cont:ContractDetail) => cont.service_type.id == 1).map((cont:ContractDetail) => cont.nodo)
     if (this.date.getDate() >= 1 && this.date.getMonth() + 1 == 5 && this.contratos.parish == 5) {
       option = true
     }
