@@ -44,9 +44,7 @@ export class CardUserComponent {
     // console.log(this.contratos.zone, 'date', this.date.getDate(), this.date.getMonth()+1)
     // Carayaca 
     let option: boolean = false
-    // if (this.date.getDate() == 30 && this.date.getMonth() +1 == 4 && this.contratos.zone==2) {
-    //   option = true
-    // }
+    let nodo = this.contract.nodo
     if (this.date.getDate() >= 1 && this.date.getMonth() + 1 == 5 && this.contratos.parish == 5) {
       option = true
     }
@@ -55,7 +53,7 @@ export class CardUserComponent {
       option = true
     }
     // Este
-    if (this.date.getDay() >= 6 && this.date.getMonth() + 1 == 5 && this.contratos.zone == 3) {
+    if (this.date.getDay() >= 6 && this.date.getMonth() + 1 == 5 && nodo[0] == 9 && nodo[0] == 14 && nodo[0] == 15 && nodo[0] == 16 && nodo[0] == 18 && nodo[0] == 19 && nodo[0] == 22) {
       option = true
     }
     // Centro
