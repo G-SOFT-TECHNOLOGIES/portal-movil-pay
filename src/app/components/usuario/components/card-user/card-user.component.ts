@@ -9,6 +9,7 @@ import { DialogFirmaComponent } from '../dialog-firma/dialog-firma.component';
 import { FacturaContratoService } from 'src/app/components/finanzas/services/usuario.service';
 import { LoginService } from 'src/app/components/auth/services/login.service';
 import { ContractDetail, ContratoID } from 'src/app/components/finanzas/interfaces/UsuarioIDInterface';
+import { guide } from '../../services/gtv-guide';
 
 @Component({
   selector: 'app-card-user',
@@ -24,6 +25,7 @@ export class CardUserComponent {
   private usuario = inject(UsuarioService);
   private fuser = inject(FacturaContratoService)
   private login = inject(LoginService)
+  guide = guide.gtv
   gtv: any
   permiso: boolean | any
   constructor() {
@@ -41,28 +43,14 @@ export class CardUserComponent {
     })
   }
   permisosFechaZona(): Boolean {
-    // console.log(this.contratos.zone, 'date', this.date.getDate(), this.date.getMonth()+1)
     // Carayaca 
     let option: boolean = false
     let nodo = this.contract.filter((cont) => cont.service_type.id == 1).map(cont => cont.nodo)
-    if (this.date.getDate() >= 1 && this.date.getMonth() + 1 == 5 && this.contratos.parish == 5) {
-      option = true
-    }
-    // y Naiguata
-    if (this.date.getDate() >= 3 && this.date.getMonth() + 1 == 5 && this.contratos.parish == 11) {
-      option = true
-    }
-    // Este
-    if (this.date.getDate() >= 6 && this.date.getMonth() + 1 == 5 && nodo[0] == 9 || nodo[0] == 14 || nodo[0] == 15 || nodo[0] == 16 || nodo[0] == 18 || nodo[0] == 19 || nodo[0] == 22) {
-      option = true
-    }
-    // Centro
-    if (this.date.getDate() >=13 && this.date.getMonth() + 1 == 5 && this.contratos.zone == 2) {
-      option = true
-    }
-    // Oeste
-    if (this.date.getDate() >= 20 && this.date.getMonth() + 1 == 5 && this.contratos.zone == 1) {
-      option = true
+    if (nodo[0] !== null) {
+      let filter = this.guide
+        .filter((gtv) => gtv.day <= this.date.getDate() && gtv.node === nodo[0])
+        .map((gtv) => gtv);
+        option = filter.length > 0
     }
     return option
   }
