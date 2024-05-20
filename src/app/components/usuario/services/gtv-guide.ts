@@ -36,6 +36,11 @@ export const guide = {
             zone_name: 'CARABALLEDA',
         },
         {
+            node: 22,
+            day: 7,
+            zone_name: 'CARABALLEDA',
+        },
+        {
             node: 18,
             day: 7,
             zone_name: 'Corales',
@@ -62,6 +67,11 @@ export const guide = {
         },
         {
             node: 23,
+            day: 20,
+            zone_name: 'Atlantida',
+        },
+        {
+            node: 10,
             day: 20,
             zone_name: 'Atlantida',
         },
