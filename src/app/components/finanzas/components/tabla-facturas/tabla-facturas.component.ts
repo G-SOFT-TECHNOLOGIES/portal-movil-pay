@@ -71,7 +71,7 @@ export class TablaFacturasComponent {
   }
 
 
-  pagar(monto: string, charged: string, id: number, contract: number, montoDescuento: string) {
+  pagar(monto: string, charged: string, id: number, contract: number, montoDescuento: number) {
     const resultado = Number(monto) - Number(charged)
     const descuento = Number(montoDescuento) - Number(charged)
     const a = Number(resultado.toFixed(2))
@@ -93,10 +93,10 @@ export class TablaFacturasComponent {
       }
     })
   }
-  calcular(amount:string,charged:string):number{
+  calcular(amount:string,charged:string, amount_discount:number):number{
     const a =Number(amount) 
     const c =Number(charged)    
-    return a - c
+    return Number((a - c)- amount_discount)
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe()

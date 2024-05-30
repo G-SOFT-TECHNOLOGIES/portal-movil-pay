@@ -11,23 +11,34 @@ export interface Invoice {
   status: number
   status_name: string
   tax: number
-  nro_control?: string
+  nro_control: any
+  id_tfhk: any
   date_payment: string
   month: number
   cicle: number
   date_emission: string
-  observation?: string
+  date_emission_tfhk: any
+  observation: any
   date_expiration: string
   client: string
+  id_client: number
+  client_phone: string
+  client_mobile: string
   contract: number
   charged: string
   amount: string
-  iva_amount: number
+  coupon: number
+  amount_discount: number
+  amount_bs: AmountBs
+  dollar_date: string
+  dollar_rate: string
+  iva_amount: string
   sub_total: string
-  url?: string
+  url: any
+  invoice_third: any
+  synchronization_third: boolean
   invoices_items_gsoft: InvoicesItemsGsoft[]
   created_by_name: string
-  amount_discount:any
 }
 
 export interface InvoicesItemsGsoft {
@@ -38,8 +49,13 @@ export interface InvoicesItemsGsoft {
   details: string
   sum: number
   amount: string
+  amount_bs: number
 }
-
+export interface AmountBs {
+  amount: number
+  sub_total: number
+  iva_amount: number
+}
 export class InvoiceParams {
   search?: string
   page?: string

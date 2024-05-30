@@ -316,7 +316,7 @@
           </div>
         </div>
         <div *ngFor="let item of contract">
-          <div class="bg-white px-4 py-5 text-center relative" >
+          <div class="bg-white px-4 py-5 text-center relative" *ngIf="item.status == 1" >
             <dt class="text-sm font-medium text-gray-500">
               {{ item.service_type.description }}
             </dt>

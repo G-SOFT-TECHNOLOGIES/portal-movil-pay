@@ -15,7 +15,7 @@ export interface ContratoID {
   finish_installation: string
   synchronization_third: boolean
   status: number
-  balance: number
+  balance: number 
   debt: number
   sector_name: string
   parish_name: string
