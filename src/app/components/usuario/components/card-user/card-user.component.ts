@@ -36,24 +36,23 @@ export class CardUserComponent {
   ngOnInit(): void {
     this.tvservices.getContratoTV(this.contratos.id).then((value) => {
       this.contract = value.contract_detail
-      this.permiso = this.permisosFechaZona()
     }).catch((error) => {
       console.log(error)
 
     })
   }
-  permisosFechaZona(): Boolean {
-    // Carayaca 
-    let option: boolean = false
-    let nodo = this.contract.filter((cont) => cont.service_type.id == 1).map(cont => cont.nodo)
-    if (nodo[0] !== null) {
-      let filter = this.guide
-        .filter((gtv) => gtv.day <= this.date.getDate() && gtv.node === nodo[0])
-        .map((gtv) => gtv);
-        option = filter.length > 0
-    }
-    return option
-  }
+  // permisosFechaZona(): Boolean {
+  //   // Carayaca 
+  //   let option: boolean = false
+  //   let nodo = this.contract.filter((cont) => cont.service_type.id == 1).map(cont => cont.nodo)
+  //   if (nodo[0] !== null) {
+  //     let filter = this.guide
+  //       .filter((gtv) => gtv.day <= this.date.getDate() && gtv.node === nodo[0])
+  //       .map((gtv) => gtv);
+  //       option = filter.length > 0
+  //   }
+  //   return option
+  // }
   redireccionar(contrato: ContratoID) {
     const id = contrato.id
     this.router.navigate([`contratos/finanzas`])
