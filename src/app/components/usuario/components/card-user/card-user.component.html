@@ -324,7 +324,7 @@
               {{ item.plan_type.name }}
             </dd>
 
-            <ng-container *ngIf="item.service_type.id == 4 && permiso; else INTERNET">
+            <ng-container *ngIf="item.service_type.id == 4; else INTERNET">
               <span *ngIf="gtv.length" class="bg-red-700 rounded-full  top-0 right-0 absolute animate-bounce">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                   stroke="currentColor" class="w-8 h-8 text-white  m-auto p-1">
