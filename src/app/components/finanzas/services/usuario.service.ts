@@ -14,8 +14,6 @@ export interface Dollar {
   dollar_fail: boolean;
 }
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -34,20 +32,8 @@ export class FacturaContratoService {
 
   private montoDollar = new BehaviorSubject<number>(0)
   montoDollar$ = this.montoDollar.asObservable()
-
-
   saldoFavor: any = 0
 
-
-
-  // getFacturas(id:string| number,page=0):Promise<ResultsInvoice>{
-  //   let url = `${this.url}/api/gsoft/portal/invoices/?contract=${id}`
-  //   if (page > 0) {
-  //     url = `${this.url}/api/gsoft/portal/invoices/?contract=${id}&page=${page}`
-  //   }
-  //   const obs$ = this.http.get<ResultsInvoice>(url)
-  //   return lastValueFrom(obs$)    
-  // }
   getFacturas(params: InvoiceParams): Promise<ResultsInvoice> {
     const resparams = this.queryservices.buildQueryParams(params)
     let services = `${this.url}/api/gsoft/portal/invoices/`
@@ -80,7 +66,6 @@ export class FacturaContratoService {
     return lastValueFrom(obs$)
   }
 
-
   validarPago(body: any) {
     const obs$ = this.http.post<{ message: string; monto: number }>(
       `${this.url}/api/gsoft/payments/pmbd/validate/`,
@@ -93,7 +78,6 @@ export class FacturaContratoService {
     this.contrato.next(contrato)
   }
 
-
   validateCupon(body: any) {
     const obs$ = this.http.post<any>(
       `${this.url}/api/gsoft/invoices/coupon/validate/`,
@@ -101,6 +85,7 @@ export class FacturaContratoService {
     );
     return lastValueFrom(obs$);
   }
+
   patchDiscountInvoice(id: number, data: any) {
     const obs$ = this.http.patch(`${this.url}/api/gsoft/portal/invoices/${id}/`, data)
     return lastValueFrom(obs$)

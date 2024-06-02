@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/enviroments.prod';
-import { Graficos } from '../interface/graficos.interface';
+import { ConsumoParams, IConsumo } from '../interface/graficos.interface';
+import { QueryParamsUtils } from '../../utils/params.utils';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,9 @@ export class DashboardService {
 
   constructor() { }
 
-  getTrafickContract(body: any): Promise<Graficos[]> {
-    const obs$ = this.http.get<Graficos[]>(
-      `${this.url}/api/gsoft/portal/contracts/trafic/?contract_id=${body.id}&since=${body.since}&until=${body.until}`
-    );
+  getTrafickContract(id:number, queryParams: ConsumoParams): Promise<IConsumo[]> {
+    const params = QueryParamsUtils.buildParamsFromObject(queryParams);
+    const obs$ = this.http.get<IConsumo[]>(`${this.url}/api/gsoft/portal/contracts/traffic/${id}/`, { params });
     return lastValueFrom(obs$);
   }
 }
