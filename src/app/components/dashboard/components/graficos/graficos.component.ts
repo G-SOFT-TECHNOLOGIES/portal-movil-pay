@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import * as moment from 'moment';
 // Services
 import { FacturaContratoService } from 'src/app/components/finanzas/services/usuario.service';
@@ -12,6 +12,7 @@ import {
   IConsumo,
   IServiceDetail,
 } from '../../interface/graficos.interface';
+import { ContratoID } from 'src/app/components/finanzas/interfaces/UsuarioIDInterface';
 
 interface NombresMeses {
   [key: number]: string;
@@ -42,9 +43,10 @@ export class GraficosComponent {
   private servicesDash = inject(DashboardService);
   private usuarioContratoservices = inject(FacturaContratoService);
 
-  infor_contract: any;
+  infor_contract!: ContratoID;
   consumo = new BehaviorSubject<IConsumo[] | false>([]);
   informacion = new BehaviorSubject<boolean>(false);
+  private contratoSubscription: Subscription| null = null;
   data: any;
   rangeDates: Date[] = [];
   subida: number[] = [];
@@ -62,33 +64,59 @@ export class GraficosComponent {
 
   ngOnInit() {
     this.getContrato(this.contratos[0].id);
-    this.initForm();
-    this.loadingChart();
   }
 
-  initForm() {
-    const since = moment().toDate();
-    const until = moment().subtract(1, 'months').toDate();
-
-    this.rangeDate.patchValue({
-      start: until,
-      end: since
-    })
-    this.obtenerTraficoContrato(this.contratos[0].id);
+  ngOnDestroy() {
+    if (this.contratoSubscription) {
+      this.contratoSubscription.unsubscribe();
+    }
   }
-
+  
   getContrato(id: number) {
+    if (this.contratoSubscription) {
+      this.contratoSubscription.unsubscribe();
+    }
+
     this.usuarioContratoservices.getContrato(id);
-    this.usuarioContratoservices.contrato$.subscribe((data) => {
+
+    this.contratoSubscription = this.usuarioContratoservices.contrato$.subscribe((data) => {
       if (data) {
         this.informacion.next(true);
-        this.infor_contract = data.contract_detail;
+        this.infor_contract = data;
 
         this.service_detail = data.contract_detail.flatMap(
           (cd) => cd.service_detail ?? []
         );
+        this.initForm();
       }
     });
+  }
+
+  initForm() {
+    const { invoice_date_cicle } = this.infor_contract;
+
+     // Fecha actual
+    const today = moment();
+
+    // Determinar el inicio y fin del ciclo de facturación
+    let start: Date, end: Date;
+    
+    if (today.date() < invoice_date_cicle) {
+        // Si la fecha actual es antes del día del ciclo de facturación de este mes
+        start = moment().subtract(2, 'months').date(invoice_date_cicle).toDate(); // Inicio del ciclo de facturación (ej. 10 del mes anterior)
+        end = moment().subtract(1, 'months').date(invoice_date_cicle).toDate(); // Fin del ciclo de facturación (ej. 10 de este mes)
+    } else {
+        // Si la fecha actual es en o después del día del ciclo de facturación de este mes
+        start = moment().subtract(1, 'months').date(invoice_date_cicle).toDate(); // Inicio del ciclo de facturación (ej. 10 de este mes)
+        end = moment().date(invoice_date_cicle).toDate(); // Fin del ciclo de facturación (ej. 10 del próximo mes)
+    }
+
+    this.rangeDate.patchValue({
+      start: start,
+      end: end
+    })
+    this.obtenerTraficoContrato(this.contratos[0].id);
+    this.loadingChart();
   }
 
   crearBody() {
@@ -116,30 +144,22 @@ export class GraficosComponent {
     this.servicesDash
       .getTrafickContract(id, params)
       .then((result) => {
-        if (result.length < 1) {
-          this.totalSubida = 0;
-          this.totalBajada = 0;
-          this.labels = result.map((label) => {
-            const period = `${nombresMeses[label.date__month]}-${
-              label.date__year
-            }`;
-            return period;
-          });
-          this.loadingChart();
-        }
-
         if (result.length > 0) {
           this.consumo.next(result);
           this.procesarResultado(result);
           this.labels = result.map((label) => {
-            const period = `${nombresMeses[label.date__month]}-${
-              label.date__year
-            }`;
+            const period = `${nombresMeses[label.date__month]}-${label.date__year}`;
             return period;
           });
           this.loadingChart();
         } else {
+          this.totalSubida = 0;
+          this.totalBajada = 0;
+          this.labels = [];
+          this.subida = [];
+          this.bajada = [];
           this.consumo.next(false);
+          this.loadingChart();
         }
       })
       .catch((err) => {
@@ -149,12 +169,10 @@ export class GraficosComponent {
   }
 
   procesarResultado(result: IConsumo[]) {
-    result.map((d) => {
-      this.subida = [d.upload];
-      this.bajada = [d.download];
-      this.totalBajada = d.download;
-      this.totalSubida = d.upload;
-    });
+    this.subida = result.map(d => d.upload);
+    this.bajada = result.map(d => d.download);
+    this.totalSubida = this.subida.reduce((sum, current) => sum + current, 0);
+    this.totalBajada = this.bajada.reduce((sum, current) => sum + current, 0);
   }
 
   loadingChart() {
