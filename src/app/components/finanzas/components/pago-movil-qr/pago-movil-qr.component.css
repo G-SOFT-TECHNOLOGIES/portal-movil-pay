@@ -1,22 +1,41 @@
-@keyframes buildImage {
-    0% {
-      clip-path: inset(0 100% 100% 0);
-    }
-    25% {
-      clip-path: inset(0 75% 75% 0);
-    }
-    50% {
-      clip-path: inset(0 50% 50% 0);
-    }
-    75% {
-      clip-path: inset(0 25% 25% 0);
-    }
-    100% {
-      clip-path: inset(0);
-    }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
   
   .build-image-animation {
-    animation: buildImage 2s ease-out;
+    max-width: 80%; /* Ajusta el ancho máximo según sea necesario */
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    animation: construct 4s ease-out forwards;
+  }
+  
+  .transaction-message {
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  
+  @keyframes construct {
+    0% {
+      clip-path: polygon(0 0, 0 0, 0 0, 0 0); /* Comienza sin ninguna parte visible */
+    }
+    100% {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Finaliza con la imagen completa */
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
   

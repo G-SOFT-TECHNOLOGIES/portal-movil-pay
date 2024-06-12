@@ -27,6 +27,10 @@ export class PagoMovilQrComponent {
     contract: 0,
   };
   fechaActual = new Date()
+  showTransactionMessage = false;
 
+  onAnimationEnd() {
+    this.showTransactionMessage = true;
+  }
   
 }

@@ -1,2 +1,5 @@
-<!-- <img src="../../../../../assets/img/logo.png" [@fadeInOut] alt="Descripción de la imagen"> -->
-<img src="../../../../../assets/img/logo.png" class="build-image-animation" alt="Descripción de la imagen">
+<div class="container">
+    <h3 *ngIf="showTransactionMessage" class="transaction-message">En espera por Transaccion</h3>
+    <img src="../../../../../assets/img/pago-qr.png" class="build-image-animation" alt="Descripción de la imagen" (animationend)="onAnimationEnd()">
+  </div>
+  
