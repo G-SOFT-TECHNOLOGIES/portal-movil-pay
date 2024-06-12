@@ -2,7 +2,7 @@
     <div class="w-full mx-auto rounded-md shadow-md overflow-hidden">
         <div class="flex items-end justify-end h-56 w-full bg-contain bg-no-repeat bg-center"
             style="background-image: url('../../../../../assets/img/cupon-de-descuento.png')">
-            <button class="p-2 rounded-full bg-red-600 text-white font-mono font-semibold mx-2 -mb-4"
+            <button class="p-2 rounded-full bg-green-600 text-white font-mono font-semibold mx-2 -mb-4"
                 (click)="verDetalles(paquetes.id)">
                 {{paquetes.channels_package_gtv_count}} +
                 <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -68,7 +68,7 @@
             <span class="text-slate-600  font-semibold text-sm flex ">
                 Cupon válido hasta {{campaing.expires_at | date:'d/MM/YYYY'}}
             </span>
-            <h1 class="group-hover:text-red-700  font-bold sm:text-2xl line-clamp-2 uppercase">
+            <h1 class="group-hover:text-green-700  font-bold sm:text-2xl line-clamp-2 uppercase">
                 {{campaing.name}}
             </h1>
             <span class="text-slate-400 font-semibold">

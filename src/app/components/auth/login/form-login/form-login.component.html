@@ -3,7 +3,7 @@
     <!-- <div class=" w-auto lg:max-w-screen-sm"> -->
     <div class="py-8 px-12 rounded-2xl  ">
         <div class="card flex justify-center mb-8 ">
-            <img src="../../../../../assets/img/g5.png" class="w-[90%]  h-[50%]" />
+            <img src="../../../../../assets/img/logo.png" class="w-[90%]  h-[50%]" />
         </div>
         <form class="space-y-4 text-xs font-light" [formGroup]="formLogin" (submit)="setLogin()">
             <div>
@@ -43,7 +43,7 @@
             </div>
             <div class="mt-10 w-full">
                 <button type="submit"
-                    class=" w-full border-round  p-3 flex align-items-center justify-center justify-content-center rounded-full border-0 py-2 px-2 text-lg uppercase font-semibold shadow-xl  {{formLogin.invalid? 'bg-red-300': 'bg-red-500'}}   text-gray-100 text-center"
+                    class=" w-full border-round  p-3 flex align-items-center justify-center justify-content-center rounded-full border-0 py-2 px-2 text-lg uppercase font-semibold shadow-xl  {{formLogin.invalid? 'bg-green-300': 'bg-green-500'}}   text-gray-100 text-center"
                     [disabled]="formLogin.invalid">Acceder </button>
 
             </div>

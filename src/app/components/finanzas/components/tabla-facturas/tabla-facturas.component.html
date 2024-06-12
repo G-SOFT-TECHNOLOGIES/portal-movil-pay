@@ -2,7 +2,7 @@
   <mat-accordion multi class="" *ngFor="let item of factura">
     <div class="my-4">
       <mat-expansion-panel>
-        <mat-expansion-panel-header [ngClass]="{'bg-red-700 text-gray-400':item.status === 23}">
+        <mat-expansion-panel-header [ngClass]="{'bg-green-700 text-gray-400':item.status === 23}">
           <mat-panel-title> <span>Nro Factura: <strong>{{item.id}}</strong></span>
           </mat-panel-title>
         </mat-expansion-panel-header>

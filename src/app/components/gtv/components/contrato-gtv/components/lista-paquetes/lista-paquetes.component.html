@@ -21,7 +21,7 @@
               <mat-icon>check</mat-icon>
               Canales incluidos
               <div class="flex-shrink-0">
-                <button class="p-2 flex rounded-full bg-red-600 text-white font-mono font-semibold mx-2 cursor-pointer"
+                <button class="p-2 flex rounded-full bg-green-600 text-white font-mono font-semibold mx-2 cursor-pointer"
                   (click)="verDetalles(paquete.package)">
                   <mat-icon>queue_play_next</mat-icon>
 
@@ -36,7 +36,7 @@
             </div>
             <div class="inline-flex justify-center" *ngIf="paquete.finish_date != null">
               <mat-icon>history</mat-icon>
-              <span class="text-xs text-red-700">
+              <span class="text-xs text-green-700">
                 Su paquete se encuentra vencido desde la fecha
                 {{ paquete.finish_date | date : "d/M/YYY" }}
               </span>
@@ -51,7 +51,7 @@
            
 
             <div class="flex-shrink-0">
-                <button class="p-2 flex rounded-full bg-red-600 text-white font-mono font-semibold mx-2 my-4"
+                <button class="p-2 flex rounded-full bg-green-600 text-white font-mono font-semibold mx-2 my-4"
                     (click)="verDetalles(paquete.package)">
                     <mat-icon>queue_play_next</mat-icon>
                    

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title class="bg-red-500"><span class="text-slate-50 text-xl font-medium">Pago de factura
+<h1 mat-dialog-title class="bg-neutral-900"><span class="text-slate-50 text-xl font-medium">Pago de factura
     ({{data.id}})</span><a mat-dialog-close
     class="absolute top-1 right-0 p-2.5 text-sm font-medium  text-white rounded-r-lg cursor-pointer ">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -39,11 +39,12 @@
       <mat-select [formControl]="selectedOption">
         <mat-option value="0">...</mat-option>
         <mat-option value="1">Pago Movil</mat-option>
+        <mat-option value="4">Pago MovilQR</mat-option>
         <mat-option value="2">Zelle</mat-option>
         <mat-option value="3">Transferencia</mat-option>
       </mat-select>
     </mat-form-field>
-    <div class="flex items-center justify-between border-t border-gray-200 pt-6"
+    <!-- <div class="flex items-center justify-between border-t border-gray-200 pt-6"
       *ngIf="data.montoDescuento==data.monto && selectedOption.value=='0'">
       <mat-form-field class="w-full">
         <mat-label>Aplicar Cupon </mat-label>
@@ -53,7 +54,7 @@
         </button>
 
       </mat-form-field>
-    </div>
+    </div> -->
     <div class="scroll-smooth  z-10">
       <ng-container *ngIf="selectedOption.value == '1'">
         <app-pago-movil [factura]="data" ></app-pago-movil>
@@ -63,6 +64,9 @@
       </ng-container>
       <ng-container *ngIf="selectedOption.value == '3'">
         <app-transferencia [factura]="data" > </app-transferencia>
+      </ng-container>
+      <ng-container *ngIf="selectedOption.value == '4'">
+        <app-pago-movil-qr [factura]="data"></app-pago-movil-qr>
       </ng-container>
     </div>
     <!-- <div *ngIf="selectedOption !='0' ? openAlerts() : '' ">

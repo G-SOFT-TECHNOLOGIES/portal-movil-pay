@@ -47,7 +47,7 @@
     </div>
     <div class="w-full flex-1 items-start">
       <section class="items-center px-5 py-8">
-        <div class="w-full flex flex-col m-4 p-4 text-red-700 border rounded-lg shadow-xl mx-auto my-4">
+        <div class="w-full flex flex-col m-4 p-4 text-green-700 border rounded-lg shadow-xl mx-auto my-4">
           <dl class="my-6 space-y-4">
             <div *ngIf="planActivo | async as planActivo">
               <div class="flex items-center justify-between my-4 border-b border-gray-200 py-2"
@@ -157,7 +157,7 @@
 
         <div class="flex justify-center gap-2 mt-6" *ngIf="totalTvBox | async as totalTvBox; else Registrar">
           <button type="submit" (click)="pagar(totalTvBox)" [disabled]="aceptar"
-            [ngClass]="!aceptar ? 'bg-red-600' : 'bg-neutral-400'" *ngIf="payments == null; else Registrar"
+            [ngClass]="!aceptar ? 'bg-green-600' : 'bg-neutral-400'" *ngIf="payments == null; else Registrar"
             class="w-full inline-flex p-2 mx-4 rounded-2xl text-white font-semibold justify-center items-center">
             <mat-icon class="mx-2">check_small</mat-icon> Pagar
           </button>
@@ -165,7 +165,7 @@
         <ng-template #Registrar>
           <div class="flex justify-center gap-2 mt-6">
             <button type="submit" (click)="registrar()" [disabled]="aceptar"
-              [ngClass]="!aceptar ? 'bg-red-600' : 'bg-neutral-400'"
+              [ngClass]="!aceptar ? 'bg-green-600' : 'bg-neutral-400'"
               class="w-full inline-flex p-2 mx-4 rounded-2xl text-white font-semibold justify-center items-center">
               <mat-icon class="mx-2">check_small</mat-icon> Registrar
             </button>
@@ -177,7 +177,7 @@
   </div>
   <!-- <div class="flex justify-center gap-2">
     <button
-      class="p-3 rounded-full text-white w-1/2 font-semibold text-xl bg-red-600"
+      class="p-3 rounded-full text-white w-1/2 font-semibold text-xl bg-green-600"
       (click)="registrar()"
     >
       Finalizar

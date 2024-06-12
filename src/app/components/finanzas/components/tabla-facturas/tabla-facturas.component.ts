@@ -58,7 +58,8 @@ export class TablaFacturasComponent {
   getFacturas() {
     const params = new InvoiceParams()
     params.page = this.nextPage.toString() ?? '',
-      params.contract = this.id.toString() ?? ''
+      // params.contract = this.id.toString() ?? ''
+      params.contract =  '18823'
     this.loading.showLoading()
     this.facturaServ.getFacturas(params).then((result) => {
       this.loading.hideLoading()

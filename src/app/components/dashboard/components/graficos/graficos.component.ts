@@ -197,8 +197,8 @@ export class GraficosComponent {
           label: 'Bajada',
           data: this.bajada,
           fill: false,
-          borderColor: documentStyle.getPropertyValue('--red-600'),
-          backgroundColor: documentStyle.getPropertyValue('--red-600'),
+          borderColor: documentStyle.getPropertyValue('--green-600'),
+          backgroundColor: documentStyle.getPropertyValue('--green-600'),
         },
       ],
     };

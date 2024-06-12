@@ -1,6 +1,6 @@
 <div class="flex justify-center px-8 py-4">
     <div>
-        <p-button (click)="showDialog()" icon="pi pi-external-link" styleClass="p-button-danger bg-red-700"
+        <p-button (click)="showDialog()" icon="pi pi-external-link" styleClass="p-button-danger bg-green-700"
             label="Aceptar terminos y condiciones"></p-button>
         <p-dialog header="" [modal]="true" [draggable]="false" [(visible)]="visible" [breakpoints]="{ '960px': '80vw' }"
             [style]="{ width: '40%', height: '100%'}" [maximizable]="true" position="top">
@@ -212,7 +212,7 @@
                     <form [formGroup]="formGroup" class="inline-flex gap-x-4 mt-4">
                         <label for="check">
                             <div class="inline-flex justify-center items-center rounded-full w-full "
-                                [ngClass]="checked ?'border-2 border-red-600 text-red-600' : 'bg-red-600 text-white'">
+                                [ngClass]="checked ?'border-2 border-green-600 text-green-600' : 'bg-green-600 text-white'">
                                 <input id="check" type="checkbox" [checked]="checked" hidden="hidden"
                                     formControlName="checked" />
                                 <span class="font-bold py-2 px-6 text-xl "> Aceptar y continuar</span>

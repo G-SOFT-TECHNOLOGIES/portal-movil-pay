@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path:'',
-        redirectTo:'inicio',
+        redirectTo:'finanzas',
         pathMatch:'full'
       },
       { path: 'inicio', loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule)  },
@@ -20,7 +20,7 @@ const routes: Routes = [
       { path: 'tickets', loadChildren: () => import('../tickets/tickets.module').then(m => m.TicketsModule)  },
       { path: 'ajustes', loadChildren: () => import('../ajustes/ajustes.module').then(m => m.AjustesModule) },
       { path: 'canjes', loadChildren: () => import('../canjes/canjes.module').then(m => m.CanjesModule) },
-      // { path: 'finanzas', loadChildren: () => import('../finanzas/finanzas.module').then(m => m.FinanzasModule) },
+      { path: 'finanzas', loadChildren: () => import('../finanzas/finanzas.module').then(m => m.FinanzasModule) },
 
   ]
   },

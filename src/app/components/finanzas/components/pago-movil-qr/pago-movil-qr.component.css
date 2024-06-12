@@ -1,0 +1,22 @@
+@keyframes buildImage {
+    0% {
+      clip-path: inset(0 100% 100% 0);
+    }
+    25% {
+      clip-path: inset(0 75% 75% 0);
+    }
+    50% {
+      clip-path: inset(0 50% 50% 0);
+    }
+    75% {
+      clip-path: inset(0 25% 25% 0);
+    }
+    100% {
+      clip-path: inset(0);
+    }
+  }
+  
+  .build-image-animation {
+    animation: buildImage 2s ease-out;
+  }
+  
