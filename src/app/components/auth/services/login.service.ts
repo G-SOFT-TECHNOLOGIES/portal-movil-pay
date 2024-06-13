@@ -33,18 +33,18 @@ export class LoginService {
 
   login(value: any) {
     this.loading.showLoading()
-    const obs$ = this.http.post<ResultsLogin>(`${this.url}/portal/login/`, value)
+    const obs$ = this.http.post<ResultsLogin>(`${this.url}/login/`, value)
     firstValueFrom(obs$)
       .then((result) => {
         this.loading.hideLoading()
-        localStorage.setItem('user', JSON.stringify(result.client))
+        localStorage.setItem('user', JSON.stringify(result))
         sessionStorage.setItem('token', result.token)
         this.snack.openSnack(result.message, '')
         this.router.navigate(['home'])
         this.loading.hideLoading()
         this.isLoggedSub.next(true)
 
-        this.getAlerts()
+        // this.getAlerts()
       }).catch((err) => {
         this.loading.hideLoading()
         if (err.status == 400) {

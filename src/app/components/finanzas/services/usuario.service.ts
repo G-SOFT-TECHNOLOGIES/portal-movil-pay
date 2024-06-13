@@ -36,7 +36,8 @@ export class FacturaContratoService {
 
   getFacturas(params: InvoiceParams): Promise<ResultsInvoice> {
     const resparams = this.queryservices.buildQueryParams(params)
-    let services = `${this.url}/api/gsoft/portal/invoices/`
+    let services = `${this.url}/api/invoices/`
+    // const http = this.http.get<ResultsInvoice>(services, { params: resparams })
     const http = this.http.get<ResultsInvoice>(services, { params: resparams })
     return lastValueFrom(http)
 
@@ -52,7 +53,8 @@ export class FacturaContratoService {
   }
 
   getDollar() {
-    const obs$ = this.http.get<Dollar[]>(`${this.url}/api/gsoft/services/dollar/?fecha=${this.fecha}`)
+    // const obs$ = this.http.get<Dollar[]>(`${this.url}/api/gsoft/services/dollar/?fecha=${this.fecha}`)
+    const obs$ = this.http.get<Dollar[]>(`${this.url}/api/invoices/dollar/?fecha=${this.fecha}`)
     lastValueFrom(obs$)
       .then((result) => {
         const [data] = result
@@ -62,13 +64,13 @@ export class FacturaContratoService {
   }
 
   pagarFatura(body: any) {
-    const obs$ = this.http.post(`${this.url}/api/gsoft/portal/payments/`, body)
+    const obs$ = this.http.post(`${this.url}/api/payments/payment_portal/`, body)
     return lastValueFrom(obs$)
   }
 
   validarPago(body: any) {
-    const obs$ = this.http.post<{ message: string; monto: number }>(
-      `${this.url}/api/gsoft/payments/pmbd/validate/`,
+    const obs$ = this.http.post<{ message: string; amount_usd: number }>(
+      `${this.url}/api/invoices/payment_validate/`,
       body
     );
     return lastValueFrom(obs$);

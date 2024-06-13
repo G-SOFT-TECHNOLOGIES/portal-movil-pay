@@ -16,6 +16,9 @@ export class CoreService {
 
   getUser():Client{
     const user = JSON.parse(localStorage.getItem('user')??'')
+    console.log('====================================');
+    console.log(user);
+    console.log('====================================');
     return user
   }
   

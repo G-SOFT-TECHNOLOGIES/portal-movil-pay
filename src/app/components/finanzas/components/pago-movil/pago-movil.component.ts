@@ -9,6 +9,7 @@ import { InfoService } from 'src/app/components/ajustes/services/info.service';
 import { DialogConfirmComponent } from 'src/app/components/components/dialog-confirm/dialog-confirm.component';
 import { DialogoActualizacionesComponent } from 'src/app/components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
 import { LoginService } from 'src/app/components/auth/services/login.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-pago-movil',
@@ -19,9 +20,8 @@ export class PagoMovilComponent {
   private dialog = inject(MatDialog);
   private login = inject(LoginService)
   msg = this.login.contratos$.value.filter((menu) => menu.code == "payment_methods_add_contrato").map(data => data)
-  @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
+  @Input() factura: { monto: string; id: number; contract: number;  } = {
     monto: '0',
-    montoDescuento: '0',
     id: 0,
     contract: 0,
   };
@@ -44,12 +44,12 @@ export class PagoMovilComponent {
       Validators.required,
       Validators.minLength(11),
     ]),
-    date: new FormControl('', Validators.required),
+    // date: new FormControl('', Validators.required),
     reference: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
     ]),
-    amount: new FormControl('', Validators.required),
+    // amount: new FormControl('', Validators.required),
   });
   registro = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -67,7 +67,7 @@ export class PagoMovilComponent {
       this.montoDollar$ = data;
     });
     this.info.getMethod()
-    this.descuento = Number(this.factura.monto) - Number(this.factura.montoDescuento)
+    // this.descuento = Number(this.factura.monto) - Number(this.factura.montoDescuento)
     this.info.datosTablas$.subscribe(data => {
       this.cuentas = data.filter((pm) => pm.method === 1).map(data => data)
     })
@@ -96,12 +96,12 @@ export class PagoMovilComponent {
     //   );
     // } 
     const payment = {
-      bank: null,
-      amount: Number(valor.amount ?? '0'),
+      // bank: null,
+      // amount: Number(valor.amount ?? '0'),
       reference: valor.reference ?? '',
       sender: valor.sender ?? '',
       method: 1,
-      date: this.core.formatearFecha(valor.date ?? ''),
+      // date: this.core.formatearFecha(valor.date ?? ''),
     };
     this.registro.patchValue({
       phone: valor.sender
@@ -111,24 +111,24 @@ export class PagoMovilComponent {
       .then((result) => {
         this.snack.openSnack(result.message, 'success');
 
-        const numero = Number(this.factura.montoDescuento) - Number(result.monto);
+        const numero = Number(result.amount_usd);
         const resultado = Number(numero.toFixed(2));
-        const resultadoBS = this.convertirBolivares(resultado < 0 ? Number(this.factura.monto) : result.monto)
+        const resultadoBS = this.convertirBolivares(resultado < 0 ? Number(this.factura.monto) : result.amount_usd)
         const pago = {
           payment: [
             {
               bank: null,
               method: 1,
               reference: valor.reference,
-              amount: result.monto,
-              amount_bs: Number(valor.amount),
+              amount: result.amount_usd,
+              amount_bs:this.convertirBolivares( Number(this.factura.monto)),
               sender: valor.sender,
-              date: this.core.formatearFecha(valor.date ?? ''),
-              contract: this.factura.contract,
+              date: moment(new Date()).format('YYYY-MM-DD')?? '',
+              contract: null,
               payment_invoices: [
                 {
                   invoice: this.factura.id,
-                  amount: resultado < 0 ? this.factura.montoDescuento : result.monto,
+                  amount: resultado < 0 ? this.factura.monto : result.amount_usd,
                 },
               ],
             },
@@ -165,7 +165,7 @@ export class PagoMovilComponent {
   }
 
   calcular(): number {
-    const f = Number(this.factura.montoDescuento) - this.usuario.saldoFavor;
+    const f = Number(this.factura.monto) - this.usuario.saldoFavor;
     const s = Math.max(f, 0)
     const result = s * this.montoDollar$;
     const r = result.toFixed(2);

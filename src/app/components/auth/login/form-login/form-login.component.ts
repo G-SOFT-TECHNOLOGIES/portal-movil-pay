@@ -19,7 +19,7 @@ export class FormLoginComponent {
   hide = true
 
   formLogin = this.form.group({
-    indicador: ['V', Validators.required],
+    // indicador: ['V', Validators.required],
     user: ['', [Validators.required]],
     pass: ['', [Validators.required]],
   });
@@ -27,7 +27,8 @@ export class FormLoginComponent {
   setLogin() {
     const valor = this.formLogin.value
     const body = {
-      "identification": `${valor.indicador}${valor.user}`,
+      // "identification": `${valor.indicador}${valor.user}`,
+      "email": `${valor.user}`,
       "password": valor.pass
     }
     this.auth.login(body)

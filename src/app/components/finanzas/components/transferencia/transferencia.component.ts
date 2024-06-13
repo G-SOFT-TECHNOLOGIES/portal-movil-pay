@@ -8,6 +8,7 @@ import { CoreService } from 'src/app/components/service/core.service';
 import { InfoService } from 'src/app/components/ajustes/services/info.service';
 import { LoginService } from 'src/app/components/auth/services/login.service';
 import { DialogoActualizacionesComponent } from 'src/app/components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-transferencia',
@@ -17,9 +18,8 @@ import { DialogoActualizacionesComponent } from 'src/app/components/components/d
 export class TransferenciaComponent {
   optionTrans: boolean = false
 
-  @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
+  @Input() factura: { monto: string; id: number; contract: number;  } = {
     monto: '0',
-    montoDescuento: '0',
     id: 0,
     contract: 0,
   };
@@ -44,10 +44,10 @@ export class TransferenciaComponent {
   msg = this.login.contratos$.value.filter((menu) => menu.code == "payment_methods_add_contrato").map(data => data)
 
   myForm = new FormGroup({
-    bank: new FormControl('', [
-      Validators.required
-    ]),
-    date: new FormControl('', Validators.required),
+    // bank: new FormControl('', [
+    //   Validators.required
+    // ]),
+    // date: new FormControl('', Validators.required),
     reference: new FormControl('', [
       Validators.required,
       Validators.maxLength(6),
@@ -58,7 +58,7 @@ export class TransferenciaComponent {
       Validators.maxLength(6),
       Validators.pattern('[0-9]*')
     ]),
-    amount: new FormControl('', Validators.required),
+    // amount: new FormControl('', Validators.required),
   });
   registro = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -73,7 +73,6 @@ export class TransferenciaComponent {
       this.montoDollar$ = data;
     });
     this.info.getMethod()
-    this.descuento = Number(this.factura.monto) - Number(this.factura.montoDescuento)
     this.info.datosTablas$.subscribe(data => {
       this.cuentas = data.filter((pm) => pm.method === 4).map(data => data)
     })
@@ -96,19 +95,19 @@ export class TransferenciaComponent {
       nro_cuenta: valor.sender
     })
     const payment = {
-      bank: valor.bank,
-      amount: Number(valor.amount ?? '0'),
+      bank: null,
+      // amount: Number(valor.amount ?? '0'),
       reference: valor.reference ?? '',
       sender: valor.sender,
-      method: 4,
-      date: this.core.formatearFecha(valor.date ?? ''),
+      method: 2,
+      // date: this.core.formatearFecha(valor.date ?? ''),
     };
 
     this.usuario
       .validarPago(payment)
       .then((result) => {
         this.snack.openSnack(result.message, 'success');
-        const numero = Number(this.factura.montoDescuento) - Number(result.monto);
+        const numero = Number(result.amount_usd);
         const resultado = Number(numero.toFixed(2));
         // console.log(this.factura.monto, 'antes de calcular')
         // if (Number(valor.amount) < Number(resultadoBS)) {
@@ -121,18 +120,18 @@ export class TransferenciaComponent {
         const pago = {
           payment: [
             {
-              bank: valor.bank,
-              method: 4,
+              bank: null,
+              method: 2,
               reference: valor.reference,
-              amount: result.monto,
-              amount_bs: Number(valor.amount),
+              amount: result.amount_usd,
+              amount_bs:this.convertirBolivares( Number(this.factura.monto)),
               sender: valor.sender,
-              date: this.core.formatearFecha(valor.date ?? ''),
+              date: moment(new Date()).format('YYYY-MM-DD')?? '',
               contract: this.factura.contract,
               payment_invoices: [
                 {
                   invoice: this.factura.id,
-                  amount: resultado < 0 ? this.factura.montoDescuento : result.monto,
+                  amount: resultado < 0 ? this.factura.monto : result.amount_usd,
                 },
               ],
             }
@@ -177,7 +176,7 @@ export class TransferenciaComponent {
 
   calcular(): number {
     // console.log(this.factura.monto, 'calcular', this.montoDollar$)
-    const f = Number(this.factura.montoDescuento) - this.usuario.saldoFavor;
+    const f = Number(this.factura.monto) - this.usuario.saldoFavor;
     const s = Math.max(f, 0)
     const result = s * this.montoDollar$;
     const r = result.toFixed(2);

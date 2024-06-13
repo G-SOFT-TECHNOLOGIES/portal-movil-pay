@@ -60,7 +60,7 @@
         </div>
         <!-- <button mat-raised-button color="warn" class="w-full">Bs.{{calcular()|number:'1.2-2'}}</button> -->
     </div>
-    <div class="sticky top-0 z-10  flex justify-between bg-gray-50">
+    <!-- <div class="sticky top-0 z-10  flex justify-between bg-gray-50">
         <div>
             <mat-checkbox class="ml-3" color="primary" [formControl]="registradas"
                 (change)="listaCuentas = registradas.value">Cuentas afiliadas</mat-checkbox>
@@ -70,7 +70,7 @@
                 Sin cuentas afiliadas
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="mt-8">
         <ng-container *ngIf="!listaCuentas">
             <form class="space-y-3" [formGroup]="myForm" (submit)="onSubmit()">
@@ -83,26 +83,30 @@
                         Solo caracteres númericos
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="example-full-width">
+                <!-- <mat-form-field class="example-full-width">
                     <mat-label>Banco Receptor</mat-label>
                     <mat-select formControlName="bank">
-                        <!-- <mat-option value="4"> BFC </mat-option> -->
+                    <mat-option value="4"> BFC </mat-option> 
                         <mat-option value="33"> BNC </mat-option>
-                        <!-- <mat-option value="1"> BANESCO </mat-option> -->
+                       <mat-option value="1"> BANESCO </mat-option> 
                     </mat-select>
                     <mat-icon matPrefix>account_balance</mat-icon>
 
-                </mat-form-field>
-                <mat-form-field appearance="fill">
+                </mat-form-field> -->
+                <!-- <mat-form-field appearance="fill">
                     <mat-label>Fecha Del Pago</mat-label>
                     <input matInput [matDatepicker]="picker"  [max]="maxDate" formControlName="date" />
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+                </mat-form-field> -->
                 <mat-form-field appearance="fill">
                     <mat-label>Referencia</mat-label>
                     <input matInput formControlName="reference" type="text" maxlength="6" pattern="[0-9]*" />
+                    <button mat-icon-button matSuffix [attr.aria-label]="'Enviar Pago'" [attr.aria-pressed]="true"
+                        color="primary" [disabled]="myForm.invalid || !botonHabilitado">
+                        <mat-icon>send</mat-icon>
+                    </button>
                     <mat-hint>Ultimo 6 digitos</mat-hint>
                     <mat-icon matPrefix>tag</mat-icon>
                     <mat-error *ngIf="myForm.controls['reference'].hasError('pattern')" class="text-xs ">
@@ -110,7 +114,7 @@
                     </mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill">
+                <!-- <mat-form-field appearance="fill">
                     <mat-label>Monto Pagado</mat-label>
                     <input matInput formControlName="amount" type="number" />
                     <button mat-icon-button matSuffix [attr.aria-label]="'Enviar Pago'" [attr.aria-pressed]="true"
@@ -119,7 +123,7 @@
                     </button>
                     <mat-icon matPrefix>attach_money</mat-icon>
 
-                </mat-form-field>
+                </mat-form-field> -->
             </form>
             <ng-container *ngIf="registrar_cuenta && !registradas.value">
                 <div class="my-4 p-2">

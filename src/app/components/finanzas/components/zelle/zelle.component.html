@@ -46,7 +46,7 @@
     </div>
     <!-- <button mat-raised-button color="warn" class="w-full">Bs.{{calcular()|number:'1.2-2'}}</button> -->
   </div>
-  <div class="sticky top-0 z-10  flex justify-between bg-gray-50">
+  <!-- <div class="sticky top-0 z-10  flex justify-between bg-gray-50">
     <div>
       <mat-checkbox class="ml-3" color="primary" [formControl]="registradas"
         (change)="listaCuentas = registradas.value">Cuentas afiliadas</mat-checkbox>
@@ -56,7 +56,7 @@
         Sin cuentas afiliadas
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- <div class="mt-6">
   <h1 class="text-gray-900 font-semibold ">Monto a Pagar</h1>
   <button mat-raised-button color="warn" class="w-full">${{factura.monto}}</button>
@@ -67,11 +67,16 @@
         <mat-form-field appearance="fill">
           <mat-label>Titular Cuenta</mat-label>
           <input matInput formControlName="sender" type="text" />
+          <button mat-icon-button matSuffix [attr.aria-label]="'Enviar Pago'" [attr.aria-pressed]="true" color="primary"
+          [disabled]="myForm.invalid || !botonHabilitado">
+
+          <mat-icon>send</mat-icon>
+        </button>
           <mat-icon matPrefix>account_circle</mat-icon>
 
 
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <!-- <mat-form-field appearance="fill">
           <mat-label>Fecha Del Pago</mat-label>
           <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date" />
           <mat-hint>MM/DD/YYYY</mat-hint>
@@ -87,7 +92,7 @@
             <mat-icon>send</mat-icon>
           </button>
           <mat-icon matPrefix>attach_money</mat-icon>
-        </mat-form-field>
+        </mat-form-field> -->
       </form>
       <ng-container *ngIf="registrar_cuenta && !registradas.value " class="">
         <div class="my-4 p-2  ">

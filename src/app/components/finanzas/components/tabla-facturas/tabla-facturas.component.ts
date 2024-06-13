@@ -62,8 +62,10 @@ export class TablaFacturasComponent {
       params.contract =  '18823'
     this.loading.showLoading()
     this.facturaServ.getFacturas(params).then((result) => {
-      this.loading.hideLoading()
+      this.loading.hideLoading();
+
       this.factura = result.results
+  
       this.dataSource = new MatTableDataSource(result.results)
       this.count = result.count
     }).catch((err) => {
@@ -72,11 +74,9 @@ export class TablaFacturasComponent {
   }
 
 
-  pagar(monto: string, charged: string, id: number, contract: number, montoDescuento: number) {
+  pagar(monto: string, charged: string, id: number, contract: number) {
     const resultado = Number(monto) - Number(charged)
-    const descuento = Number(montoDescuento) - Number(charged)
     const a = Number(resultado.toFixed(2))
-    const d = Number(descuento.toFixed(2))
     const dialogRef = this.dialog.open(DialogPagarComponent, {
       width: '520px',
       data: {
@@ -84,7 +84,7 @@ export class TablaFacturasComponent {
         id,
         contract,
         opcion: '',
-        montoDescuento: d,
+        // montoDescuento: d,
       }
     })
     dialogRef.afterClosed().subscribe(result => {
@@ -94,10 +94,10 @@ export class TablaFacturasComponent {
       }
     })
   }
-  calcular(amount:string,charged:string, amount_discount:number):number{
+  calcular(amount:string,charged:string):number{
     const a =Number(amount) 
     const c =Number(charged)    
-    return Number((a - c)- amount_discount)
+    return Number((a - c))
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe()

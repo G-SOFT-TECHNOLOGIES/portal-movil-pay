@@ -28,7 +28,7 @@ export class MenuComponent {
       shareReplay()
     );
   ngAfterViewInit(): void {
-    this.login.getAlerts()
+    // this.login.getAlerts()
     setTimeout(() => {
       this.ajustes = this.login.ajustes$.value.length > 0
       this.inicio = this.login.inicio$.value.length > 0

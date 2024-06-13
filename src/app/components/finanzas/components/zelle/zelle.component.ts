@@ -8,6 +8,7 @@ import { CoreService } from 'src/app/components/service/core.service';
 import { InfoService } from 'src/app/components/ajustes/services/info.service';
 import { DialogoActualizacionesComponent } from 'src/app/components/components/dialogo-actualizaciones/dialogo-actualizaciones.component';
 import { LoginService } from 'src/app/components/auth/services/login.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-zelle',
@@ -20,9 +21,8 @@ export class ZelleComponent {
   optionZL:boolean= false
 
 
-  @Input() factura: { monto: string; id: number; contract: number; montoDescuento: string; } = {
+  @Input() factura: { monto: string; id: number; contract: number; } = {
     monto: '0',
-    montoDescuento: '0',
     id: 0,
     contract: 0,
   };
@@ -40,8 +40,8 @@ export class ZelleComponent {
   botonHabilitado = true;
   myForm = this.form.group({
     sender: ['', Validators.required],
-    date: ['', Validators.required],
-    amount: ['', Validators.required],
+    // date: ['', Validators.required],
+    // amount: ['', Validators.required],
   });
   registro = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -60,7 +60,7 @@ export class ZelleComponent {
 
   ngOnInit(): void {
     this.info.getMethod()
-    this.descuento = Number(this.factura.monto) - Number(this.factura.montoDescuento)
+    // this.descuento = Number(this.factura.monto) 
     this.info.datosTablas$.subscribe(data => {
       this.cuentas = data.filter((zelle) => zelle.method === 3).map(data => data)
     })
@@ -84,12 +84,12 @@ export class ZelleComponent {
     //   );
     // }
     const payment: any = {
-      bank: null,
-      amount: Number(valor.amount ?? '0'),
+      // bank: null,
+      // amount: Number(valor.amount ?? '0'),
       reference: null,
       sender: valor.sender ?? '',
       method: 3,
-      date: this.core.formatearFecha(valor.date ?? ''),
+      // date: this.core.formatearFecha(valor.date ?? ''),
     };
     this.registro.patchValue({
       titular: valor.sender
@@ -100,7 +100,7 @@ export class ZelleComponent {
         this.botonHabilitado = false
         this.snack.openSnack(result.message, 'success');
 
-        const numero = Number(this.calcular) - Number(result.monto);
+        const numero = Number(this.calcular) - Number(result.amount_usd);
         const resultado = Number(numero.toFixed(2));
     
         const pago = {
@@ -109,14 +109,14 @@ export class ZelleComponent {
               bank: null,
               method: 3,
               reference: null,
-              amount: result.monto,
+              amount: result.amount_usd,
               sender: valor.sender,
-              date: this.core.formatearFecha(valor.date ?? ''),
-              contract: this.factura.contract,
+              date: moment(new Date()).format('YYYY-MM-DD')?? '',
+              contract: null,
               payment_invoices: [
                 {
                   invoice: this.factura.id,
-                  amount: resultado < 0 ? this.calcular : result.monto,
+                  amount: resultado < 0 ? this.calcular : result.amount_usd,
                 },
               ],
             },
@@ -159,7 +159,7 @@ export class ZelleComponent {
     })
   }
   get calcular() {
-    const f = Number(this.factura.montoDescuento) - this.usuario.saldoFavor;
+    const f = Number(this.factura.monto) - this.usuario.saldoFavor;
     const s = Math.max(f, 0)
     return s
   }
