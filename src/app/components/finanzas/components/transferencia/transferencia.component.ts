@@ -106,7 +106,7 @@ export class TransferenciaComponent {
     this.usuario
       .validarPago(payment)
       .then((result) => {
-        this.snack.openSnack(result.message, 'success');
+        this.snack.openSnack('Pago Validado', 'success');
         const numero = Number(result.amount_usd);
         const resultado = Number(numero.toFixed(2));
         // console.log(this.factura.monto, 'antes de calcular')
@@ -137,14 +137,16 @@ export class TransferenciaComponent {
             }
           ]
         };
-        setTimeout(() => {
+    //setTimeout(() => {
           this.usuario
             .pagarFatura(pago)
             .then((result) => {
+              //this.registrar_cuenta = true
+              this.dialogRef.close(true)
               this.snack.openSnack('Pago Registrado con exito', 'success');
-              this.registrar_cuenta = true
-              this.msg.length > 0 && !this.registradas.value ? this.openModal() : this.dialogRef.close(true)
-              this.registradas.value ? this.dialogRef.close(true) : '';
+              
+              //this.msg.length > 0 && !this.registradas.value ? this.openModal() : this.dialogRef.close(true)
+              //this.registradas.value ? this.dialogRef.close(true) : '';
             })
             .catch((err) => {
               console.log(err.status)
@@ -154,7 +156,7 @@ export class TransferenciaComponent {
                 return
               }
             });
-        }, 1500);
+       // }, 1500);
 
       })
       .catch((err) => {
